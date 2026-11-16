@@ -3,7 +3,32 @@
   "wallets": [
     {
       "address": "6YCQcp4SfJbwkz8rrENYy26FAtCR2jqkTxZKTymeC7tC",
-      "label": "6YCQcp4S latency test, ~47s median hold, profitable 14d",
+      "label": "disabled: full USDC-inclusive check showed -7.76 SOL, 4 closes",
+      "enabled": false
+    },
+    {
+      "address": "FHvBFrvg1RBXe27uucghF6bQQYNTuf8pjcnrSsnA2aWY",
+      "label": "early-WASTED+HWAN (90 closed, 77.8% wr, +4.28 SOL, 9.6m hold)",
+      "enabled": true
+    },
+    {
+      "address": "9xHqBH1FtbN1T57u6RSZDn6ykkJzDjNMJe9M1jN7j8NQ",
+      "label": "Smart Degen 9xHqBH1F (104 closed, 55.8% wr, +17.76 SOL, 5.1h hold)",
+      "enabled": true
+    },
+    {
+      "address": "5n593DWQkpfFgA69mS1MFWJDRZDCLcAuEsQYryqxi22Z",
+      "label": "Smart Degen 5n593DWQ (27 closed, 48.1% wr, +42.14 SOL, one-token concentrated)",
+      "enabled": true
+    },
+    {
+      "address": "DGPk66NJFJgnmmy6ccc6HorB25jPfWGKi3zga2zFg5hk",
+      "label": "early-HOGE+WIGGLES (385 closed, 44.9% wr, +12.72 SOL, 7d negative)",
+      "enabled": true
+    },
+    {
+      "address": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+      "label": "early-mihao+HOGE+BIG (286 closed, 40.9% wr, +0.75 SOL, 7d negative)",
       "enabled": true
     },
     {
@@ -14,6 +39,11 @@
     {
       "address": "ELGNVYE7X1R1uQSuVqFN8TxbV7AipcQ23HmmqNhCVUMy",
       "label": "ELGNVYE7 reference",
+      "enabled": false
+    },
+    {
+      "address": "2zm4rjzCT7HxfmjpG3vZHhD4s4fY9dkXi85ms4CMSGi7",
+      "label": "early-mihao+Leonida, 118s hold",
       "enabled": false
     }
   ]
