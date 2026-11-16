@@ -8,7 +8,7 @@
 #   ./scheduler.sh ci-loop        # GitHub Actions relay (time-bounded)
 #   ./scheduler.sh commit-state   # publish data/desk.db + reports/dashboard.json
 #
-# The Actions relay checks stops about every DESK_MANAGE_SEC (default 50s) and
+# The Actions relay checks stops about every DESK_MANAGE_SEC (default 15s) and
 # runs a full scan about every DESK_SCAN_SEC (default 180s). State is committed
 # to the `state` branch as a single moving snapshot ([skip ci]) so the binary
 # database does not pile up in git history.
@@ -18,7 +18,7 @@ cd "$ROOT"
 export TZ="${TZ:-America/Edmonton}"
 export PYTHONUNBUFFERED=1
 
-MANAGE_SEC="${DESK_MANAGE_SEC:-50}"
+MANAGE_SEC="${DESK_MANAGE_SEC:-15}"
 SCAN_SEC="${DESK_SCAN_SEC:-180}"
 MAX_SEC="${DESK_MAX_SECONDS:-20700}" # 5h45m, under the 6h hosted-runner cap
 STATE_BRANCH="${DESK_STATE_BRANCH:-state}"

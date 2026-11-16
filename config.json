@@ -72,7 +72,22 @@
     "hard_stop_net_pct": -8.0,
     "trail_activate_net_pct": 12.0,
     "trail_distance_from_peak_pct": 8.0,
-    "_exits": "ONLY the stop or the trailing stop exits a position. The stop is never moved lower."
+    "liq_drop_from_entry_pct": 30.0,
+    "_exits": "The hard stop is set before entry and never lowered. A trail only ratchets it up. The manage loop also exits on liq_drop when pool liquidity falls more than liq_drop_from_entry_pct from entry, or below gates.min_liquidity_usd. Nothing else closes a position."
+  },
+  "entry": {
+    "_comment": "Extra entry protection on top of the existing gates. Fail closed if the 5m path is missing. max_fill_worse_than_mark_pct compares the paper fill with the DexScreener mark. The pre-buy sell quote reuses gates.max_round_trip_loss_pct. Does not change the hard stop, trail, size, or scout window.",
+    "max_chase_5m_pct": 25.0,
+    "flush_dump_pct": 25.0,
+    "flush_bounce_pct": 25.0,
+    "flush_window_minutes": 10,
+    "max_fill_worse_than_mark_pct": 3.0
+  },
+  "brake": {
+    "_comment": "Pause NEW entries for the rest of the America/Edmonton day. Open positions are still managed. Day P&L is realized plus unrealized versus equity at local midnight. A single close at or below max_single_loss_pct also trips it, and it stays on even if P&L recovers.",
+    "max_day_loss_pct": -15.0,
+    "max_single_loss_pct": -40.0,
+    "timezone": "America/Edmonton"
   },
   "sources": {
     "gmgn_enabled": true,

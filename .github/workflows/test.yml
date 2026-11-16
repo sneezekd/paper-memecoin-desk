@@ -28,6 +28,7 @@ jobs:
         run: |
           python3 tests/test_manage_fastpath.py
           python3 tests/test_free_sources.py
+          python3 tests/test_entry_risk.py
 
       - name: End-to-end mock (temp database)
         run: python3 tests/e2e_mock.py

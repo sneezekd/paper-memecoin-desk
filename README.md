@@ -33,8 +33,17 @@ python3 tests/test_manage_fastpath.py
 python3 tests/e2e_mock.py
 ```
 
-`manage` does not scout. It re-marks open positions and exits only on the existing
-stop or trailing stop. With no open positions it does not write a run.
+`manage` does not scout. It re-marks open positions and exits on the existing
+stop, the trailing stop, or a liquidity drop (`liq_drop`). It does not lower a
+stop. With no open positions it does not write a run.
+
+New entries also skip a 5-minute chase above `entry.max_chase_5m_pct`, a dump-then-bounce
+inside `entry.flush_window_minutes` (missing 5m candles fail closed), a paper fill more
+than `entry.max_fill_worse_than_mark_pct` worse than the mark, and a pre-buy round trip
+over the existing `gates.max_round_trip_loss_pct`. New entries pause for the rest of the
+America/Edmonton day when day P&L is at or below `brake.max_day_loss_pct` of start-of-day
+equity, or a single close is at or below `brake.max_single_loss_pct`. Open positions
+keep being managed. The dashboard shows `entry_pause.paused`.
 
 ## GitHub Actions relay
 
@@ -42,7 +51,10 @@ Hosted cron cannot run faster than every 5 minutes and often starts late, which 
 how a sleeping computer missed stops. `.github/workflows/paper-desk.yml` instead
 holds one runner for about 5 hours 45 minutes (under the 6 hour job cap):
 
-- about every 50 seconds, `run.py manage` checks stops and trails
+- about every 15 seconds, `run.py manage` checks stops, trails, and liquidity.
+  A public repo does not spend Actions minutes, and each check is one DexScreener
+  batch for the open book (Jupiter only when an exit fires). A flat book does not
+  call the network, so 15s stays inside the free rate limits.
 - about every 3 minutes, `run.py tick` runs the full scout, filter, and score pass
 - when the run finishes, including after a failed step, it dispatches the next
   **Paper desk** run on `main` with `GITHUB_TOKEN`. It skips that dispatch if another
