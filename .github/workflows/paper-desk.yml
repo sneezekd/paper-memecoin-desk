@@ -1,7 +1,7 @@
 # Paper-only Solana memecoin desk. No secrets, no wallet, no live orders.
-# Cron cannot run faster than every 5 minutes and is often late, so each run
-# stays up for about 5h45m. A new run is queued every 30 minutes and waits in
-# this concurrency group, which keeps a single pending handoff ready.
+# Each run stays up for about 5h45m, then dispatches the next run on main.
+# The */30 cron is only a backup. Concurrency keeps one runner and at most
+# one waiter. Repository variable DESK_ENABLED=false stops new runs and the chain.
 name: Paper desk
 
 on:
@@ -15,10 +15,12 @@ concurrency:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   relay:
     name: paper relay
+    if: vars.DESK_ENABLED != 'false'
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
@@ -47,3 +49,37 @@ jobs:
         env:
           DESK_PUSH_STATE: "1"
         run: ./scheduler.sh commit-state
+
+      - name: Chain the next relay
+        if: always() && vars.DESK_ENABLED != 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DESK_ENABLED: ${{ vars.DESK_ENABLED }}
+        run: |
+          set -u
+          enabled="$(printf '%s' "${DESK_ENABLED:-}" | tr '[:upper:]' '[:lower:]')"
+          if [ "$enabled" = "false" ]; then
+            echo "DESK_ENABLED=false; not starting another run"
+            exit 0
+          fi
+          # Live read, so turning the variable off during this shift stops the chain.
+          if live="$(gh api "repos/${GITHUB_REPOSITORY}/actions/variables/DESK_ENABLED" --jq .value 2>/dev/null)"; then
+            live="$(printf '%s' "$live" | tr '[:upper:]' '[:lower:]')"
+            if [ "$live" = "false" ]; then
+              echo "DESK_ENABLED=false; not starting another run"
+              exit 0
+            fi
+          fi
+          current="${GITHUB_RUN_ID}"
+          others=0
+          if ! others="$(gh run list --workflow paper-desk.yml --limit 30 --json databaseId,status \
+            --jq "[.[] | select((.databaseId | tostring) != \"${current}\" and .status != \"completed\")] | length")"; then
+            echo "could not list runs; dispatching anyway so concurrency can keep a single waiter"
+            others=0
+          fi
+          if [ "${others}" != "0" ]; then
+            echo "another paper-desk run is already queued or running (${others}); not dispatching a duplicate"
+            exit 0
+          fi
+          gh workflow run paper-desk.yml --ref main
+          echo "dispatched the next paper-desk run on main"
