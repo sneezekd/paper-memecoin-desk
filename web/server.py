@@ -28,6 +28,12 @@ HOST = os.environ.get("DASHBOARD_HOST", "127.0.0.1")
 PORT = int(os.environ.get("DASHBOARD_PORT", "8788"))
 
 CHG_RE = re.compile(r"already \+(-?[\d.]+)% in 1h", re.I)
+
+
+def _hard_stop_label() -> str:
+    """Display label from config.json. int(-8) -> '-8%'. No stored stop is rewritten."""
+    cfg = json.loads((ROOT / "config.json").read_text())
+    return f"{int(cfg['risk']['hard_stop_net_pct'])}%"
 GATE_LABELS = {
     "volume_1h": "1h volume",
     "top10_real": "top-10 holders",
@@ -455,7 +461,7 @@ def snapshot():
         elif last_sell:
             risk_act = f"exited {last_sell['symbol']} · {last_sell['reason']}"
         else:
-            risk_act = "no open positions · stop −6% · trail +12%"
+            risk_act = f"no open positions · stop {_hard_stop_label()} · trail +12%"
 
         logger_act = f"{kills_n} kills logged" + (f" · {buys} trades" if buys else " · no trades yet")
 
@@ -496,7 +502,7 @@ def snapshot():
             {
                 "id": "risk",
                 "name": "Risk",
-                "subtitle": "stop −6% · trail +12%",
+                "subtitle": f"stop {_hard_stop_label()} · trail +12%",
                 "activity": risk_act,
                 "count": n_stops,
                 "badge": f"{n_stops} open" + (f" · {n_trails} trail" if n_trails else ""),

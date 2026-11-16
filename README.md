@@ -18,6 +18,11 @@ the same paper book. Do not commit `secrets/`, `.env`, or anything under `logs/`
 Trading rules live in `config.json`. `config.medium.json` and `config.strict.json` are
 unused backups. Nothing in the Actions runner changes gates, scores, size, or stops.
 
+New entries take the hard stop from `risk.hard_stop_net_pct` (net of slippage, swap
+fees, price impact, and the network fee). A new hard-stop fill is labeled
+`stop_{int(pct)}pct`. A stop already stored on a position is never lowered, so open
+positions keep the stop they were given at entry.
+
 ## Run one pass
 
 ```bash

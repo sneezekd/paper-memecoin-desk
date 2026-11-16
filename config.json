@@ -69,7 +69,7 @@
     }
   },
   "risk": {
-    "hard_stop_net_pct": -6.0,
+    "hard_stop_net_pct": -8.0,
     "trail_activate_net_pct": 12.0,
     "trail_distance_from_peak_pct": 8.0,
     "_exits": "ONLY the stop or the trailing stop exits a position. The stop is never moved lower."
