@@ -718,21 +718,31 @@ class Executor:
         pid = cur.lastrowid
         self.L.add_cash(-usd)
         self.log.trade(pid, "BUY", "entry", mark, fill, qty, usd, usd - qty * mark, 0.0, "jupiter_quote", rationale)
+        stop_pct = self.cfg["risk"]["hard_stop_net_pct"]
         self.log.db.execute("INSERT INTO stop_moves(position_id,ts,old_stop,new_stop,why) VALUES(?,?,?,?,?)",
-                            (pid, t_fill, None, stop, "initial -6% net stop set before entry"))
+                            (pid, t_fill, None, stop, f"initial {int(stop_pct)}% net stop set before entry"))
         self.log.db.commit()
         return pid
 
 
+def hard_stop_reason(pct):
+    """exit_reason for a new hard-stop fill. int(-8) -> 'stop_-8pct'.
+    Closed trades already stored keep whatever reason they were written with."""
+    return f"stop_{int(pct)}pct"
+
+
 class Risk:
-    """Stage 5. -6% net stop set before entry; never lowered; trailing stop after +12% net.
-    Exits ONLY on stop or trail."""
+    """Stage 5. Hard stop from risk.hard_stop_net_pct (net of slippage, swap fee,
+    price impact, and network fee) is set before entry and never lowered.
+    A trail can ratchet it up after trail_activate_net_pct. Exits ONLY on that
+    stop or the trail. New hard-stop fills use hard_stop_reason(pct)."""
 
     def __init__(self, cfg, log, ledger):
         self.cfg, self.R, self.log, self.L = cfg, cfg["risk"], log, ledger
 
     def initial_stop(self, qty, cost, k):
-        """Mark at which selling everything nets exactly -6% of cost after exit costs (k) and network fee."""
+        """Mark at which selling everything nets hard_stop_net_pct of cost after exit costs (k) and network fee.
+        Used for new entries only. manage() does not recompute a stop already stored on a position."""
         target = cost * (1 + self.R["hard_stop_net_pct"] / 100)
         return (target + self.cfg["costs"]["network_fee_usd_per_tx"]) / (qty * (1 - k))
 
@@ -777,7 +787,7 @@ class Risk:
             if mark <= stop:
                 p = self.log.db.execute("SELECT * FROM positions WHERE id=?", (p["id"],)).fetchone()
                 proceeds, src = self._exit_value(p, mark, liq)
-                reason = "trailing_stop" if trail else "stop_-6pct"
+                reason = "trailing_stop" if trail else hard_stop_reason(self.R["hard_stop_net_pct"])
                 pnl = proceeds - p["size_usd"]
                 exit_fill = proceeds / p["qty"] if p["qty"] else 0
                 why = (f"mark {mark:.10g} <= stop {stop:.10g} ({reason}); peak {peak:.10g}; net {pnl / p['size_usd'] * 100:+.1f}%"

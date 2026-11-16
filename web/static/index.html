@@ -547,7 +547,7 @@
     const lastKill = (d.recent_rejects || [])[0];
     const nOpen = open.length;
     const nTrail = open.filter(p => p.trail_active).length;
-    const stopTxt = (rules.stop_net_pct != null ? rules.stop_net_pct : -6) + "%";
+    const stopTxt = rules.stop_net_pct != null ? (rules.stop_net_pct + "%") : "—";
     const trailTxt = "+" + (rules.trail_after_net_pct != null ? rules.trail_after_net_pct : 12) + "%";
     const discovered = sm.discovered;
     const scouted = sm.scouted;

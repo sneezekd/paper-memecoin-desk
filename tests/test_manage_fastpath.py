@@ -18,7 +18,7 @@ info = d.manage_only()
 assert info == {"exits": 0, "stop_moves": 0, "open": 0}, info
 assert d.log.db.execute("SELECT COUNT(*) FROM runs").fetchone()[0] == 0
 risk = d.cfg["risk"]
-assert risk["hard_stop_net_pct"] == -6.0
+assert risk["hard_stop_net_pct"] == -8.0
 assert risk["trail_activate_net_pct"] == 12.0
 assert risk["trail_distance_from_peak_pct"] == 8.0
 assert d.cfg["analyst"]["min_score"] == 65
@@ -45,6 +45,7 @@ E.S.jupiter_quote = _offline
 fired = d.manage_only()
 assert fired["exits"] == 1 and fired["open"] == 1, fired
 row = d.log.db.execute("SELECT status, exit_reason FROM positions WHERE address=?", (addr,)).fetchone()
-assert row["status"] == "closed" and row["exit_reason"] == "stop_-6pct", tuple(row)
+assert row["status"] == "closed" and row["exit_reason"] == E.hard_stop_reason(risk["hard_stop_net_pct"]), tuple(row)
+assert row["exit_reason"] == "stop_-8pct"
 assert d.log.db.execute("SELECT COUNT(*) FROM scouted").fetchone()[0] == 0
 print("FAST PATH OK", info, fired)
