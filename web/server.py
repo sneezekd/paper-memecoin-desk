@@ -30,6 +30,16 @@ PORT = int(os.environ.get("DASHBOARD_PORT", "8788"))
 CHG_RE = re.compile(r"already \+(-?[\d.]+)% in 1h", re.I)
 
 
+def _entry_pause(db, equity):
+    """Read-only brake view. Does not write the desk database."""
+    import sys
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0, str(ROOT))
+    from desk.engine import entry_pause_view, load_config
+    return entry_pause_view(db, load_config(), equity, meta_day=_meta(db, "entry_pause_day"),
+                            meta_reason=_meta(db, "entry_pause_reason"))
+
+
 def _hard_stop_label() -> str:
     """Display label from config.json. int(-8) -> '-8%'. No stored stop is rewritten."""
     cfg = json.loads((ROOT / "config.json").read_text())
@@ -51,6 +61,12 @@ GATE_LABELS = {
     "price_impact": "price impact",
     "stale_data": "stale data",
     "requote": "re-quote",
+    "chase_5m": "up more than 25% in 5m",
+    "flush_bounce": "dump then bounce",
+    "entry_slippage": "fill vs mark",
+    "entry_round_trip": "round trip at entry",
+    "liq_drop": "liquidity drop",
+    "entry_paused": "entries paused",
 }
 
 
@@ -524,6 +540,11 @@ def snapshot():
         pnl_usd = equity - start
         pnl_pct = (equity / start - 1) * 100 if start else 0
         sched = _scheduler_status(last["ts"] if last else None)
+        pause = _entry_pause(db, equity)
+        if pause.get("paused"):
+            for agent in agents:
+                if agent["id"] == "risk":
+                    agent["activity"] = "entries paused · " + str(pause.get("reason") or "")[:180]
 
         return {
             "generated_at": lt(_now()),
@@ -556,6 +577,7 @@ def snapshot():
             "open_positions": open_out,
             "closed_trades": closed_out,
             "best_trade": best,
+            "entry_pause": pause,
         }
     finally:
         db.close()

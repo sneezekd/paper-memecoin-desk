@@ -39,7 +39,7 @@ jobs:
       - name: Relay loop
         env:
           DESK_PUSH_STATE: "1"
-          DESK_MANAGE_SEC: "50"
+          DESK_MANAGE_SEC: "15"
           DESK_SCAN_SEC: "180"
           DESK_MAX_SECONDS: "20700"
         run: ./scheduler.sh ci-loop

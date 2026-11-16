@@ -1,7 +1,7 @@
 """Logger read-side: report, morning recap, reject audit, dashboard JSON. Read-only over the DB."""
 import json, time, datetime as dt
 from zoneinfo import ZoneInfo
-from .engine import Logger, Ledger, load_config, ROOT, now
+from .engine import Logger, Ledger, load_config, ROOT, now, sync_entry_pause
 from . import sources as S
 
 TZ = ZoneInfo("America/Edmonton")
@@ -101,6 +101,7 @@ def dashboard_data():
                   "max_trade_pct_pool_liq": cfg["bankroll"]["max_trade_pct_of_pool_liquidity"],
                   "min_score": cfg["analyst"]["min_score"]},
         "ticker": _last_scan_ticker(db),
+        "entry_pause": sync_entry_pause(log, L, cfg),
     }
     p = ROOT / "reports" / "dashboard.json"
     p.parent.mkdir(exist_ok=True)

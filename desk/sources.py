@@ -434,6 +434,23 @@ def gecko_discovery():
     return addrs, status
 
 
+def gecko_ohlcv_5m(pair, limit=6):
+    """5-minute USD candles for a pool, newest first as returned. Raises if the path is empty."""
+    url = ("https://api.geckoterminal.com/api/v2/networks/solana/pools/%s/ohlcv/minute?aggregate=5&limit=%d&currency=usd"
+           % (pair, int(limit)))
+    d = http_json(url, timeout=12, retries=1)
+    rows = ((d.get("data") or {}).get("attributes") or {}).get("ohlcv_list") or []
+    out = []
+    for row in rows:
+        if not isinstance(row, (list, tuple)) or len(row) < 5:
+            continue
+        out.append({"ts": f(row[0]), "open": f(row[1]), "high": f(row[2]), "low": f(row[3]), "close": f(row[4])})
+    if not out:
+        raise RuntimeError("no 5m candles")
+    time.sleep(0.4)
+    return out
+
+
 def gecko_pool_txns(pair_addresses):
     """Unique buyers/sellers per pool from GeckoTerminal (keyless). {pair: {..., fetched_at}}."""
     out = {}

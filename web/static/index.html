@@ -257,7 +257,7 @@
     <header class="top">
       <div class="brand">
         <h1>Paper Memecoin Desk</h1>
-        <div class="sub">Solana memes · strict RM · PAPER ONLY</div>
+        <div class="sub" id="brand-sub">Solana memes · strict RM · PAPER ONLY</div>
       </div>
       <div class="head-right">
         <div class="clock" id="clock">— <small>MT</small></div>
@@ -482,7 +482,9 @@
   ];
   const GATE_LABELS = {
     volume_1h: "1h volume", top10_real: "top-10 holders", bundled_launch: "bundled launch",
-    pumped_1h: "already pumped 1h", lp_burn_lock: "LP burn / lock", mint_freeze: "mint or freeze",
+    pumped_1h: "already pumped 1h", chase_5m: "up more than 25% in 5m", flush_bounce: "dump then bounce",
+    entry_slippage: "fill vs mark", entry_round_trip: "round trip at entry", liq_drop: "liquidity drop",
+    lp_burn_lock: "LP burn / lock", mint_freeze: "mint or freeze",
     dev_hold: "dev wallet", creator_rugs: "creator rugs", liquidity: "liquidity",
     sell_sim: "sell simulation", token2022_ext: "Token-2022 extension",
     analyst_below_70: "score below 70", analyst_low_coverage: "low score coverage"
@@ -601,7 +603,8 @@
       equity_curve: d.equity_curve || [],
       open_positions: open,
       closed_trades: closed,
-      kills_by_rule: kills
+      kills_by_rule: kills,
+      entry_pause: d.entry_pause || null
     };
   }
 
@@ -624,7 +627,15 @@
     pill.className = "pill " + (st.running && !st.stale ? "on" : (st.running ? "stale" : "off"));
     let lab = st.label || (st.running ? "Running" : "Stopped");
     if (st.last_scan_at) lab += " · " + st.last_scan_at.replace(/^[A-Za-z]{3} \d+ /, "");
+    const pause = s.entry_pause;
+    if (pause && pause.paused) lab += " · entries paused";
     document.getElementById("status-lab").textContent = lab;
+    const sub = document.getElementById("brand-sub");
+    if (sub) {
+      sub.textContent = (pause && pause.paused)
+        ? ("Entries paused · " + (pause.reason || "drawdown brake"))
+        : "Solana memes · strict RM · PAPER ONLY";
+    }
 
     const stats = s.stats || {};
     document.getElementById("stats").textContent =

@@ -5,6 +5,7 @@ Each stage is a separate class; a stage only receives what the previous stage ha
 """
 import json, sqlite3, time, datetime as dt
 from pathlib import Path
+from zoneinfo import ZoneInfo
 from . import sources as S
 from .sources import f
 
@@ -29,6 +30,159 @@ def load_config():
 
 def clamp(x, lo=0.0, hi=1.0):
     return max(lo, min(hi, x))
+
+
+def trading_day(now_ts=None, cfg=None):
+    """America/Edmonton calendar day by default. Returns (iso_date, start_ts, end_ts)."""
+    tzname = ((cfg or {}).get("brake") or {}).get("timezone") or "America/Edmonton"
+    t = dt.datetime.fromtimestamp(now() if now_ts is None else now_ts, ZoneInfo(tzname))
+    start = t.replace(hour=0, minute=0, second=0, microsecond=0)
+    end = start + dt.timedelta(days=1)
+    return start.date().isoformat(), start.timestamp(), end.timestamp()
+
+
+def _row_val(row, key, idx=0):
+    if row is None:
+        return None
+    if hasattr(row, "keys"):
+        return row[key]
+    return row[idx]
+
+
+def start_of_day_equity(db, day_start, cfg):
+    row = db.execute("SELECT equity FROM equity WHERE ts < ? ORDER BY ts DESC LIMIT 1", (day_start,)).fetchone()
+    val = _row_val(row, "equity")
+    if val is not None:
+        return float(val)
+    meta = db.execute("SELECT value FROM meta WHERE key='starting_balance'").fetchone()
+    val = _row_val(meta, "value")
+    if val is not None:
+        return float(val)
+    return float(cfg["bankroll"]["starting_balance_usd"])
+
+
+def entry_pause_view(db, cfg, equity, now_ts=None, meta_day=None, meta_reason=None):
+    """Read-only daily brake. Stays on for the rest of the local day once tripped."""
+    brake = cfg["brake"]
+    day, day_start, _end = trading_day(now_ts, cfg)
+    sod = start_of_day_equity(db, day_start, cfg)
+    pnl = (equity / sod - 1) * 100 if sod else 0.0
+    tzname = brake.get("timezone") or "America/Edmonton"
+    if meta_day == day and meta_reason:
+        return {"paused": True, "reason": meta_reason, "day": day, "day_pnl_pct": round(pnl, 2),
+                "start_of_day_equity_usd": round(sod, 4), "timezone": tzname}
+    reason = None
+    if pnl <= float(brake["max_day_loss_pct"]):
+        reason = (f"day P&L {pnl:.1f}% <= {brake['max_day_loss_pct']}% of start-of-day equity ${sod:.2f}")
+    worst = db.execute(
+        "SELECT symbol, pnl_pct FROM positions WHERE status='closed' AND closed_at>=? AND pnl_pct<=? "
+        "ORDER BY pnl_pct ASC LIMIT 1",
+        (day_start, float(brake["max_single_loss_pct"]))).fetchone()
+    if worst is not None:
+        bit = (f"{_row_val(worst, 'symbol')} closed {float(_row_val(worst, 'pnl_pct')):.1f}% "
+               f"(worse than {brake['max_single_loss_pct']}%)")
+        reason = f"{reason}; {bit}" if reason else bit
+    return {"paused": reason is not None, "reason": reason, "day": day, "day_pnl_pct": round(pnl, 2),
+            "start_of_day_equity_usd": round(sod, 4), "timezone": tzname}
+
+
+def sync_entry_pause(log, ledger, cfg, marks=None, now_ts=None):
+    """Persist the brake when it first trips today. Later calls do not re-log it."""
+    view = entry_pause_view(log.db, cfg, ledger.equity(marks), now_ts=now_ts,
+                            meta_day=log.meta("entry_pause_day"), meta_reason=log.meta("entry_pause_reason"))
+    if view["paused"] and not (log.meta("entry_pause_day") == view["day"] and log.meta("entry_pause_reason")):
+        log.set_meta("entry_pause_day", view["day"])
+        log.set_meta("entry_pause_reason", view["reason"])
+        log.event("entry_paused", reason=view["reason"], day=view["day"], day_pnl_pct=view["day_pnl_pct"],
+                  start_of_day_equity_usd=view["start_of_day_equity_usd"])
+    return view
+
+
+def path_has_dump_then_bounce(prices, dump_pct, bounce_pct):
+    """True when a later trough is dump_pct under an earlier peak, then a later price bounces bounce_pct off that trough."""
+    n = len(prices)
+    for i in range(n):
+        peak = prices[i]
+        if not peak or peak <= 0:
+            continue
+        trough, trough_at = peak, i
+        for j in range(i + 1, n):
+            if prices[j] < trough:
+                trough, trough_at = prices[j], j
+            if trough <= 0 or j <= trough_at:
+                continue
+            dump = (peak - trough) / peak * 100
+            bounce = (prices[j] / trough - 1) * 100
+            if dump > dump_pct and bounce > bounce_pct:
+                return True
+    return False
+
+
+def chase_flush_verdict(chg_m5, candles, now_ts, entry_cfg):
+    """None if the coin may continue. Otherwise (gate, reason, unverifiable). Missing 5m path fails closed."""
+    window = float(entry_cfg["flush_window_minutes"]) * 60
+    bar = 300.0
+    usable = []
+    for c in candles or []:
+        ts = c.get("ts")
+        o, h, l, cl = c.get("open"), c.get("high"), c.get("low"), c.get("close")
+        if ts is None or None in (o, h, l, cl):
+            continue
+        if min(o, h, l, cl) <= 0:
+            continue
+        if ts + bar >= now_ts - window and ts <= now_ts + 120:
+            usable.append(c)
+    usable.sort(key=lambda c: c["ts"])
+    chg = chg_m5
+    if chg is None and usable and usable[-1]["open"]:
+        chg = (usable[-1]["close"] / usable[-1]["open"] - 1) * 100
+    if chg is None:
+        return ("chase_5m", "5m price change missing", True)
+    cap = float(entry_cfg["max_chase_5m_pct"])
+    if chg > cap:
+        return ("chase_5m", f"up {chg:.1f}% in 5m (> {cap:.0f}%)", False)
+    if len(usable) < 2:
+        return ("flush_bounce", "5m candles missing for the 10m flush check", True)
+    dump, bounce = float(entry_cfg["flush_dump_pct"]), float(entry_cfg["flush_bounce_pct"])
+    paths = []
+    for order in (("high", "low"), ("low", "high")):
+        path = []
+        for c in usable:
+            path.extend([c["open"], c[order[0]], c[order[1]], c["close"]])
+        paths.append(path)
+    for path in paths:
+        if path_has_dump_then_bounce(path, dump, bounce):
+            return ("flush_bounce",
+                    f"dumped >{dump:.0f}% then bounced >{bounce:.0f}% within {entry_cfg['flush_window_minutes']}m",
+                    False)
+    return None
+
+
+def fill_vs_mark_pct(fill, mark):
+    """Positive when the paper fill is worse (higher) than the mark."""
+    if fill is None or not mark or mark <= 0:
+        return None
+    return (fill / mark - 1) * 100
+
+
+def round_trip_loss_pct(amount_in, amount_out):
+    if not amount_in:
+        return None
+    return (1 - amount_out / amount_in) * 100
+
+
+def liq_drop_reason(entry_liq, liq_now, drop_pct, floor):
+    """Immediate exit text, or None. Unknown liquidity does not invent an exit. The stored stop is not moved."""
+    if liq_now is None:
+        return None
+    if floor is not None and liq_now < float(floor):
+        return f"pool liquidity ${liq_now:,.0f} below ${float(floor):,.0f} floor"
+    if entry_liq and entry_liq > 0:
+        drop = (1 - liq_now / entry_liq) * 100
+        if round(drop, 4) > float(drop_pct):
+            return (f"pool liquidity ${liq_now:,.0f} is {drop:.0f}% below entry ${entry_liq:,.0f} "
+                    f"(>{float(drop_pct):.0f}%)")
+    return None
 
 
 SCHEMA = """
@@ -235,8 +389,9 @@ class Gate(Exception):
         self.gate, self.reason, self.unverifiable, self.evidence = gate, reason, unverifiable, evidence or {}
 
 
-GATE_ORDER = ["liquidity", "volume_1h", "pumped_1h", "mint_freeze", "token2022_ext", "lp_burn_lock", "top10_real",
-              "dev_hold", "bundled_launch", "creator_rugs", "sell_sim"]
+GATE_ORDER = ["liquidity", "volume_1h", "pumped_1h", "chase_5m", "flush_bounce", "mint_freeze", "token2022_ext",
+              "lp_burn_lock", "top10_real", "dev_hold", "bundled_launch", "creator_rugs", "sell_sim",
+              "entry_slippage", "entry_round_trip"]
 
 
 class Filter:
@@ -560,6 +715,8 @@ class Filter:
         if len(rugs) >= G["creator_rugs_to_kill"]:
             raise Gate("creator_rugs", f"creator rugged {len(rugs)} of last {len(prev)} launches: {rugs[:5]}")
 
+        self._chase_flush_gate(c, ev, ts)
+
         # 11: sell simulation (Jupiter buy -> 100% sell quote)
         try:
             solp = S.sol_price_usd()
@@ -576,6 +733,28 @@ class Filter:
         ev["fetched_at"] = ts
         c["rc"] = rc
         return ev
+
+    def _chase_flush_gate(self, c, ev, ts):
+        """Skip a 5m chase or a dump-then-bounce. Missing candles or 5m change fail closed."""
+        entry = self.cfg["entry"]
+        pair = (c.get("ds") or {}).get("pair")
+        if not pair:
+            raise Gate("chase_5m", "pair address missing for 5m path", True)
+        candles, err = None, None
+        try:
+            candles = S.gecko_ohlcv_5m(pair)
+            ts["ohlcv_5m"] = now()
+        except Exception as e:
+            err = str(e)[:160]
+            ev["ohlcv_error"] = err
+        verdict = chase_flush_verdict((c.get("ds") or {}).get("chg_m5"), candles, now(), entry)
+        if verdict:
+            gate, reason, unver = verdict
+            if err and unver:
+                reason = f"{reason} ({err})"[:200]
+            raise Gate(gate, reason, unver, {"chg_m5": (c.get("ds") or {}).get("chg_m5")})
+        ev["chg_m5"] = (c.get("ds") or {}).get("chg_m5")
+        ev["chase_flush"] = "ok"
 
 
 class Analyst:
@@ -697,12 +876,25 @@ class Executor:
         if chase > G["max_chase_above_signal_pct"]:
             self.log.kill(c, "executor", "requote_chase", f"fill {chase:+.1f}% vs scout signal > {G['max_chase_above_signal_pct']}%"); return None
         mark = c["ds"]["price_usd"]
+        worse = fill_vs_mark_pct(fill, mark)
+        slip_cap = self.cfg["entry"]["max_fill_worse_than_mark_pct"]
+        if worse is None:
+            self.log.kill(c, "executor", "entry_slippage", "mark missing for the fill-vs-mark cap", True); return None
+        if worse > slip_cap:
+            self.log.kill(c, "executor", "entry_slippage",
+                          f"fill {worse:.2f}% worse than mark (cap {slip_cap}%)"); return None
         try:
             q2 = S.jupiter_quote(c["address"], SOL, int(q["outAmount"]), C["jupiter_slippage_bps"])
             sell_usd = int(q2["outAmount"]) / 1e9 * solp * (1 - C["extra_adverse_slippage_pct"] / 100)
             k = min(max(1 - sell_usd / (qty * mark), 0.0), 0.5)
+            rt_now = round_trip_loss_pct(lam, int(q2["outAmount"]))
         except Exception as e:
             self.log.kill(c, "executor", "requote", f"exit-cost quote failed: {e}"[:160], True); return None
+        if rt_now is None or rt_now > G["max_round_trip_loss_pct"]:
+            self.log.kill(c, "executor", "entry_round_trip",
+                          f"pre-buy round trip {rt_now if rt_now is not None else 'unknown'}% > {G['max_round_trip_loss_pct']}%",
+                          rt_now is None)
+            return None
         stop = self.risk.initial_stop(qty, usd, k)  # stop set BEFORE the order is recorded
         rationale = (f"score {s['score']} (cov {s['coverage_pct']}%, comps {s['components']}); gates: liq ${ev['liq_usd']:,.0f}, "
                      f"1h vol ${ev['vol_h1']:,.0f}, 1h chg {ev['chg_h1']:+.0f}%, LP {ev['lp']}, top10 {ev['top10']['effective_pct']}%, "
@@ -734,8 +926,8 @@ def hard_stop_reason(pct):
 class Risk:
     """Stage 5. Hard stop from risk.hard_stop_net_pct (net of slippage, swap fee,
     price impact, and network fee) is set before entry and never lowered.
-    A trail can ratchet it up after trail_activate_net_pct. Exits ONLY on that
-    stop or the trail. New hard-stop fills use hard_stop_reason(pct)."""
+    A trail can ratchet it up after trail_activate_net_pct. A liquidity drop
+    can also close the position. New hard-stop fills use hard_stop_reason(pct)."""
 
     def __init__(self, cfg, log, ledger):
         self.cfg, self.R, self.log, self.L = cfg, cfg["risk"], log, ledger
@@ -757,20 +949,45 @@ class Risk:
         except Exception:
             return max(self.L.pos_net(p, mark), 0.0), "entry-measured exit cost model (no Jupiter route)"
 
+    def _close(self, p, mark, liq, reason, why):
+        proceeds, src = self._exit_value(p, mark, liq if liq else p["entry_liq"])
+        pnl = proceeds - p["size_usd"]
+        pnl_pct = pnl / p["size_usd"] * 100 if p["size_usd"] else 0.0
+        exit_fill = proceeds / p["qty"] if p["qty"] else 0
+        self.log.db.execute("UPDATE positions SET status='closed', closed_at=?, exit_mark=?, exit_fill=?, proceeds=?, "
+                            "pnl_usd=?, pnl_pct=?, exit_reason=? WHERE id=?",
+                            (now(), mark, exit_fill, proceeds, pnl, pnl_pct, reason, p["id"]))
+        self.L.add_cash(proceeds)
+        self.log.trade(p["id"], "SELL", reason, mark, exit_fill, p["qty"], proceeds, None, pnl, src, why)
+        self.log.db.commit()
+
     def manage(self):
         ops = self.L.open_positions()
         if not ops:
             return 0, {}
         quotes, errs = S.ds_best_pairs([p["address"] for p in ops], set(self.cfg["scout"]["allowed_dex_ids"]))
         n = 0
+        floor = self.cfg["gates"]["min_liquidity_usd"]
+        drop_pct = self.R["liq_drop_from_entry_pct"]
         for p in ops:
             q = quotes.get(p["address"])
             if not q or not q.get("price_usd"):
                 self.log.event("stale_mark", position_id=p["id"], symbol=p["symbol"], note="no fresh price; stop still armed")
                 continue
-            mark, liq = q["price_usd"], q["liq_usd"] or p["entry_liq"]
+            mark = q["price_usd"]
+            raw_liq = q.get("liq_usd")
+            liq = raw_liq if raw_liq else p["entry_liq"]
             peak = max(p["peak_mark"] or mark, mark)
             net = (self.L.pos_net(p, mark) / p["size_usd"] - 1) * 100
+            drop = liq_drop_reason(p["entry_liq"], raw_liq, drop_pct, floor)
+            if drop:
+                self.log.db.execute("UPDATE positions SET last_mark=?, peak_mark=?, last_check=?, last_net_pct=? WHERE id=?",
+                                    (mark, peak, now(), net, p["id"]))
+                self.log.db.commit()
+                fresh = self.log.db.execute("SELECT * FROM positions WHERE id=?", (p["id"],)).fetchone()
+                self._close(fresh, mark, raw_liq, "liq_drop", drop)
+                n += 1
+                continue
             stop, trail = p["stop_mark"], p["trail_active"]
             if net >= self.R["trail_activate_net_pct"] and not trail:
                 trail = 1
@@ -785,20 +1002,13 @@ class Risk:
                                 "trail_active=? WHERE id=?", (mark, peak, now(), net, stop, trail, p["id"]))
             self.log.db.commit()
             if mark <= stop:
-                p = self.log.db.execute("SELECT * FROM positions WHERE id=?", (p["id"],)).fetchone()
-                proceeds, src = self._exit_value(p, mark, liq)
+                fresh = self.log.db.execute("SELECT * FROM positions WHERE id=?", (p["id"],)).fetchone()
                 reason = "trailing_stop" if trail else hard_stop_reason(self.R["hard_stop_net_pct"])
-                pnl = proceeds - p["size_usd"]
-                exit_fill = proceeds / p["qty"] if p["qty"] else 0
-                why = (f"mark {mark:.10g} <= stop {stop:.10g} ({reason}); peak {peak:.10g}; net {pnl / p['size_usd'] * 100:+.1f}%"
+                why = (f"mark {mark:.10g} <= stop {stop:.10g} ({reason}); peak {peak:.10g}"
                        + (" - gapped past stop between checks" if mark < stop * 0.97 else ""))
-                self.log.db.execute("UPDATE positions SET status='closed', closed_at=?, exit_mark=?, exit_fill=?, proceeds=?, "
-                                    "pnl_usd=?, pnl_pct=?, exit_reason=? WHERE id=?",
-                                    (now(), mark, exit_fill, proceeds, pnl, pnl / p["size_usd"] * 100, reason, p["id"]))
-                self.L.add_cash(proceeds)
-                self.log.trade(p["id"], "SELL", reason, mark, exit_fill, p["qty"], proceeds, None, pnl, src, why)
-                self.log.db.commit()
+                self._close(fresh, mark, liq, reason, why)
                 n += 1
+        sync_entry_pause(self.log, self.L, self.cfg, quotes)
         return n, quotes
 
 
@@ -848,6 +1058,8 @@ class Desk:
         status = {"gmgn": gmgn, "gates_source": gates}
         self.say(f"[{iso(t0)}] PAPER scan (cash ${self.L.cash:.2f})")
         exits, quotes = self.risk.manage()                                   # Risk first on open positions
+        pause = sync_entry_pause(self.log, self.L, self.cfg, quotes)
+        status["entry_pause"] = {"paused": pause["paused"], "reason": pause.get("reason")}
         cands, funnel = Scout(self.cfg, self.log).run(status)                # Stage 1
         kills = {}
         survivors = []
@@ -881,14 +1093,18 @@ class Desk:
                 self.log.kill(c, "analyst", g, f"score {s['score']} (coverage {s['coverage_pct']}%, missing {s['missing']})")
         scored.sort(key=lambda cs: -cs[1]["score"])
         bought = []
-        ex = Executor(self.cfg, self.log, self.L, self.filter, self.risk)
-        for c, s in scored:                                                  # Stage 4
-            pid = ex.run(c, s)
-            if pid:
-                bought.append(c["symbol"])
+        if pause["paused"]:
+            self.say("  entries paused:", pause.get("reason"))
+        else:
+            ex = Executor(self.cfg, self.log, self.L, self.filter, self.risk)
+            for c, s in scored:                                              # Stage 4
+                pid = ex.run(c, s)
+                if pid:
+                    bought.append(c["symbol"])
         self.log.equity(self.L.cash, self.L.open_value(quotes), len(self.L.open_positions()))  # Stage 6 snapshot
         funnel.update({"filter_kills": kills, "filter_passed": len(survivors), "scored_70plus": len(scored),
-                       "bought": bought, "exits": exits})
+                       "bought": bought, "exits": exits,
+                       "entries_paused": pause.get("reason") if pause["paused"] else None})
         self.log.end_run(status, funnel, t0)
         self.say("  sources:", json.dumps(status))
         self.say("  funnel:", json.dumps(funnel))
