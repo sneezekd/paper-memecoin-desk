@@ -1,0 +1,28 @@
+{
+  "blockTime": 1794800000,
+  "slot": 381000001,
+  "transaction": {
+    "signatures": ["buySig111"],
+    "message": {
+      "accountKeys": [
+        {"pubkey": "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU", "signer": true},
+        {"pubkey": "TokenAccount111", "signer": false}
+      ]
+    }
+  },
+  "meta": {
+    "err": null,
+    "fee": 5000,
+    "preBalances": [2000000000, 0],
+    "postBalances": [1000000000, 0],
+    "preTokenBalances": [],
+    "postTokenBalances": [
+      {
+        "accountIndex": 1,
+        "mint": "Mint111111111111111111111111111111111111111",
+        "owner": "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU",
+        "uiTokenAmount": {"uiAmount": 1000.0, "decimals": 6, "amount": "1000000000"}
+      }
+    ]
+  }
+}

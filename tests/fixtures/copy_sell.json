@@ -1,0 +1,35 @@
+{
+  "blockTime": 1794800300,
+  "slot": 381000080,
+  "transaction": {
+    "signatures": ["sellSig222"],
+    "message": {
+      "accountKeys": [
+        {"pubkey": "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU", "signer": true},
+        {"pubkey": "TokenAccount111", "signer": false}
+      ]
+    }
+  },
+  "meta": {
+    "err": null,
+    "fee": 5000,
+    "preBalances": [1000000000, 0],
+    "postBalances": [1800000000, 0],
+    "preTokenBalances": [
+      {
+        "accountIndex": 1,
+        "mint": "Mint111111111111111111111111111111111111111",
+        "owner": "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU",
+        "uiTokenAmount": {"uiAmount": 1000.0, "decimals": 6, "amount": "1000000000"}
+      }
+    ],
+    "postTokenBalances": [
+      {
+        "accountIndex": 1,
+        "mint": "Mint111111111111111111111111111111111111111",
+        "owner": "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU",
+        "uiTokenAmount": {"uiAmount": 400.0, "decimals": 6, "amount": "400000000"}
+      }
+    ]
+  }
+}

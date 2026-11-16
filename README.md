@@ -75,6 +75,27 @@ The relay checks out `main` for code, then overlays `data/desk.db` and
 `reports/dashboard.json` from `state` when that branch exists. The first run uses
 the copies on `main`.
 
+## Copy desk (separate paper book)
+
+`copy/` is a second paper strategy. It does not use a wallet, a private key, or the
+main desk's `data/desk.db`. Leader buys and sells are watched on a Solana
+`logsSubscribe` WebSocket (public mainnet RPC, or Helius when the optional
+`HELIUS_API_KEY` secret is set). Our fills are Jupiter quotes. Detection latency
+is the leader transaction's block time until we parse it, usually a couple of
+seconds on a live socket and up to about 5 seconds while the socket is down and
+the signature poll is the fallback.
+
+Tracked wallets live in `copy/wallets.json` (`enabled: true`). `python3 copy/run.py discover`
+(or the **Copy discover** workflow) writes `copy/candidates.json` and does not
+turn a wallet on by itself. The copy book starts at $100 in `data/copy.db`.
+The Pages dashboard has a **Copy desk** tab fed by `reports/copy_dashboard.json`.
+
+`copy-desk.yml` is its own concurrency group and chains the next run the same
+way as the main desk. Set repository variable `COPY_DESK_ENABLED` to `false` to
+stop it. State pushes start from the latest `state` branch and only replace
+that strategy's files, so the two relays can retry a rejected push without
+wiping the other ledger.
+
 To turn the desk off, add a repository variable named `DESK_ENABLED` with the
 value `false` (**Settings → Secrets and variables → Actions → Variables**).
 The shift already running finishes and does not dispatch the next one. Cron

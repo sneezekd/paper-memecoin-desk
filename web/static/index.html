@@ -226,6 +226,12 @@
   td { padding: 8px 8px 8px 0; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; vertical-align: top; }
   td.sym { font-weight: 700; letter-spacing: -0.02em; }
   .hidden { display: none !important; }
+  .tabs { display: flex; gap: 8px; margin: 0 0 14px; }
+  .tab {
+    border: 0; background: transparent; color: var(--muted); font: inherit; font-weight: 700;
+    padding: 8px 12px; border-radius: 999px; cursor: pointer;
+  }
+  .tab.on { background: #fff; color: var(--ink); box-shadow: var(--shadow); }
   .bars { display: flex; flex-direction: column; gap: 10px; }
   .bar-row { display: grid; grid-template-columns: 9.5rem 1fr auto; gap: 10px; align-items: center; }
   .bar-lab { font-size: .8rem; font-weight: 600; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -265,11 +271,17 @@
       </div>
     </header>
 
+    <div class="tabs" role="tablist">
+      <button class="tab on" id="tab-desk" type="button">Desk</button>
+      <button class="tab" id="tab-copy" type="button">Copy desk</button>
+    </div>
+
+    <div id="panel-desk">
     <div class="ticker-wrap" id="ticker-wrap">
       <div class="ticker" id="ticker"><div class="tick"><span class="px">waiting for a scan…</span></div></div>
     </div>
 
-    <div class="grid">
+    <div class="grid" id="desk-grid">
       <section class="card equity" id="equity-card">
         <div class="eq-top">
           <div>
@@ -324,6 +336,47 @@
       <div class="sec-h">Kills by rule</div>
       <div class="bars" id="bars"></div>
     </section>
+
+    </div>
+
+    <div id="panel-copy" class="hidden">
+      <div class="grid">
+        <section class="card equity">
+          <div class="eq-top">
+            <div>
+              <div class="eq-num" id="copy-eq">$100.00</div>
+              <div class="eq-meta">
+                <span class="pnl" id="copy-pnl">+$0.00 (0.00%)</span>
+                <span class="wl">W <b id="copy-w">0</b> / L <b id="copy-l">0</b></span>
+              </div>
+            </div>
+          </div>
+          <div class="stats" id="copy-status">Paper copy · waiting for a leader</div>
+        </section>
+        <section class="card logger">
+          <div class="logger-h"><span>Leader events</span><span class="killed-n" id="copy-lat">latency —</span></div>
+          <div class="feed" id="copy-feed"></div>
+        </section>
+      </div>
+      <section class="card" id="copy-open-sec">
+        <div class="sec-h">Open copy positions</div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr><th>Coin</th><th>Leader</th><th>Size</th><th>Leader px</th><th>Our fill</th><th>Slip</th><th>Stop</th><th>Latency</th><th>P&amp;L</th></tr></thead>
+            <tbody id="copy-open"></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="card" id="copy-closed-sec" style="margin-top:14px">
+        <div class="sec-h">Closed copy trades</div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr><th>Coin</th><th>Leader</th><th>Reason</th><th>Slip vs leader</th><th>Latency</th><th>P&amp;L</th></tr></thead>
+            <tbody id="copy-closed"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
 
     <footer class="note">Paper / shadow / simulation only. Auto-refreshes every 30 seconds. Times are America/Edmonton (MT).</footer>
   </div>
@@ -480,6 +533,74 @@
     "https://raw.githubusercontent.com/sneezekd/paper-memecoin-desk/state/reports/dashboard.json",
     "https://raw.githubusercontent.com/sneezekd/paper-memecoin-desk/main/reports/dashboard.json"
   ];
+  const COPY_URLS = [
+    "https://raw.githubusercontent.com/sneezekd/paper-memecoin-desk/state/reports/copy_dashboard.json",
+    "https://raw.githubusercontent.com/sneezekd/paper-memecoin-desk/main/reports/copy_dashboard.json"
+  ];
+  document.getElementById("tab-desk").onclick = function () {
+    document.getElementById("panel-desk").classList.remove("hidden");
+    document.getElementById("panel-copy").classList.add("hidden");
+    document.getElementById("tab-desk").className = "tab on";
+    document.getElementById("tab-copy").className = "tab";
+  };
+  document.getElementById("tab-copy").onclick = function () {
+    document.getElementById("panel-copy").classList.remove("hidden");
+    document.getElementById("panel-desk").classList.add("hidden");
+    document.getElementById("tab-copy").className = "tab on";
+    document.getElementById("tab-desk").className = "tab";
+  };
+  function applyCopy(d) {
+    d = d || {};
+    const b = d.balance || {};
+    const start = b.starting_usd || 100;
+    const equity = b.equity_usd != null ? b.equity_usd : start;
+    const pnl = b.total_pnl_usd != null ? b.total_pnl_usd : 0;
+    const pnlPct = b.total_pnl_pct || 0;
+    document.getElementById("copy-eq").textContent = usd(equity);
+    const pnlEl = document.getElementById("copy-pnl");
+    const sign = pnl >= 0 ? "+" : "";
+    pnlEl.textContent = sign + usd(pnl).replace("+","") + " (" + sign + pnlPct.toFixed(2) + "%)";
+    pnlEl.className = "pnl " + (pnl > 0 ? "up" : (pnl < 0 ? "dn" : ""));
+    document.getElementById("copy-w").textContent = d.wins || 0;
+    document.getElementById("copy-l").textContent = d.losses || 0;
+    const openN = (d.open_positions || []).length;
+    document.getElementById("copy-status").textContent =
+      "Paper copy · " + openN + " open · separate $100 book";
+    const lats = (d.recent_events || []).map(e => e.latency_s).filter(x => x != null);
+    document.getElementById("copy-lat").textContent = lats.length
+      ? ("latency " + lats[0].toFixed(1) + "s") : "latency —";
+    const feed = document.getElementById("copy-feed");
+    const rows = d.recent_events || [];
+    feed.innerHTML = rows.length ? rows.map(e => {
+      const slip = e.slippage_vs_leader_pct != null ? (" · slip " + Number(e.slippage_vs_leader_pct).toFixed(1) + "%") : "";
+      const lat = e.latency_s != null ? (" · " + Number(e.latency_s).toFixed(1) + "s") : "";
+      return '<div class="fe"><div class="d"></div><div class="txt"><span class="a">' + esc(e.side || e.note || "event") +
+        "</span> " + esc((e.mint || "").slice(0, 4)) + " · " + esc((e.wallet || "").slice(0, 4)) + slip + lat + "</div></div>";
+    }).join("") : '<div class="fe"><div class="d"></div><div class="txt">waiting for a tracked wallet</div></div>';
+    const ob = document.getElementById("copy-open");
+    ob.innerHTML = (d.open_positions || []).map(p => {
+      const slip = p.slippage_vs_leader_pct != null ? Number(p.slippage_vs_leader_pct).toFixed(1) + "%" : "—";
+      const lat = p.detection_latency_s != null ? Number(p.detection_latency_s).toFixed(1) + "s" : "—";
+      return "<tr><td class=\"sym\">" + esc(p.symbol) + "</td><td>" + esc(p.leader_label || (p.leader || "").slice(0, 4)) +
+        "</td><td>" + usd(p.size_usd) + "</td><td>" + px(p.leader_price) + "</td><td>" + px(p.entry_fill) +
+        "</td><td>" + slip + "</td><td>" + px(p.stop_mark) + "</td><td>" + lat + "</td><td>" + usd(p.unrealized_pnl_usd) + "</td></tr>";
+    }).join("") || "<tr><td colspan=\"9\">none</td></tr>";
+    const cb = document.getElementById("copy-closed");
+    cb.innerHTML = (d.closed_trades || []).map(p => {
+      const slip = p.slippage_vs_leader_pct != null ? Number(p.slippage_vs_leader_pct).toFixed(1) + "%" : "—";
+      const lat = p.detection_latency_s != null ? Number(p.detection_latency_s).toFixed(1) + "s" : "—";
+      return "<tr><td class=\"sym\">" + esc(p.symbol) + "</td><td>" + esc(p.leader_label || (p.leader || "").slice(0, 4)) +
+        "</td><td>" + esc(p.exit_reason || "") + "</td><td>" + slip + "</td><td>" + lat + "</td><td>" + usd(p.pnl_usd) + "</td></tr>";
+    }).join("") || "<tr><td colspan=\"6\">none</td></tr>";
+  }
+  async function pollCopy() {
+    for (let i = 0; i < COPY_URLS.length; i++) {
+      try {
+        applyCopy(await fetchJson(COPY_URLS[i] + "?t=" + Date.now()));
+        return;
+      } catch (e) {}
+    }
+  }
   const GATE_LABELS = {
     volume_1h: "1h volume", top10_real: "top-10 holders", bundled_launch: "bundled launch",
     pumped_1h: "already pumped 1h", chase_5m: "up more than 25% in 5m", flush_bounce: "dump then bounce",
@@ -707,7 +828,8 @@
     if (window.console && lastErr) console.warn(lastErr);
   }
   poll();
-  setInterval(poll, 30000);
+  pollCopy();
+  setInterval(function () { poll(); pollCopy(); }, 30000);
 })();
 </script>
 </body>
