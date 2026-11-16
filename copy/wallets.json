@@ -1,0 +1,4 @@
+{
+  "_comment": "PAPER ONLY. Labels for wallets whose buys and sells we simulate copying. No private keys. Discovery writes copy/candidates.json; a human sets enabled to true. The list ships empty when discovery cannot finish a ranked sample in this environment.",
+  "wallets": []
+}

@@ -30,6 +30,9 @@ jobs:
           python3 tests/test_free_sources.py
           python3 tests/test_entry_risk.py
 
+      - name: Copy desk mock end to end
+        run: python3 tests/test_copy_desk.py
+
       - name: End-to-end mock (temp database)
         run: python3 tests/e2e_mock.py
 

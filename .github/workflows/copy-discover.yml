@@ -1,0 +1,28 @@
+# One-shot wallet ranking. Not part of the copy hot loop.
+name: Copy discover
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Rank candidate wallets
+        env:
+          HELIUS_API_KEY: ${{ secrets.HELIUS_API_KEY }}
+        run: python3 copy/run.py discover --max-coins 3
+      - name: Upload candidates
+        uses: actions/upload-artifact@v4
+        with:
+          name: copy-candidates
+          path: copy/candidates.json
+          if-no-files-found: warn

@@ -96,7 +96,12 @@ PY
       git worktree prune >/dev/null 2>&1 || true
       wt=$(mktemp -d)
       rmdir "$wt"
-      git worktree add --detach "$wt" HEAD >/dev/null
+      # Start from the latest state snapshot so this publish cannot wipe the copy desk's files.
+      base="HEAD"
+      if git rev-parse --verify "origin/${STATE_BRANCH}" >/dev/null 2>&1; then
+        base="origin/${STATE_BRANCH}"
+      fi
+      git worktree add --detach "$wt" "$base" >/dev/null
       mkdir -p "$wt/data" "$wt/reports"
       cp "$backup/desk.db" "$wt/data/desk.db"
       cp "$backup/dashboard.json" "$wt/reports/dashboard.json"
@@ -224,8 +229,103 @@ cmd_status() {
   cash_line
 }
 
+restore_copy() {
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1 || { say "not a git checkout; keeping local copy files"; return 0; }
+  git fetch --depth=1 origin "$STATE_BRANCH" >/dev/null 2>&1 || true
+  if ! git rev-parse --verify "origin/${STATE_BRANCH}" >/dev/null 2>&1; then
+    say "no origin/${STATE_BRANCH} yet; using copy files in this checkout"
+    return 0
+  fi
+  if git cat-file -e "origin/${STATE_BRANCH}:data/copy.db" 2>/dev/null; then
+    git restore --source="origin/${STATE_BRANCH}" --worktree -- data/copy.db || true
+  fi
+  if git cat-file -e "origin/${STATE_BRANCH}:reports/copy_dashboard.json" 2>/dev/null; then
+    git restore --source="origin/${STATE_BRANCH}" --worktree -- reports/copy_dashboard.json || true
+  fi
+  say "restored copy desk files from origin/${STATE_BRANCH} when present"
+}
+
+publish_copy() {
+  if [ "${COPY_PUSH_STATE:-}" != "1" ]; then
+    say "COPY_PUSH_STATE is not 1; not pushing copy state"
+    return 0
+  fi
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1 || { say "not a git checkout"; return 1; }
+  [ -f data/copy.db ] && [ -f reports/copy_dashboard.json ] || { say "missing copy state files"; return 1; }
+  (
+    flock -n 9 || { say "copy state publish already in progress"; exit 0; }
+    msg="state: copy desk snapshot [skip ci]"
+    backup=$(mktemp -d)
+    python3 - "$backup" <<'PY' || exit 1
+import sqlite3, shutil, sys
+from pathlib import Path
+dst = Path(sys.argv[1])
+src = sqlite3.connect("file:data/copy.db?mode=ro", uri=True)
+out = sqlite3.connect(dst / "copy.db")
+src.backup(out)
+out.close(); src.close()
+shutil.copyfile("reports/copy_dashboard.json", dst / "copy_dashboard.json")
+PY
+    author_name="${GIT_AUTHOR_NAME:-github-actions[bot]}"
+    author_email="${GIT_AUTHOR_EMAIL:-41898282+github-actions[bot]@users.noreply.github.com}"
+    attempt=1
+    while [ "$attempt" -le 5 ]; do
+      git fetch --depth=1 origin "$STATE_BRANCH" >/dev/null 2>&1 || true
+      expected=""
+      if git rev-parse --verify "origin/${STATE_BRANCH}" >/dev/null 2>&1; then
+        expected=$(git rev-parse "origin/${STATE_BRANCH}")
+        old_db=$(git rev-parse "origin/${STATE_BRANCH}:data/copy.db" 2>/dev/null || echo missing)
+        old_js=$(git rev-parse "origin/${STATE_BRANCH}:reports/copy_dashboard.json" 2>/dev/null || echo missing)
+        new_db=$(git hash-object "$backup/copy.db")
+        new_js=$(git hash-object "$backup/copy_dashboard.json")
+        if [ "$old_db" = "$new_db" ] && [ "$old_js" = "$new_js" ]; then
+          say "copy state unchanged"
+          exit 0
+        fi
+      fi
+      git worktree prune >/dev/null 2>&1 || true
+      wt=$(mktemp -d)
+      rmdir "$wt"
+      base="HEAD"
+      if git rev-parse --verify "origin/${STATE_BRANCH}" >/dev/null 2>&1; then
+        base="origin/${STATE_BRANCH}"
+      fi
+      git worktree add --detach "$wt" "$base" >/dev/null
+      mkdir -p "$wt/data" "$wt/reports"
+      cp "$backup/copy.db" "$wt/data/copy.db"
+      cp "$backup/copy_dashboard.json" "$wt/reports/copy_dashboard.json"
+      git -C "$wt" add -A
+      tree=$(git -C "$wt" write-tree)
+      commit=$(
+        GIT_AUTHOR_NAME="$author_name" \
+        GIT_AUTHOR_EMAIL="$author_email" \
+        GIT_COMMITTER_NAME="$author_name" \
+        GIT_COMMITTER_EMAIL="$author_email" \
+        git -C "$wt" commit-tree "$tree" -m "$msg"
+      )
+      git worktree remove --force "$wt" >/dev/null 2>&1 || rm -rf "$wt"
+      if [ -n "$expected" ]; then
+        if git push --force-with-lease="refs/heads/${STATE_BRANCH}:${expected}" origin "${commit}:refs/heads/${STATE_BRANCH}"; then
+          say "published copy snapshot ${commit:0:12}"
+          exit 0
+        fi
+      else
+        if git push origin "${commit}:refs/heads/${STATE_BRANCH}"; then
+          say "published copy snapshot ${commit:0:12}"
+          exit 0
+        fi
+      fi
+      say "copy state push rejected (attempt ${attempt}); retrying"
+      attempt=$((attempt + 1))
+      sleep $((attempt * 2))
+    done
+    say "failed to publish copy state"
+    exit 1
+  ) 9>"${COPY_LOCK_FILE:-/tmp/paper-copy-state.lock}"
+}
+
 usage() {
-  say "usage: $0 manage|once|loop|start|stop|status|ci-loop|commit-state|restore"
+  say "usage: $0 manage|once|loop|start|stop|status|ci-loop|commit-state|restore|publish-copy|restore-copy"
   return 2
 }
 
@@ -239,5 +339,7 @@ case "${1:-status}" in
   ci-loop) ci_loop ;;
   commit-state) publish_state ;;
   restore) restore_state ;;
+  publish-copy) publish_copy ;;
+  restore-copy) restore_copy ;;
   *) usage ;;
 esac

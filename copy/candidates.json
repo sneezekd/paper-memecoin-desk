@@ -1,0 +1,15 @@
+{
+ "generated_at": 1794853676.8709097,
+ "rpc": "public",
+ "candidates": [
+  {
+   "win_rate": 0.0,
+   "closed": 9,
+   "pnl_sol": -0.9623,
+   "address": "5GpzkbJ1L4sAbJqwfHtVTiiKsRKnR6K9u5QYcQvjnFJd",
+   "early_buys": 1,
+   "score": -0.962
+  }
+ ],
+ "note": "PAPER ONLY research. A human enables wallets in copy/wallets.json. Deployers and >200 trades/day are dropped."
+}
