@@ -333,6 +333,7 @@ def snapshot():
                 "pnl_pct": round(pnl_pct, 2) if pnl_pct is not None else None,
                 "opened": lt(p.get("opened_at")),
                 "url": p.get("url"),
+                "x_score": p.get("x_score"),
             })
         if latest_eq and not ops:
             equity = float(latest_eq["equity"])
@@ -360,6 +361,7 @@ def snapshot():
                 "opened": lt(p.get("opened_at")),
                 "closed": lt(p.get("closed_at")),
                 "url": p.get("url"),
+                "x_score": p.get("x_score"),
             })
         wins = sum(1 for p in closed if (p.get("pnl_usd") or 0) > 0)
         losses = sum(1 for p in closed if p.get("status") == "closed" and (p.get("pnl_usd") or 0) <= 0)

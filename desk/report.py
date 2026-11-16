@@ -82,9 +82,10 @@ def dashboard_data():
                     "unrealized_pnl_usd": round(sum(p["unrealized_pnl_usd"] for p in ops), 4)},
         "open_positions": [{k: p[k] for k in ("symbol", "address", "score", "size_usd", "entry_fill", "last_mark", "stop_mark",
                                               "initial_stop_mark", "trail_active", "peak_mark", "unrealized_pnl_usd", "url")}
-                           | {"opened": lt(p["opened_at"])} for p in ops],
+                           | {"opened": lt(p["opened_at"]), "x_score": p.get("x_score")} for p in ops],
         "closed_trades": [{k: p[k] for k in ("symbol", "address", "score", "size_usd", "entry_fill", "exit_fill", "pnl_usd",
-                                             "pnl_pct", "exit_reason", "url")} | {"opened": lt(p["opened_at"]), "closed": lt(p["closed_at"])}
+                                             "pnl_pct", "exit_reason", "url")} | {"opened": lt(p["opened_at"]), "closed": lt(p["closed_at"]),
+                                                                                  "x_score": p.get("x_score")}
                           for p in closed],
         "wins": sum(1 for p in closed if (p["pnl_usd"] or 0) > 0), "losses": sum(1 for p in closed if (p["pnl_usd"] or 0) <= 0),
         "funnel_24h": funnel_since(db, now() - 86400),

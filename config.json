@@ -96,6 +96,14 @@
     "free_source_cache_seconds": 1800,
     "_comment": "gmgn_enabled: use GMGN when a personal key is in ~/.config/gmgn/.env (or secrets/gmgn.env). use_free_sources_when_no_gmgn: if no key (or a GMGN call fails), bundle = RugCheck insider/cluster share (>10% kill), creator history = pump.fun created-coins when reachable, else RugCheck creatorTokens + cached reports (2+ rugs in last 10 = kill, no history = half size). Smart-wallet factor is GMGN-only; without a key it is dropped and its 20-point weight is redistributed over the other five Analyst factors. Pump.fun's frontend API is often Cloudflare-blocked from this host; that is treated as unavailable, not a fail-closed kill."
   },
+  "x_watchlist": {
+    "_comment": "PAPER ONLY. On each scan, read issue comments (cached 5 min). Trust only login sneezekd with author_association OWNER. Coins are added to the scout set and still face every filter gate. max_boost is added after the weighted score and cannot pass a coin that is under min_score.",
+    "enabled": true,
+    "repo": "sneezekd/paper-memecoin-desk",
+    "issue_number": 8,
+    "max_boost": 8.0,
+    "cache_seconds": 300
+  },
   "audit": {
     "ran_threshold_pct": 50,
     "rug_drawdown_pct": 80,

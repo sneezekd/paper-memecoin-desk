@@ -29,6 +29,7 @@ jobs:
           python3 tests/test_manage_fastpath.py
           python3 tests/test_free_sources.py
           python3 tests/test_entry_risk.py
+          python3 tests/test_x_watchlist.py
 
       - name: Copy desk mock end to end
         run: python3 tests/test_copy_desk.py
