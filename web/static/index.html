@@ -569,19 +569,26 @@
     const lats = (d.recent_events || []).map(e => e.latency_s).filter(x => x != null);
     document.getElementById("copy-lat").textContent = lats.length
       ? ("latency " + lats[0].toFixed(1) + "s") : "latency —";
+    function leaderName(p) {
+      const addr = String((p && (p.leader || p.wallet)) || "");
+      const label = String((p && p.leader_label) || "");
+      const short = addr.slice(0, 8);
+      if (label && short) return label + " · " + short;
+      return label || short || "—";
+    }
     const feed = document.getElementById("copy-feed");
     const rows = d.recent_events || [];
     feed.innerHTML = rows.length ? rows.map(e => {
       const slip = e.slippage_vs_leader_pct != null ? (" · slip " + Number(e.slippage_vs_leader_pct).toFixed(1) + "%") : "";
       const lat = e.latency_s != null ? (" · " + Number(e.latency_s).toFixed(1) + "s") : "";
       return '<div class="fe"><div class="d"></div><div class="txt"><span class="a">' + esc(e.side || e.note || "event") +
-        "</span> " + esc((e.mint || "").slice(0, 4)) + " · " + esc((e.wallet || "").slice(0, 4)) + slip + lat + "</div></div>";
+        "</span> " + esc((e.mint || "").slice(0, 4)) + " · " + esc(leaderName(e)) + slip + lat + "</div></div>";
     }).join("") : '<div class="fe"><div class="d"></div><div class="txt">waiting for a tracked wallet</div></div>';
     const ob = document.getElementById("copy-open");
     ob.innerHTML = (d.open_positions || []).map(p => {
       const slip = p.slippage_vs_leader_pct != null ? Number(p.slippage_vs_leader_pct).toFixed(1) + "%" : "—";
       const lat = p.detection_latency_s != null ? Number(p.detection_latency_s).toFixed(1) + "s" : "—";
-      return "<tr><td class=\"sym\">" + esc(p.symbol) + "</td><td>" + esc(p.leader_label || (p.leader || "").slice(0, 4)) +
+      return "<tr><td class=\"sym\">" + esc(p.symbol) + "</td><td>" + esc(leaderName(p)) +
         "</td><td>" + usd(p.size_usd) + "</td><td>" + px(p.leader_price) + "</td><td>" + px(p.entry_fill) +
         "</td><td>" + slip + "</td><td>" + px(p.stop_mark) + "</td><td>" + lat + "</td><td>" + usd(p.unrealized_pnl_usd) + "</td></tr>";
     }).join("") || "<tr><td colspan=\"9\">none</td></tr>";
@@ -589,7 +596,7 @@
     cb.innerHTML = (d.closed_trades || []).map(p => {
       const slip = p.slippage_vs_leader_pct != null ? Number(p.slippage_vs_leader_pct).toFixed(1) + "%" : "—";
       const lat = p.detection_latency_s != null ? Number(p.detection_latency_s).toFixed(1) + "s" : "—";
-      return "<tr><td class=\"sym\">" + esc(p.symbol) + "</td><td>" + esc(p.leader_label || (p.leader || "").slice(0, 4)) +
+      return "<tr><td class=\"sym\">" + esc(p.symbol) + "</td><td>" + esc(leaderName(p)) +
         "</td><td>" + esc(p.exit_reason || "") + "</td><td>" + slip + "</td><td>" + lat + "</td><td>" + usd(p.pnl_usd) + "</td></tr>";
     }).join("") || "<tr><td colspan=\"6\">none</td></tr>";
   }
