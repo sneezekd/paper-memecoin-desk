@@ -42,6 +42,7 @@ jobs:
           DESK_MANAGE_SEC: "15"
           DESK_SCAN_SEC: "180"
           DESK_MAX_SECONDS: "20700"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: ./scheduler.sh ci-loop
 
       - name: Persist state before exit

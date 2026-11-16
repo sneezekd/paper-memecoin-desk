@@ -316,7 +316,7 @@
       <div class="sec-h">Open positions</div>
       <div style="overflow-x:auto">
         <table>
-          <thead><tr><th>Coin</th><th>Entry</th><th>Size</th><th>Score</th><th>Stop</th><th>Trail</th><th>P&amp;L</th></tr></thead>
+          <thead><tr><th>Coin</th><th>Entry</th><th>Size</th><th>Score</th><th>X</th><th>Stop</th><th>Trail</th><th>P&amp;L</th></tr></thead>
           <tbody id="open-body"></tbody>
         </table>
       </div>
@@ -326,7 +326,7 @@
       <div class="sec-h">Closed trades</div>
       <div style="overflow-x:auto">
         <table>
-          <thead><tr><th>Coin</th><th>Entry</th><th>Exit</th><th>Reason</th><th>P&amp;L</th></tr></thead>
+          <thead><tr><th>Coin</th><th>Entry</th><th>Exit</th><th>Reason</th><th>X</th><th>P&amp;L</th></tr></thead>
           <tbody id="closed-body"></tbody>
         </table>
       </div>
@@ -638,7 +638,7 @@
       exit: p.exit != null ? p.exit : p.exit_fill,
       reason: p.reason || p.exit_reason,
       pnl_usd: p.pnl_usd, pnl_pct: p.pnl_pct, score: p.score, size_usd: p.size_usd,
-      closed: p.closed
+      closed: p.closed, x_score: p.x_score
     }));
     const open = (d.open_positions || []).map(p => {
       const size = p.size_usd || 0;
@@ -647,7 +647,7 @@
       return {
         symbol: p.symbol, entry: p.entry != null ? p.entry : p.entry_fill,
         size_usd: size, score: p.score, stop: p.stop != null ? p.stop : p.stop_mark,
-        trail_active: !!p.trail_active, pnl_usd: pnlU, pnl_pct: pnlP
+        trail_active: !!p.trail_active, pnl_usd: pnlU, pnl_pct: pnlP, x_score: p.x_score
       };
     });
     const funnel = d.funnel_all_time || d.funnel_24h || {};
@@ -793,6 +793,7 @@
         <td>${px(p.entry)}</td>
         <td>${usd(p.size_usd)}</td>
         <td>${p.score != null ? p.score : "—"}</td>
+        <td>${p.x_score != null ? p.x_score : "—"}</td>
         <td>${px(p.stop)}</td>
         <td>${p.trail_active ? "on" : "off"}</td>
         <td class="${pc.cls}">${usd(p.pnl_usd)} (${pc.t})</td>
@@ -805,6 +806,7 @@
         <td>${px(p.entry)}</td>
         <td>${px(p.exit)}</td>
         <td>${esc((p.reason||"").replaceAll("_"," "))}</td>
+        <td>${p.x_score != null ? p.x_score : "—"}</td>
         <td class="${pc.cls}">${usd(p.pnl_usd)} (${pc.t})</td>
       </tr>`;
     });

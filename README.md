@@ -37,6 +37,13 @@ python3 tests/e2e_mock.py
 stop, the trailing stop, or a liquidity drop (`liq_drop`). It does not lower a
 stop. With no open positions it does not write a run.
 
+The Analyst can add up to `x_watchlist.max_boost` points from an X watchlist posted as a
+JSON comment on GitHub issue 8. Only comments by `sneezekd` with association OWNER
+are read, cached for 5 minutes, and ignored after `ttl_hours`. Watchlist mints are
+scouted even if DexScreener discovery missed them, then they face every filter gate.
+The boost cannot turn a below-minimum score into a pass. `x_score` is stored on the
+trade and shown on the dashboard.
+
 New entries also skip a 5-minute chase above `entry.max_chase_5m_pct`, a dump-then-bounce
 inside `entry.flush_window_minutes` (missing 5m candles fail closed), a paper fill more
 than `entry.max_fill_worse_than_mark_pct` worse than the mark, and a pre-buy round trip

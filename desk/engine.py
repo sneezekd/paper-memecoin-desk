@@ -8,6 +8,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 from . import sources as S
 from .sources import f
+from .xwatch import apply_x_boost, load_x_watchlist
 
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data" / "desk.db"
@@ -220,7 +221,16 @@ class Logger:
         self.db = sqlite3.connect(DB, timeout=30)
         self.db.row_factory = sqlite3.Row
         self.db.executescript(SCHEMA)
+        self._ensure_x_score()
         self.run_id = None
+
+    def _ensure_x_score(self):
+        """Nullable column so an existing ledger can record x_score without rewriting stops."""
+        for table in ("positions", "trades"):
+            have = {r[1] for r in self.db.execute(f"PRAGMA table_info({table})")}
+            if "x_score" not in have:
+                self.db.execute(f"ALTER TABLE {table} ADD COLUMN x_score REAL")
+        self.db.commit()
 
     def event(self, kind, **kw):
         with EVENTS.open("a") as fh:
@@ -284,11 +294,12 @@ class Logger:
                          json.dumps(s["components"]), json.dumps(s["missing"]), d["price_usd"], d["liq_usd"]))
         self.event("score", symbol=c["symbol"], address=c["address"], **s)
 
-    def trade(self, pid, side, reason, mark, fill, qty, usd, fees, pnl, src, rationale):
-        self.db.execute("INSERT INTO trades(position_id,ts,side,reason,mark,fill,qty,usd,fees_usd,pnl_usd,price_source,rationale) "
-                        "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)", (pid, now(), side, reason, mark, fill, qty, usd, fees, pnl, src, rationale))
+    def trade(self, pid, side, reason, mark, fill, qty, usd, fees, pnl, src, rationale, x_score=None):
+        self.db.execute("INSERT INTO trades(position_id,ts,side,reason,mark,fill,qty,usd,fees_usd,pnl_usd,price_source,rationale,x_score) "
+                        "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                        (pid, now(), side, reason, mark, fill, qty, usd, fees, pnl, src, rationale, x_score))
         self.event("paper_" + side.lower(), position_id=pid, reason=reason, mark=mark, fill=fill, usd=usd, pnl_usd=pnl,
-                   price_source=src, rationale=rationale)
+                   price_source=src, rationale=rationale, x_score=x_score)
 
     def equity(self, cash, open_value, n_open):
         self.db.execute("INSERT INTO equity(run_id,ts,cash,open_value,equity,n_open) VALUES(?,?,?,?,?,?)",
@@ -342,10 +353,14 @@ class Ledger:
 
 
 class Scout:
-    """Stage 1. New Pump.fun / Raydium pairs via DexScreener, 30m-72h old, mcap $300k-$20M."""
+    """Stage 1. New Pump.fun / Raydium pairs via DexScreener, 30m-72h old, mcap $300k-$20M.
+
+    X-watchlist mints are added to the candidate set when discovery missed them.
+    They still have to clear the same age, mcap, and filter gates as everyone else.
+    """
 
     def __init__(self, cfg, log):
-        self.cfg, self.log = cfg["scout"], log
+        self.full, self.cfg, self.log = cfg, cfg["scout"], log
 
     def run(self, status):
         sc = self.cfg
@@ -357,6 +372,11 @@ class Scout:
             status.update(st2)
             for a, labels in ga.items():
                 addrs.setdefault(a, set()).update(labels)
+        watch = load_x_watchlist(self.log, self.full)
+        self._watch = watch
+        for mint in watch:
+            addrs.setdefault(mint, set()).add("x_watchlist")
+        status["x_watchlist"] = len(watch)
         pairs, errs = S.ds_best_pairs(list(addrs), allowed)
         if errs:
             status["ds_pairs_errors"] = errs[:3]
@@ -374,8 +394,11 @@ class Scout:
                 counts["age_out_of_window"] += 1; continue
             if not (sc["min_mcap_usd"] <= d["mcap"] <= sc["max_mcap_usd"]):
                 counts["mcap_out_of_window"] += 1; continue
-            c = {"address": a, "symbol": d.get("symbol") or a[:6], "sources": labels, "ds": d,
+            c = {"address": a, "symbol": d.get("symbol") or (self._watch.get(a) or {}).get("symbol") or a[:6],
+                 "sources": labels, "ds": d,
                  "age_min": round(age, 1), "signal_price": d["price_usd"], "signal_ts": d["fetched_at"]}
+            if a in self._watch:
+                c["x_watch"] = self._watch[a]
             self.log.scouted(c)
             out.append(c)
         counts["scouted"] = len(out)
@@ -763,6 +786,7 @@ class Analyst:
 
     def __init__(self, cfg, log, use_smart_wallets=False):
         self.A, self.log, self.use_smart_wallets = cfg["analyst"], log, use_smart_wallets
+        self.xcfg = cfg.get("x_watchlist") or {}
 
     def run(self, c, gt):
         d, comp, missing = c["ds"], {}, []
@@ -811,9 +835,21 @@ class Analyst:
         # else: smart-wallet factor dropped; its weight is redistributed over the other five
         wsum = sum(W[k] for k in comp if k in W)
         cov = wsum / sum(W.values()) * 100 if W else 0.0
-        score = round(sum(W[k] * v for k, v in comp.items() if k in W) / wsum, 1) if wsum else 0.0
-        passed = cov >= self.A["min_weight_coverage_pct"] and score >= self.A["min_score"]
-        s = {"score": score, "coverage_pct": round(cov, 1), "passed": passed, "components": comp, "missing": missing}
+        base = round(sum(W[k] * v for k, v in comp.items() if k in W) / wsum, 1) if wsum else 0.0
+        x_score = None
+        if self.xcfg.get("enabled"):
+            raw = (c.get("x_watch") or {}).get("x_score")
+            if raw is not None:
+                try:
+                    x_score = max(0.0, min(100.0, float(raw)))
+                except (TypeError, ValueError):
+                    x_score = None
+        shown, boost, passed = apply_x_boost(
+            base, x_score, self.xcfg.get("max_boost", 0) if x_score is not None else 0,
+            self.A["min_score"], cov >= self.A["min_weight_coverage_pct"])
+        # apply_x_boost already refuses to pass a coin under min_score. Pass max_boost 0 when there is no x_score.
+        s = {"score": shown, "base_score": base, "x_score": x_score, "x_boost": boost,
+             "coverage_pct": round(cov, 1), "passed": passed, "components": comp, "missing": missing}
         self.log.score(c, s)
         return s
 
@@ -900,16 +936,18 @@ class Executor:
                      f"1h vol ${ev['vol_h1']:,.0f}, 1h chg {ev['chg_h1']:+.0f}%, LP {ev['lp']}, top10 {ev['top10']['effective_pct']}%, "
                      f"dev {ev['dev_hold_pct']}%, bundled {ev.get('bundled_pct')}%, round-trip {ev['round_trip_loss_pct']}%, "
                      f"impact {impact:.2f}%, chase {chase:+.1f}%, size ${usd:.2f} of equity ${eq:.2f}"
-                     + (" (half size: creator has no history)" if c.get("no_creator_history") else ""))
+                     + (" (half size: creator has no history)" if c.get("no_creator_history") else "")
+                     + (f" x_score {s.get('x_score')}" if s.get("x_score") is not None else ""))
+        x_score = s.get("x_score")
         cur = self.log.db.execute(
             "INSERT INTO positions(address,symbol,status,opened_at,score,size_usd,decimals,qty,entry_mark,entry_fill,entry_liq,"
-            "stop_mark,initial_stop_mark,peak_mark,last_mark,last_check,half_size,url,entry_rationale,exit_cost_frac) "
-            "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            "stop_mark,initial_stop_mark,peak_mark,last_mark,last_check,half_size,url,entry_rationale,exit_cost_frac,x_score) "
+            "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             (c["address"], c["symbol"], "open", t_fill, s["score"], usd, c["decimals"], qty, mark, fill, c["ds"]["liq_usd"],
-             stop, stop, mark, mark, t_fill, int(bool(c.get("no_creator_history"))), c["ds"].get("url"), rationale, k))
+             stop, stop, mark, mark, t_fill, int(bool(c.get("no_creator_history"))), c["ds"].get("url"), rationale, k, x_score))
         pid = cur.lastrowid
         self.L.add_cash(-usd)
-        self.log.trade(pid, "BUY", "entry", mark, fill, qty, usd, usd - qty * mark, 0.0, "jupiter_quote", rationale)
+        self.log.trade(pid, "BUY", "entry", mark, fill, qty, usd, usd - qty * mark, 0.0, "jupiter_quote", rationale, x_score)
         stop_pct = self.cfg["risk"]["hard_stop_net_pct"]
         self.log.db.execute("INSERT INTO stop_moves(position_id,ts,old_stop,new_stop,why) VALUES(?,?,?,?,?)",
                             (pid, t_fill, None, stop, f"initial {int(stop_pct)}% net stop set before entry"))
@@ -1090,7 +1128,9 @@ class Desk:
             else:
                 g = "analyst_below_70" if s["coverage_pct"] >= self.cfg["analyst"]["min_weight_coverage_pct"] else "analyst_low_coverage"
                 kills[g] = kills.get(g, 0) + 1
-                self.log.kill(c, "analyst", g, f"score {s['score']} (coverage {s['coverage_pct']}%, missing {s['missing']})")
+                base = s.get("base_score", s["score"])
+                extra = f" +x {s['x_boost']}" if s.get("x_boost") else ""
+                self.log.kill(c, "analyst", g, f"score {base}{extra} (coverage {s['coverage_pct']}%, missing {s['missing']})")
         scored.sort(key=lambda cs: -cs[1]["score"])
         bought = []
         if pause["paused"]:
