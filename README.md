@@ -44,9 +44,13 @@ holds one runner for about 5 hours 45 minutes (under the 6 hour job cap):
 
 - about every 50 seconds, `run.py manage` checks stops and trails
 - about every 3 minutes, `run.py tick` runs the full scout, filter, and score pass
-- `concurrency: paper-desk` allows one running job and keeps the newest waiting job
-- cron `*/30 * * * *` plus **Run workflow** starts a job when none is running, so the
-  waiting job takes over as the current one exits
+- when the run finishes, including after a failed step, it dispatches the next
+  **Paper desk** run on `main` with `GITHUB_TOKEN`. It skips that dispatch if another
+  run is already queued or in progress, so waiters do not pile up
+- `concurrency: paper-desk` keeps one running job and one waiting job, so the
+  dispatched run does not overlap the current one
+- cron `*/30 * * * *` is only a backup if a handoff is missed. **Run workflow**
+  starts a job immediately
 
 State is pushed to the `state` branch with the built-in `GITHUB_TOKEN` (`contents: write`).
 Each push is a single snapshot commit whose message ends in `[skip ci]`, rewritten with
@@ -59,9 +63,12 @@ The relay checks out `main` for code, then overlays `data/desk.db` and
 `reports/dashboard.json` from `state` when that branch exists. The first run uses
 the copies on `main`.
 
-Cancel the in-progress run and disable the **Paper desk** workflow to pause.
-Scheduled workflows also go idle after 60 days without repository activity; a
-`state` update counts as activity while the relay is healthy.
+To turn the desk off, add a repository variable named `DESK_ENABLED` with the
+value `false` (**Settings → Secrets and variables → Actions → Variables**).
+The shift already running finishes and does not dispatch the next one. Cron
+runs that start while it is `false` skip trading. Delete the variable, or set
+it to anything other than `false`, to allow runs again. Disabling the
+**Paper desk** workflow in the Actions tab stops it as well.
 
 ## Dashboard
 
