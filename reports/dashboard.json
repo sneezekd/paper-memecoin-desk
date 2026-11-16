@@ -1,0 +1,766 @@
+{
+ "generated_at": "Nov 15 10:31 PM MT",
+ "mode": "PAPER ONLY",
+ "balance": {
+  "starting_usd": 100.0,
+  "cash_usd": 97.7676,
+  "equity_usd": 97.7676,
+  "total_pnl_usd": -2.2324,
+  "total_pnl_pct": -2.23,
+  "realized_pnl_usd": -2.2324,
+  "unrealized_pnl_usd": 0
+ },
+ "open_positions": [],
+ "closed_trades": [
+  {
+   "symbol": "Anthropig",
+   "address": "2NUaS6Gfrm5rBuPBn7svHka8t33SrSkpXGQiUvZLpump",
+   "score": 65.5,
+   "size_usd": 3.92,
+   "entry_fill": 0.0010959462350469522,
+   "exit_fill": 0.0010130937203087229,
+   "pnl_usd": -0.3148363680133004,
+   "pnl_pct": -8.031540000339296,
+   "exit_reason": "stop_-6pct",
+   "url": "https://dexscreener.com/solana/4rm7lq7udxmmmgv88qjk1ck22xuq3cxg9qqiymbhksnq",
+   "opened": "Nov 15 08:38 PM MT",
+   "closed": "Nov 15 09:06 PM MT"
+  },
+  {
+   "symbol": "CYBERDACITY",
+   "address": "C5X8tVbt8cGw7iaaEuAVGTxFVZ4uSjscmiUbVpVwpump",
+   "score": 73.6,
+   "size_usd": 3.99,
+   "entry_fill": 0.0001431148599352051,
+   "exit_fill": 0.00021777038643000206,
+   "pnl_usd": 2.050941063133,
+   "pnl_pct": 51.40203165746867,
+   "exit_reason": "trailing_stop",
+   "url": "https://dexscreener.com/solana/9iqd6n93rwevk8kmwww2fpbonsvfpkghvdgpchvzsgxk",
+   "opened": "Nov 15 06:56 PM MT",
+   "closed": "Nov 15 08:10 PM MT"
+  },
+  {
+   "symbol": "AI",
+   "address": "GgDHtSGcXn5YrADnpsQSVHFAa5xLwVEuD7FWeRgvpump",
+   "score": 82.3,
+   "size_usd": 4.0,
+   "entry_fill": 0.00013591507633661036,
+   "exit_fill": 1.0757457738379649e-06,
+   "pnl_usd": -3.9684989458471,
+   "pnl_pct": -99.2124736461775,
+   "exit_reason": "stop_-6pct",
+   "url": "https://dexscreener.com/solana/96robeefw9fgnrfjbd7lnfnngxmpvdh1wkpkhfbx4qwt",
+   "opened": "Nov 15 06:56 PM MT",
+   "closed": "Nov 15 08:06 PM MT"
+  }
+ ],
+ "wins": 1,
+ "losses": 2,
+ "funnel_24h": {
+  "scans": 25,
+  "scouted_pair_checks": 291,
+  "scouted_unique_coins": 30,
+  "kills_by_gate": [
+   {
+    "gate": "volume_1h",
+    "n": 147,
+    "coins": 15,
+    "unverif": 0
+   },
+   {
+    "gate": "analyst_below_70",
+    "n": 53,
+    "coins": 10,
+    "unverif": 0
+   },
+   {
+    "gate": "top10_real",
+    "n": 39,
+    "coins": 4,
+    "unverif": 0
+   },
+   {
+    "gate": "pumped_1h",
+    "n": 33,
+    "coins": 8,
+    "unverif": 0
+   },
+   {
+    "gate": "liquidity",
+    "n": 14,
+    "coins": 5,
+    "unverif": 0
+   },
+   {
+    "gate": "bundled_launch",
+    "n": 8,
+    "coins": 3,
+    "unverif": 8
+   },
+   {
+    "gate": "lp_burn_lock",
+    "n": 2,
+    "coins": 1,
+    "unverif": 0
+   }
+  ],
+  "filter_passed": 59,
+  "scored": 59,
+  "scored_70plus": 6,
+  "bought": 3
+ },
+ "funnel_all_time": {
+  "scans": 25,
+  "scouted_pair_checks": 291,
+  "scouted_unique_coins": 30,
+  "kills_by_gate": [
+   {
+    "gate": "volume_1h",
+    "n": 147,
+    "coins": 15,
+    "unverif": 0
+   },
+   {
+    "gate": "analyst_below_70",
+    "n": 53,
+    "coins": 10,
+    "unverif": 0
+   },
+   {
+    "gate": "top10_real",
+    "n": 39,
+    "coins": 4,
+    "unverif": 0
+   },
+   {
+    "gate": "pumped_1h",
+    "n": 33,
+    "coins": 8,
+    "unverif": 0
+   },
+   {
+    "gate": "liquidity",
+    "n": 14,
+    "coins": 5,
+    "unverif": 0
+   },
+   {
+    "gate": "bundled_launch",
+    "n": 8,
+    "coins": 3,
+    "unverif": 8
+   },
+   {
+    "gate": "lp_burn_lock",
+    "n": 2,
+    "coins": 1,
+    "unverif": 0
+   }
+  ],
+  "filter_passed": 59,
+  "scored": 59,
+  "scored_70plus": 6,
+  "bought": 3
+ },
+ "last_scan": {
+  "at": "Nov 15 10:31 PM MT",
+  "secs": 20.1,
+  "summary": {
+   "discovered": 176,
+   "no_pumpfun_raydium_pair": 5,
+   "age_out_of_window": 101,
+   "mcap_out_of_window": 46,
+   "missing_age_or_mcap": 8,
+   "scouted": 16,
+   "skipped_already_traded": 1,
+   "filter_kills": {
+    "pumped_1h": 1,
+    "top10_real": 3,
+    "volume_1h": 10,
+    "analyst_below_70": 1
+   },
+   "filter_passed": 1,
+   "scored_70plus": 0,
+   "bought": [],
+   "exits": 0
+  },
+  "sources": {
+   "gmgn": "no personal key",
+   "gates_source": "free (RugCheck insiders + creatorTokens/pump.fun; smart-wallets reweighted)",
+   "ds_profiles": "ok (27)",
+   "ds_boosts_latest": "ok (29)",
+   "ds_boosts_top": "ok (29)",
+   "ds_takeovers": "ok (1)",
+   "ds_search:pumpswap": "ok (30)",
+   "ds_search:raydium": "ok (30)",
+   "ds_search:pump": "ok (5)",
+   "ds_search:launchlab": "ok (1)",
+   "ds_search:solana meme": "ok (7)",
+   "gt_new_pools": "ok (36)",
+   "gt_trending": "ok (36)"
+  }
+ },
+ "recent_rejects": [
+  {
+   "symbol": "BJB",
+   "address": "CHuLmJXz8F3YXUyv984PRxeECfSvqD5MZ3W1FoDmpump",
+   "stage": "analyst",
+   "gate": "analyst_below_70",
+   "reason": "score 45.3 (coverage 100.0%, missing [])",
+   "unverifiable": 0,
+   "at": "Nov 15 10:31 PM MT"
+  },
+  {
+   "symbol": "HWAN",
+   "address": "FNxVZo25dGerP4Tw49f4aHg9xac5qw1FER9F7EzK9cTs",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $4,641 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:31 PM MT"
+  },
+  {
+   "symbol": "duh",
+   "address": "ngwxpGYdkauMcxLFrNTKp8qBgK7JV53zVvd7F2spump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $9,621 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:31 PM MT"
+  },
+  {
+   "symbol": "Max",
+   "address": "5qaP7oKUqKffwwo5DaEqDoTtsBLMpdbQTxEkCDaTpump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $12,757 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:31 PM MT"
+  },
+  {
+   "symbol": "FOOD",
+   "address": "FTu55MyigXns96jz4nTCDDiTCjYJjyrHSceCgG9Upump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $10,529 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:31 PM MT"
+  },
+  {
+   "symbol": "HOGE",
+   "address": "FVzqGqRmr4UH1Fif6dewmwbJ1p4YUZCu8dcw4Efopump",
+   "stage": "filter",
+   "gate": "top10_real",
+   "reason": "real top-10 13.9% (+same-funder clusters -> 37.5%) > 30%",
+   "unverifiable": 0,
+   "at": "Nov 15 10:31 PM MT"
+  },
+  {
+   "symbol": "rockstar",
+   "address": "9HFUEab7sompLDPTAaTGkryMNGbtBaFMhHMVpJEBpump",
+   "stage": "filter",
+   "gate": "top10_real",
+   "reason": "real top-10 24.9% (+same-funder clusters -> 34.1%) > 30%",
+   "unverifiable": 0,
+   "at": "Nov 15 10:31 PM MT"
+  },
+  {
+   "symbol": "bill",
+   "address": "85RhcSEMy15SNhFLmSArNm7udPKXVagVgsq4YmSopump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $12,454 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:31 PM MT"
+  },
+  {
+   "symbol": "gtacoin",
+   "address": "DSKM3d518BBaQShSKqaqZcG1XMRf81UFB6a1eavhSTNK",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $13,568 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:31 PM MT"
+  },
+  {
+   "symbol": "Christmax",
+   "address": "D7MyAD7k3AqJpg4uxjUcmL51EDHrEsJxkjUynsxcpump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $826 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:31 PM MT"
+  },
+  {
+   "symbol": "BUTTHOLE",
+   "address": "4B8CdHPZ8ng1CtMP2Jk2W8wGAwJ5nJnap1deVsz2pump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $8,609 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:31 PM MT"
+  },
+  {
+   "symbol": "WISHMAS",
+   "address": "9cmXfuC26anZtH9AUWVzpUxU1UJ7PPogYxftYTepump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $9,996 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:31 PM MT"
+  },
+  {
+   "symbol": "Socks",
+   "address": "FS1pBmZKp2Qw1atC64GoLamHstECAos9ot8bGPgDpump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $16,883 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:31 PM MT"
+  },
+  {
+   "symbol": "Neil",
+   "address": "9iG6qBMgzzuYyq2kfXcAD49bkTFrpGp5gr1QHJiZMwoi",
+   "stage": "filter",
+   "gate": "top10_real",
+   "reason": "real top-10 20.8% (+same-funder clusters -> 39.9%) > 30%",
+   "unverifiable": 0,
+   "at": "Nov 15 10:31 PM MT"
+  },
+  {
+   "symbol": "Marvin",
+   "address": "HkRQ6Qcadi5yuoNpZdA1Q7yVF3r7LdEmAw1aKkSxpump",
+   "stage": "filter",
+   "gate": "pumped_1h",
+   "reason": "already +400% in 1h (>= +80%)",
+   "unverifiable": 0,
+   "at": "Nov 15 10:31 PM MT"
+  },
+  {
+   "symbol": "BJB",
+   "address": "CHuLmJXz8F3YXUyv984PRxeECfSvqD5MZ3W1FoDmpump",
+   "stage": "analyst",
+   "gate": "analyst_below_70",
+   "reason": "score 48.9 (coverage 100.0%, missing [])",
+   "unverifiable": 0,
+   "at": "Nov 15 10:10 PM MT"
+  },
+  {
+   "symbol": "HWAN",
+   "address": "FNxVZo25dGerP4Tw49f4aHg9xac5qw1FER9F7EzK9cTs",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $6,554 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:10 PM MT"
+  },
+  {
+   "symbol": "duh",
+   "address": "ngwxpGYdkauMcxLFrNTKp8qBgK7JV53zVvd7F2spump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $16,035 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:10 PM MT"
+  },
+  {
+   "symbol": "Max",
+   "address": "5qaP7oKUqKffwwo5DaEqDoTtsBLMpdbQTxEkCDaTpump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $12,605 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:10 PM MT"
+  },
+  {
+   "symbol": "FOOD",
+   "address": "FTu55MyigXns96jz4nTCDDiTCjYJjyrHSceCgG9Upump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $10,696 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:10 PM MT"
+  },
+  {
+   "symbol": "HOGE",
+   "address": "FVzqGqRmr4UH1Fif6dewmwbJ1p4YUZCu8dcw4Efopump",
+   "stage": "filter",
+   "gate": "top10_real",
+   "reason": "real top-10 14.7% (+same-funder clusters -> 38.4%) > 30%",
+   "unverifiable": 0,
+   "at": "Nov 15 10:10 PM MT"
+  },
+  {
+   "symbol": "rockstar",
+   "address": "9HFUEab7sompLDPTAaTGkryMNGbtBaFMhHMVpJEBpump",
+   "stage": "filter",
+   "gate": "top10_real",
+   "reason": "real top-10 24.8% (+same-funder clusters -> 34.1%) > 30%",
+   "unverifiable": 0,
+   "at": "Nov 15 10:10 PM MT"
+  },
+  {
+   "symbol": "bill",
+   "address": "85RhcSEMy15SNhFLmSArNm7udPKXVagVgsq4YmSopump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $12,267 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:10 PM MT"
+  },
+  {
+   "symbol": "gtacoin",
+   "address": "DSKM3d518BBaQShSKqaqZcG1XMRf81UFB6a1eavhSTNK",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $11,850 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:10 PM MT"
+  },
+  {
+   "symbol": "Christmax",
+   "address": "D7MyAD7k3AqJpg4uxjUcmL51EDHrEsJxkjUynsxcpump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $790 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:10 PM MT"
+  },
+  {
+   "symbol": "BUTTHOLE",
+   "address": "4B8CdHPZ8ng1CtMP2Jk2W8wGAwJ5nJnap1deVsz2pump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $14,086 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:10 PM MT"
+  },
+  {
+   "symbol": "WISHMAS",
+   "address": "9cmXfuC26anZtH9AUWVzpUxU1UJ7PPogYxftYTepump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $11,211 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:10 PM MT"
+  },
+  {
+   "symbol": "Socks",
+   "address": "FS1pBmZKp2Qw1atC64GoLamHstECAos9ot8bGPgDpump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $11,649 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:10 PM MT"
+  },
+  {
+   "symbol": "Neil",
+   "address": "9iG6qBMgzzuYyq2kfXcAD49bkTFrpGp5gr1QHJiZMwoi",
+   "stage": "filter",
+   "gate": "top10_real",
+   "reason": "real top-10 20.8% (+same-funder clusters -> 38.7%) > 30%",
+   "unverifiable": 0,
+   "at": "Nov 15 10:10 PM MT"
+  },
+  {
+   "symbol": "XRL",
+   "address": "Fww6zaNKcjpJaB33JayvUzsofBUobX5JaHiuQBN1Jf9g",
+   "stage": "filter",
+   "gate": "liquidity",
+   "reason": "liquidity $23,939 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:10 PM MT"
+  },
+  {
+   "symbol": "Marvin",
+   "address": "HkRQ6Qcadi5yuoNpZdA1Q7yVF3r7LdEmAw1aKkSxpump",
+   "stage": "filter",
+   "gate": "pumped_1h",
+   "reason": "already +389% in 1h (>= +80%)",
+   "unverifiable": 0,
+   "at": "Nov 15 10:10 PM MT"
+  },
+  {
+   "symbol": "BJB",
+   "address": "CHuLmJXz8F3YXUyv984PRxeECfSvqD5MZ3W1FoDmpump",
+   "stage": "analyst",
+   "gate": "analyst_below_70",
+   "reason": "score 45.4 (coverage 100.0%, missing [])",
+   "unverifiable": 0,
+   "at": "Nov 15 10:07 PM MT"
+  },
+  {
+   "symbol": "HWAN",
+   "address": "FNxVZo25dGerP4Tw49f4aHg9xac5qw1FER9F7EzK9cTs",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $6,788 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:07 PM MT"
+  },
+  {
+   "symbol": "duh",
+   "address": "ngwxpGYdkauMcxLFrNTKp8qBgK7JV53zVvd7F2spump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $16,025 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:07 PM MT"
+  },
+  {
+   "symbol": "Max",
+   "address": "5qaP7oKUqKffwwo5DaEqDoTtsBLMpdbQTxEkCDaTpump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $13,181 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:07 PM MT"
+  },
+  {
+   "symbol": "FOOD",
+   "address": "FTu55MyigXns96jz4nTCDDiTCjYJjyrHSceCgG9Upump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $10,344 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:07 PM MT"
+  },
+  {
+   "symbol": "HOGE",
+   "address": "FVzqGqRmr4UH1Fif6dewmwbJ1p4YUZCu8dcw4Efopump",
+   "stage": "filter",
+   "gate": "top10_real",
+   "reason": "real top-10 14.7% (+same-funder clusters -> 38.4%) > 30%",
+   "unverifiable": 0,
+   "at": "Nov 15 10:07 PM MT"
+  },
+  {
+   "symbol": "rockstar",
+   "address": "9HFUEab7sompLDPTAaTGkryMNGbtBaFMhHMVpJEBpump",
+   "stage": "filter",
+   "gate": "top10_real",
+   "reason": "real top-10 24.8% (+same-funder clusters -> 34.1%) > 30%",
+   "unverifiable": 0,
+   "at": "Nov 15 10:07 PM MT"
+  },
+  {
+   "symbol": "bill",
+   "address": "85RhcSEMy15SNhFLmSArNm7udPKXVagVgsq4YmSopump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $11,703 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:07 PM MT"
+  },
+  {
+   "symbol": "gtacoin",
+   "address": "DSKM3d518BBaQShSKqaqZcG1XMRf81UFB6a1eavhSTNK",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $11,972 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:07 PM MT"
+  },
+  {
+   "symbol": "Christmax",
+   "address": "D7MyAD7k3AqJpg4uxjUcmL51EDHrEsJxkjUynsxcpump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $817 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:07 PM MT"
+  },
+  {
+   "symbol": "BUTTHOLE",
+   "address": "4B8CdHPZ8ng1CtMP2Jk2W8wGAwJ5nJnap1deVsz2pump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $13,658 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:07 PM MT"
+  },
+  {
+   "symbol": "WISHMAS",
+   "address": "9cmXfuC26anZtH9AUWVzpUxU1UJ7PPogYxftYTepump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $10,732 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:07 PM MT"
+  },
+  {
+   "symbol": "Socks",
+   "address": "FS1pBmZKp2Qw1atC64GoLamHstECAos9ot8bGPgDpump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $11,823 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:07 PM MT"
+  },
+  {
+   "symbol": "Neil",
+   "address": "9iG6qBMgzzuYyq2kfXcAD49bkTFrpGp5gr1QHJiZMwoi",
+   "stage": "filter",
+   "gate": "top10_real",
+   "reason": "real top-10 20.8% (+same-funder clusters -> 38.7%) > 30%",
+   "unverifiable": 0,
+   "at": "Nov 15 10:07 PM MT"
+  },
+  {
+   "symbol": "XRL",
+   "address": "Fww6zaNKcjpJaB33JayvUzsofBUobX5JaHiuQBN1Jf9g",
+   "stage": "filter",
+   "gate": "liquidity",
+   "reason": "liquidity $23,084 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:07 PM MT"
+  },
+  {
+   "symbol": "Marvin",
+   "address": "HkRQ6Qcadi5yuoNpZdA1Q7yVF3r7LdEmAw1aKkSxpump",
+   "stage": "filter",
+   "gate": "pumped_1h",
+   "reason": "already +282% in 1h (>= +80%)",
+   "unverifiable": 0,
+   "at": "Nov 15 10:07 PM MT"
+  },
+  {
+   "symbol": "BJB",
+   "address": "CHuLmJXz8F3YXUyv984PRxeECfSvqD5MZ3W1FoDmpump",
+   "stage": "analyst",
+   "gate": "analyst_below_70",
+   "reason": "score 46.3 (coverage 100.0%, missing [])",
+   "unverifiable": 0,
+   "at": "Nov 15 10:06 PM MT"
+  },
+  {
+   "symbol": "HWAN",
+   "address": "FNxVZo25dGerP4Tw49f4aHg9xac5qw1FER9F7EzK9cTs",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $7,247 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:05 PM MT"
+  },
+  {
+   "symbol": "duh",
+   "address": "ngwxpGYdkauMcxLFrNTKp8qBgK7JV53zVvd7F2spump",
+   "stage": "filter",
+   "gate": "volume_1h",
+   "reason": "1h volume $16,672 < $25,000",
+   "unverifiable": 0,
+   "at": "Nov 15 10:05 PM MT"
+  }
+ ],
+ "equity_curve": [
+  {
+   "at": "Nov 15 01:02 PM MT",
+   "equity": 100.0
+  },
+  {
+   "at": "Nov 15 01:04 PM MT",
+   "equity": 100.0
+  },
+  {
+   "at": "Nov 15 01:05 PM MT",
+   "equity": 100.0
+  },
+  {
+   "at": "Nov 15 04:04 PM MT",
+   "equity": 100.0
+  },
+  {
+   "at": "Nov 15 04:10 PM MT",
+   "equity": 100.0
+  },
+  {
+   "at": "Nov 15 04:19 PM MT",
+   "equity": 100.0
+  },
+  {
+   "at": "Nov 15 04:19 PM MT",
+   "equity": 100.0
+  },
+  {
+   "at": "Nov 15 04:20 PM MT",
+   "equity": 100.0
+  },
+  {
+   "at": "Nov 15 04:30 PM MT",
+   "equity": 100.0
+  },
+  {
+   "at": "Nov 15 04:41 PM MT",
+   "equity": 100.0
+  },
+  {
+   "at": "Nov 15 04:50 PM MT",
+   "equity": 100.0
+  },
+  {
+   "at": "Nov 15 04:58 PM MT",
+   "equity": 100.0
+  },
+  {
+   "at": "Nov 15 06:47 PM MT",
+   "equity": 100.0
+  },
+  {
+   "at": "Nov 15 06:52 PM MT",
+   "equity": 100.0
+  },
+  {
+   "at": "Nov 15 06:56 PM MT",
+   "equity": 99.6187
+  },
+  {
+   "at": "Nov 15 07:04 PM MT",
+   "equity": 99.8919
+  },
+  {
+   "at": "Nov 15 08:06 PM MT",
+   "equity": 98.6652
+  },
+  {
+   "at": "Nov 15 08:10 PM MT",
+   "equity": 98.0824
+  },
+  {
+   "at": "Nov 15 08:38 PM MT",
+   "equity": 97.9536
+  },
+  {
+   "at": "Nov 15 09:07 PM MT",
+   "equity": 97.7676
+  },
+  {
+   "at": "Nov 15 09:10 PM MT",
+   "equity": 97.7676
+  },
+  {
+   "at": "Nov 15 10:06 PM MT",
+   "equity": 97.7676
+  },
+  {
+   "at": "Nov 15 10:07 PM MT",
+   "equity": 97.7676
+  },
+  {
+   "at": "Nov 15 10:10 PM MT",
+   "equity": 97.7676
+  },
+  {
+   "at": "Nov 15 10:31 PM MT",
+   "equity": 97.7676
+  }
+ ],
+ "rules": {
+  "stop_net_pct": -6.0,
+  "trail_after_net_pct": 12.0,
+  "trail_distance_pct": 8.0,
+  "max_trade_pct_equity": 8.0,
+  "max_trade_pct_pool_liq": 2.0,
+  "min_score": 65
+ }
+}
