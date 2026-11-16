@@ -1,4 +1,20 @@
 {
-  "_comment": "PAPER ONLY. Labels for wallets whose buys and sells we simulate copying. No private keys. Discovery writes copy/candidates.json; a human sets enabled to true. The list ships empty when discovery cannot finish a ranked sample in this environment.",
-  "wallets": []
+  "_comment": "PAPER ONLY. Labels for wallets whose buys and sells we simulate copying. No private keys. enabled:false rows are reference only and are not subscribed.",
+  "wallets": [
+    {
+      "address": "6YCQcp4SfJbwkz8rrENYy26FAtCR2jqkTxZKTymeC7tC",
+      "label": "6YCQcp4S latency test, ~47s median hold, profitable 14d",
+      "enabled": true
+    },
+    {
+      "address": "8HcYptCBAaPFWkmupiSAmysZ6Z8jB7N1c4YhVjhX7zbg",
+      "label": "8HcYptCB reference",
+      "enabled": false
+    },
+    {
+      "address": "ELGNVYE7X1R1uQSuVqFN8TxbV7AipcQ23HmmqNhCVUMy",
+      "label": "ELGNVYE7 reference",
+      "enabled": false
+    }
+  ]
 }
