@@ -324,8 +324,103 @@ PY
   ) 9>"${COPY_LOCK_FILE:-/tmp/paper-copy-state.lock}"
 }
 
+restore_dip() {
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1 || { say "not a git checkout; keeping local dip files"; return 0; }
+  git fetch --depth=1 origin "$STATE_BRANCH" >/dev/null 2>&1 || true
+  if ! git rev-parse --verify "origin/${STATE_BRANCH}" >/dev/null 2>&1; then
+    say "no origin/${STATE_BRANCH} yet; using dip files in this checkout"
+    return 0
+  fi
+  if git cat-file -e "origin/${STATE_BRANCH}:data/dip.db" 2>/dev/null; then
+    git restore --source="origin/${STATE_BRANCH}" --worktree -- data/dip.db || true
+  fi
+  if git cat-file -e "origin/${STATE_BRANCH}:reports/dip_dashboard.json" 2>/dev/null; then
+    git restore --source="origin/${STATE_BRANCH}" --worktree -- reports/dip_dashboard.json || true
+  fi
+  say "restored dip desk files from origin/${STATE_BRANCH} when present"
+}
+
+publish_dip() {
+  if [ "${DIP_PUSH_STATE:-}" != "1" ]; then
+    say "DIP_PUSH_STATE is not 1; not pushing dip state"
+    return 0
+  fi
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1 || { say "not a git checkout"; return 1; }
+  [ -f data/dip.db ] && [ -f reports/dip_dashboard.json ] || { say "missing dip state files"; return 1; }
+  (
+    flock -n 9 || { say "dip state publish already in progress"; exit 0; }
+    msg="state: dip desk snapshot [skip ci]"
+    backup=$(mktemp -d)
+    python3 - "$backup" <<'PY' || exit 1
+import sqlite3, shutil, sys
+from pathlib import Path
+dst = Path(sys.argv[1])
+src = sqlite3.connect("file:data/dip.db?mode=ro", uri=True)
+out = sqlite3.connect(dst / "dip.db")
+src.backup(out)
+out.close(); src.close()
+shutil.copyfile("reports/dip_dashboard.json", dst / "dip_dashboard.json")
+PY
+    author_name="${GIT_AUTHOR_NAME:-github-actions[bot]}"
+    author_email="${GIT_AUTHOR_EMAIL:-41898282+github-actions[bot]@users.noreply.github.com}"
+    attempt=1
+    while [ "$attempt" -le 5 ]; do
+      git fetch --depth=1 origin "$STATE_BRANCH" >/dev/null 2>&1 || true
+      expected=""
+      if git rev-parse --verify "origin/${STATE_BRANCH}" >/dev/null 2>&1; then
+        expected=$(git rev-parse "origin/${STATE_BRANCH}")
+        old_db=$(git rev-parse "origin/${STATE_BRANCH}:data/dip.db" 2>/dev/null || echo missing)
+        old_js=$(git rev-parse "origin/${STATE_BRANCH}:reports/dip_dashboard.json" 2>/dev/null || echo missing)
+        new_db=$(git hash-object "$backup/dip.db")
+        new_js=$(git hash-object "$backup/dip_dashboard.json")
+        if [ "$old_db" = "$new_db" ] && [ "$old_js" = "$new_js" ]; then
+          say "dip state unchanged"
+          exit 0
+        fi
+      fi
+      git worktree prune >/dev/null 2>&1 || true
+      wt=$(mktemp -d)
+      rmdir "$wt"
+      base="HEAD"
+      if git rev-parse --verify "origin/${STATE_BRANCH}" >/dev/null 2>&1; then
+        base="origin/${STATE_BRANCH}"
+      fi
+      git worktree add --detach "$wt" "$base" >/dev/null
+      mkdir -p "$wt/data" "$wt/reports"
+      cp "$backup/dip.db" "$wt/data/dip.db"
+      cp "$backup/dip_dashboard.json" "$wt/reports/dip_dashboard.json"
+      git -C "$wt" add -A
+      tree=$(git -C "$wt" write-tree)
+      commit=$(
+        GIT_AUTHOR_NAME="$author_name" \
+        GIT_AUTHOR_EMAIL="$author_email" \
+        GIT_COMMITTER_NAME="$author_name" \
+        GIT_COMMITTER_EMAIL="$author_email" \
+        git -C "$wt" commit-tree "$tree" -m "$msg"
+      )
+      git worktree remove --force "$wt" >/dev/null 2>&1 || rm -rf "$wt"
+      if [ -n "$expected" ]; then
+        if git push --force-with-lease="refs/heads/${STATE_BRANCH}:${expected}" origin "${commit}:refs/heads/${STATE_BRANCH}"; then
+          say "published dip snapshot ${commit:0:12}"
+          exit 0
+        fi
+      else
+        if git push origin "${commit}:refs/heads/${STATE_BRANCH}"; then
+          say "published dip snapshot ${commit:0:12}"
+          exit 0
+        fi
+      fi
+      say "dip state push rejected (attempt ${attempt}); retrying"
+      attempt=$((attempt + 1))
+      sleep $((attempt * 2))
+    done
+    say "failed to publish dip state"
+    exit 1
+  ) 9>"${DIP_LOCK_FILE:-/tmp/paper-dip-state.lock}"
+}
+
 usage() {
-  say "usage: $0 manage|once|loop|start|stop|status|ci-loop|commit-state|restore|publish-copy|restore-copy"
+  say "usage: $0 manage|once|loop|start|stop|status|ci-loop|commit-state|restore|publish-copy|restore-copy|publish-dip|restore-dip"
   return 2
 }
 
@@ -341,5 +436,7 @@ case "${1:-status}" in
   restore) restore_state ;;
   publish-copy) publish_copy ;;
   restore-copy) restore_copy ;;
+  publish-dip) publish_dip ;;
+  restore-dip) restore_dip ;;
   *) usage ;;
 esac

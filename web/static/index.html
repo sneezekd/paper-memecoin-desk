@@ -232,6 +232,14 @@
     padding: 8px 12px; border-radius: 999px; cursor: pointer;
   }
   .tab.on { background: #fff; color: var(--ink); box-shadow: var(--shadow); }
+  .chips { display: flex; flex-wrap: wrap; gap: 3px; }
+  .chip { width: 14px; height: 14px; border-radius: 4px; background: #d9d6cd; display: inline-block; cursor: help; }
+  .chip.ok { background: var(--green); }
+  .chip.red { background: var(--red); }
+  .dip-counts { display: flex; flex-wrap: wrap; gap: 6px; }
+  .dip-counts .badge b { margin-left: 4px; }
+  .verdict-pass { color: var(--green); font-weight: 700; }
+  .verdict-reject { color: var(--red); font-weight: 700; }
   .bars { display: flex; flex-direction: column; gap: 10px; }
   .bar-row { display: grid; grid-template-columns: 9.5rem 1fr auto; gap: 10px; align-items: center; }
   .bar-lab { font-size: .8rem; font-weight: 600; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -255,6 +263,8 @@
     .bar-track { grid-column: 1 / -1; }
     .ag { grid-template-columns: 32px 1fr auto; }
     .ag .act { grid-column: 2 / -1; }
+    .tabs { flex-wrap: wrap; }
+    #panel-dip table { font-size: .76rem; }
   }
 </style>
 </head>
@@ -274,6 +284,7 @@
     <div class="tabs" role="tablist">
       <button class="tab on" id="tab-desk" type="button">Desk</button>
       <button class="tab" id="tab-copy" type="button">Copy desk</button>
+      <button class="tab" id="tab-dip" type="button">Dip desk</button>
     </div>
 
     <div id="panel-desk">
@@ -375,6 +386,60 @@
             <tbody id="copy-closed"></tbody>
           </table>
         </div>
+      </section>
+    </div>
+
+    <div id="panel-dip" class="hidden">
+      <div class="grid">
+        <section class="card equity">
+          <div class="eq-top">
+            <div>
+              <div class="eq-num" id="dip-eq">$100.00</div>
+              <div class="eq-meta">
+                <span class="pnl" id="dip-pnl">+$0.00 (0.00%)</span>
+                <span class="wl">Cash <b id="dip-cash">$100.00</b></span>
+              </div>
+            </div>
+          </div>
+          <div class="stats" id="dip-status">Paper dip desk · waiting for data</div>
+        </section>
+        <section class="card logger">
+          <div class="logger-h"><span>Activity</span><span class="killed-n" id="dip-upd">—</span></div>
+          <div class="feed" id="dip-feed"></div>
+        </section>
+      </div>
+      <section class="card">
+        <div class="sec-h">Open dip positions</div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr><th>Coin</th><th>Entry</th><th>Mark</th><th>Peak</th><th>Stop</th><th>TP</th><th>Age</th></tr></thead>
+            <tbody id="dip-open"></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="card" style="margin-top:14px">
+        <div class="sec-h">Waiting dip orders</div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr><th>Coin</th><th>Size</th><th>10m high</th><th>Now</th><th>Depth</th><th>Left</th></tr></thead>
+            <tbody id="dip-wait"></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="card" style="margin-top:14px">
+        <div class="sec-h">Analyst audits <span class="muted" style="font-weight:500;font-size:.75rem">· 8 layers: mint, freeze, dev, top 10, liquidity, pool age, bundles, delegations</span></div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr><th>Coin</th><th>Layers</th><th>Score</th><th>Verdict</th></tr></thead>
+            <tbody id="dip-audits"></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="card" style="margin-top:14px">
+        <div class="sec-h">Scanner kills</div>
+        <div class="dip-counts" id="dip-kills"></div>
+        <div class="sec-h" style="margin-top:14px">Skip reasons</div>
+        <div class="dip-counts" id="dip-skips"></div>
       </section>
     </div>
 
@@ -604,6 +669,90 @@
     for (let i = 0; i < COPY_URLS.length; i++) {
       try {
         applyCopy(await fetchJson(COPY_URLS[i] + "?t=" + Date.now()));
+        return;
+      } catch (e) {}
+    }
+  }
+  const DIP_URLS = [
+    "https://raw.githubusercontent.com/sneezekd/paper-memecoin-desk/state/reports/dip_dashboard.json",
+    "https://raw.githubusercontent.com/sneezekd/paper-memecoin-desk/main/reports/dip_dashboard.json"
+  ];
+  // Dip desk tab. Added as extra listeners so the desk/copy tab code above stays untouched.
+  function showPanel(name) {
+    ["desk", "copy", "dip"].forEach(function (k) {
+      document.getElementById("panel-" + k).classList.toggle("hidden", k !== name);
+      document.getElementById("tab-" + k).className = k === name ? "tab on" : "tab";
+    });
+  }
+  document.getElementById("tab-dip").addEventListener("click", function () { showPanel("dip"); });
+  document.getElementById("tab-desk").addEventListener("click", function () { showPanel("desk"); });
+  document.getElementById("tab-copy").addEventListener("click", function () { showPanel("copy"); });
+  function dipAge(min) {
+    if (min == null) return "—";
+    return min >= 120 ? (min / 60).toFixed(1) + "h" : Math.round(min) + "m";
+  }
+  function dipCounts(el, obj) {
+    const rows = Object.keys(obj || {}).map(k => [k, obj[k]]).sort((a, b) => b[1] - a[1]);
+    el.innerHTML = rows.length
+      ? rows.map(r => '<span class="badge">' + esc(r[0]) + "<b>" + esc(r[1]) + "</b></span>").join("")
+      : '<span class="muted">none yet</span>';
+  }
+  function applyDip(d) {
+    d = d || {};
+    const start = d.start_cash != null ? d.start_cash : 100;
+    const eq = d.equity != null ? d.equity : start;
+    const pnl = d.pnl_usd || 0, pnlPct = d.pnl_pct || 0;
+    document.getElementById("dip-eq").textContent = usd(eq);
+    document.getElementById("dip-cash").textContent = usd(d.cash != null ? d.cash : start);
+    const pe = document.getElementById("dip-pnl");
+    const sign = pnl >= 0 ? "+" : "";
+    pe.textContent = sign + usd(pnl).replace("+", "") + " (" + sign + pnlPct.toFixed(2) + "%)";
+    pe.className = "pnl " + (pnl > 0 ? "up" : (pnl < 0 ? "dn" : ""));
+    const n = d.night || {}, ses = d.session || {};
+    document.getElementById("dip-status").textContent =
+      "Paper only · " + (d.open_positions || []).length + " open · " + (d.waiting_orders || []).length + " waiting · night trades " +
+      (n.trades || 0) + " · night P&L " + usd(n.pnl_usd || 0) + (n.locked ? " · LOCKED" : "") +
+      " · window " + (ses.night_start || "?") + "–" + (ses.lock_time || "?") + (ses.in_window ? " (open)" : " (closed)") +
+      " · telegram " + (d.telegram || "off") + " · social " + (d.social || "off");
+    document.getElementById("dip-upd").textContent = d.updated_at
+      ? new Date(d.updated_at * 1000).toLocaleTimeString("en-US", { timeZone: TZ, hour: "2-digit", minute: "2-digit" }) : "—";
+    const ev = d.recent_events || [];
+    document.getElementById("dip-feed").innerHTML = ev.length ? ev.map(function (e) {
+      const t = e.ts ? new Date(e.ts * 1000).toLocaleTimeString("en-US", { timeZone: TZ, hour12: false }) : "";
+      const cls = /buy/.test(e.kind || "") ? "buy" : (/sell|kill|skip|stop/.test(e.kind || "") ? "kill" : "");
+      return '<div class="fe ' + cls + '"><div class="d"></div><div class="txt"><span class="t">' + esc(t) + '</span> <span class="a">' +
+        esc(e.kind) + "</span> " + esc((e.mint || "").slice(0, 4)) + " " + esc(e.note || "") + "</div></div>";
+    }).join("") : '<div class="fe"><div class="d"></div><div class="txt">waiting for the first coin</div></div>';
+    document.getElementById("dip-open").innerHTML = (d.open_positions || []).map(function (p) {
+      return '<tr><td class="sym">' + esc(p.symbol || (p.mint || "").slice(0, 6)) + "</td><td>" + px(p.entry) + "</td><td>" + px(p.mark) +
+        "</td><td>" + px(p.peak) + "</td><td>" + px(p.stop_line) + "</td><td>" + (p.tp_done ? "done" : "—") + "</td><td>" + dipAge(p.age_min) + "</td></tr>";
+    }).join("") || '<tr><td colspan="7">none</td></tr>';
+    document.getElementById("dip-wait").innerHTML = (d.waiting_orders || []).map(function (o) {
+      const dp = o.depth_pct != null ? Number(o.depth_pct).toFixed(1) + "%" : "—";
+      return '<tr><td class="sym">' + esc(o.symbol || (o.mint || "").slice(0, 6)) + "</td><td>" + usd(o.size_usd) + "</td><td>" + px(o.high10) +
+        "</td><td>" + px(o.current) + "</td><td>" + dp + "</td><td>" + (o.minutes_left != null ? Math.round(o.minutes_left) + "m" : "—") + "</td></tr>";
+    }).join("") || '<tr><td colspan="6">none</td></tr>';
+    document.getElementById("dip-audits").innerHTML = (d.audits || []).map(function (a) {
+      const chips = (a.layers || []).map(function (l) {
+        const cls = l.status === "ok" ? "ok" : (l.status === "red" ? "red" : "");
+        const tip = l.n + " " + l.name + ": " + (l.status === "ok" ? "pass" : (l.status === "red" ? "fail" : "not checked")) +
+          (l.value != null ? " · " + l.value : "") + (l.reason ? " · " + l.reason : "") + (l.source ? " · via " + l.source : "");
+        return '<span class="chip ' + cls + '" title="' + esc(tip) + '"></span>';
+      }).join("");
+      const parts = a.parts || {};
+      const social = (parts.log || []).indexOf("social: off") >= 0 ? " · social: off" : "";
+      const why = a.verdict === "pass" ? "pass" : (a.reason || a.verdict || "");
+      return '<tr><td class="sym" title="' + esc(a.mint) + '">' + esc(a.symbol || (a.mint || "").slice(0, 6)) + '</td><td><div class="chips">' + chips +
+        "</div></td><td>" + esc(a.score != null ? a.score : "—") + '<span class="muted" title="' + esc((parts.log || []).join(" | ")) + '">' + esc(social) +
+        '</span></td><td class="verdict-' + (a.verdict === "pass" ? "pass" : "reject") + '">' + esc(why) + "</td></tr>";
+    }).join("") || '<tr><td colspan="4">no audits yet</td></tr>';
+    dipCounts(document.getElementById("dip-kills"), d.scanner_kills);
+    dipCounts(document.getElementById("dip-skips"), d.skip_reasons);
+  }
+  async function pollDip() {
+    for (let i = 0; i < DIP_URLS.length; i++) {
+      try {
+        applyDip(await fetchJson(DIP_URLS[i] + "?t=" + Date.now()));
         return;
       } catch (e) {}
     }
@@ -838,7 +987,8 @@
   }
   poll();
   pollCopy();
-  setInterval(function () { poll(); pollCopy(); }, 30000);
+  pollDip();
+  setInterval(function () { poll(); pollCopy(); pollDip(); }, 30000);
 })();
 </script>
 </body>

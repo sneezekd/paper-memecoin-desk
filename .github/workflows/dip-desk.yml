@@ -1,0 +1,87 @@
+# Paper-only dip desk. No wallets, no signing, no live orders.
+# Separate concurrency group from the main desk. State pushes only replace
+# data/dip.db and reports/dip_dashboard.json, on top of the latest state branch.
+name: Dip desk
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: dip-desk
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  relay:
+    name: dip relay
+    if: vars.DIP_DESK_ENABLED != 'false'
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: true
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Restore dip ledger
+        run: ./scheduler.sh restore-dip
+
+      - name: Listen and paper-dip
+        env:
+          DIP_PUSH_STATE: "1"
+          DIP_MAX_SECONDS: "20700"
+          HELIUS_API_KEY: ${{ secrets.HELIUS_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python3 dip/run.py listen
+
+      - name: Persist dip state before exit
+        if: always()
+        env:
+          DIP_PUSH_STATE: "1"
+        run: ./scheduler.sh publish-dip
+
+      - name: Chain the next dip relay
+        if: always() && vars.DIP_DESK_ENABLED != 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DIP_DESK_ENABLED: ${{ vars.DIP_DESK_ENABLED }}
+        run: |
+          set -u
+          enabled="$(printf '%s' "${DIP_DESK_ENABLED:-}" | tr '[:upper:]' '[:lower:]')"
+          if [ "$enabled" = "false" ]; then
+            echo "DIP_DESK_ENABLED=false; not starting another run"
+            exit 0
+          fi
+          if live="$(gh api "repos/${GITHUB_REPOSITORY}/actions/variables/DIP_DESK_ENABLED" --jq .value 2>/dev/null)"; then
+            live="$(printf '%s' "$live" | tr '[:upper:]' '[:lower:]')"
+            if [ "$live" = "false" ]; then
+              echo "DIP_DESK_ENABLED=false; not starting another run"
+              exit 0
+            fi
+          fi
+          current="${GITHUB_RUN_ID}"
+          others=0
+          if ! others="$(gh run list --workflow dip-desk.yml --limit 30 --json databaseId,status \
+            --jq "[.[] | select((.databaseId | tostring) != \"${current}\" and .status != \"completed\")] | length")"; then
+            echo "could not list dip runs; dispatching anyway so concurrency keeps a single waiter"
+            others=0
+          fi
+          if [ "${others}" != "0" ]; then
+            echo "another dip-desk run is already queued or running (${others}); not dispatching a duplicate"
+            exit 0
+          fi
+          gh workflow run dip-desk.yml --ref main
+          echo "dispatched the next dip-desk run on main"
