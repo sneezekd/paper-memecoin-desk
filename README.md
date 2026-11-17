@@ -110,6 +110,30 @@ runs that start while it is `false` skip trading. Delete the variable, or set
 it to anything other than `false`, to allow runs again. Disabling the
 **Paper desk** workflow in the Actions tab stops it as well.
 
+## Dip desk (third paper book)
+
+A separate PAPER-ONLY desk in `dip/` (spec: `docs/DIP_DESK_SPEC.md`). It watches new PumpSwap
+migrations, runs a scanner and an 8-layer analyst, sizes a trade, then waits up to 30 minutes for a
+15% dip before it "buys". Every buy and sell is a row in `data/dip.db`; there are no wallets, keys,
+signing, or live orders. Dashboard: `reports/dip_dashboard.json` (the **Dip desk** tab on the site).
+
+- Workflow: `.github/workflows/dip-desk.yml` (every 30 minutes). Off switch: set the repository
+  variable `DIP_DESK_ENABLED=false` (Settings -> Secrets and variables -> Actions -> Variables).
+- Telegram (optional): secrets `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID`. Both must be set or it
+  stays off. Messages start with `PAPER`. `python3 dip/run.py summary` prints (and sends) the summary.
+- Commands: `python3 dip/run.py listen | tick | dashboard | summary`. Tests: `python3 tests/test_dip_desk.py`.
+
+Source-strategy rules that are approximated, because the original data needs a login or a paid feed:
+
+- Unique buyers -> DexScreener `txns` (buys in the last hour, logged as "organic: txns").
+- Holder count / growth -> RugCheck `totalHolders`, sampled every 5 minutes.
+- Trading-app token warnings -> RugCheck danger `risks` plus Token-2022 extensions that can block selling.
+- Smart holders: unavailable (logged "smart: unavailable", counted as 0).
+- Social: off (logged "social: off"), so the score uses 4 parts.
+- Paper fills: buys and exits fill at the DexScreener price that fired them, minus the source
+  strategy's fee schedule (under $5 -> $0.10; $5-$47.50 -> 2%; $47.50-$190 -> $0.95; above -> 0.45%).
+  No other slippage model, so real fills would be worse on thin pools.
+
 ## Dashboard
 
 The page is the existing `web/static/index.html`, deployed by the Pages workflow.

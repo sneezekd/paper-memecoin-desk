@@ -1,0 +1,43 @@
+{
+ "mode": "PAPER ONLY",
+ "updated_at": 1794939927.3265631,
+ "cash": 100.0,
+ "reserved": 0.0,
+ "equity": 100.0,
+ "start_cash": 100.0,
+ "pnl_usd": 0.0,
+ "pnl_pct": 0.0,
+ "open_positions": [],
+ "waiting_orders": [],
+ "recent_events": [
+  {
+   "ts": 1794939927.3234482,
+   "kind": "night_start",
+   "mint": null,
+   "note": "2026-11-16"
+  }
+ ],
+ "audits": [],
+ "scanner_kills": {},
+ "skip_reasons": {},
+ "night": {
+  "id": "2026-11-16",
+  "trades": 0,
+  "start_equity": 100.0,
+  "realized": 0.0,
+  "locked": false,
+  "pnl_usd": 0.0,
+  "loss_stop_pct": 30,
+  "max_trades": 30
+ },
+ "session": {
+  "tz": "America/Edmonton",
+  "night_start": "22:00",
+  "lock_time": "06:30",
+  "report_time": "08:00",
+  "always_on": false,
+  "in_window": false
+ },
+ "telegram": "off",
+ "social": "off"
+}

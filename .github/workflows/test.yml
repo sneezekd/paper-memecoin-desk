@@ -34,8 +34,14 @@ jobs:
       - name: Copy desk mock end to end
         run: python3 tests/test_copy_desk.py
 
+      - name: Dip desk tests
+        run: python3 tests/test_dip_desk.py
+
       - name: End-to-end mock (temp database)
         run: python3 tests/e2e_mock.py
 
       - name: One paper tick (not pushed)
         run: python3 run.py tick
+
+      - name: One dip tick (not pushed)
+        run: python3 dip/run.py tick

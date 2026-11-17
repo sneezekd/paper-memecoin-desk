@@ -1,0 +1,41 @@
+{
+  "_comment": "PAPER ONLY dip desk. Every number used by dip/ logic lives here.",
+  "scanner": {
+    "min_liquidity_usd": 20000, "max_top10_pct": 25, "max_h1_change_pct": 200, "poll_s": 60,
+    "min_pool_age_min": 10, "max_wait_min": 60, "runner_h24_pct": 300,
+    "min_holders_growth_pct": 0, "holders_sample_min": 5, "holders_growth_min_age_min": 8,
+    "rugs_refresh_min": 10, "ds_max_per_min": 250, "ds_429_wait_s": 30, "ws_silence_s": 120
+  },
+  "analyst": {
+    "max_dev_pct": 5, "max_top10_pct": 25, "min_lp_locked_pct": 99, "max_liq_drop_pct": 50,
+    "max_bundled": 5, "max_insiders_pct": 15, "max_delegated_accounts": 10, "retries": 3,
+    "retry_gap_s": 2, "min_score": 70, "alive_volume_h1": 25000, "organic_unique_h1": 80,
+    "organic_buys_h1": 150, "bundled_penalty": 0.5, "bundled_penalty_min": 3, "fast_curve_min": 10,
+    "max_fresh_pct": 50, "fresh_top_n": 20, "fresh_sig_min": 10, "flush_sell_ratio": 1.5,
+    "chase_h1_pct": 200, "min_pool_age_min": 10
+  },
+  "social": {"enabled": false, "social_weight": 0.5, "shill_cut": 0.5},
+  "brain": {
+    "paper_start_cash": 100, "risk_per_trade_pct": 3, "stop_pct": 25, "full_size_score": 80,
+    "below_full_pct": 50, "max_pool_pct": 2, "min_ticket_usd": 2, "max_ticket_usd": 50,
+    "max_trades_night": 30
+  },
+  "executor": {
+    "dip_pct": 15, "dip_window_min": 10, "dip_wait_min": 30, "crash_pct": 35, "flush_sell_ratio": 1.5,
+    "recheck_liq_drop_pct": 20, "recheck_price_up_pct": 15, "tp_x": 2.0, "tp_sell_pct": 50,
+    "trail_pct": 40
+  },
+  "risk": {
+    "poll_s": 5, "stop_pct": 25, "timeout_h": 3, "timeout_min_gain_pct": 5, "pulled_drop_pct": 80,
+    "dev_check_s": 60, "dev_dump_pct": 50, "warn_check_s": 60, "no_price_polls": 12,
+    "night_loss_stop_pct": 30
+  },
+  "session": {
+    "tz": "America/Edmonton", "night_start": "22:00", "lock_time": "06:30", "report_time": "08:00",
+    "always_on": false
+  },
+  "fees": {
+    "small_usd": 5, "small_flat": 0.10, "mid_top": 47.50, "mid_pct": 2, "big_top": 190,
+    "big_flat": 0.95, "fee_pct": 0.45
+  }
+}
