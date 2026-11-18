@@ -32,7 +32,7 @@
   },
   "session": {
     "tz": "America/Edmonton", "night_start": "22:00", "lock_time": "06:30", "report_time": "08:00",
-    "always_on": false
+    "always_on": true
   },
   "fees": {
     "small_usd": 5, "small_flat": 0.10, "mid_top": 47.50, "mid_pct": 2, "big_top": 190,
