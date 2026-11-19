@@ -135,10 +135,10 @@ SAMPLES = [(NOW - 600, 100), (NOW, 100)]
 
 def dec(**kw):
     a = dict(coin=COIN, row=row(), report={"mint": MINT, "risks": []}, holders_now=100, samples=SAMPLES,
-             top10=10.0, runners=[], cfg=CFG, now=NOW)
+             top10=10.0, runners=[], cfg=CFG, now=NOW, prices=None)
     a.update(kw)
     return decide(a["coin"], a["row"], a["report"], a["holders_now"], a["samples"], a["top10"], a["runners"],
-                  a["cfg"], a["now"])
+                  a["cfg"], a["now"], a["prices"])
 
 
 ok(dec() == ("pass", None), "clean coin passes at pool age >= 10 min")
@@ -191,6 +191,67 @@ out = sc.tick()
 ok(out == [(MINT, "kill", "liq $14.2K")] and book.kill_counts() == {"liq": 1}, "scanner tick kills on low liquidity and counts it")
 ok(book.is_rug("old"), "rugs ticker refreshed into the rugs table")
 ok(book.last_price(MINT)["liq_mcap"] is None and book.last_price(MINT)["price"] == 1.0, "prices row stored")
+
+
+# ---- scanner fixes: only real migrations, stub first reads wait, h1 measured on the PumpSwap pool ----
+from dip.scanner import measured_h1  # noqa: E402
+USDC = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+ok(S.parse_portal_message({"mint": USDC, "signature": "sig"}, 5.0) is None, "nameless message with a signature is NOT a migration")
+ok(S.parse_portal_message({"mint": USDC, "signature": "sig", "txType": "buy"}, 5.0) is None, "trade message ignored")
+ok(S.parse_portal_message({"mint": USDC, "message": "Successfully subscribed"}, 5.0) is None, "subscribe ack ignored")
+ok(S.parse_portal_message({"mint": "m", "txType": "migrate"}, 5.0)["kind"] == "migration", "explicit migrate still parsed")
+ok(S.parse_portal_message({"mint": "m", "name": "n", "symbol": "s"}, 5.0)["kind"] == "new", "named new-token message still parsed")
+sc3 = Scanner(DipBook(":memory:"), FakeDS(), FakeRC(), FakeRpc(), CFG, clock=lambda: NOW)
+sc3.on_event({"kind": "new", "mint": MINT, "creator": DEV, "name": "n", "symbol": "s", "seen_at": NOW - 30, "curve": None})
+ok(sc3.book.room_waiting() == [], "new (still on curve) token never enters the room")
+
+young = row(pair_created_ms=(NOW - 80) * 1000)
+ycoin = {**COIN, "migrated_at": NOW - 80}
+one = [(NOW, 1.0, 50000)]
+two = [(NOW - 60, 1.0, 50000), (NOW, 1.0, 50000)]
+ok(dec(row=young | {"liq_usd": 4}, coin=ycoin, prices=one)[0] == "wait", "seconds-old pair, stub $4 liq on first read: wait, no kill")
+ok(dec(row=young | {"liq_usd": None}, coin=ycoin, prices=one)[0] == "wait", "seconds-old pair with no liquidity figure: wait")
+ok(dec(row=young | {"liq_usd": 14200}, coin=ycoin, prices=two) == ("kill", "liq $14.2K"), "real liq under $20k kills once seen twice")
+ok(dec(row=young | {"chg_h1": 364679}, coin=ycoin, prices=one)[0] == "wait", "seconds-old pair, garbage DexScreener h1: wait, no kill")
+ok(dec(row=young | {"chg_h1": 364679}, coin=ycoin, prices=two)[0] == "wait", "garbage h1 ignored; flat measured price: wait")
+ok(dec(row=young, coin=ycoin, prices=[(NOW - 60, 1.0, 50000), (NOW, 3.5, 50000)]) == ("kill", "+250% in 1h"), "measured +250% on the pool kills")
+ok(dec(row=young, coin=ycoin, prices=[(NOW - 60, 1.0, 50000), (NOW, 3.0, 50000)])[0] == "wait", "measured +200% exactly is not above the cut")
+ok(abs(measured_h1([(NOW - 4000, 1.0, 9e4), (NOW - 60, 2.0, 9e4), (NOW, 2.2, 9e4)], NOW, 20000) - 10.0) < 1e-6 and measured_h1(one, NOW) is None,
+   "measured_h1 uses the last hour, needs 2 readings")
+ok(abs(measured_h1([(NOW - 120, 1e-9, 3), (NOW - 60, 1.0, 9e4), (NOW, 1.5, 9e4)], NOW, 20000) - 50.0) < 1e-6, "stub first read (liq $3) is not a baseline")
+ok(dec(row=row(chg_h1=364679), prices=[(NOW - 600, 1.0, 5e4), (NOW, 1.0, 5e4)])[0] == "pass", "old pool with flat measured price passes despite dust-tick h1")
+ok(dec(row=row(chg_h1=300), prices=None)[0] == "kill", "no history, 15-min pool: raw h1 still kills")
+ok(dec(row=row(chg_h1=300, pair_created_ms=(NOW - 61 * 60) * 1000), prices=[(NOW, 1.0, 5e4)])[0] == "kill", "pair a full hour old: DexScreener h1 is a real window")
+ok(dec(row=None, coin={**COIN, "migrated_at": NOW - 59 * 60})[0] == "wait" and dec(row=None, coin={**COIN, "migrated_at": NOW - 61 * 60})[0] == "drop", "unknown coin waits, then drops at 60 min")
+ok(dec(row=young | {"liq_usd": None}, coin={**COIN, "migrated_at": NOW - 61 * 60}, prices=one)[0] == "drop", "no-liquidity pair still drops at 60 min")
+
+# tick end to end: stub first read waits and is kept; real second read decides on measured h1
+tb = DipBook(":memory:")
+tb.room_add(MINT, pool=POOL, creator=DEV, name="Foo Coin", symbol="FOO", migrated_at=NOW - 80)
+tb.add_holders(MINT, 100, NOW - 60)
+seq = iter([row(liq_usd=3, price_usd=1e-9, chg_h1=5e6, pair_created_ms=(NOW - 80) * 1000),
+            row(liq_usd=60000, price_usd=1.0, chg_h1=5e6, pair_created_ms=(NOW - 80) * 1000)])
+class SeqDS:
+    def batch(self, mints): return {MINT: next(seq)}, []
+    def top_boosts_runners(self, pct): return []
+t = {"now": NOW}
+sc4 = Scanner(tb, SeqDS(), FakeRC(), FakeRpc(), CFG, clock=lambda: t["now"])
+ok(sc4.tick() == [] and len(tb.room_waiting()) == 1, "first read stub (liq $3, h1 5e6%): coin stays in the room")
+t["now"] += 60
+ok(sc4.tick() == [] and len(tb.room_waiting()) == 1, "second read: stub baseline ignored, only one real reading -> still waiting (not a +1e11% kill)")
+
+class RLDS:
+    def batch(self, mints):
+        raise S.RateLimited("429")
+    def top_boosts_runners(self, pct): return []
+tb2 = DipBook(":memory:")
+tb2.room_add(MINT, migrated_at=NOW - 80)
+try:
+    Scanner(tb2, RLDS(), FakeRC(), FakeRpc(), CFG, clock=lambda: NOW).tick()
+    raised = False
+except S.RateLimited:
+    raised = True
+ok(raised and len(tb2.room_waiting()) == 1, "429 propagates to the caller (which waits 30s) and the room is kept")
 
 # book: reserved cash
 b2 = DipBook(":memory:")
@@ -511,22 +572,25 @@ ok(size_order(b.free_cash(), 80, 50000, CFG, night_loss=st["night_loss"])["reaso
 ok(abs(night_pnl(b, {MINT: 0.2}) - (-32.0)) < 1e-9 and abs(equity(b, {MINT: 0.2}) - 68.0) < 1e-9, "night pnl = realized + open marked")
 
 # window / always_on / night reset
+# the shipped config is always_on=true; the 22:00-06:30 window rules are tested with always_on off
+NCFG = json.loads(json.dumps(CFG))
+NCFG["session"]["always_on"] = False
 tzn = ZoneInfo(CFG["session"]["tz"])
 ts = lambda d, h, m=0: datetime(2026, 11, d, h, m, tzinfo=tzn).timestamp()  # noqa: E731
-ok(window_state(ts(17, 21, 59), CFG) == (False, "2026-11-16"), "21:59 outside the window")
-ok(window_state(ts(17, 22), CFG) == (True, "2026-11-17"), "22:00 opens the window")
-ok(window_state(ts(18, 6, 29), CFG) == (True, "2026-11-17"), "06:29 still the same night")
-ok(window_state(ts(18, 6, 30), CFG) == (False, "2026-11-17"), "06:30 lock_time closes it")
-ao = json.loads(json.dumps(CFG))
+ok(window_state(ts(17, 21, 59), NCFG) == (False, "2026-11-16"), "21:59 outside the window")
+ok(window_state(ts(17, 22), NCFG) == (True, "2026-11-17"), "22:00 opens the window")
+ok(window_state(ts(18, 6, 29), NCFG) == (True, "2026-11-17"), "06:29 still the same night")
+ok(window_state(ts(18, 6, 30), NCFG) == (False, "2026-11-17"), "06:30 lock_time closes it")
+ao = json.loads(json.dumps(NCFG))
 ao["session"]["always_on"] = True
 ok(window_state(ts(18, 12), ao) == (True, "2026-11-17") and window_state(ts(18, 22), ao) == (True, "2026-11-18"),
    "always_on trades 24/7 and rolls the night at night_start")
 
 # lock_time sells all "night over"
 b = DipBook(":memory:")
-exl = Executor(b, CFG)
-rkl = Risk(b, CFG)
-sess = Session(b, rkl, exl, CFG)
+exl = Executor(b, NCFG)
+rkl = Risk(b, NCFG)
+sess = Session(b, rkl, exl, NCFG)
 sess.step({}, ts(17, 23))
 M2 = "N" * 44
 b.open_position(MINT, 1.0, 10.0, 10.0, 0.2, 0.75, night="2026-11-17", now=ts(17, 23))

@@ -20,6 +20,7 @@ sys.path.insert(0, str(ROOT))
 from dip import notify, report  # noqa: E402
 from dip import sources as S  # noqa: E402
 from dip.book import DipBook, load_config  # noqa: E402
+from dip.scanner import measured_h1  # noqa: E402
 from dip.brain import Brain  # noqa: E402
 from dip.executor import Executor  # noqa: E402
 from dip.layers import run_layers  # noqa: E402
@@ -175,6 +176,13 @@ class Desk:
             self.book.event("analyst_skip", mint, "no data: price")
             return None
         created = (row.get("pair_created_ms") or 0) / 1000 or c.get("migrated_at") or now
+        if (now - created) < 3600:
+            # score's chase term reads h1: on a pair younger than 1h use the PumpSwap change we measured
+            # ourselves, not DexScreener's dust-first-tick figure (same measurement as the scanner)
+            h1 = measured_h1(self.book.price_history(mint, now - 3600), now,
+                             self.cfg["scanner"]["min_liquidity_usd"])
+            if h1 is not None:
+                row = {**row, "chg_h1": h1}
         ctx = {"mint": mint, "pool": c.get("pool") or row.get("pair"), "creator": c.get("creator"),
                "creator_balance": c.get("creator_balance"), "liq_scanner": c.get("liq_scanner"),
                "liq_now": row.get("liq_usd"), "pool_age_min": (now - created) / 60,
