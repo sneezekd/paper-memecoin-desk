@@ -245,9 +245,11 @@ def parse_portal_message(msg, now=None):
     if not mint:
         return None
     tx = (msg.get("txType") or "").lower()
-    if tx == "migrate" or (not tx and msg.get("signature") and not msg.get("name")):
+    # Only an explicit migrate message is a graduation. (A nameless message with a signature used to
+    # count as one, which let USDC and other long-established tokens into the waiting room.)
+    if tx == "migrate":
         kind = "migration"
-    elif tx == "create" or msg.get("name") or msg.get("symbol"):
+    elif tx == "create" or (not tx and msg.get("name") and msg.get("symbol")):
         kind = "new"
     else:
         return None

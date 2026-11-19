@@ -166,6 +166,12 @@ class DipBook:
         r = self.db.execute("SELECT * FROM prices WHERE mint=? ORDER BY ts DESC, id DESC LIMIT 1", (mint,)).fetchone()
         return dict(r) if r else None
 
+    def price_history(self, mint, since_ts):
+        """[(ts, price, liq)] oldest first: stored PumpSwap readings with a usable price, since since_ts."""
+        return [(r["ts"], r["price"], r["liq"]) for r in self.db.execute(
+            "SELECT ts, price, liq FROM prices WHERE mint=? AND ts>=? AND price IS NOT NULL AND price>0 ORDER BY ts, id",
+            (mint, since_ts))]
+
     def high_since(self, mint, since_ts):
         r = self.db.execute("SELECT MAX(price) p FROM prices WHERE mint=? AND ts>=? AND price IS NOT NULL",
                             (mint, since_ts)).fetchone()

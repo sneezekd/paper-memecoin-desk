@@ -101,7 +101,21 @@ def holders_growth(samples, now, min_age_min=8):
     return holders_growth_info(samples, now, min_age_min)[0]
 
 
-def decide(coin, row, report, holders_now, samples, top10, runners, cfg, now):
+H1_WINDOW_S = 3600
+
+
+def measured_h1(prices, now, min_liq=0):
+    """% change of the PumpSwap price over the last hour from our own stored readings, or None.
+    prices: [(ts, price, liq)] oldest first. The baseline is the first stored reading whose pool holds at
+    least min_liq, never DexScreener's own first tick of a brand-new pair (dust-priced, which makes
+    priceChange.h1 read +100000% on young pools) and never a stub read of a pool that is not indexed yet."""
+    pts = [(t, p) for t, p, q in prices or [] if p and p > 0 and (q or 0) >= min_liq and now - t <= H1_WINDOW_S]
+    if len(pts) < 2:
+        return None
+    return (pts[-1][1] / pts[0][1] - 1) * 100
+
+
+def decide(coin, row, report, holders_now, samples, top10, runners, cfg, now, prices=None):
     """One poll for one waiting coin. Returns ("kill", reason) | ("drop", reason) | ("pass", None) | ("wait", why).
 
     coin: room row dict; row: DexScreener row or None; report: RugCheck report or None;
@@ -113,12 +127,31 @@ def decide(coin, row, report, holders_now, samples, top10, runners, cfg, now):
         if age_room >= s["max_wait_min"]:
             return "drop", "timed out"
         return "wait", "no dexscreener pair"
+    created = (row.get("pair_created_ms") or 0) / 1000 or coin.get("migrated_at") or now
+    pool_age = (now - created) / 60
+    young = pool_age < s["min_pool_age_min"]
+    # A pool younger than min_pool_age_min is only judged on a reading we have seen twice: the very first
+    # DexScreener read of a new pair can be a stub (pool not indexed yet, dust liquidity, dust first tick).
+    # prices=None (pure callers) means "no history available": old pools are judged on the row alone.
+    n_reads = None if prices is None else sum(1 for t, p, q in prices if now - t <= H1_WINDOW_S)
+    seen_twice = not young or (n_reads or 0) >= 2
     liq = row.get("liq_usd")
-    if liq is not None and liq < s["min_liquidity_usd"]:
-        return "kill", f"liq {fmt_k(liq)}"
+    if liq is None:
+        # no liquidity figure = DexScreener has no real PumpSwap pool data yet: never pass, never kill
+        if age_room >= s["max_wait_min"]:
+            return "drop", "timed out"
+        return "wait", "no pumpswap liquidity data"
+    if liq < s["min_liquidity_usd"]:
+        if seen_twice:
+            return "kill", f"liq {fmt_k(liq)}"
+        return "wait", "first read, confirming liquidity"
     if top10 is not None and top10 > s["max_top10_pct"]:
         return "kill", f"top 10 hold {top10:.0f}%"
-    h1 = row.get("chg_h1")
+    h1 = measured_h1(prices, now, s["min_liquidity_usd"]) if prices is not None and pool_age < H1_WINDOW_S / 60 else None
+    if h1 is None and (not young or pool_age >= H1_WINDOW_S / 60):
+        # no usable history of our own, but the pool is old enough (>= min_pool_age_min) that DexScreener's
+        # h1 is a real PumpSwap reading; a full-hour-old pair always uses it.
+        h1 = row.get("chg_h1")
     if h1 is not None and h1 > s["max_h1_change_pct"]:
         return "kill", f"+{h1:.0f}% in 1h"
     cc = is_copycat(coin["mint"], coin.get("name") or row.get("name"), coin.get("symbol") or row.get("symbol"), runners)
@@ -127,9 +160,7 @@ def decide(coin, row, report, holders_now, samples, top10, runners, cfg, now):
     warn = blocking_warns(report)
     if warn:
         return "kill", f"warns: {warn}"
-    created = (row.get("pair_created_ms") or 0) / 1000 or coin.get("migrated_at") or now
-    pool_age = (now - created) / 60
-    if pool_age >= s["min_pool_age_min"]:
+    if not young:
         if holders_now is None:
             return "kill", "no data: holders"
         g, g_min = holders_growth_info(samples, now, s["holders_growth_min_age_min"])
@@ -252,8 +283,8 @@ class Scanner:
                 upd = {}
                 if row.get("pair") and not c.get("pool"):
                     upd["pool"] = row["pair"]  # DexScreener pairAddress of the chosen pumpswap pair
-                if c.get("liq_scanner") is None:
-                    upd["liq_scanner"] = row.get("liq_usd")
+                if c.get("liq_scanner") is None and (row.get("liq_usd") or 0) >= s["min_liquidity_usd"]:
+                    upd["liq_scanner"] = row.get("liq_usd")  # first real reading, not a stub first read
                 if upd:
                     self.book.room_update(c["mint"], **upd)
                 c = {**c, **upd}
@@ -272,7 +303,8 @@ class Scanner:
                 report = self._report_for(c["mint"], now, force=True)
             samples = self.book.holders_samples(c["mint"])
             holders_now = samples[-1][1] if samples else total_holders(report)
-            act, why = decide(c, row, report, holders_now, samples, top10, runners, self.cfg, now)
+            prices = self.book.price_history(c["mint"], now - H1_WINDOW_S) if row else None
+            act, why = decide(c, row, report, holders_now, samples, top10, runners, self.cfg, now, prices)
             day = self.day_of(now)
             if act == "pass" and self.book.passed_today(c["mint"], day):
                 act, why = "drop", "already passed today"
