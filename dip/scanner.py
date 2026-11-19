@@ -45,7 +45,17 @@ def _ext_names(report):
         ext = (report or {}).get("tokenExtensions")
     names = []
     if isinstance(ext, dict):
-        names = [str(k) for k in ext]
+        # RugCheck lists every Token-2022 key; most are null/false. Count only enabled ones.
+        for k, v in ext.items():
+            if v is None or v is False:
+                continue
+            if re.sub(r"[^a-z]", "", str(k).lower()) == "defaultaccountstate":
+                st = v
+                while isinstance(st, dict):
+                    st = st.get("accountState", st.get("state"))
+                if str(st).lower() != "frozen":
+                    continue  # only a frozen default state blocks selling
+            names.append(str(k))
     elif isinstance(ext, list):
         for e in ext:
             if not isinstance(e, dict):
