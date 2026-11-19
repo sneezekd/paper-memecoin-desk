@@ -13,12 +13,22 @@
     },
     {
       "address": "9xHqBH1FtbN1T57u6RSZDn6ykkJzDjNMJe9M1jN7j8NQ",
-      "label": "Smart Degen 9xHqBH1F (104 closed, 55.8% wr, +17.76 SOL, 5.1h hold)",
-      "enabled": true
+      "label": "disabled: 7d -18.25 SOL, 14d -13.61 SOL (119 closed, 52.1% wr, 3.6h hold)",
+      "enabled": false
     },
     {
       "address": "5n593DWQkpfFgA69mS1MFWJDRZDCLcAuEsQYryqxi22Z",
       "label": "Smart Degen 5n593DWQ (27 closed, 48.1% wr, +42.14 SOL, one-token concentrated)",
+      "enabled": true
+    },
+    {
+      "address": "6JJdhkhk2fsxJcv5f2pEfrkMfHDe6bJSWT6JF2pUXGAK",
+      "label": "Smart Degen 6JJdhkhk (77 closed, 64.9% wr, +52.61 SOL, 50.2m hold)",
+      "enabled": true
+    },
+    {
+      "address": "3BaHX3PW14oP9m96f5JKv5RHojEtbztRWsUQvfFTSAX8",
+      "label": "Smart Degen 3BaHX3PW (30 closed, 66.7% wr, +22.03 SOL, 3.1h hold)",
       "enabled": true
     },
     {
