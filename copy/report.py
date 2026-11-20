@@ -39,6 +39,19 @@ def write_dashboard(book, path=None):
             "ts": e["ts"], "wallet": e["wallet"], "mint": e["mint"], "side": e["side"],
             "latency_s": e["latency_s"], "slippage_vs_leader_pct": e["slippage_vs_leader_pct"], "note": e["note"],
         })
+    wallets = []
+    try:
+        wd = json.loads((ROOT / "copy" / "wallets.json").read_text())
+        for w in (wd.get("wallets") if isinstance(wd, dict) else wd) or []:
+            if isinstance(w, dict) and w.get("address"):
+                wallets.append({"address": w["address"], "label": w.get("label"), "enabled": w.get("enabled") is not False})
+    except Exception:
+        pass
+    skips = {}
+    for e in db.execute("SELECT note, COUNT(*) c FROM events WHERE (side IS NULL OR side='') AND note NOT LIKE 'paper_%' AND note NOT LIKE 'ledger_%' GROUP BY note ORDER BY c DESC LIMIT 15"):
+        skips[(e["note"] or "")[:80]] = e["c"]
+    errs = [(r["note"] or "")[:120] for r in db.execute(
+        "SELECT note FROM events WHERE ts>? AND note LIKE '%error%' ORDER BY id DESC LIMIT 3", (time.time() - 1800,))]
     wins = sum(1 for p in closed if (p["pnl_usd"] or 0) > 0)
     losses = sum(1 for p in closed if (p["pnl_usd"] or 0) <= 0)
     out = {
@@ -55,6 +68,8 @@ def write_dashboard(book, path=None):
         "wins": wins,
         "losses": losses,
         "recent_events": recent,
+        "wallets": wallets, "event_reasons": skips,
+        "health": {"status": "errors" if errs else "ok", "errors": errs, "sources": {"wallets_enabled": sum(1 for w in wallets if w["enabled"])}},
         "rules": {
             "stop_net_pct": book.cfg["risk"]["hard_stop_net_pct"],
             "take_profit_net_pct": book.cfg["risk"]["take_profit_net_pct"],

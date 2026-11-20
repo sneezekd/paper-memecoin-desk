@@ -37,6 +37,9 @@ jobs:
       - name: Dip desk tests
         run: python3 tests/test_dip_desk.py
 
+      - name: Missed-runner tracker and Gecko limiter tests
+        run: python3 tests/test_outcomes.py
+
       - name: End-to-end mock (temp database)
         run: python3 tests/e2e_mock.py
 

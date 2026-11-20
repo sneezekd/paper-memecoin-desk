@@ -1,11 +1,14 @@
 """SQLite paper ledger for the dip desk (data/dip.db). PAPER ONLY: rows, never real orders."""
 import json
+import os
 import sqlite3
 import time
 from pathlib import Path
 
+from desk import outcomes as O
+
 ROOT = Path(__file__).resolve().parent.parent
-DB = ROOT / "data" / "dip.db"
+DB = Path(os.environ.get("PAPER_DIP_DB") or ROOT / "data" / "dip.db")
 CONFIG = Path(__file__).resolve().parent / "config.json"
 
 SCHEMA = """
@@ -61,7 +64,7 @@ class DipBook:
             p.parent.mkdir(parents=True, exist_ok=True)
         self.db = sqlite3.connect(str(path) if path == ":memory:" else str(p))
         self.db.row_factory = sqlite3.Row
-        self.db.executescript(SCHEMA)
+        self.db.executescript(SCHEMA + O.SCHEMA)
         if "curve" not in [r["name"] for r in self.db.execute("PRAGMA table_info(room)")]:
             self.db.execute("ALTER TABLE room ADD COLUMN curve TEXT")
         if self.meta_get("cash") is None:
