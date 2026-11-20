@@ -3,6 +3,7 @@ import json, time, datetime as dt
 from zoneinfo import ZoneInfo
 from .engine import Logger, Ledger, load_config, ROOT, now, sync_entry_pause
 from . import sources as S
+from . import outcomes as O
 
 TZ = ZoneInfo("America/Edmonton")
 
@@ -61,6 +62,18 @@ def _last_scan_ticker(db, limit=40):
     return out
 
 
+def _recent_rejects(db, limit):
+    out = []
+    for r in _rows(db, "SELECT ts, symbol, address, stage, gate, reason, unverifiable, price, liq, mcap, evidence "
+                       "FROM kills ORDER BY id DESC LIMIT ?", limit):
+        try:
+            ch = float(json.loads(r.pop("evidence") or "{}").get("chg_h1"))
+        except (TypeError, ValueError, AttributeError):
+            ch = None
+        out.append(r | {"at": lt(r["ts"]), "chg_h1": ch})
+    return out
+
+
 def dashboard_data():
     log, L, db = _ctx()
     cfg = load_config()
@@ -82,9 +95,10 @@ def dashboard_data():
                     "unrealized_pnl_usd": round(sum(p["unrealized_pnl_usd"] for p in ops), 4)},
         "open_positions": [{k: p[k] for k in ("symbol", "address", "score", "size_usd", "entry_fill", "last_mark", "stop_mark",
                                               "initial_stop_mark", "trail_active", "peak_mark", "unrealized_pnl_usd", "url")}
-                           | {"opened": lt(p["opened_at"]), "x_score": p.get("x_score")} for p in ops],
+                           | {"opened": lt(p["opened_at"]), "opened_ts": p["opened_at"], "x_score": p.get("x_score")} for p in ops],
         "closed_trades": [{k: p[k] for k in ("symbol", "address", "score", "size_usd", "entry_fill", "exit_fill", "pnl_usd",
                                              "pnl_pct", "exit_reason", "url")} | {"opened": lt(p["opened_at"]), "closed": lt(p["closed_at"]),
+                                                                                  "opened_ts": p["opened_at"], "closed_ts": p["closed_at"],
                                                                                   "x_score": p.get("x_score")}
                           for p in closed],
         "wins": sum(1 for p in closed if (p["pnl_usd"] or 0) > 0), "losses": sum(1 for p in closed if (p["pnl_usd"] or 0) <= 0),
@@ -92,9 +106,8 @@ def dashboard_data():
         "funnel_all_time": funnel_since(db, 0),
         "last_scan": {"at": lt(last["ts"]), "secs": last["secs"], "summary": json.loads(last["summary"] or "{}"),
                       "sources": json.loads(last["status"] or "{}")} if last else None,
-        "recent_rejects": [r | {"at": lt(r.pop("ts"))} for r in _rows(
-            db, "SELECT ts, symbol, address, stage, gate, reason, unverifiable FROM kills ORDER BY id DESC LIMIT 50")],
-        "equity_curve": [{"at": lt(r["ts"]), "equity": round(r["equity"], 4)} for r in _rows(
+        "recent_rejects": _recent_rejects(db, 100),
+        "equity_curve": [{"at": lt(r["ts"]), "ts": r["ts"], "equity": round(r["equity"], 4)} for r in _rows(
             db, "SELECT ts, equity FROM equity ORDER BY id DESC LIMIT 300")][::-1],
         "rules": {"stop_net_pct": cfg["risk"]["hard_stop_net_pct"], "trail_after_net_pct": cfg["risk"]["trail_activate_net_pct"],
                   "trail_distance_pct": cfg["risk"]["trail_distance_from_peak_pct"],
@@ -104,6 +117,10 @@ def dashboard_data():
         "ticker": _last_scan_ticker(db),
         "entry_pause": sync_entry_pause(log, L, cfg),
     }
+    oc = O.update_and_export(db, "main", O.seed_main)       # never raises; DexScreener errors land in outcomes_meta
+    out.update(oc)
+    srcs = (out["last_scan"] or {}).get("sources") or {}
+    out["health"] = O.health_from_sources(srcs, [oc["outcomes_meta"].get("error")])
     p = ROOT / "reports" / "dashboard.json"
     p.parent.mkdir(exist_ok=True)
     tmp = p.with_suffix(".tmp")

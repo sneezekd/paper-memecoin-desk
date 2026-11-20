@@ -418,7 +418,7 @@ def gecko_discovery():
         n = 0
         for page in (1, 2):
             try:
-                d = http_json(f"https://api.geckoterminal.com/api/v2/networks/solana/{path}?page={page}&include=dex")
+                d = gecko_http(f"https://api.geckoterminal.com/api/v2/networks/solana/{path}?page={page}&include=dex")
             except Exception as e:
                 status[label] = f"error: {e}"[:150]; break
             for it in d.get("data") or []:
@@ -429,7 +429,6 @@ def gecko_discovery():
                     a = base.split("_", 1)[1]
                     if a != SOL_MINT:
                         addrs.setdefault(a, set()).add(label); n += 1
-            time.sleep(2.1)
         status.setdefault(label, f"ok ({n})")
     return addrs, status
 
@@ -438,7 +437,7 @@ def gecko_ohlcv_5m(pair, limit=6):
     """5-minute USD candles for a pool, newest first as returned. Raises if the path is empty."""
     url = ("https://api.geckoterminal.com/api/v2/networks/solana/pools/%s/ohlcv/minute?aggregate=5&limit=%d&currency=usd"
            % (pair, int(limit)))
-    d = http_json(url, timeout=12, retries=1)
+    d = gecko_http(url, timeout=12)
     rows = ((d.get("data") or {}).get("attributes") or {}).get("ohlcv_list") or []
     out = []
     for row in rows:
@@ -451,17 +450,67 @@ def gecko_ohlcv_5m(pair, limit=6):
     return out
 
 
-def gecko_pool_txns(pair_addresses):
-    """Unique buyers/sellers per pool from GeckoTerminal (keyless). {pair: {..., fetched_at}}."""
+# GeckoTerminal free tier is ~30 calls/min. One limiter per process: minimum spacing, a cooldown after any
+# 429, and a short in-memory cache of the last good pool_txns so a 429 can still return recent data.
+GECKO_MIN_GAP_S = 2.1
+GECKO_COOLDOWN_S = 60
+GECKO_CACHE_TTL_S = 600
+_gecko = {"last_call": 0.0, "cooldown_until": 0.0, "cache": {}}
+
+
+def _gecko_reset():
+    _gecko.update(last_call=0.0, cooldown_until=0.0, cache={})
+
+
+def gecko_http(url, timeout=15, now=time.time, sleep=time.sleep):
+    """http_json for GeckoTerminal only: spaced calls, no in-call 429 retries, 60s cooldown after a 429."""
+    t = now()
+    if t < _gecko["cooldown_until"]:
+        raise RuntimeError(f"rate_limited (cooldown {_gecko['cooldown_until'] - t:.0f}s left)")
+    wait = _gecko["last_call"] + GECKO_MIN_GAP_S - t
+    if wait > 0:
+        sleep(wait)
+    _gecko["last_call"] = now()
+    try:
+        return http_json(url, timeout=timeout, retries=0)
+    except RuntimeError as e:
+        if "429" in str(e):
+            _gecko["cooldown_until"] = now() + GECKO_COOLDOWN_S
+            raise RuntimeError("rate_limited (HTTP 429)")
+        raise
+
+
+def gecko_pool_txns(pair_addresses, status=None):
+    """Unique buyers/sellers per pool from GeckoTerminal (keyless). {pair: {..., fetched_at}}.
+
+    If rate limited or in cooldown, returns recent cached pools (if any) and records a clean status string
+    instead of raising. Other errors still raise to the caller.
+    """
     out = {}
     pa = list(dict.fromkeys(p for p in pair_addresses if p))
+    cache = _gecko["cache"]
+    limited = False
     for i in range(0, len(pa), 30):
         chunk = pa[i:i + 30]
-        d = http_json("https://api.geckoterminal.com/api/v2/networks/solana/pools/multi/" + ",".join(chunk))
+        try:
+            d = gecko_http("https://api.geckoterminal.com/api/v2/networks/solana/pools/multi/" + ",".join(chunk))
+        except RuntimeError as e:
+            if "rate_limited" not in str(e):
+                raise
+            limited = True
+            break
         for it in d.get("data") or []:
             at = it.get("attributes") or {}
             out[at.get("address")] = {"tx": at.get("transactions") or {}, "fetched_at": time.time()}
-        time.sleep(2.1)
+            cache[at.get("address")] = out[at.get("address")]
+    if limited:
+        used = 0
+        for a in pa:
+            if a not in out and a in cache and time.time() - cache[a]["fetched_at"] < GECKO_CACHE_TTL_S:
+                out[a] = cache[a]; used += 1
+        if status is not None:
+            status["gecko_txns"] = (f"rate_limited (cooldown, using cache {used}/{len(pa)})" if used
+                                    else "rate_limited (skipped)")
     return out
 
 

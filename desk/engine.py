@@ -3,15 +3,16 @@
 PAPER ONLY. Nothing here holds a wallet, signs, or sends a transaction, and there is no live switch.
 Each stage is a separate class; a stage only receives what the previous stage handed off.
 """
-import json, sqlite3, time, datetime as dt
+import json, os, sqlite3, time, datetime as dt
 from pathlib import Path
 from zoneinfo import ZoneInfo
 from . import sources as S
+from . import outcomes as O
 from .sources import f
 from .xwatch import apply_x_boost, load_x_watchlist
 
 ROOT = Path(__file__).resolve().parent.parent
-DB = ROOT / "data" / "desk.db"
+DB = Path(os.environ.get("PAPER_DESK_DB") or ROOT / "data" / "desk.db")
 EVENTS = ROOT / "logs" / "events.jsonl"
 SOL = S.SOL_MINT
 BURN = S.BURN_OWNERS
@@ -220,7 +221,7 @@ class Logger:
         EVENTS.parent.mkdir(exist_ok=True)
         self.db = sqlite3.connect(DB, timeout=30)
         self.db.row_factory = sqlite3.Row
-        self.db.executescript(SCHEMA)
+        self.db.executescript(SCHEMA + O.SCHEMA)  # rejected_outcomes is created on first open of an older DB
         self._ensure_x_score()
         self.run_id = None
 
@@ -1117,7 +1118,8 @@ class Desk:
         gt = {}
         if survivors:
             try:
-                gt = S.gecko_pool_txns([c["ds"]["pair"] for c in survivors])
+                gt = S.gecko_pool_txns([c["ds"]["pair"] for c in survivors], status)
+                status.setdefault("gecko_txns", f"ok ({len(gt)})")
             except Exception as e:
                 status["gecko_txns"] = f"error: {e}"[:150]
         scored = []

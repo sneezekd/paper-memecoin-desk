@@ -3,992 +3,489 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#f4f3ef">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0b0d12">
 <meta name="robots" content="noindex,nofollow">
 <title>Paper Memecoin Desk</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f3f2ed;
-    --card: #ffffff;
-    --ink: #141413;
-    --muted: #6b6a64;
-    --line: rgba(20,20,16,.08);
-    --green: #12944a;
-    --green-soft: #e8f7ee;
-    --red: #d2273d;
-    --red-soft: #fdecee;
-    --shadow: 0 1px 1px rgba(16,16,12,.04), 0 10px 28px rgba(16,16,12,.07);
-    --radius: 18px;
-    --scout: #2f6bff;
-    --filter: #f07812;
-    --analyst: #7b4dff;
-    --executor: #16a34a;
-    --risk: #e4498d;
-    --logger: #14b8c8;
+    color-scheme: dark;
+    --bg: #0b0d12; --panel: #131720; --panel2: #181d28; --line: #262d3b; --ink: #e8ecf3; --muted: #93a0b4;
+    --green: #3ddc84; --red: #ff6b7a; --amber: #f5b942; --blue: #6aa8ff; --violet: #a78bfa; --teal: #3cd3c4;
+    --green-bg: rgba(61,220,132,.13); --red-bg: rgba(255,107,122,.13); --amber-bg: rgba(245,185,66,.14); --blue-bg: rgba(106,168,255,.13);
     --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     --sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); }
-  body {
-    min-height: 100dvh;
-    padding: 16px 16px 32px;
-    padding-left: max(16px, env(safe-area-inset-left));
-    padding-right: max(16px, env(safe-area-inset-right));
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: 1080px; margin: 0 auto; }
-  header.top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 14px;
-  }
-  .brand h1 {
-    font-size: 1.35rem;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    margin: 0;
-    line-height: 1.15;
-  }
-  .brand .sub {
-    margin-top: 4px;
-    color: var(--muted);
-    font-size: .82rem;
-    font-weight: 500;
-  }
-  .head-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0; }
-  .clock {
-    font-variant-numeric: tabular-nums;
-    font-weight: 600;
-    font-size: .92rem;
-    letter-spacing: -0.01em;
-  }
-  .clock small { color: var(--muted); font-weight: 500; margin-left: 4px; }
-  .pill {
-    display: inline-flex; align-items: center; gap: 7px;
-    background: #fff; border-radius: 999px;
-    padding: 5px 10px 5px 8px;
-    font-size: .75rem; font-weight: 600;
-    box-shadow: var(--shadow);
-    color: var(--ink);
-    white-space: nowrap;
-  }
-  .pill .dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: #9ca3af; display: inline-block;
-  }
-  .pill.on .dot { background: var(--green); box-shadow: 0 0 0 0 rgba(18,148,74,.6); animation: pulse 2s infinite; }
-  .pill.stale .dot { background: #d97706; animation: none; }
-  .pill.off .dot { background: var(--red); animation: none; }
-  @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(18,148,74,.45); }
-    70% { box-shadow: 0 0 0 7px rgba(18,148,74,0); }
-    100% { box-shadow: 0 0 0 0 rgba(18,148,74,0); }
-  }
-
-  .ticker-wrap {
-    background: var(--card);
-    border-radius: 14px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    margin-bottom: 14px;
-    position: relative;
-  }
-  .ticker-wrap::before, .ticker-wrap::after {
-    content: ""; position: absolute; top: 0; bottom: 0; width: 28px; z-index: 1; pointer-events: none;
-  }
-  .ticker-wrap::before { left: 0; background: linear-gradient(90deg, #fff, transparent); }
-  .ticker-wrap::after { right: 0; background: linear-gradient(270deg, #fff, transparent); }
-  .ticker {
-    display: flex; gap: 0; overflow-x: auto; scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    padding: 10px 16px;
-  }
-  .ticker::-webkit-scrollbar { display: none; }
-  .tick {
-    display: flex; align-items: baseline; gap: 8px;
-    padding: 0 16px; border-right: 1px solid var(--line);
-    white-space: nowrap; flex-shrink: 0;
-    font-size: .86rem;
-  }
-  .tick:last-child { border-right: none; }
-  .tick .sym { font-weight: 700; letter-spacing: -0.02em; }
-  .tick .px { color: var(--muted); font-variant-numeric: tabular-nums; font-weight: 500; }
-  .tick .chg { font-weight: 700; font-variant-numeric: tabular-nums; }
-  .up { color: var(--green); }
-  .dn { color: var(--red); }
-  .tick .chg.na, .muted { color: var(--muted); font-weight: 500; }
-
-  .grid {
-    display: grid;
-    grid-template-columns: 1.15fr .85fr;
-    gap: 14px;
-    margin-bottom: 14px;
-  }
-  .card {
-    background: var(--card);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 18px 18px 16px;
-  }
-  .equity { position: relative; min-height: 280px; display: flex; flex-direction: column; }
-  .eq-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
-  .eq-num {
-    font-size: 2.55rem; font-weight: 800; letter-spacing: -0.04em;
-    font-variant-numeric: tabular-nums; line-height: 1;
-  }
-  .eq-meta { margin-top: 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-weight: 600; }
-  .eq-meta .pnl { font-variant-numeric: tabular-nums; font-size: 1rem; }
-  .mult {
-    background: var(--green-soft); color: var(--green);
-    border-radius: 999px; padding: 3px 8px; font-size: .78rem; font-weight: 700;
-  }
-  .mult.flat { background: #f1f0ea; color: var(--muted); }
-  .mult.dn { background: var(--red-soft); color: var(--red); }
-  .wl { color: var(--muted); font-size: .9rem; font-weight: 600; }
-  .wl b { color: var(--ink); font-weight: 700; }
-  .toast-best {
-    position: absolute; top: 16px; right: 16px;
-    background: var(--green-soft); color: var(--green);
-    border-radius: 12px; padding: 8px 10px; font-size: .75rem; font-weight: 650;
-    box-shadow: 0 6px 16px rgba(18,148,74,.12);
-    max-width: 46%;
-    line-height: 1.25;
-  }
-  .toast-best .lbl { display: block; font-size: .65rem; text-transform: uppercase; letter-spacing: .06em; opacity: .85; font-weight: 700; }
-  svg.chart { width: 100%; height: 150px; margin-top: 8px; display: block; }
-  .stats {
-    margin-top: 6px; color: var(--muted); font-size: .86rem; font-weight: 550;
-  }
-
-  .logger { display: flex; flex-direction: column; min-height: 280px; max-height: 420px; padding-bottom: 10px; }
-  .logger-h, .sec-h {
-    display: flex; justify-content: space-between; align-items: baseline;
-    margin: 0 0 10px; font-weight: 700; letter-spacing: -0.02em;
-  }
-  .sec-h { font-size: 1rem; }
-  .killed-n { color: var(--red); font-weight: 800; font-variant-numeric: tabular-nums; }
-  .feed {
-    overflow: auto; flex: 1; min-height: 180px;
-    font-family: var(--mono); font-size: .75rem; line-height: 1.45;
-    padding-right: 4px;
-  }
-  .fe {
-    display: grid; grid-template-columns: 10px 1fr; gap: 8px;
-    padding: 5px 0; border-bottom: 1px solid var(--line);
-  }
-  .fe:last-child { border-bottom: none; }
-  .fe .d { width: 7px; height: 7px; border-radius: 50%; margin-top: 6px; background: #c4c3bb; }
-  .fe.kill .d { background: var(--red); }
-  .fe.buy .d, .fe.sell .d { background: var(--green); }
-  .fe.risk .d { background: #111; }
-  .fe .txt { min-width: 0; }
-  .fe .txt span.t { color: var(--muted); }
-  .fe .txt span.a { font-weight: 600; }
-  .fe.kill .a { color: var(--red); }
-  .fe.buy .a, .fe.sell .a { color: var(--green); }
-
-  .agents-wrap { margin-bottom: 14px; }
-  .agents { display: flex; flex-direction: column; gap: 2px; }
-  .ag {
-    display: grid;
-    grid-template-columns: 36px 1fr auto;
-    gap: 10px 12px;
-    align-items: center;
-    padding: 11px 6px;
-    border-bottom: 1px solid var(--line);
-  }
-  .ag:last-child { border-bottom: none; }
-  .ic {
-    width: 32px; height: 32px; border-radius: 10px;
-    display: grid; place-items: center;
-  }
-  .ic svg { width: 16px; height: 16px; display: block; }
-  .ag .name { font-weight: 700; font-size: .95rem; letter-spacing: -0.02em; }
-  .ag .sub { color: var(--muted); font-size: .75rem; font-weight: 500; margin-top: 1px; }
-  .ag .act { grid-column: 2 / 3; color: var(--ink); font-size: .78rem; font-weight: 500; opacity: .82; margin-top: -4px; line-height: 1.35; }
-  .badge {
-    background: #f3f2ed; color: var(--ink);
-    border-radius: 999px; padding: 4px 9px;
-    font-size: .72rem; font-weight: 700;
-    font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-  }
-
-  table { width: 100%; border-collapse: collapse; font-size: .82rem; }
-  th { text-align: left; color: var(--muted); font-weight: 600; font-size: .72rem; letter-spacing: .02em; text-transform: uppercase; padding: 0 8px 8px 0; }
-  td { padding: 8px 8px 8px 0; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; vertical-align: top; }
-  td.sym { font-weight: 700; letter-spacing: -0.02em; }
-  .hidden { display: none !important; }
-  .tabs { display: flex; gap: 8px; margin: 0 0 14px; }
-  .tab {
-    border: 0; background: transparent; color: var(--muted); font: inherit; font-weight: 700;
-    padding: 8px 12px; border-radius: 999px; cursor: pointer;
-  }
-  .tab.on { background: #fff; color: var(--ink); box-shadow: var(--shadow); }
-  .chips { display: flex; flex-wrap: wrap; gap: 3px; }
-  .chip { width: 14px; height: 14px; border-radius: 4px; background: #d9d6cd; display: inline-block; cursor: help; }
-  .chip.ok { background: var(--green); }
-  .chip.red { background: var(--red); }
-  .dip-counts { display: flex; flex-wrap: wrap; gap: 6px; }
-  .dip-counts .badge b { margin-left: 4px; }
-  .verdict-pass { color: var(--green); font-weight: 700; }
-  .verdict-reject { color: var(--red); font-weight: 700; }
-  .bars { display: flex; flex-direction: column; gap: 10px; }
-  .bar-row { display: grid; grid-template-columns: 9.5rem 1fr auto; gap: 10px; align-items: center; }
-  .bar-lab { font-size: .8rem; font-weight: 600; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .bar-track { height: 8px; background: #efece6; border-radius: 99px; overflow: hidden; }
-  .bar-fill { height: 100%; background: var(--red); border-radius: 99px; width: 0; transition: width .4s ease; }
-  .bar-n { font-variant-numeric: tabular-nums; font-weight: 700; font-size: .8rem; min-width: 2.2rem; text-align: right; }
-  footer.note { margin-top: 16px; color: var(--muted); font-size: .72rem; text-align: center; }
-  a { color: inherit; }
-
-  @media (max-width: 700px) {
-    body { padding: 12px 12px 28px; }
-    .grid { grid-template-columns: 1fr; }
-    .brand h1 { font-size: 1.18rem; }
-    .eq-num { font-size: 2.15rem; }
-    .toast-best { position: static; max-width: 100%; margin: 10px 0 0; }
-    .equity, .logger { min-height: 0; max-height: none; }
-    .logger { max-height: 360px; }
-    .bar-row { grid-template-columns: 1fr auto; }
-    .bar-lab { grid-column: 1 / 2; }
-    .bar-n { grid-column: 2 / 3; grid-row: 1; }
-    .bar-track { grid-column: 1 / -1; }
-    .ag { grid-template-columns: 32px 1fr auto; }
-    .ag .act { grid-column: 2 / -1; }
-    .tabs { flex-wrap: wrap; }
-    #panel-dip table { font-size: .76rem; }
-  }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 var(--sans); }
+  body { padding: 14px max(14px, env(safe-area-inset-right)) 40px max(14px, env(safe-area-inset-left)); -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  a { color: var(--blue); text-decoration: none; } a:hover { text-decoration: underline; }
+  .num, td.n, .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  .pos { color: var(--green); } .neg { color: var(--red); } .dim { color: var(--muted); }
+  header.top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+  header.top h1 { margin: 0; font-size: 1.15rem; letter-spacing: -.02em; }
+  .pill { font-size: .68rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 3px 8px; border-radius: 99px; border: 1px solid var(--line); color: var(--muted); }
+  /* overview strip */
+  .strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; min-height: 148px; }
+  .card h3 { margin: 0 0 6px; font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .card .eq { font: 500 1.55rem/1.15 var(--mono); font-variant-numeric: tabular-nums; }
+  .card .row { display: flex; justify-content: space-between; gap: 8px; font-size: .82rem; margin-top: 4px; }
+  .card .row span:first-child { color: var(--muted); }
+  .badge { display: inline-block; font-size: .66rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: 2px 7px; border-radius: 6px; white-space: nowrap; }
+  .b-ok { background: var(--green-bg); color: var(--green); } .b-stale { background: var(--amber-bg); color: var(--amber); }
+  .b-rl { background: var(--amber-bg); color: var(--amber); outline: 1px solid var(--amber); } .b-err { background: var(--red-bg); color: var(--red); }
+  .b-na { background: var(--panel2); color: var(--muted); } .b-info { background: var(--blue-bg); color: var(--blue); }
+  /* tabs */
+  [role=tablist] { display: flex; gap: 4px; overflow-x: auto; border-bottom: 1px solid var(--line); margin-bottom: 14px; scrollbar-width: none; }
+  [role=tab] { background: none; border: 0; color: var(--muted); font: 600 .85rem var(--sans); padding: 10px 14px; cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; }
+  [role=tab][aria-selected=true] { color: var(--ink); border-bottom-color: var(--blue); }
+  [role=tab]:focus-visible, select:focus-visible, input:focus-visible, button:focus-visible, a:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  section.panel[hidden] { display: none; }
+  h2 { font-size: .95rem; margin: 20px 0 8px; } h2:first-child { margin-top: 0; }
+  .lede { color: var(--muted); margin: 0 0 12px; max-width: 80ch; }
+  .box { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; } .grid2 > .box { margin: 0; }
+  .tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 8px; }
+  select, input[type=search] { background: var(--panel2); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 7px 9px; font: inherit; font-size: .85rem; min-width: 0; }
+  input[type=search] { flex: 1 1 200px; }
+  .tw { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+  table { border-collapse: collapse; width: 100%; font-size: .82rem; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: .7rem; text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; position: sticky; top: 0; background: var(--panel); }
+  tr:last-child td { border-bottom: 0; }
+  td.n, th.n { text-align: right; white-space: nowrap; }
+  td.reason { max-width: 340px; color: var(--muted); font-size: .78rem; overflow-wrap: anywhere; }
+  .mult { font: 600 .8rem var(--mono); padding: 2px 7px; border-radius: 6px; background: var(--green-bg); color: var(--green); white-space: nowrap; }
+  .mult.hot { background: rgba(167,139,250,.18); color: var(--violet); }
+  .mult.down { background: var(--red-bg); color: var(--red); }
+  .empty { padding: 22px 14px; color: var(--muted); text-align: center; border: 1px dashed var(--line); border-radius: 12px; }
+  .bars .br { display: grid; grid-template-columns: minmax(90px, 160px) 1fr 70px; gap: 8px; align-items: center; font-size: .8rem; margin: 4px 0; }
+  .bars .bar { height: 10px; background: var(--panel2); border-radius: 5px; overflow: hidden; } .bars .bar i { display: block; height: 100%; background: var(--blue); border-radius: 5px; }
+  .bars .bar.k i { background: var(--red); opacity: .75; }
+  .kv { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 6px 14px; font-size: .8rem; }
+  .kv div { display: flex; justify-content: space-between; gap: 8px; border-bottom: 1px dashed var(--line); padding: 3px 0; } .kv span:first-child { color: var(--muted); }
+  .src { display: flex; justify-content: space-between; gap: 8px; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--line); font-size: .8rem; }
+  .src small { color: var(--muted); overflow-wrap: anywhere; text-align: right; max-width: 60%; }
+  #chart { width: 100%; height: 190px; display: block; }
+  .legend { display: flex; gap: 14px; font-size: .75rem; color: var(--muted); margin-top: 4px; flex-wrap: wrap; } .legend i { display: inline-block; width: 10px; height: 3px; border-radius: 2px; margin-right: 5px; vertical-align: middle; }
+  .note { font-size: .75rem; color: var(--muted); margin-top: 6px; }
+  @media (max-width: 820px) { .strip { grid-template-columns: 1fr; } .card { min-height: 0; } .grid2 { grid-template-columns: 1fr; } .bars .br { grid-template-columns: 90px 1fr 56px; } }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <header class="top">
-      <div class="brand">
-        <h1>Paper Memecoin Desk</h1>
-        <div class="sub" id="brand-sub">Solana memes · strict RM · PAPER ONLY</div>
-      </div>
-      <div class="head-right">
-        <div class="clock" id="clock">— <small>MT</small></div>
-        <div class="pill off" id="status"><span class="dot"></span><span id="status-lab">…</span></div>
-      </div>
-    </header>
+<div class="wrap">
+  <header class="top"><h1>Paper Memecoin Desk</h1><span class="pill">Paper only &middot; no real funds</span></header>
+  <div class="strip" id="strip" aria-live="polite"></div>
 
-    <div class="tabs" role="tablist">
-      <button class="tab on" id="tab-desk" type="button">Desk</button>
-      <button class="tab" id="tab-copy" type="button">Copy desk</button>
-      <button class="tab" id="tab-dip" type="button">Dip desk</button>
-    </div>
-
-    <div id="panel-desk">
-    <div class="ticker-wrap" id="ticker-wrap">
-      <div class="ticker" id="ticker"><div class="tick"><span class="px">waiting for a scan…</span></div></div>
-    </div>
-
-    <div class="grid" id="desk-grid">
-      <section class="card equity" id="equity-card">
-        <div class="eq-top">
-          <div>
-            <div class="eq-num" id="eq-num">$100.00</div>
-            <div class="eq-meta">
-              <span class="pnl" id="eq-pnl">+$0.00 (0.00%)</span>
-              <span class="mult flat" id="eq-mult">1.00x</span>
-              <span class="wl">W <b id="eq-w">0</b> / L <b id="eq-l">0</b></span>
-            </div>
-          </div>
-        </div>
-        <div class="toast-best hidden" id="best"></div>
-        <svg class="chart" id="chart" viewBox="0 0 600 150" preserveAspectRatio="none" aria-label="Equity curve"></svg>
-        <div class="stats" id="stats">0 scanned · 0 traded</div>
-      </section>
-
-      <section class="card logger">
-        <div class="logger-h">
-          <span>Logger</span>
-          <span class="killed-n" id="killed-n">0 killed</span>
-        </div>
-        <div class="feed" id="feed"></div>
-      </section>
-    </div>
-
-    <section class="card agents-wrap">
-      <div class="sec-h">Desk · 6 agents</div>
-      <div class="agents" id="agents"></div>
-    </section>
-
-    <section class="card hidden" id="open-sec">
-      <div class="sec-h">Open positions</div>
-      <div style="overflow-x:auto">
-        <table>
-          <thead><tr><th>Coin</th><th>Entry</th><th>Size</th><th>Score</th><th>X</th><th>Stop</th><th>Trail</th><th>P&amp;L</th></tr></thead>
-          <tbody id="open-body"></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="card hidden" id="closed-sec" style="margin-top:14px">
-      <div class="sec-h">Closed trades</div>
-      <div style="overflow-x:auto">
-        <table>
-          <thead><tr><th>Coin</th><th>Entry</th><th>Exit</th><th>Reason</th><th>X</th><th>P&amp;L</th></tr></thead>
-          <tbody id="closed-body"></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="card hidden" id="bars-sec" style="margin-top:14px">
-      <div class="sec-h">Kills by rule</div>
-      <div class="bars" id="bars"></div>
-    </section>
-
-    </div>
-
-    <div id="panel-copy" class="hidden">
-      <div class="grid">
-        <section class="card equity">
-          <div class="eq-top">
-            <div>
-              <div class="eq-num" id="copy-eq">$100.00</div>
-              <div class="eq-meta">
-                <span class="pnl" id="copy-pnl">+$0.00 (0.00%)</span>
-                <span class="wl">W <b id="copy-w">0</b> / L <b id="copy-l">0</b></span>
-              </div>
-            </div>
-          </div>
-          <div class="stats" id="copy-status">Paper copy · waiting for a leader</div>
-        </section>
-        <section class="card logger">
-          <div class="logger-h"><span>Leader events</span><span class="killed-n" id="copy-lat">latency —</span></div>
-          <div class="feed" id="copy-feed"></div>
-        </section>
-      </div>
-      <section class="card" id="copy-open-sec">
-        <div class="sec-h">Open copy positions</div>
-        <div style="overflow-x:auto">
-          <table>
-            <thead><tr><th>Coin</th><th>Leader</th><th>Size</th><th>Leader px</th><th>Our fill</th><th>Slip</th><th>Stop</th><th>Latency</th><th>P&amp;L</th></tr></thead>
-            <tbody id="copy-open"></tbody>
-          </table>
-        </div>
-      </section>
-      <section class="card" id="copy-closed-sec" style="margin-top:14px">
-        <div class="sec-h">Closed copy trades</div>
-        <div style="overflow-x:auto">
-          <table>
-            <thead><tr><th>Coin</th><th>Leader</th><th>Reason</th><th>Slip vs leader</th><th>Latency</th><th>P&amp;L</th></tr></thead>
-            <tbody id="copy-closed"></tbody>
-          </table>
-        </div>
-      </section>
-    </div>
-
-    <div id="panel-dip" class="hidden">
-      <div class="grid">
-        <section class="card equity">
-          <div class="eq-top">
-            <div>
-              <div class="eq-num" id="dip-eq">$100.00</div>
-              <div class="eq-meta">
-                <span class="pnl" id="dip-pnl">+$0.00 (0.00%)</span>
-                <span class="wl">Cash <b id="dip-cash">$100.00</b></span>
-              </div>
-            </div>
-          </div>
-          <div class="stats" id="dip-status">Paper dip desk · waiting for data</div>
-        </section>
-        <section class="card logger">
-          <div class="logger-h"><span>Activity</span><span class="killed-n" id="dip-upd">—</span></div>
-          <div class="feed" id="dip-feed"></div>
-        </section>
-      </div>
-      <section class="card">
-        <div class="sec-h">Open dip positions</div>
-        <div style="overflow-x:auto">
-          <table>
-            <thead><tr><th>Coin</th><th>Entry</th><th>Mark</th><th>Peak</th><th>Stop</th><th>TP</th><th>Age</th></tr></thead>
-            <tbody id="dip-open"></tbody>
-          </table>
-        </div>
-      </section>
-      <section class="card" style="margin-top:14px">
-        <div class="sec-h">Waiting dip orders</div>
-        <div style="overflow-x:auto">
-          <table>
-            <thead><tr><th>Coin</th><th>Size</th><th>10m high</th><th>Now</th><th>Depth</th><th>Left</th></tr></thead>
-            <tbody id="dip-wait"></tbody>
-          </table>
-        </div>
-      </section>
-      <section class="card" style="margin-top:14px">
-        <div class="sec-h">Analyst audits <span class="muted" style="font-weight:500;font-size:.75rem">· 8 layers: mint, freeze, dev, top 10, liquidity, pool age, bundles, delegations</span></div>
-        <div style="overflow-x:auto">
-          <table>
-            <thead><tr><th>Coin</th><th>Layers</th><th>Score</th><th>Verdict</th></tr></thead>
-            <tbody id="dip-audits"></tbody>
-          </table>
-        </div>
-      </section>
-      <section class="card" style="margin-top:14px">
-        <div class="sec-h">Scanner kills</div>
-        <div class="dip-counts" id="dip-kills"></div>
-        <div class="sec-h" style="margin-top:14px">Skip reasons</div>
-        <div class="dip-counts" id="dip-skips"></div>
-      </section>
-    </div>
-
-    <footer class="note">Paper / shadow / simulation only. Auto-refreshes every 30 seconds. Times are America/Edmonton (MT).</footer>
+  <div role="tablist" aria-label="Dashboard views" id="tabs">
+    <button role="tab" id="tab-overview" aria-controls="p-overview" aria-selected="true">Overview &amp; Trades</button>
+    <button role="tab" id="tab-missed" aria-controls="p-missed" aria-selected="false" tabindex="-1">Missed Runners &amp; Gates</button>
+    <button role="tab" id="tab-rejections" aria-controls="p-rejections" aria-selected="false" tabindex="-1">Rejections &amp; Funnel</button>
+    <button role="tab" id="tab-health" aria-controls="p-health" aria-selected="false" tabindex="-1">Health &amp; Rules</button>
   </div>
+
+  <section class="panel" id="p-overview" role="tabpanel" aria-labelledby="tab-overview">
+    <h2>Cumulative P&amp;L since start (%)</h2>
+    <div class="box"><svg id="chart" viewBox="0 0 600 190" preserveAspectRatio="none" role="img" aria-label="P&amp;L curves"></svg><div class="legend" id="legend"></div>
+      <div class="note">Main uses its logged equity curve; Dip and Copy are rebuilt from closed trades.</div></div>
+    <h2>Open positions</h2>
+    <div id="open"></div>
+    <h2>Closed trades</h2>
+    <div class="tools"><label class="dim" for="f-trade-desk">Desk</label>
+      <select id="f-trade-desk"><option value="all">All desks</option><option value="main">Main</option><option value="dip">Dip</option><option value="copy">Copy</option></select></div>
+    <div id="closed"></div>
+  </section>
+
+  <section class="panel" id="p-missed" role="tabpanel" aria-labelledby="tab-missed" hidden>
+    <p class="lede">After a rule rejects a coin we keep checking its price. If it later ran, the rule may be costing us; if it dumped, the rule saved us. This is how we learn whether each gate helps or hurts.</p>
+    <div id="outcomes-note"></div>
+    <h2>Gate scorecard</h2><div id="scorecard"></div>
+    <h2>Missed runners (2x+ after rejection)</h2>
+    <div class="tools">
+      <select id="f-mr-desk" aria-label="Desk"><option value="all">All desks</option><option value="main">Main</option><option value="dip">Dip</option></select>
+      <select id="f-mr-gate" aria-label="Gate"><option value="all">All gates</option></select>
+      <select id="f-mr-sort" aria-label="Sort"><option value="peak_multiple">Sort: peak multiple</option><option value="peak_mcap">Sort: peak mcap</option><option value="first_kill_ts">Sort: kill time</option></select>
+    </div>
+    <div id="runners"></div>
+    <h2>Dodged crashes (-50% or dead after rejection)</h2>
+    <div id="dodged"></div>
+  </section>
+
+  <section class="panel" id="p-rejections" role="tabpanel" aria-labelledby="tab-rejections" hidden>
+    <h2>Funnel</h2>
+    <div class="tools"><select id="f-fun-win" aria-label="Window"><option value="24h">Last 24h</option><option value="all">All time</option></select></div>
+    <div class="grid2" id="funnels"></div>
+    <h2>Recent rejections</h2>
+    <div class="tools">
+      <input type="search" id="f-rej-q" placeholder="Search symbol, reason, address" aria-label="Search rejections">
+      <select id="f-rej-desk" aria-label="Desk"><option value="all">All desks</option><option value="main">Main</option><option value="dip">Dip</option></select>
+      <select id="f-rej-gate" aria-label="Gate"><option value="all">All gates</option></select>
+    </div>
+    <div id="rejs"></div>
+    <div class="note">"Since kill" appears once a coin is tracked after its rejection; Main shows the last 100 rejections, Dip the last 50.</div>
+  </section>
+
+  <section class="panel" id="p-health" role="tabpanel" aria-labelledby="tab-health" hidden>
+    <h2>Data sources</h2><div class="grid2" id="sources"></div>
+    <h2>Copy desk</h2><div class="grid2" id="copyinfo"></div>
+    <h2>Dip waiting room</h2><div class="grid2" id="dipinfo"></div>
+    <h2>Active rules</h2><div class="grid2" id="rules"></div>
+  </section>
+  <p class="note" id="foot"></p>
+</div>
 <script>
 (function () {
-  const TZ = "America/Edmonton";
-  const ICONS = {
-    scout: { color: "#2f6bff", bg: "#e8efff", svg: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16.5l4 4"/></svg>' },
-    filter: { color: "#f07812", bg: "#fff1e4", svg: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>' },
-    analyst: { color: "#7b4dff", bg: "#f0eaff", svg: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16l5-5 3 3 6-7"/><path d="M15 7h4v4"/></svg>' },
-    executor: { color: "#16a34a", bg: "#e8f7ee", svg: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>' },
-    risk: { color: "#e4498d", bg: "#fde8f2", svg: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l8 4v5c0 4.5-3.3 7.6-8 9-4.7-1.4-8-4.5-8-9V8l8-4z"/></svg>' },
-    logger: { color: "#14b8c8", bg: "#e6f8fb", svg: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M7 6h10M7 12h10M7 18h6"/></svg>' }
-  };
+  "use strict";
+  var BASE = "https://raw.githubusercontent.com/sneezekd/paper-memecoin-desk/";
+  var FILES = { main: "dashboard.json", dip: "dip_dashboard.json", copy: "copy_dashboard.json" };
+  var NAMES = { main: "Main", dip: "Dip", copy: "Copy" };
+  var COLORS = { main: "#6aa8ff", dip: "#3cd3c4", copy: "#a78bfa" };
+  var STALE_S = 15 * 60;
+  var D = { main: null, dip: null, copy: null };
+  var $ = function (id) { return document.getElementById(id); };
 
-  function clock() {
-    const now = new Date();
-    const t = new Intl.DateTimeFormat("en-US", { timeZone: TZ, hour: "numeric", minute: "2-digit", second: "2-digit", hour12: true }).format(now);
-    document.getElementById("clock").innerHTML = t + ' <small>MT</small>';
+  // ---------- helpers ----------
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function num(x) { var n = typeof x === "number" ? x : parseFloat(x); return isFinite(n) ? n : null; }
+  function usd(n, d) { n = num(n); if (n == null) return "–"; return (n < 0 ? "-$" : "$") + Math.abs(n).toLocaleString(undefined, { minimumFractionDigits: d == null ? 2 : d, maximumFractionDigits: d == null ? 2 : d }); }
+  function sgn(n, d) { n = num(n); if (n == null) return "–"; return (n >= 0 ? "+" : "-") + "$" + Math.abs(n).toFixed(d == null ? 2 : d); }
+  function pct(n, d) { n = num(n); if (n == null) return "–"; return (n >= 0 ? "+" : "") + n.toFixed(d == null ? 1 : d) + "%"; }
+  function cap(n) { n = num(n); if (n == null || n <= 0) return "–"; if (n >= 1e9) return "$" + (n / 1e9).toFixed(2) + "B"; if (n >= 1e6) return "$" + (n / 1e6).toFixed(2) + "M"; if (n >= 1e3) return "$" + (n / 1e3).toFixed(1) + "K"; return "$" + n.toFixed(0); }
+  function px(n) { n = num(n); if (n == null) return "–"; if (n === 0) return "0"; if (n >= 1) return n.toFixed(3); return n.toPrecision(3).replace(/e-(\d+)$/, function (m, e) { return "e-" + e; }); }
+  function mx(n) { n = num(n); return n == null ? "–" : (n >= 100 ? n.toFixed(0) : n.toFixed(1)) + "x"; }
+  function when(ts) { ts = num(ts); if (!ts) return "–"; return new Date(ts * 1000).toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }); }
+  function ago(ts) { ts = num(ts); if (!ts) return ""; var s = Math.max(0, Date.now() / 1000 - ts); if (s < 90) return Math.round(s) + "s ago"; if (s < 5400) return Math.round(s / 60) + "m ago"; if (s < 172800) return Math.round(s / 3600) + "h ago"; return Math.round(s / 86400) + "d ago"; }
+  function hold(a, b) { a = num(a); b = num(b); if (!a || !b) return "–"; var m = (b - a) / 60; return m < 90 ? Math.round(m) + "m" : (m / 60).toFixed(1) + "h"; }
+  function cls(n) { n = num(n); return n == null ? "" : n > 0 ? "pos" : n < 0 ? "neg" : ""; }
+  var B58 = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/;
+  function dsUrl(r) {
+    if (r && typeof r.url === "string" && /^https:\/\/dexscreener\.com\//.test(r.url)) return r.url;
+    var a = r && (r.address || r.mint);
+    return a && B58.test(a) ? "https://dexscreener.com/solana/" + a : null;
   }
-  clock();
-  setInterval(clock, 1000);
+  function sym(r) {
+    var u = dsUrl(r), s = esc(r.symbol || (r.address || r.mint || "?").slice(0, 6));
+    return u ? '<a href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + s + "</a>" : s;
+  }
+  function multBadge(n, kind) {
+    n = num(n); if (n == null) return '<span class="dim">–</span>';
+    var c = kind === "cur" ? (n < 1 ? "down" : "") : (n >= 5 ? "hot" : "");
+    return '<span class="mult ' + c + '">' + mx(n) + "</span>";
+  }
+  function table(cols, rows, empty) {
+    if (!rows.length) return '<div class="empty">' + esc(empty || "Nothing to show yet.") + "</div>";
+    return '<div class="tw"><table><thead><tr>' + cols.map(function (c) { return '<th class="' + (c.n ? "n" : "") + '">' + esc(c.h) + "</th>"; }).join("") +
+      "</tr></thead><tbody>" + rows.map(function (r) { return "<tr>" + cols.map(function (c) { return '<td class="' + (c.n ? "n " : "") + (c.c || "") + '">' + c.f(r) + "</td>"; }).join("") + "</tr>"; }).join("") + "</tbody></table></div>";
+  }
+  function badge(kind, text) { return '<span class="badge b-' + kind + '">' + esc(text) + "</span>"; }
 
-  function usd(n, d) {
-    if (n == null || isNaN(n)) return "—";
-    const abs = Math.abs(n);
-    const digits = d != null ? d : (abs >= 100 ? 2 : 2);
-    return (n < 0 ? "-$" : "$") + Math.abs(n).toLocaleString("en-US", { minimumFractionDigits: digits, maximumFractionDigits: digits });
-  }
-  function px(n) {
-    if (n == null || isNaN(n)) return "—";
-    const a = Math.abs(n);
-    let d = 2;
-    if (a < 1) d = 4;
-    if (a < 0.01) d = 6;
-    if (a < 0.0001) d = 8;
-    let s = n.toFixed(d).replace(/0+$/, "").replace(/\.$/, "");
-    return "$" + s;
-  }
-  function chg(n) {
-    if (n == null || isNaN(n)) return { t: "—", cls: "na" };
-    const sign = n > 0 ? "+" : "";
-    const v = Math.abs(n) >= 10 ? n.toFixed(0) : n.toFixed(1);
-    return { t: sign + v + "%", cls: n > 0 ? "up" : (n < 0 ? "dn" : "na") };
-  }
-  function esc(s) {
-    return String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[c]));
-  }
-
-  function drawChart(curve) {
-    const svg = document.getElementById("chart");
-    if (!curve || !curve.length) { svg.innerHTML = ""; return; }
-    const W = 600, H = 150, padX = 6, padY = 18;
-    let vals = curve.map(p => +p.equity);
-    let min = Math.min.apply(null, vals), max = Math.max.apply(null, vals);
-    if (max - min < 0.01) { min -= 1; max += 1; } // flat line sits mid-chart
-    const span = max - min;
-    const xs = curve.map((p, i) => padX + (curve.length === 1 ? W/2 : i * (W - padX * 2) / (curve.length - 1)));
-    const ys = vals.map(v => padY + (1 - (v - min) / span) * (H - padY * 2));
-    // smooth path (Catmull-Rom to cubic)
-    function path(ptsX, ptsY) {
-      if (ptsX.length === 1) return `M${ptsX[0]},${ptsY[0]}`;
-      let d = `M${ptsX[0]},${ptsY[0]}`;
-      for (let i = 0; i < ptsX.length - 1; i++) {
-        const x0 = ptsX[i-1] ?? ptsX[i], y0 = ptsY[i-1] ?? ptsY[i];
-        const x1 = ptsX[i], y1 = ptsY[i];
-        const x2 = ptsX[i+1], y2 = ptsY[i+1];
-        const x3 = ptsX[i+2] ?? x2, y3 = ptsY[i+2] ?? y2;
-        const c1x = x1 + (x2 - x0) / 6, c1y = y1 + (y2 - y0) / 6;
-        const c2x = x2 - (x3 - x1) / 6, c2y = y2 - (y3 - y1) / 6;
-        d += ` C${c1x},${c1y} ${c2x},${c2y} ${x2},${y2}`;
-      }
-      return d;
+  // ---------- normalize ----------
+  function health(key, d) {
+    var h = d.health, st = "ok", errs = [], srcs = {};
+    if (h && typeof h === "object") { st = h.status || "ok"; errs = h.errors || []; srcs = h.sources || {}; }
+    else if (key === "main" && d.last_scan && d.last_scan.sources) {   // older JSON without a health block
+      srcs = d.last_scan.sources;
+      Object.keys(srcs).forEach(function (k) { var v = String(srcs[k]).toLowerCase(); if (v.indexOf("429") >= 0 || v.indexOf("rate_limited") >= 0) st = "rate_limited"; else if (v.indexOf("error") === 0 && st === "ok") st = "errors"; });
     }
-    const line = path(xs, ys);
-    const lastX = xs[xs.length - 1], lastY = ys[ys.length - 1];
-    const area = `${line} L${lastX},${H} L${xs[0]},${H} Z`;
-    svg.innerHTML = `
-      <defs>
-        <linearGradient id="eqg" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#16a34a" stop-opacity="0.28"/>
-          <stop offset="100%" stop-color="#16a34a" stop-opacity="0.02"/>
-        </linearGradient>
-      </defs>
-      <path d="${area}" fill="url(#eqg)"></path>
-      <path d="${line}" fill="none" stroke="#16a34a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
-      <circle cx="${lastX}" cy="${lastY}" r="3.6" fill="#16a34a"></circle>`;
+    return { status: st, errors: errs, sources: srcs };
+  }
+  function tradesOf(key, d) {
+    var o = [], c = [];
+    (d.open_positions || []).forEach(function (p) {
+      if (key === "main") o.push({ desk: key, symbol: p.symbol, address: p.address, url: p.url, openedTs: p.opened_ts, entry: p.entry_fill, mark: p.last_mark, score: p.score, size: p.size_usd, pnl: p.unrealized_pnl_usd, note: p.trail_active ? "trailing" : "stop " + px(p.stop_mark) });
+      else if (key === "dip") o.push({ desk: key, symbol: p.symbol, address: p.mint, entry: p.entry, mark: p.mark, size: p.cost_usd, openedTs: p.age_min != null ? Date.now() / 1000 - p.age_min * 60 : null, pnl: p.entry && p.mark && p.cost_usd ? (p.mark / p.entry - 1) * p.cost_usd : null, note: p.tp_done ? "tp done" : "stop " + px(p.stop_line) });
+      else o.push({ desk: key, symbol: p.symbol, address: p.mint, entry: p.entry_fill, mark: p.last_mark, size: p.size_usd, openedTs: p.opened_at, pnl: p.unrealized_pnl_usd, leader: p.leader_label, note: p.half_sold ? "half sold" : "" });
+    });
+    (d.closed_trades || []).forEach(function (p) {
+      if (key === "main") c.push({ desk: key, symbol: p.symbol, address: p.address, url: p.url, openedTs: p.opened_ts, closedTs: p.closed_ts, closedLabel: p.closed, entry: p.entry_fill, exit: p.exit_fill, score: p.score, size: p.size_usd, pnl: p.pnl_usd, pnlPct: p.pnl_pct, reason: p.exit_reason });
+      else if (key === "dip") c.push({ desk: key, symbol: p.symbol, address: p.mint, openedTs: p.opened_at, closedTs: p.closed_at, entry: p.entry, size: p.size_usd, pnl: p.pnl_usd, pnlPct: p.pnl_pct, reason: p.exit_reason });
+      else c.push({ desk: key, symbol: p.symbol, address: p.mint, openedTs: p.opened_at, closedTs: p.closed_at, entry: p.entry_fill, size: p.size_usd, pnl: p.pnl_usd, pnlPct: p.pnl_pct, reason: p.exit_reason, leader: p.leader_label });
+    });
+    return { open: o, closed: c };
+  }
+  function summary(key) {
+    var d = D[key]; if (!d) return null;
+    var b = d.balance || {}, t = tradesOf(key, d);
+    var eq, start, pnl, pp, ts;
+    if (key === "dip") { eq = d.equity; start = d.start_cash; pnl = d.pnl_usd; pp = d.pnl_pct; ts = d.generated_ts || d.updated_at; }
+    else { eq = b.equity_usd; start = b.starting_usd; pnl = b.total_pnl_usd; pp = b.total_pnl_pct; ts = d.generated_ts; }
+    var w = d.wins != null ? d.wins : t.closed.filter(function (x) { return (x.pnl || 0) > 0; }).length;
+    var l = d.losses != null ? d.losses : t.closed.length - w;
+    return { key: key, eq: eq, start: start, pnl: pnl, pp: pp, wins: w, losses: l, open: t.open.length, ts: num(ts), h: health(key, d), t: t };
+  }
+  function statusOf(s) {
+    if (!s) return ["na", "Unavailable"];
+    if (s.ts && Date.now() / 1000 - s.ts > STALE_S) return ["stale", "Stale"];
+    if (s.h.status === "rate_limited") return ["rl", "Rate-limited"];
+    if (s.h.status === "errors") return ["err", "Errors"];
+    return ["ok", "OK"];
   }
 
-  function renderTicker(items) {
-    const el = document.getElementById("ticker");
-    if (!items || !items.length) {
-      el.innerHTML = '<div class="tick"><span class="px">no coins in the last scan window</span></div>';
-      return;
-    }
-    el.innerHTML = items.map(c => {
-      const ch = chg(c.chg_h1);
-      return `<div class="tick"><span class="sym">${esc(c.symbol)}</span><span class="px">${px(c.price)}</span><span class="chg ${ch.cls}">${ch.t}</span></div>`;
+  // ---------- strip ----------
+  function renderStrip() {
+    $("strip").innerHTML = ["main", "dip", "copy"].map(function (k) {
+      var s = summary(k), st = statusOf(s), h = '<div class="card"><h3><span>' + NAMES[k] + " desk</span>" + badge(st[0], st[1]) + "</h3>";
+      if (!s) return h + '<div class="eq dim">unavailable</div><div class="row"><span>Feed could not be loaded</span><span></span></div></div>';
+      var n = s.wins + s.losses;
+      return h + '<div class="eq">' + usd(s.eq) + '</div>' +
+        '<div class="row"><span>P&amp;L</span><span class="num ' + cls(s.pnl) + '">' + sgn(s.pnl) + " (" + pct(s.pp, 2) + ")</span></div>" +
+        '<div class="row"><span>Win / loss</span><span class="num">' + s.wins + " / " + s.losses + (n ? " &middot; " + Math.round(s.wins / n * 100) + "%" : "") + "</span></div>" +
+        '<div class="row"><span>Open positions</span><span class="num">' + s.open + "</span></div>" +
+        '<div class="row"><span>Updated</span><span class="num">' + (s.ts ? esc(when(s.ts)) + " &middot; " + esc(ago(s.ts)) : "–") + "</span></div></div>";
     }).join("");
   }
 
-  function renderAgents(agents) {
-    const el = document.getElementById("agents");
-    el.innerHTML = (agents || []).map(a => {
-      const ic = ICONS[a.id] || ICONS.logger;
-      return `<div class="ag">
-        <div class="ic" style="background:${ic.color}">${ic.svg}</div>
-        <div>
-          <div class="name">${esc(a.name)}</div>
-          <div class="sub">${esc(a.subtitle)}</div>
-        </div>
-        <div class="badge">${esc(a.badge)}</div>
-        <div class="act">${esc(a.activity)}</div>
-      </div>`;
+  // ---------- overview ----------
+  function renderChart() {
+    var lines = [];
+    var m = D.main, bs = m && m.balance && num(m.balance.starting_usd);
+    if (m && bs && (m.equity_curve || []).length > 1) lines.push({ k: "main", pts: m.equity_curve.filter(function (p) { return num(p.ts) && num(p.equity) != null; }).map(function (p) { return [p.ts, (p.equity / bs - 1) * 100]; }) });
+    ["dip", "copy"].forEach(function (k) {
+      var s = summary(k); if (!s || !s.start || !s.t.closed.length) return;
+      var cl = s.t.closed.filter(function (x) { return x.closedTs; }).sort(function (a, b) { return a.closedTs - b.closedTs; });
+      if (!cl.length) return;
+      var run = 0, pts = [[cl[0].openedTs || cl[0].closedTs - 60, 0]];
+      cl.forEach(function (x) { run += x.pnl || 0; pts.push([x.closedTs, run / s.start * 100]); });
+      lines.push({ k: k, pts: pts });
+    });
+    lines = lines.filter(function (l) { return l.pts.length > 1; });
+    var svg = $("chart");
+    if (!lines.length) { svg.innerHTML = '<text x="300" y="100" text-anchor="middle" fill="#93a0b4" font-size="13">No curve data yet</text>'; $("legend").innerHTML = ""; return; }
+    var xs = [], ys = [0];
+    lines.forEach(function (l) { l.pts.forEach(function (p) { xs.push(p[0]); ys.push(p[1]); }); });
+    var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs), y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys);
+    if (y1 - y0 < 1) { y1 += .5; y0 -= .5; } if (x1 === x0) x1 += 1;
+    var X = function (x) { return 8 + (x - x0) / (x1 - x0) * 584; }, Y = function (y) { return 12 + (1 - (y - y0) / (y1 - y0)) * 166; };
+    var out = '<line x1="8" x2="592" y1="' + Y(0).toFixed(1) + '" y2="' + Y(0).toFixed(1) + '" stroke="#3a4356" stroke-dasharray="3 4"/>';
+    lines.forEach(function (l) { out += '<polyline fill="none" stroke="' + COLORS[l.k] + '" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" points="' + l.pts.map(function (p) { return X(p[0]).toFixed(1) + "," + Y(p[1]).toFixed(1); }).join(" ") + '"/>'; });
+    svg.innerHTML = out;
+    $("legend").innerHTML = lines.map(function (l) { var last = l.pts[l.pts.length - 1][1]; return '<span><i style="background:' + COLORS[l.k] + '"></i>' + NAMES[l.k] + ' <span class="num">' + pct(last, 2) + "</span></span>"; }).join("") + '<span class="num">range ' + pct(y0, 1) + " to " + pct(y1, 1) + "</span>";
+  }
+  function allTrades(which) {
+    var out = [];
+    ["main", "dip", "copy"].forEach(function (k) { var s = summary(k); if (s) out = out.concat(s.t[which]); });
+    return out;
+  }
+  function renderTrades() {
+    var op = allTrades("open"), cl = allTrades("closed"), f = $("f-trade-desk").value;
+    if (f !== "all") { op = op.filter(function (x) { return x.desk === f; }); cl = cl.filter(function (x) { return x.desk === f; }); }
+    cl.sort(function (a, b) { return (b.closedTs || 0) - (a.closedTs || 0); });
+    var deskCol = { h: "Desk", f: function (r) { return esc(NAMES[r.desk]) + (r.leader ? '<br><span class="dim">' + esc(r.leader) + "</span>" : ""); } };
+    $("open").innerHTML = table([deskCol, { h: "Coin", f: sym }, { h: "Entry", n: 1, f: function (r) { return px(r.entry); } }, { h: "Mark", n: 1, f: function (r) { return px(r.mark); } },
+      { h: "Size", n: 1, f: function (r) { return usd(r.size); } }, { h: "Unreal. P&L", n: 1, f: function (r) { return '<span class="' + cls(r.pnl) + '">' + sgn(r.pnl) + "</span>"; } },
+      { h: "Score", n: 1, f: function (r) { return r.score != null ? esc(r.score) : "–"; } }, { h: "Held", n: 1, f: function (r) { return r.openedTs ? esc(hold(r.openedTs, Date.now() / 1000)) : "–"; } },
+      { h: "Note", c: "dim", f: function (r) { return esc(r.note || ""); } }], op, "No open positions.");
+    $("closed").innerHTML = table([deskCol, { h: "Coin", f: sym }, { h: "Closed", n: 1, f: function (r) { return r.closedTs ? esc(when(r.closedTs)) : esc(r.closedLabel || "–"); } },
+      { h: "Held", n: 1, f: function (r) { return esc(hold(r.openedTs, r.closedTs)); } }, { h: "Score", n: 1, f: function (r) { return r.score != null ? esc(r.score) : "–"; } },
+      { h: "Entry", n: 1, f: function (r) { return px(r.entry); } }, { h: "Exit", n: 1, f: function (r) { return px(r.exit); } },
+      { h: "Exit reason", c: "dim", f: function (r) { return esc(r.reason || ""); } },
+      { h: "P&L", n: 1, f: function (r) { return '<span class="' + cls(r.pnl) + '">' + sgn(r.pnl) + " (" + pct(r.pnlPct) + ")</span>"; } }], cl, "No closed trades.");
+  }
+
+  // ---------- missed runners ----------
+  function outcomes(key) { var d = D[key]; return d || {}; }
+  function tagged(field) {
+    var out = [];
+    ["main", "dip"].forEach(function (k) { (outcomes(k)[field] || []).forEach(function (r) { out.push(Object.assign({}, r, { desk: k })); }); });
+    return out;
+  }
+  function fillGates(sel, rows, getter) {
+    var el = $(sel), cur = el.value, seen = {};
+    rows.forEach(function (r) { var g = getter(r); if (g) seen[g] = 1; });
+    var gs = Object.keys(seen).sort();
+    el.innerHTML = '<option value="all">All gates</option>' + gs.map(function (g) { return '<option value="' + esc(g) + '">' + esc(g) + "</option>"; }).join("");
+    el.value = gs.indexOf(cur) >= 0 ? cur : "all";
+  }
+  var TRACK_EMPTY = "Tracking starts after the next desk restart on the new code.";
+  function renderMissed() {
+    var sc = tagged("gate_scorecard"), mr = tagged("missed_runners"), dg = tagged("dodged_rugs");
+    var metas = ["main", "dip"].map(function (k) { return [k, (outcomes(k).outcomes_meta)]; }).filter(function (x) { return x[1]; });
+    $("outcomes-note").innerHTML = metas.length ? '<div class="note" style="margin:-4px 0 10px">' + metas.map(function (x) {
+      return esc(NAMES[x[0]]) + ": " + x[1].tracked + " tracked" + (x[1].last_refresh_ts ? ", prices refreshed " + esc(ago(x[1].last_refresh_ts)) : ", not refreshed yet") + (x[1].error ? ' ' + badge(/429|rate_limited/.test(x[1].error) ? "rl" : "err", x[1].error.slice(0, 70)) : "");
+    }).join(" &nbsp;|&nbsp; ") + "</div>" : "";
+    sc.sort(function (a, b) { return (b.runners_5x - a.runners_5x) || (b.runners_2x - a.runners_2x) || (b.unique_coins_killed - a.unique_coins_killed); });
+    $("scorecard").innerHTML = table([
+      { h: "Gate", f: function (r) { return esc(r.gate); } }, { h: "Desk", f: function (r) { return esc(NAMES[r.desk]); } },
+      { h: "Coins blocked", n: 1, f: function (r) { return r.unique_coins_killed + ' <span class="dim">(' + r.tracked_coins + " tracked)</span>"; } },
+      { h: "Missed 2x+", n: 1, f: function (r) { return '<span class="' + (r.runners_2x ? "pos" : "dim") + '">' + r.runners_2x + "</span>"; } },
+      { h: "Missed 5x+", n: 1, f: function (r) { return '<span class="' + (r.runners_5x ? "pos" : "dim") + '">' + r.runners_5x + "</span>"; } },
+      { h: "Dodged crashes", n: 1, f: function (r) { return r.crashed_50pct; } },
+      { h: "Median peak", n: 1, f: function (r) { return mx(r.median_peak_x); } }, { h: "Median now", n: 1, f: function (r) { return mx(r.median_current_x); } },
+      { h: "Biggest missed", f: function (r) { var b = r.best_runner; return b ? sym(b) + ' <span class="num">' + mx(b.peak_x) + "</span>" : "–"; } }], sc, TRACK_EMPTY);
+    fillGates("f-mr-gate", mr, function (r) { return r.kill_gate; });
+    var fd = $("f-mr-desk").value, fg = $("f-mr-gate").value, sk = $("f-mr-sort").value;
+    var rows = mr.filter(function (r) { return (fd === "all" || r.desk === fd) && (fg === "all" || r.kill_gate === fg); });
+    rows.sort(function (a, b) { return (num(b[sk]) || 0) - (num(a[sk]) || 0); });
+    $("runners").innerHTML = table([
+      { h: "Coin", f: sym }, { h: "Desk", f: function (r) { return esc(NAMES[r.desk]); } },
+      { h: "Gate / reason", f: function (r) { return "<b>" + esc(r.kill_gate) + '</b><br><span class="dim">' + esc(r.kill_reason || "") + "</span>"; }, c: "reason" },
+      { h: "Mcap at kill", n: 1, f: function (r) { return cap(r.kill_mcap); } }, { h: "Peak mcap", n: 1, f: function (r) { return cap(r.peak_mcap); } }, { h: "Now mcap", n: 1, f: function (r) { return cap(r.current_mcap); } },
+      { h: "Price kill → peak → now", n: 1, f: function (r) { return px(r.kill_price) + " → " + px(r.peak_price) + " → " + px(r.current_price); } },
+      { h: "Peak", n: 1, f: function (r) { return multBadge(r.peak_multiple); } }, { h: "Now", n: 1, f: function (r) { return multBadge(r.current_multiple, "cur"); } },
+      { h: "Killed", n: 1, f: function (r) { return esc(when(r.first_kill_ts)); } }], rows, mr.length ? "No runners match these filters." : TRACK_EMPTY);
+    var dr = dg.slice().sort(function (a, b) { return (num(a.current_multiple) == null ? 0 : a.current_multiple) - (num(b.current_multiple) == null ? 0 : b.current_multiple); });
+    $("dodged").innerHTML = table([
+      { h: "Coin", f: sym }, { h: "Desk", f: function (r) { return esc(NAMES[r.desk]); } },
+      { h: "Gate / reason", f: function (r) { return "<b>" + esc(r.kill_gate) + '</b><br><span class="dim">' + esc(r.kill_reason || "") + "</span>"; }, c: "reason" },
+      { h: "Mcap at kill", n: 1, f: function (r) { return cap(r.kill_mcap); } }, { h: "Now mcap", n: 1, f: function (r) { return r.dead ? '<span class="neg">dead</span>' : cap(r.current_mcap); } },
+      { h: "Peak", n: 1, f: function (r) { return multBadge(r.peak_multiple); } }, { h: "Now", n: 1, f: function (r) { return multBadge(r.current_multiple, "cur"); } },
+      { h: "Killed", n: 1, f: function (r) { return esc(when(r.first_kill_ts)); } }], dr, TRACK_EMPTY);
+  }
+
+  // ---------- rejections ----------
+  function barList(rows, key, val, kill) {
+    var max = Math.max.apply(null, rows.map(function (r) { return r[val] || 0; }).concat([1]));
+    return '<div class="bars">' + rows.map(function (r) { return '<div class="br"><span>' + esc(r[key]) + '</span><span class="bar' + (kill ? " k" : "") + '"><i style="width:' + ((r[val] || 0) / max * 100).toFixed(1) + '%"></i></span><span class="num" style="text-align:right">' + esc(r[val] || 0) + "</span></div>"; }).join("") + "</div>";
+  }
+  function renderFunnels() {
+    var w = $("f-fun-win").value, out = "";
+    var m = D.main, f = m && (w === "24h" ? m.funnel_24h : m.funnel_all_time);
+    if (f) {
+      out += '<div class="box"><b>Main</b> <span class="dim">' + (w === "24h" ? "last 24h" : "all time") + "</span>" +
+        barList([{ k: "Scouted coins", v: f.scouted_unique_coins }, { k: "Passed filters", v: f.filter_passed }, { k: "Scored", v: f.scored }, { k: "Scored 70+", v: f.scored_70plus }, { k: "Bought", v: f.bought }], "k", "v") +
+        '<div class="note">Killed by gate (unique coins)</div>' + barList((f.kills_by_gate || []).map(function (g) { return { k: g.gate, v: g.coins }; }), "k", "v", true) + "</div>";
+    } else out += '<div class="box"><b>Main</b><div class="empty">unavailable</div></div>';
+    var d = D.dip;
+    if (d) {
+      var rc = d.room_counts, kc = d.scanner_kills || {}, est = !rc;
+      var rows = [];
+      if (rc) { rows.push({ k: "Entered room", v: (rc.waiting || 0) + (rc.killed || 0) + (rc.dropped || 0) + (rc.passed || 0) }); rows.push({ k: "Killed / dropped", v: (rc.killed || 0) + (rc.dropped || 0) }); rows.push({ k: "Waiting now", v: rc.waiting || 0 }); }
+      rows.push({ k: "Recent audits", v: (d.audits || []).length }); rows.push({ k: "Trades (open+closed)", v: (d.open_positions || []).length + (d.closed_trades || []).length });
+      out += '<div class="box"><b>Dip</b> <span class="dim">' + (w === "24h" ? "all-time counts (no 24h split in the Dip feed)" : "all time") + "</span>" + barList(rows, "k", "v") +
+        '<div class="note">Killed by rule</div>' + barList(Object.keys(kc).sort(function (a, b) { return kc[b] - kc[a]; }).map(function (k) { return { k: k, v: kc[k] }; }), "k", "v", true) +
+        '<div class="note">Estimated: audits and trades cover only recent rows' + (est ? "; waiting-room counts not in this feed yet" : "") + ".</div></div>";
+    } else out += '<div class="box"><b>Dip</b><div class="empty">unavailable</div></div>';
+    $("funnels").innerHTML = out;
+  }
+  function rejRows() {
+    var rows = [], idx = {};
+    ["main", "dip"].forEach(function (k) { idx[k] = (D[k] && D[k].outcome_index) || {}; });
+    if (D.main) (D.main.recent_rejects || []).forEach(function (r) { rows.push({ desk: "main", symbol: r.symbol, address: r.address, ts: r.ts, gate: r.gate, reason: r.reason, mcap: r.mcap, liq: r.liq, chg: r.chg_h1, at: r.at }); });
+    if (D.dip) (D.dip.recent_rejections || []).forEach(function (r) { rows.push({ desk: "dip", symbol: r.symbol, address: r.mint, ts: r.ts, gate: r.gate, reason: r.reason, mcap: r.mcap, liq: r.liq, chg: r.chg_h1 }); });
+    rows.forEach(function (r) { r.o = idx[r.desk][r.address]; });
+    return rows;
+  }
+  function renderRejs() {
+    var rows = rejRows();
+    fillGates("f-rej-gate", rows, function (r) { return r.gate; });
+    var q = $("f-rej-q").value.trim().toLowerCase(), fd = $("f-rej-desk").value, fg = $("f-rej-gate").value;
+    rows = rows.filter(function (r) { return (fd === "all" || r.desk === fd) && (fg === "all" || r.gate === fg) && (!q || [r.symbol, r.reason, r.address, r.gate].join(" ").toLowerCase().indexOf(q) >= 0); });
+    rows.sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
+    $("rejs").innerHTML = table([{ h: "When", n: 1, f: function (r) { return r.ts ? esc(when(r.ts)) : esc(r.at || "–"); } }, { h: "Coin", f: sym }, { h: "Desk", f: function (r) { return esc(NAMES[r.desk]); } },
+      { h: "Gate / reason", c: "reason", f: function (r) { return "<b>" + esc(r.gate) + '</b><br><span class="dim">' + esc(r.reason || "") + "</span>"; } },
+      { h: "Mcap", n: 1, f: function (r) { return cap(r.mcap); } }, { h: "Liq", n: 1, f: function (r) { return cap(r.liq); } },
+      { h: "1h", n: 1, f: function (r) { return r.chg != null ? '<span class="' + cls(r.chg) + '">' + pct(r.chg, 0) + "</span>" : "–"; } },
+      { h: "Since kill", n: 1, f: function (r) { return r.o ? multBadge(r.o.c, "cur") + ' <span class="dim">peak ' + mx(r.o.p) + "</span>" : '<span class="dim">–</span>'; } }],
+      rows.slice(0, 150), "No rejections match.");
+  }
+
+  // ---------- health ----------
+  function srcBadge(v) {
+    var s = String(v), l = s.toLowerCase();
+    if (l.indexOf("429") >= 0 || l.indexOf("rate_limited") >= 0) return badge("rl", "429 / limited");
+    if (l.indexOf("error") === 0 || l.indexOf("error:") >= 0) return badge("err", "error");
+    if (l.indexOf("ok") === 0 || l === "on") return badge("ok", l.indexOf("ok") === 0 ? "ok" : "on");
+    return badge("info", "info");
+  }
+  function srcBox(key) {
+    var d = D[key]; if (!d) return '<div class="box"><b>' + NAMES[key] + '</b><div class="empty">unavailable</div></div>';
+    var s = summary(key), h = s.h, st = statusOf(s), keys = Object.keys(h.sources || {});
+    var rows = keys.map(function (k) {
+      var v = h.sources[k], txt = typeof v === "object" && v ? JSON.stringify(v) : String(v);
+      return '<div class="src"><span>' + esc(k) + "</span><span>" + srcBadge(txt) + "</span></div>" + (srcBadge(txt).indexOf("b-ok") < 0 && srcBadge(txt).indexOf("b-info") < 0 ? '<div class="note" style="margin:-2px 0 4px;overflow-wrap:anywhere">' + esc(txt.slice(0, 180)) + "</div>" : "");
     }).join("");
+    return '<div class="box"><b>' + NAMES[key] + "</b> " + badge(st[0], st[1]) + (h.errors.length ? '<div class="note">' + h.errors.map(esc).join("<br>") + "</div>" : "") + (rows || '<div class="note">No source detail in this feed.</div>') +
+      (key !== "copy" && d.outcomes_meta ? '<div class="note">Outcome tracker: ' + d.outcomes_meta.tracked + " coins tracked" + (d.outcomes_meta.error ? ", error: " + esc(d.outcomes_meta.error) : "") + "</div>" : "") + "</div>";
+  }
+  function kvBox(title, obj, fmt) {
+    var ks = Object.keys(obj || {});
+    if (!ks.length) return '<div class="box"><b>' + esc(title) + '</b><div class="note">Not in this feed yet.</div></div>';
+    return '<div class="box"><b>' + esc(title) + '</b><div class="kv" style="margin-top:8px">' + ks.map(function (k) { return "<div><span>" + esc(k.replace(/_/g, " ")) + '</span><span class="num">' + esc(fmt ? fmt(obj[k]) : obj[k]) + "</span></div>"; }).join("") + "</div></div>";
+  }
+  function renderHealth() {
+    $("sources").innerHTML = ["main", "dip", "copy"].map(srcBox).join("");
+    var c = D.copy, ci = "";
+    if (c) {
+      var w = c.wallets || [];
+      ci += '<div class="box"><b>Wallets</b> <span class="dim">(public labels only)</span>' + (w.length ? w.map(function (x) {
+        return '<div class="src"><span>' + esc(x.label || "") + '<br><span class="mono dim">' + esc(String(x.address || "").slice(0, 6) + "…" + String(x.address || "").slice(-4)) + "</span></span>" + badge(x.enabled ? "ok" : "na", x.enabled ? "enabled" : "off") + "</div>";
+      }).join("") : '<div class="note">Wallet list not in this feed yet.</div>') + "</div>";
+      var er = c.event_reasons || {};
+      ci += '<div class="box"><b>Skip / event reasons</b>' + (Object.keys(er).length ? barList(Object.keys(er).sort(function (a, b) { return er[b] - er[a]; }).map(function (k) { return { k: k, v: er[k] }; }), "k", "v") : '<div class="note">Not in this feed yet.</div>') +
+        '<div class="note" style="margin-top:10px">Recent events</div>' + ((c.recent_events || []).slice(0, 8).map(function (e) { return '<div class="note">' + esc(when(e.ts)) + " &middot; " + esc((e.note || "").slice(0, 90)) + "</div>"; }).join("") || '<div class="note">none</div>') + "</div>";
+    } else ci = '<div class="box"><div class="empty">Copy feed unavailable</div></div>';
+    $("copyinfo").innerHTML = ci;
+    var d = D.dip, di = "";
+    if (d) {
+      var rc = d.room_counts;
+      di += kvBox("Waiting room", rc);
+      var kc = d.scanner_kills || {}, sr = d.skip_reasons || {};
+      di += '<div class="box"><b>Kill breakdown</b>' + barList(Object.keys(kc).sort(function (a, b) { return kc[b] - kc[a]; }).map(function (k) { return { k: k, v: kc[k] }; }), "k", "v", true) +
+        (Object.keys(sr).length ? '<div class="note">Order skips</div>' + barList(Object.keys(sr).map(function (k) { return { k: k, v: sr[k] }; }), "k", "v") : "") + "</div>";
+      var wo = d.waiting_orders || [];
+      di += '<div class="box"><b>Waiting dip orders</b>' + (wo.length ? wo.map(function (o) { return '<div class="src"><span>' + esc(o.symbol || o.mint.slice(0, 6)) + '</span><span class="num">' + usd(o.size_usd) + " &middot; dip " + (o.depth_pct != null ? o.depth_pct + "%" : "–") + " &middot; " + o.minutes_left + "m left</span></div>"; }).join("") : '<div class="note">No dip orders waiting.</div>') + "</div>";
+      if (d.session) di += kvBox("Session", { always_on: d.session.always_on, in_window: d.session.in_window, telegram: d.telegram });
+    } else di = '<div class="box"><div class="empty">Dip feed unavailable</div></div>';
+    $("dipinfo").innerHTML = di;
+    $("rules").innerHTML = ["main", "dip", "copy"].map(function (k) { return D[k] ? kvBox(NAMES[k] + " rules", D[k].rules) : '<div class="box"><b>' + NAMES[k] + '</b><div class="empty">unavailable</div></div>'; }).join("");
   }
 
-  function renderFeed(feed) {
-    const el = document.getElementById("feed");
-    if (!feed || !feed.length) {
-      el.innerHTML = '<div class="fe"><div class="d"></div><div class="txt"><span class="t">—</span> waiting for events</div></div>';
-      return;
-    }
-    el.innerHTML = feed.map(f => {
-      const k = f.kind || "info";
-      return `<div class="fe ${esc(k)}"><div class="d"></div><div class="txt"><span class="t">${esc(f.hhmm)}</span> <span class="a">${esc(f.agent)}:</span> ${esc(f.action)}</div></div>`;
-    }).join("");
+  function renderAll() {
+    renderStrip(); renderChart(); renderTrades(); renderMissed(); renderFunnels(); renderRejs(); renderHealth();
+    var ts = ["main", "dip", "copy"].map(function (k) { return D[k] && (summary(k) || {}).ts; }).filter(Boolean);
+    $("foot").textContent = "Times shown in your local timezone (" + (Intl.DateTimeFormat().resolvedOptions().timeZone || "local") + "). Refreshes every 30s. Paper trading only.";
   }
 
-  function renderTable(secId, bodyId, rows, cols) {
-    const sec = document.getElementById(secId);
-    const body = document.getElementById(bodyId);
-    if (!rows || !rows.length) { sec.classList.add("hidden"); body.innerHTML = ""; return; }
-    sec.classList.remove("hidden");
-    body.innerHTML = rows.map(cols).join("");
+  // ---------- fetch ----------
+  function getJson(key) {
+    var urls = [BASE + "state/reports/" + FILES[key], BASE + "main/reports/" + FILES[key]];
+    return urls.reduce(function (p, u) {
+      return p.catch(function () {
+        return fetch(u + "?t=" + Date.now(), { cache: "no-store" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+      });
+    }, Promise.reject()).then(function (d) { if (!d || typeof d !== "object") throw new Error("bad json"); return d; });
+  }
+  function poll() {
+    return Promise.all(["main", "dip", "copy"].map(function (k) {
+      return getJson(k).then(function (d) { D[k] = d; }, function () { /* keep the last good copy, or null */ });
+    })).then(function () { try { renderAll(); } catch (e) { console.error(e); } });
   }
 
-  function renderBars(rows) {
-    const sec = document.getElementById("bars-sec");
-    const el = document.getElementById("bars");
-    if (!rows || !rows.length) { sec.classList.add("hidden"); el.innerHTML = ""; return; }
-    sec.classList.remove("hidden");
-    const max = Math.max.apply(null, rows.map(r => r.n)) || 1;
-    el.innerHTML = rows.map(r => {
-      const w = Math.max(4, Math.round(100 * r.n / max));
-      const extra = r.coins != null ? ` · ${r.coins} coins` : "";
-      return `<div class="bar-row"><div class="bar-lab" title="${esc(r.gate)}">${esc(r.label || r.gate)}</div>
-        <div class="bar-track"><div class="bar-fill" style="width:${w}%"></div></div>
-        <div class="bar-n">${r.n}${extra}</div></div>`;
-    }).join("");
-  }
-
-  const STATE_URLS = [
-    "https://raw.githubusercontent.com/sneezekd/paper-memecoin-desk/state/reports/dashboard.json",
-    "https://raw.githubusercontent.com/sneezekd/paper-memecoin-desk/main/reports/dashboard.json"
-  ];
-  const COPY_URLS = [
-    "https://raw.githubusercontent.com/sneezekd/paper-memecoin-desk/state/reports/copy_dashboard.json",
-    "https://raw.githubusercontent.com/sneezekd/paper-memecoin-desk/main/reports/copy_dashboard.json"
-  ];
-  document.getElementById("tab-desk").onclick = function () {
-    document.getElementById("panel-desk").classList.remove("hidden");
-    document.getElementById("panel-copy").classList.add("hidden");
-    document.getElementById("tab-desk").className = "tab on";
-    document.getElementById("tab-copy").className = "tab";
-  };
-  document.getElementById("tab-copy").onclick = function () {
-    document.getElementById("panel-copy").classList.remove("hidden");
-    document.getElementById("panel-desk").classList.add("hidden");
-    document.getElementById("tab-copy").className = "tab on";
-    document.getElementById("tab-desk").className = "tab";
-  };
-  function applyCopy(d) {
-    d = d || {};
-    const b = d.balance || {};
-    const start = b.starting_usd || 100;
-    const equity = b.equity_usd != null ? b.equity_usd : start;
-    const pnl = b.total_pnl_usd != null ? b.total_pnl_usd : 0;
-    const pnlPct = b.total_pnl_pct || 0;
-    document.getElementById("copy-eq").textContent = usd(equity);
-    const pnlEl = document.getElementById("copy-pnl");
-    const sign = pnl >= 0 ? "+" : "";
-    pnlEl.textContent = sign + usd(pnl).replace("+","") + " (" + sign + pnlPct.toFixed(2) + "%)";
-    pnlEl.className = "pnl " + (pnl > 0 ? "up" : (pnl < 0 ? "dn" : ""));
-    document.getElementById("copy-w").textContent = d.wins || 0;
-    document.getElementById("copy-l").textContent = d.losses || 0;
-    const openN = (d.open_positions || []).length;
-    document.getElementById("copy-status").textContent =
-      "Paper copy · " + openN + " open · separate $100 book";
-    const lats = (d.recent_events || []).map(e => e.latency_s).filter(x => x != null);
-    document.getElementById("copy-lat").textContent = lats.length
-      ? ("latency " + lats[0].toFixed(1) + "s") : "latency —";
-    function leaderName(p) {
-      const addr = String((p && (p.leader || p.wallet)) || "");
-      const label = String((p && p.leader_label) || "");
-      const short = addr.slice(0, 8);
-      if (label && short) return label + " · " + short;
-      return label || short || "—";
-    }
-    const feed = document.getElementById("copy-feed");
-    const rows = d.recent_events || [];
-    feed.innerHTML = rows.length ? rows.map(e => {
-      const slip = e.slippage_vs_leader_pct != null ? (" · slip " + Number(e.slippage_vs_leader_pct).toFixed(1) + "%") : "";
-      const lat = e.latency_s != null ? (" · " + Number(e.latency_s).toFixed(1) + "s") : "";
-      return '<div class="fe"><div class="d"></div><div class="txt"><span class="a">' + esc(e.side || e.note || "event") +
-        "</span> " + esc((e.mint || "").slice(0, 4)) + " · " + esc(leaderName(e)) + slip + lat + "</div></div>";
-    }).join("") : '<div class="fe"><div class="d"></div><div class="txt">waiting for a tracked wallet</div></div>';
-    const ob = document.getElementById("copy-open");
-    ob.innerHTML = (d.open_positions || []).map(p => {
-      const slip = p.slippage_vs_leader_pct != null ? Number(p.slippage_vs_leader_pct).toFixed(1) + "%" : "—";
-      const lat = p.detection_latency_s != null ? Number(p.detection_latency_s).toFixed(1) + "s" : "—";
-      return "<tr><td class=\"sym\">" + esc(p.symbol) + "</td><td>" + esc(leaderName(p)) +
-        "</td><td>" + usd(p.size_usd) + "</td><td>" + px(p.leader_price) + "</td><td>" + px(p.entry_fill) +
-        "</td><td>" + slip + "</td><td>" + px(p.stop_mark) + "</td><td>" + lat + "</td><td>" + usd(p.unrealized_pnl_usd) + "</td></tr>";
-    }).join("") || "<tr><td colspan=\"9\">none</td></tr>";
-    const cb = document.getElementById("copy-closed");
-    cb.innerHTML = (d.closed_trades || []).map(p => {
-      const slip = p.slippage_vs_leader_pct != null ? Number(p.slippage_vs_leader_pct).toFixed(1) + "%" : "—";
-      const lat = p.detection_latency_s != null ? Number(p.detection_latency_s).toFixed(1) + "s" : "—";
-      return "<tr><td class=\"sym\">" + esc(p.symbol) + "</td><td>" + esc(leaderName(p)) +
-        "</td><td>" + esc(p.exit_reason || "") + "</td><td>" + slip + "</td><td>" + lat + "</td><td>" + usd(p.pnl_usd) + "</td></tr>";
-    }).join("") || "<tr><td colspan=\"6\">none</td></tr>";
-  }
-  async function pollCopy() {
-    for (let i = 0; i < COPY_URLS.length; i++) {
-      try {
-        applyCopy(await fetchJson(COPY_URLS[i] + "?t=" + Date.now()));
-        return;
-      } catch (e) {}
-    }
-  }
-  const DIP_URLS = [
-    "https://raw.githubusercontent.com/sneezekd/paper-memecoin-desk/state/reports/dip_dashboard.json",
-    "https://raw.githubusercontent.com/sneezekd/paper-memecoin-desk/main/reports/dip_dashboard.json"
-  ];
-  // Dip desk tab. Added as extra listeners so the desk/copy tab code above stays untouched.
-  function showPanel(name) {
-    ["desk", "copy", "dip"].forEach(function (k) {
-      document.getElementById("panel-" + k).classList.toggle("hidden", k !== name);
-      document.getElementById("tab-" + k).className = k === name ? "tab on" : "tab";
+  // ---------- tabs ----------
+  var TABS = ["overview", "missed", "rejections", "health"];
+  function showTab(name, focus) {
+    if (TABS.indexOf(name) < 0) name = "overview";
+    TABS.forEach(function (t) {
+      var on = t === name, b = $("tab-" + t);
+      b.setAttribute("aria-selected", on ? "true" : "false"); b.tabIndex = on ? 0 : -1; $("p-" + t).hidden = !on;
+      if (on && focus) b.focus();
     });
+    if (location.hash.slice(1) !== name) history.replaceState(null, "", "#" + name);
   }
-  document.getElementById("tab-dip").addEventListener("click", function () { showPanel("dip"); });
-  document.getElementById("tab-desk").addEventListener("click", function () { showPanel("desk"); });
-  document.getElementById("tab-copy").addEventListener("click", function () { showPanel("copy"); });
-  function dipAge(min) {
-    if (min == null) return "—";
-    return min >= 120 ? (min / 60).toFixed(1) + "h" : Math.round(min) + "m";
-  }
-  function dipCounts(el, obj) {
-    const rows = Object.keys(obj || {}).map(k => [k, obj[k]]).sort((a, b) => b[1] - a[1]);
-    el.innerHTML = rows.length
-      ? rows.map(r => '<span class="badge">' + esc(r[0]) + "<b>" + esc(r[1]) + "</b></span>").join("")
-      : '<span class="muted">none yet</span>';
-  }
-  function applyDip(d) {
-    d = d || {};
-    const start = d.start_cash != null ? d.start_cash : 100;
-    const eq = d.equity != null ? d.equity : start;
-    const pnl = d.pnl_usd || 0, pnlPct = d.pnl_pct || 0;
-    document.getElementById("dip-eq").textContent = usd(eq);
-    document.getElementById("dip-cash").textContent = usd(d.cash != null ? d.cash : start);
-    const pe = document.getElementById("dip-pnl");
-    const sign = pnl >= 0 ? "+" : "";
-    pe.textContent = sign + usd(pnl).replace("+", "") + " (" + sign + pnlPct.toFixed(2) + "%)";
-    pe.className = "pnl " + (pnl > 0 ? "up" : (pnl < 0 ? "dn" : ""));
-    const n = d.night || {}, ses = d.session || {};
-    document.getElementById("dip-status").textContent =
-      "Paper only · " + (d.open_positions || []).length + " open · " + (d.waiting_orders || []).length + " waiting · night trades " +
-      (n.trades || 0) + " · night P&L " + usd(n.pnl_usd || 0) + (n.locked ? " · LOCKED" : "") +
-      " · window " + (ses.night_start || "?") + "–" + (ses.lock_time || "?") + (ses.in_window ? " (open)" : " (closed)") +
-      " · telegram " + (d.telegram || "off") + " · social " + (d.social || "off");
-    document.getElementById("dip-upd").textContent = d.updated_at
-      ? new Date(d.updated_at * 1000).toLocaleTimeString("en-US", { timeZone: TZ, hour: "2-digit", minute: "2-digit" }) : "—";
-    const ev = d.recent_events || [];
-    document.getElementById("dip-feed").innerHTML = ev.length ? ev.map(function (e) {
-      const t = e.ts ? new Date(e.ts * 1000).toLocaleTimeString("en-US", { timeZone: TZ, hour12: false }) : "";
-      const cls = /buy/.test(e.kind || "") ? "buy" : (/sell|kill|skip|stop/.test(e.kind || "") ? "kill" : "");
-      return '<div class="fe ' + cls + '"><div class="d"></div><div class="txt"><span class="t">' + esc(t) + '</span> <span class="a">' +
-        esc(e.kind) + "</span> " + esc((e.mint || "").slice(0, 4)) + " " + esc(e.note || "") + "</div></div>";
-    }).join("") : '<div class="fe"><div class="d"></div><div class="txt">waiting for the first coin</div></div>';
-    document.getElementById("dip-open").innerHTML = (d.open_positions || []).map(function (p) {
-      return '<tr><td class="sym">' + esc(p.symbol || (p.mint || "").slice(0, 6)) + "</td><td>" + px(p.entry) + "</td><td>" + px(p.mark) +
-        "</td><td>" + px(p.peak) + "</td><td>" + px(p.stop_line) + "</td><td>" + (p.tp_done ? "done" : "—") + "</td><td>" + dipAge(p.age_min) + "</td></tr>";
-    }).join("") || '<tr><td colspan="7">none</td></tr>';
-    document.getElementById("dip-wait").innerHTML = (d.waiting_orders || []).map(function (o) {
-      const dp = o.depth_pct != null ? Number(o.depth_pct).toFixed(1) + "%" : "—";
-      return '<tr><td class="sym">' + esc(o.symbol || (o.mint || "").slice(0, 6)) + "</td><td>" + usd(o.size_usd) + "</td><td>" + px(o.high10) +
-        "</td><td>" + px(o.current) + "</td><td>" + dp + "</td><td>" + (o.minutes_left != null ? Math.round(o.minutes_left) + "m" : "—") + "</td></tr>";
-    }).join("") || '<tr><td colspan="6">none</td></tr>';
-    document.getElementById("dip-audits").innerHTML = (d.audits || []).map(function (a) {
-      const chips = (a.layers || []).map(function (l) {
-        const cls = l.status === "ok" ? "ok" : (l.status === "red" ? "red" : "");
-        const tip = l.n + " " + l.name + ": " + (l.status === "ok" ? "pass" : (l.status === "red" ? "fail" : "not checked")) +
-          (l.value != null ? " · " + l.value : "") + (l.reason ? " · " + l.reason : "") + (l.source ? " · via " + l.source : "");
-        return '<span class="chip ' + cls + '" title="' + esc(tip) + '"></span>';
-      }).join("");
-      const parts = a.parts || {};
-      const social = (parts.log || []).indexOf("social: off") >= 0 ? " · social: off" : "";
-      const why = a.verdict === "pass" ? "pass" : (a.reason || a.verdict || "");
-      return '<tr><td class="sym" title="' + esc(a.mint) + '">' + esc(a.symbol || (a.mint || "").slice(0, 6)) + '</td><td><div class="chips">' + chips +
-        "</div></td><td>" + esc(a.score != null ? a.score : "—") + '<span class="muted" title="' + esc((parts.log || []).join(" | ")) + '">' + esc(social) +
-        '</span></td><td class="verdict-' + (a.verdict === "pass" ? "pass" : "reject") + '">' + esc(why) + "</td></tr>";
-    }).join("") || '<tr><td colspan="4">no audits yet</td></tr>';
-    dipCounts(document.getElementById("dip-kills"), d.scanner_kills);
-    dipCounts(document.getElementById("dip-skips"), d.skip_reasons);
-  }
-  async function pollDip() {
-    for (let i = 0; i < DIP_URLS.length; i++) {
-      try {
-        applyDip(await fetchJson(DIP_URLS[i] + "?t=" + Date.now()));
-        return;
-      } catch (e) {}
-    }
-  }
-  const GATE_LABELS = {
-    volume_1h: "1h volume", top10_real: "top-10 holders", bundled_launch: "bundled launch",
-    pumped_1h: "already pumped 1h", chase_5m: "up more than 25% in 5m", flush_bounce: "dump then bounce",
-    entry_slippage: "fill vs mark", entry_round_trip: "round trip at entry", liq_drop: "liquidity drop",
-    lp_burn_lock: "LP burn / lock", mint_freeze: "mint or freeze",
-    dev_hold: "dev wallet", creator_rugs: "creator rugs", liquidity: "liquidity",
-    sell_sim: "sell simulation", token2022_ext: "Token-2022 extension",
-    analyst_below_70: "score below 70", analyst_low_coverage: "low score coverage"
-  };
-
-  function hhmmFrom(at) {
-    if (!at) return "--:--";
-    const m = String(at).match(/(\d{1,2}:\d{2}\s*[AP]M)/i);
-    return m ? m[1] : String(at);
-  }
-
-  function normalize(d) {
-    if (d && d.equity && d.agents && d.scanner) return d;
-    d = d || {};
-    const b = d.balance || {};
-    const start = b.starting_usd != null ? b.starting_usd : 100;
-    const equity = b.equity_usd != null ? b.equity_usd : start;
-    const pnl = b.total_pnl_usd != null ? b.total_pnl_usd : (equity - start);
-    const pnlPct = b.total_pnl_pct != null ? b.total_pnl_pct : (start ? (equity / start - 1) * 100 : 0);
-    const closed = (d.closed_trades || []).map(p => ({
-      symbol: p.symbol,
-      entry: p.entry != null ? p.entry : p.entry_fill,
-      exit: p.exit != null ? p.exit : p.exit_fill,
-      reason: p.reason || p.exit_reason,
-      pnl_usd: p.pnl_usd, pnl_pct: p.pnl_pct, score: p.score, size_usd: p.size_usd,
-      closed: p.closed, x_score: p.x_score
-    }));
-    const open = (d.open_positions || []).map(p => {
-      const size = p.size_usd || 0;
-      const pnlU = p.pnl_usd != null ? p.pnl_usd : (p.unrealized_pnl_usd || 0);
-      const pnlP = p.pnl_pct != null ? p.pnl_pct : (size ? pnlU / size * 100 : 0);
-      return {
-        symbol: p.symbol, entry: p.entry != null ? p.entry : p.entry_fill,
-        size_usd: size, score: p.score, stop: p.stop != null ? p.stop : p.stop_mark,
-        trail_active: !!p.trail_active, pnl_usd: pnlU, pnl_pct: pnlP, x_score: p.x_score
-      };
+  TABS.forEach(function (t, i) {
+    $("tab-" + t).addEventListener("click", function () { showTab(t); });
+    $("tab-" + t).addEventListener("keydown", function (e) {
+      var j = e.key === "ArrowRight" ? i + 1 : e.key === "ArrowLeft" ? i - 1 : e.key === "Home" ? 0 : e.key === "End" ? TABS.length - 1 : null;
+      if (j == null) return; e.preventDefault(); showTab(TABS[(j + TABS.length) % TABS.length], true);
     });
-    const funnel = d.funnel_all_time || d.funnel_24h || {};
-    const kills = (funnel.kills_by_gate || []).map(k => ({
-      gate: k.gate, n: k.n, coins: k.coins,
-      label: GATE_LABELS[k.gate] || String(k.gate || "").replace(/_/g, " ")
-    }));
-    const killsTotal = kills.reduce((s, k) => s + (k.n || 0), 0);
-    const scanned = funnel.scouted_pair_checks || 0;
-    const traded = funnel.bought || 0;
-    const last = d.last_scan || {};
-    const sm = last.summary || {};
-    const rules = d.rules || {};
-    const age = d.generated_ts ? (Date.now() / 1000 - d.generated_ts) : null;
-    let running = false, stale = false, label = "Waiting";
-    if (age == null) {
-      label = last.at ? "Snapshot" : "Waiting";
-    } else if (age <= 12 * 60) {
-      running = true; label = "Running";
-    } else if (age <= 45 * 60) {
-      running = true; stale = true; label = "Stale";
-    } else {
-      label = "Stopped";
-    }
-    if (last.at) label += " · " + String(last.at).replace(/^[A-Za-z]{3} \d+ /, "");
-    const best = closed.length ? closed.reduce((a, p) => ((p.pnl_usd || 0) > (a.pnl_usd || 0) ? p : a)) : null;
-    const lastKill = (d.recent_rejects || [])[0];
-    const nOpen = open.length;
-    const nTrail = open.filter(p => p.trail_active).length;
-    const stopTxt = rules.stop_net_pct != null ? (rules.stop_net_pct + "%") : "—";
-    const trailTxt = "+" + (rules.trail_after_net_pct != null ? rules.trail_after_net_pct : 12) + "%";
-    const discovered = sm.discovered;
-    const scouted = sm.scouted;
-    const scoutAct = discovered != null
-      ? `${discovered} discovered this scan · ${scouted || 0} in the age / mcap window`
-      : (scanned ? `${scanned} pair checks logged` : "waiting for the first scan");
-    const filterAct = lastKill
-      ? `killed ${lastKill.symbol} · ${lastKill.gate}`
-      : "no kills yet";
-    const analystAct = sm.scored_70plus != null
-      ? `this scan: ${sm.scored_70plus} scored 70+ of ${sm.filter_passed || 0} that passed`
-      : "waiting — nothing has cleared the filter yet";
-    const bought = Array.isArray(sm.bought) ? sm.bought.length : (sm.bought || 0);
-    const executorAct = bought
-      ? `bought ${bought} this scan · paper`
-      : "idle — nothing cleared the score gate, so no entry";
-    const riskAct = nOpen
-      ? `${nOpen} open · stops armed` + (nTrail ? ` · ${nTrail} trailing` : "")
-      : `no open positions · stop ${stopTxt} · trail ${trailTxt}`;
-    const agents = [
-      { id: "scout", name: "Scout", subtitle: "age and mcap window", activity: scoutAct, badge: Number(scanned).toLocaleString() },
-      { id: "filter", name: "Filter", subtitle: "reason for all", activity: filterAct, badge: `${Number(killsTotal).toLocaleString()}` },
-      { id: "analyst", name: "Analyst", subtitle: "score gate only", activity: analystAct, badge: Number(funnel.scored || 0).toLocaleString() },
-      { id: "executor", name: "Executor", subtitle: "size cap from config", activity: executorAct, badge: Number(traded).toLocaleString() },
-      { id: "risk", name: "Risk", subtitle: `stop ${stopTxt} · trail ${trailTxt}`, activity: riskAct, badge: `${nOpen} open` },
-      { id: "logger", name: "Logger", subtitle: "reason for all", activity: `${killsTotal} kills logged · ${traded} trades`, badge: Number(killsTotal + traded).toLocaleString() }
-    ];
-    const feed = [];
-    (d.recent_rejects || []).slice(0, 40).forEach(r => {
-      const stage = String(r.stage || "filter").toLowerCase();
-      const agent = stage.indexOf("analyst") >= 0 ? "ANALYST" : (stage.indexOf("execut") >= 0 ? "EXECUTOR" : (stage.indexOf("risk") >= 0 ? "RISK" : "FILTER"));
-      feed.push({ kind: "kill", hhmm: hhmmFrom(r.at), agent, action: `killed ${r.symbol || "coin"} · ${r.gate || ""} · ${r.reason || ""}`.replace(/\s+·\s+$/, "") });
-    });
-    closed.slice(0, 6).forEach(p => {
-      const sign = (p.pnl_usd || 0) >= 0 ? "+" : "";
-      feed.push({ kind: "sell", hhmm: hhmmFrom(p.closed), agent: "RISK", action: `sold ${p.symbol} · ${(p.reason || "exit").replace(/_/g, " ")} · P&L ${sign}${usd(p.pnl_usd)}` });
-    });
-    return {
-      equity: {
-        equity_usd: equity, pnl_usd: pnl, pnl_pct: pnlPct,
-        multiplier: start ? equity / start : 1,
-        wins: d.wins || 0, losses: d.losses || 0
-      },
-      scanner: { running, stale, label },
-      stats: { scanned, traded },
-      kills_total: killsTotal,
-      best_trade: best,
-      ticker: d.ticker || [],
-      agents,
-      feed,
-      equity_curve: d.equity_curve || [],
-      open_positions: open,
-      closed_trades: closed,
-      kills_by_rule: kills,
-      entry_pause: d.entry_pause || null
-    };
-  }
+  });
+  window.addEventListener("hashchange", function () { showTab(location.hash.slice(1)); });
+  ["f-trade-desk"].forEach(function (id) { $(id).addEventListener("change", renderTrades); });
+  ["f-mr-desk", "f-mr-gate", "f-mr-sort"].forEach(function (id) { $(id).addEventListener("change", renderMissed); });
+  ["f-fun-win"].forEach(function (id) { $(id).addEventListener("change", renderFunnels); });
+  ["f-rej-desk", "f-rej-gate"].forEach(function (id) { $(id).addEventListener("change", renderRejs); });
+  $("f-rej-q").addEventListener("input", renderRejs);
 
-  function apply(s) {
-    const eq = s.equity || {};
-    document.getElementById("eq-num").textContent = usd(eq.equity_usd);
-    const pnlEl = document.getElementById("eq-pnl");
-    const sign = (eq.pnl_usd || 0) >= 0 ? "+" : "";
-    pnlEl.textContent = `${sign}${usd(eq.pnl_usd).replace("+","")} (${sign}${(eq.pnl_pct||0).toFixed(2)}%)`;
-    pnlEl.className = "pnl " + ((eq.pnl_usd||0) > 0 ? "up" : ((eq.pnl_usd||0) < 0 ? "dn" : ""));
-    const m = document.getElementById("eq-mult");
-    const mult = eq.multiplier != null ? eq.multiplier : 1;
-    m.textContent = mult.toFixed(2) + "x";
-    m.className = "mult " + (mult > 1 ? "" : (mult < 1 ? "dn" : "flat"));
-    document.getElementById("eq-w").textContent = eq.wins ?? 0;
-    document.getElementById("eq-l").textContent = eq.losses ?? 0;
-
-    const st = s.scanner || {};
-    const pill = document.getElementById("status");
-    pill.className = "pill " + (st.running && !st.stale ? "on" : (st.running ? "stale" : "off"));
-    let lab = st.label || (st.running ? "Running" : "Stopped");
-    if (st.last_scan_at) lab += " · " + st.last_scan_at.replace(/^[A-Za-z]{3} \d+ /, "");
-    const pause = s.entry_pause;
-    if (pause && pause.paused) lab += " · entries paused";
-    document.getElementById("status-lab").textContent = lab;
-    const sub = document.getElementById("brand-sub");
-    if (sub) {
-      sub.textContent = (pause && pause.paused)
-        ? ("Entries paused · " + (pause.reason || "drawdown brake"))
-        : "Solana memes · strict RM · PAPER ONLY";
-    }
-
-    const stats = s.stats || {};
-    document.getElementById("stats").textContent =
-      `${(stats.scanned||0).toLocaleString()} scanned · ${(stats.traded||0).toLocaleString()} traded`;
-    document.getElementById("killed-n").textContent = `${(s.kills_total||0).toLocaleString()} killed`;
-
-    const best = s.best_trade;
-    const bestEl = document.getElementById("best");
-    if (best && best.symbol) {
-      const p = best.pnl_usd >= 0 ? "up" : "dn";
-      bestEl.className = "toast-best";
-      bestEl.innerHTML = `<span class="lbl">Best trade</span>${esc(best.symbol)} ${best.pnl_usd>=0?"+":""}${usd(best.pnl_usd)} (${(best.pnl_pct>=0?"+":"")}${(best.pnl_pct||0).toFixed(1)}%)`;
-      bestEl.style.background = best.pnl_usd >= 0 ? "var(--green-soft)" : "var(--red-soft)";
-      bestEl.style.color = best.pnl_usd >= 0 ? "var(--green)" : "var(--red)";
-    } else {
-      bestEl.className = "toast-best hidden";
-    }
-
-    renderTicker(s.ticker);
-    renderAgents(s.agents);
-    renderFeed(s.feed);
-    drawChart(s.equity_curve);
-    renderTable("open-sec", "open-body", s.open_positions, p => {
-      const pc = chg(p.pnl_pct);
-      return `<tr>
-        <td class="sym">${esc(p.symbol)}</td>
-        <td>${px(p.entry)}</td>
-        <td>${usd(p.size_usd)}</td>
-        <td>${p.score != null ? p.score : "—"}</td>
-        <td>${p.x_score != null ? p.x_score : "—"}</td>
-        <td>${px(p.stop)}</td>
-        <td>${p.trail_active ? "on" : "off"}</td>
-        <td class="${pc.cls}">${usd(p.pnl_usd)} (${pc.t})</td>
-      </tr>`;
-    });
-    renderTable("closed-sec", "closed-body", s.closed_trades, p => {
-      const pc = chg(p.pnl_pct);
-      return `<tr>
-        <td class="sym">${esc(p.symbol)}</td>
-        <td>${px(p.entry)}</td>
-        <td>${px(p.exit)}</td>
-        <td>${esc((p.reason||"").replaceAll("_"," "))}</td>
-        <td>${p.x_score != null ? p.x_score : "—"}</td>
-        <td class="${pc.cls}">${usd(p.pnl_usd)} (${pc.t})</td>
-      </tr>`;
-    });
-    renderBars(s.kills_by_rule);
-  }
-
-  async function fetchJson(url) {
-    const r = await fetch(url, { cache: "no-store" });
-    if (!r.ok) throw new Error(r.status + " " + url);
-    return r.json();
-  }
-
-  async function poll() {
-    const urls = ["api/state"].concat(STATE_URLS.map(u => u + "?t=" + Date.now()));
-    let lastErr = null;
-    for (let i = 0; i < urls.length; i++) {
-      try {
-        apply(normalize(await fetchJson(urls[i])));
-        return;
-      } catch (e) {
-        lastErr = e;
-      }
-    }
-    const pill = document.getElementById("status");
-    if (!pill.className.includes("stale") && !pill.className.includes("off")) {
-      pill.className = "pill stale";
-    }
-    if (window.console && lastErr) console.warn(lastErr);
-  }
+  showTab(location.hash.slice(1));
+  renderAll();
   poll();
-  pollCopy();
-  pollDip();
-  setInterval(function () { poll(); pollCopy(); pollDip(); }, 30000);
+  setInterval(poll, 30000);
+  setInterval(function () { try { renderStrip(); } catch (e) { /* ignore */ } }, 30000);
 })();
 </script>
 </body>
