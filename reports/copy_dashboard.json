@@ -1,0 +1,388 @@
+{
+ "generated_at": "2026-11-21 20:39:12Z",
+ "generated_ts": 1795293552.9273708,
+ "mode": "PAPER ONLY",
+ "balance": {
+  "starting_usd": 100.0,
+  "cash_usd": 99.2029,
+  "equity_usd": 99.2029,
+  "total_pnl_usd": -0.7971,
+  "total_pnl_pct": -0.8
+ },
+ "open_positions": [],
+ "closed_trades": [
+  {
+   "symbol": "JEATER",
+   "mint": "HV3bNdQXCGERRdSZm8ockMAEUAgoQ3qT1V67ebnxpump",
+   "leader": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "leader_label": "early-mihao+HOGE+BIG (286 closed, 40.9% wr, +0.75 SOL, 7d negative)",
+   "size_usd": 8.0,
+   "entry_fill": 0.00011693329084710538,
+   "leader_price": 0.00012093542803114696,
+   "slippage_vs_leader_pct": -3.3093174177304174,
+   "exit_reason": "liq_drop",
+   "pnl_usd": -0.7971440288971872,
+   "pnl_pct": -9.964300361214839,
+   "detection_latency_s": 0.8880212306976318,
+   "opened_at": 1794884427.7944663,
+   "closed_at": 1794884472.3745627
+  }
+ ],
+ "wins": 0,
+ "losses": 1,
+ "recent_events": [
+  {
+   "ts": 1795286624.5719333,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "72mQThogLxX1hGCrQAhf4ckxt6YeHFA7E9Kcitrpump",
+   "side": "sell",
+   "latency_s": 5.536535263061523,
+   "slippage_vs_leader_pct": null,
+   "note": "latency 5.536535263061523s"
+  },
+  {
+   "ts": 1795286402.0378711,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "72mQThogLxX1hGCrQAhf4ckxt6YeHFA7E9Kcitrpump",
+   "side": null,
+   "latency_s": null,
+   "slippage_vs_leader_pct": null,
+   "note": "liquidity missing"
+  },
+  {
+   "ts": 1795286401.589883,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "72mQThogLxX1hGCrQAhf4ckxt6YeHFA7E9Kcitrpump",
+   "side": "buy",
+   "latency_s": 3.4867799282073975,
+   "slippage_vs_leader_pct": null,
+   "note": "latency 3.4867799282073975s"
+  },
+  {
+   "ts": 1795284574.243967,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "5DXhycfJ9bdnx2sxbPoGZk9L3wZnjGdMJVMJSQY5pump",
+   "side": "sell",
+   "latency_s": 5.189675807952881,
+   "slippage_vs_leader_pct": null,
+   "note": "latency 5.189675807952881s"
+  },
+  {
+   "ts": 1795284198.3472276,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "5DXhycfJ9bdnx2sxbPoGZk9L3wZnjGdMJVMJSQY5pump",
+   "side": null,
+   "latency_s": null,
+   "slippage_vs_leader_pct": null,
+   "note": "liquidity missing"
+  },
+  {
+   "ts": 1795284196.6962051,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "5DXhycfJ9bdnx2sxbPoGZk9L3wZnjGdMJVMJSQY5pump",
+   "side": "buy",
+   "latency_s": 7.606658697128296,
+   "slippage_vs_leader_pct": null,
+   "note": "latency 7.606658697128296s"
+  },
+  {
+   "ts": 1795279732.126268,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "EAvEkfAnQtazgMsGeY2LD5u3SuZLGXZqiMhoKg29pump",
+   "side": "sell",
+   "latency_s": 1.0764403343200684,
+   "slippage_vs_leader_pct": null,
+   "note": "latency 1.0764403343200684s"
+  },
+  {
+   "ts": 1795279512.0105536,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "EAvEkfAnQtazgMsGeY2LD5u3SuZLGXZqiMhoKg29pump",
+   "side": null,
+   "latency_s": null,
+   "slippage_vs_leader_pct": null,
+   "note": "liquidity missing"
+  },
+  {
+   "ts": 1795279511.3075376,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "EAvEkfAnQtazgMsGeY2LD5u3SuZLGXZqiMhoKg29pump",
+   "side": "buy",
+   "latency_s": 2.184720039367676,
+   "slippage_vs_leader_pct": null,
+   "note": "latency 2.184720039367676s"
+  },
+  {
+   "ts": 1795278626.75801,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "BFzEwy2Y8m5f8yhfeC62fBsnCgX9dU4qKbWMAkEGpump",
+   "side": "sell",
+   "latency_s": 1.7009453773498535,
+   "slippage_vs_leader_pct": null,
+   "note": "latency 1.7009453773498535s"
+  },
+  {
+   "ts": 1795278437.43983,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "BFzEwy2Y8m5f8yhfeC62fBsnCgX9dU4qKbWMAkEGpump",
+   "side": null,
+   "latency_s": null,
+   "slippage_vs_leader_pct": null,
+   "note": "safety budget exceeded"
+  },
+  {
+   "ts": 1795278432.3368394,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "BFzEwy2Y8m5f8yhfeC62fBsnCgX9dU4qKbWMAkEGpump",
+   "side": "buy",
+   "latency_s": 10.288678169250488,
+   "slippage_vs_leader_pct": null,
+   "note": "latency 10.288678169250488s"
+  },
+  {
+   "ts": 1795273954.230303,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "7cPgB3RJUZUeTEc9ZM3eFahvTMMdR89SGgYPf7Mapump",
+   "side": "sell",
+   "latency_s": 1.1528751850128174,
+   "slippage_vs_leader_pct": null,
+   "note": "latency 1.1528751850128174s"
+  },
+  {
+   "ts": 1795273580.9331007,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "7cPgB3RJUZUeTEc9ZM3eFahvTMMdR89SGgYPf7Mapump",
+   "side": null,
+   "latency_s": null,
+   "slippage_vs_leader_pct": null,
+   "note": "liquidity missing"
+  },
+  {
+   "ts": 1795273580.5013227,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "7cPgB3RJUZUeTEc9ZM3eFahvTMMdR89SGgYPf7Mapump",
+   "side": "buy",
+   "latency_s": 10.50124979019165,
+   "slippage_vs_leader_pct": null,
+   "note": "latency 10.50124979019165s"
+  },
+  {
+   "ts": 1795271550.6264968,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "85Ej8BWR8hXDBVt6h8qgomaUzei5r4dqKXAh92Gwpump",
+   "side": "sell",
+   "latency_s": 1.5714342594146729,
+   "slippage_vs_leader_pct": null,
+   "note": "latency 1.5714342594146729s"
+  },
+  {
+   "ts": 1795271331.0731285,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "85Ej8BWR8hXDBVt6h8qgomaUzei5r4dqKXAh92Gwpump",
+   "side": null,
+   "latency_s": null,
+   "slippage_vs_leader_pct": null,
+   "note": "liquidity missing"
+  },
+  {
+   "ts": 1795271330.6070607,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "85Ej8BWR8hXDBVt6h8qgomaUzei5r4dqKXAh92Gwpump",
+   "side": "buy",
+   "latency_s": 2.559398889541626,
+   "slippage_vs_leader_pct": null,
+   "note": "latency 2.559398889541626s"
+  },
+  {
+   "ts": 1795270585.3105712,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "DmrUPQKm5ifGaneG1bTkUD9sjSF2Th7qiwV7GwUYpump",
+   "side": "sell",
+   "latency_s": 1.198962926864624,
+   "slippage_vs_leader_pct": null,
+   "note": "latency 1.198962926864624s"
+  },
+  {
+   "ts": 1795270268.8468266,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "DmrUPQKm5ifGaneG1bTkUD9sjSF2Th7qiwV7GwUYpump",
+   "side": null,
+   "latency_s": null,
+   "slippage_vs_leader_pct": null,
+   "note": "liquidity missing"
+  },
+  {
+   "ts": 1795270268.4282608,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "DmrUPQKm5ifGaneG1bTkUD9sjSF2Th7qiwV7GwUYpump",
+   "side": "buy",
+   "latency_s": 1.3311796188354492,
+   "slippage_vs_leader_pct": null,
+   "note": "latency 1.3311796188354492s"
+  },
+  {
+   "ts": 1795267436.7234013,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "GsKXTWqJvZtUekcNGTQoWGPSU2fgsdrCNDBoeV9Npump",
+   "side": "sell",
+   "latency_s": 1.6875231266021729,
+   "slippage_vs_leader_pct": null,
+   "note": "latency 1.6875231266021729s"
+  },
+  {
+   "ts": 1795267318.7017465,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "GsKXTWqJvZtUekcNGTQoWGPSU2fgsdrCNDBoeV9Npump",
+   "side": null,
+   "latency_s": null,
+   "slippage_vs_leader_pct": null,
+   "note": "liquidity missing"
+  },
+  {
+   "ts": 1795267318.2614186,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "GsKXTWqJvZtUekcNGTQoWGPSU2fgsdrCNDBoeV9Npump",
+   "side": "buy",
+   "latency_s": 1.1573200225830078,
+   "slippage_vs_leader_pct": null,
+   "note": "latency 1.1573200225830078s"
+  },
+  {
+   "ts": 1795261040.162103,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "A8SopfixaQUJ3Aivs87q7SzrMi6FMrpNMGyx3x4vpump",
+   "side": "sell",
+   "latency_s": 1.0624351501464844,
+   "slippage_vs_leader_pct": null,
+   "note": "latency 1.0624351501464844s"
+  },
+  {
+   "ts": 1795254242.6361587,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "A8SopfixaQUJ3Aivs87q7SzrMi6FMrpNMGyx3x4vpump",
+   "side": "sell",
+   "latency_s": 0.5375583171844482,
+   "slippage_vs_leader_pct": null,
+   "note": "latency 0.5375583171844482s"
+  },
+  {
+   "ts": 1795248363.0725024,
+   "wallet": "FHvBFrvg1RBXe27uucghF6bQQYNTuf8pjcnrSsnA2aWY",
+   "mint": "F5kvpUYbbMsvk7zLtjqu3oiRyrmbCntBFFZHiWuapump",
+   "side": "sell",
+   "latency_s": 0.9828462600708008,
+   "slippage_vs_leader_pct": null,
+   "note": "latency 0.9828462600708008s"
+  },
+  {
+   "ts": 1795247098.104294,
+   "wallet": "FHvBFrvg1RBXe27uucghF6bQQYNTuf8pjcnrSsnA2aWY",
+   "mint": "F5kvpUYbbMsvk7zLtjqu3oiRyrmbCntBFFZHiWuapump",
+   "side": null,
+   "latency_s": null,
+   "slippage_vs_leader_pct": null,
+   "note": "liquidity missing"
+  },
+  {
+   "ts": 1795247097.7483492,
+   "wallet": "FHvBFrvg1RBXe27uucghF6bQQYNTuf8pjcnrSsnA2aWY",
+   "mint": "F5kvpUYbbMsvk7zLtjqu3oiRyrmbCntBFFZHiWuapump",
+   "side": "buy",
+   "latency_s": 0.7216291427612305,
+   "slippage_vs_leader_pct": null,
+   "note": "latency 0.7216291427612305s"
+  },
+  {
+   "ts": 1795235744.0761604,
+   "wallet": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "mint": "J5xvseARowcz7L51mYNVdCdypNJKCdpahuuFCsXgpump",
+   "side": "sell",
+   "latency_s": 5.059081077575684,
+   "slippage_vs_leader_pct": null,
+   "note": "latency 5.059081077575684s"
+  }
+ ],
+ "wallets": [
+  {
+   "address": "6YCQcp4SfJbwkz8rrENYy26FAtCR2jqkTxZKTymeC7tC",
+   "label": "disabled: full USDC-inclusive check showed -7.76 SOL, 4 closes",
+   "enabled": false
+  },
+  {
+   "address": "FHvBFrvg1RBXe27uucghF6bQQYNTuf8pjcnrSsnA2aWY",
+   "label": "early-WASTED+HWAN (90 closed, 77.8% wr, +4.28 SOL, 9.6m hold)",
+   "enabled": true
+  },
+  {
+   "address": "9xHqBH1FtbN1T57u6RSZDn6ykkJzDjNMJe9M1jN7j8NQ",
+   "label": "disabled: 7d -18.25 SOL, 14d -13.61 SOL (119 closed, 52.1% wr, 3.6h hold)",
+   "enabled": false
+  },
+  {
+   "address": "5n593DWQkpfFgA69mS1MFWJDRZDCLcAuEsQYryqxi22Z",
+   "label": "Smart Degen 5n593DWQ (27 closed, 48.1% wr, +42.14 SOL, one-token concentrated)",
+   "enabled": true
+  },
+  {
+   "address": "6JJdhkhk2fsxJcv5f2pEfrkMfHDe6bJSWT6JF2pUXGAK",
+   "label": "Smart Degen 6JJdhkhk (77 closed, 64.9% wr, +52.61 SOL, 50.2m hold)",
+   "enabled": true
+  },
+  {
+   "address": "3BaHX3PW14oP9m96f5JKv5RHojEtbztRWsUQvfFTSAX8",
+   "label": "Smart Degen 3BaHX3PW (30 closed, 66.7% wr, +22.03 SOL, 3.1h hold)",
+   "enabled": true
+  },
+  {
+   "address": "DGPk66NJFJgnmmy6ccc6HorB25jPfWGKi3zga2zFg5hk",
+   "label": "early-HOGE+WIGGLES (385 closed, 44.9% wr, +12.72 SOL, 7d negative)",
+   "enabled": true
+  },
+  {
+   "address": "4go9NPyTLpftonEXnweuypmSSfNzgjrzRXFK5Az6H2qw",
+   "label": "early-mihao+HOGE+BIG (286 closed, 40.9% wr, +0.75 SOL, 7d negative)",
+   "enabled": true
+  },
+  {
+   "address": "8HcYptCBAaPFWkmupiSAmysZ6Z8jB7N1c4YhVjhX7zbg",
+   "label": "8HcYptCB reference",
+   "enabled": false
+  },
+  {
+   "address": "ELGNVYE7X1R1uQSuVqFN8TxbV7AipcQ23HmmqNhCVUMy",
+   "label": "ELGNVYE7 reference",
+   "enabled": false
+  },
+  {
+   "address": "2zm4rjzCT7HxfmjpG3vZHhD4s4fY9dkXi85ms4CMSGi7",
+   "label": "early-mihao+Leonida, 118s hold",
+   "enabled": false
+  }
+ ],
+ "event_reasons": {
+  "liquidity missing": 66,
+  "safety budget exceeded": 2,
+  "mint or freeze authority still set": 1,
+  "fill 41788103.5% worse than leader": 1,
+  "fill 40492336.2% worse than leader": 1,
+  "fill 39772117.8% worse than leader": 1,
+  "fill 311396566.6% worse than leader": 1,
+  "fill 269895.5% worse than leader": 1,
+  "fill 224223645.1% worse than leader": 1,
+  "fill 186032512.8% worse than leader": 1
+ },
+ "health": {
+  "status": "ok",
+  "errors": [],
+  "sources": {
+   "wallets_enabled": 6
+  }
+ },
+ "rules": {
+  "stop_net_pct": -8.0,
+  "take_profit_net_pct": 40.0,
+  "take_profit_fraction": 0.5,
+  "trail_distance_from_peak_pct": 15.0,
+  "leader_sell_fraction": 0.25
+ }
+}

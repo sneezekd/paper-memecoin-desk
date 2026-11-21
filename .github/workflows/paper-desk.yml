@@ -1,0 +1,49 @@
+# Paper-only Solana memecoin desk. No secrets, no wallet, no live orders.
+# Cron cannot run faster than every 5 minutes and is often late, so each run
+# stays up for about 5h45m. A new run is queued every 30 minutes and waits in
+# this concurrency group, which keeps a single pending handoff ready.
+name: Paper desk
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: paper-desk
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  relay:
+    name: paper relay
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: true
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Relay loop
+        env:
+          DESK_PUSH_STATE: "1"
+          DESK_MANAGE_SEC: "50"
+          DESK_SCAN_SEC: "180"
+          DESK_MAX_SECONDS: "20700"
+        run: ./scheduler.sh ci-loop
+
+      - name: Persist state before exit
+        if: always()
+        env:
+          DESK_PUSH_STATE: "1"
+        run: ./scheduler.sh commit-state

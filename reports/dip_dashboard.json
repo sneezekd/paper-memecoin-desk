@@ -1,0 +1,4187 @@
+{
+ "mode": "PAPER ONLY",
+ "updated_at": 1795293458.4851236,
+ "generated_ts": 1795293458.4851236,
+ "closed_trades": [],
+ "wins": 0,
+ "losses": 0,
+ "recent_rejections": [
+  {
+   "mint": "29LxBq5GiDJtgW9HLmgYzBKKGj4Ue1jH9wDzFWkTpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $2",
+   "ts": 1795293458.4036822,
+   "price": 1.478e-09,
+   "mcap": 3.0,
+   "liq": 4.2,
+   "chg_h1": -96.52
+  },
+  {
+   "mint": "DnJK43qFfwdaUBTZdcSqdQK7vBNPCfC1ZVBmL7CXpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $6",
+   "ts": 1795293454.109661,
+   "price": 3.051e-08,
+   "mcap": 61.0,
+   "liq": 15.13,
+   "chg_h1": -11.57
+  },
+  {
+   "mint": "4RtmiCdvKszPoW5oNyjXC5uK8kfM6HjE4Gt2g7sNpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $9.6K",
+   "ts": 1795293215.365247,
+   "price": 2.776e-05,
+   "mcap": 27767.0,
+   "liq": null,
+   "chg_h1": -4.95
+  },
+  {
+   "mint": "e5SH8rr8ypL3KsXbxWUPvurj1Yq9akm8pzVoLshpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $1",
+   "ts": 1795293211.018341,
+   "price": 6.384e-09,
+   "mcap": 13.0,
+   "liq": 3.28,
+   "chg_h1": -38.5
+  },
+  {
+   "mint": "G2m7PA1WUNZMH9Jx5JKwuU7ofHu5poxwYksEttz4pump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $5.3K",
+   "ts": 1795292725.1890445,
+   "price": 2.191e-05,
+   "mcap": 21913.0,
+   "liq": 9214.61,
+   "chg_h1": -21.93
+  },
+  {
+   "mint": "3E9DZfZagjeXsfpaVzyetu1cZbKBTXmW2cRiz2HVUTDv",
+   "symbol": "THEAP",
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $1",
+   "ts": 1795292660.2082536,
+   "price": 4.226e-10,
+   "mcap": 1.0,
+   "liq": 1.48,
+   "chg_h1": -97.99
+  },
+  {
+   "mint": "GM8DK56XEFdsbHZ5tEndMf9ypfVbUVfothW7RPsupump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $14.0K",
+   "ts": 1795292539.524078,
+   "price": 3.952e-05,
+   "mcap": 39527.0,
+   "liq": 12815.04,
+   "chg_h1": 34.99
+  },
+  {
+   "mint": "7ZvVvfLrjdCpCrPLhmSk3VMFB3hGgHoWNtzPtS14pump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "copycat",
+   "reason": "copycat of VTC",
+   "ts": 1795292424.2442853,
+   "price": 9.745e-05,
+   "mcap": 97406.0,
+   "liq": 20783.16,
+   "chg_h1": 206.0
+  },
+  {
+   "mint": "4tSyA4g1odGi629vqnEmxWdSqzmYmzSbo5zbMiuVpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $0",
+   "ts": 1795292357.625045,
+   "price": 1.784e-08,
+   "mcap": 36.0,
+   "liq": null,
+   "chg_h1": 112.0
+  },
+  {
+   "mint": "7C2Xv1G9HeB2KQfzw24iJ8oR1soHGpL6a2gzgDVnpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $6.3K",
+   "ts": 1795292175.5310152,
+   "price": 3.31e-05,
+   "mcap": 33104.0,
+   "liq": 11589.28,
+   "chg_h1": 13.14
+  },
+  {
+   "mint": "hMXHcSc79hpYJpX6S8WV7ASbwNp7F9sNne3giaEpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $1",
+   "ts": 1795291812.7851684,
+   "price": 1.637e-08,
+   "mcap": 33.0,
+   "liq": null,
+   "chg_h1": 55.53
+  },
+  {
+   "mint": "dE2iMhRL19Nw35yjGm6H78yD9YTGN8dNTkjc3sqpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $3",
+   "ts": 1795291752.4541645,
+   "price": 1.312e-09,
+   "mcap": 3.0,
+   "liq": 3.8,
+   "chg_h1": -97.47
+  },
+  {
+   "mint": "friqAKh5S9e8HYNuZtXSe5kVumGKPGT7sD7aGSCpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $400",
+   "ts": 1795291631.3936794,
+   "price": 1.267e-06,
+   "mcap": 2535.0,
+   "liq": 551.47,
+   "chg_h1": -10.25
+  },
+  {
+   "mint": "EgS3Df2c26PY6CF2XxHS64XPgeiv98uzuiodJT6S16X",
+   "symbol": "BITINU",
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $5",
+   "ts": 1795291575.7502239,
+   "price": 2.57e-09,
+   "mcap": 5.0,
+   "liq": null,
+   "chg_h1": -96.39
+  },
+  {
+   "mint": "pumptGRwCjbBVT9dskwqNDpYGLwS3VuDNiD6uiRssEm",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $11.0K",
+   "ts": 1795291571.528476,
+   "price": 3.51e-05,
+   "mcap": 35070.0,
+   "liq": 12011.08,
+   "chg_h1": 22.98
+  },
+  {
+   "mint": "A7P2kLjmVyB3jAteyUqzh31UX4fmqWp5x9xzDuJ7pump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $40",
+   "ts": 1795291511.2282076,
+   "price": 2.885e-07,
+   "mcap": 577.0,
+   "liq": 126.44,
+   "chg_h1": 11.78
+  },
+  {
+   "mint": "7abgv392gsP25DZ8Q5YGYAVtykVfNvvzWLZQeX6apump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $7",
+   "ts": 1795291338.202987,
+   "price": 3.082e-09,
+   "mcap": 6.0,
+   "liq": 8.49,
+   "chg_h1": -96.86
+  },
+  {
+   "mint": "7yMnhNL1ogfn3f1gjE6igi25Qj42WWdEybaKEZJkpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $13.3K",
+   "ts": 1795291333.8223183,
+   "price": 3.212e-05,
+   "mcap": 32081.0,
+   "liq": 11397.02,
+   "chg_h1": 9.83
+  },
+  {
+   "mint": "E7nFMcFDT8PhX8VQYifr9zLtaXe318MUkkyYRwhcpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $18.2K",
+   "ts": 1795291329.625882,
+   "price": 8.483e-05,
+   "mcap": 84833.0,
+   "liq": 19346.43,
+   "chg_h1": 165.0
+  },
+  {
+   "mint": "Dz9LRiD9JZhJ2NFzUd7YKnUHqgsqSWPqzqwLUnw3pump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $11",
+   "ts": 1795291269.7291863,
+   "price": 4.662e-08,
+   "mcap": 93.0,
+   "liq": 19.6,
+   "chg_h1": -2.58
+  },
+  {
+   "mint": "5vh1khFqXp2BdboRv7ycBknTeMEG9rT8kKqBk3BKpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $11.5K",
+   "ts": 1795290967.5941446,
+   "price": 3.407e-05,
+   "mcap": 34015.0,
+   "liq": 11791.85,
+   "chg_h1": 16.5
+  },
+  {
+   "mint": "DcXt3VREW9kJvN2wAyRpYDacg12W7Dzy3RjEMxQDpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $5",
+   "ts": 1795290664.5710945,
+   "price": 1.757e-08,
+   "mcap": 35.0,
+   "liq": 10.19,
+   "chg_h1": -38.61
+  },
+  {
+   "mint": "G16MVSAVMUc43oTugpP7mTwBwb4F5efky723Ghnspump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $1",
+   "ts": 1795290604.4974554,
+   "price": 5.847e-09,
+   "mcap": 12.0,
+   "liq": 4.74,
+   "chg_h1": -73.74
+  },
+  {
+   "mint": "C8KYaCpPKpsP1bhnDwtVKMHHA8jVi4pc6oNASF5dpump",
+   "symbol": "TIMMYTHICK",
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $6",
+   "ts": 1795290483.3421323,
+   "price": 2.671e-09,
+   "mcap": 5.0,
+   "liq": 6.98,
+   "chg_h1": -94.77
+  },
+  {
+   "mint": "CUxcbWRhChNNscAsTLXgp7fHH2AeT7zBgNwvhcdTpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $5.6K",
+   "ts": 1795290422.8680596,
+   "price": 8.956e-06,
+   "mcap": 8940.0,
+   "liq": 5461.5,
+   "chg_h1": -69.43
+  },
+  {
+   "mint": "39RViwf3G3Sh9qSq8tnnnrGfqCV5TSXkEJFpk1CGpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $3",
+   "ts": 1795290247.9559884,
+   "price": 9.306e-10,
+   "mcap": 2.0,
+   "liq": 3.27,
+   "chg_h1": -98.22
+  },
+  {
+   "mint": "4nij2GasfEfyZStUA8BsaGsdzYvxS5UstnVKZDNmpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $43",
+   "ts": 1795290200.3331344,
+   "price": 1.922e-07,
+   "mcap": 326.0,
+   "liq": 56.31,
+   "chg_h1": 98.19
+  },
+  {
+   "mint": "3uHnnphofgbJbuxEmqFRjmj6m8G7s585zAyxCWFspump",
+   "symbol": "Jensen",
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $17",
+   "ts": 1795290004.5805862,
+   "price": 3.731e-09,
+   "mcap": 7.0,
+   "liq": 11.63,
+   "chg_h1": -97.7
+  },
+  {
+   "mint": "72mQThogLxX1hGCrQAhf4ckxt6YeHFA7E9Kcitrpump",
+   "symbol": null,
+   "status": "dropped",
+   "gate": "timed out",
+   "reason": "timed out",
+   "ts": 1795290000.3664665,
+   "price": null,
+   "mcap": null,
+   "liq": null,
+   "chg_h1": 6.19
+  },
+  {
+   "mint": "Dtx414D8jurspmB1jqJWsYU66pemoXRjQeXx7TC1pump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $11.3K",
+   "ts": 1795289885.472785,
+   "price": 2.956e-05,
+   "mcap": 29515.0,
+   "liq": 10975.72,
+   "chg_h1": 2.66
+  },
+  {
+   "mint": "41WpXn15fxQXEGhiKnkqHcoJn14tNXXgmymLKE57pump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $3.2K",
+   "ts": 1795289707.4182823,
+   "price": 3.451e-06,
+   "mcap": 3424.0,
+   "liq": 3236.14,
+   "chg_h1": null
+  },
+  {
+   "mint": "7SjpHoT4mJrqCdS8F1sN3EaNNm7Zv4ijCwgXeYr7xVkr",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $10.7K",
+   "ts": 1795289702.4327867,
+   "price": 3.558e-05,
+   "mcap": 35538.0,
+   "liq": 12178.27,
+   "chg_h1": 17.13
+  },
+  {
+   "mint": "BganZwsMszyogAEDsncgHgjt12qXjKD1NV9iZzvVpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $12.5K",
+   "ts": 1795289643.4097838,
+   "price": 3.007e-05,
+   "mcap": 30070.0,
+   "liq": 10991.55,
+   "chg_h1": 2.76
+  },
+  {
+   "mint": "DRPPEw6J7rrsBEwP59SSjtKxmVB32v7sd7eheccapump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $11.6K",
+   "ts": 1795289580.6175413,
+   "price": 2.884e-05,
+   "mcap": 28811.0,
+   "liq": 10732.47,
+   "chg_h1": -1.42
+  },
+  {
+   "mint": "Fq21HdJsqHhUS5qvGf9xAXB8f8UreGuSUzZvTiz4pump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $3.0K",
+   "ts": 1795289538.5704243,
+   "price": 1.106e-05,
+   "mcap": 22136.0,
+   "liq": 2558.67,
+   "chg_h1": 217.0
+  },
+  {
+   "mint": "DKUM8qywmi8X9RYK2wUgnTw8QKjh1nYDThZR1GXPpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $14.5K",
+   "ts": 1795289533.3633263,
+   "price": 4.201e-05,
+   "mcap": 41980.0,
+   "liq": 13491.52,
+   "chg_h1": 52.11
+  },
+  {
+   "mint": "EhYZ1zUAYNX9cWDRPxUPCExQAjged26Mb7Kvywu5pump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $11.5K",
+   "ts": 1795289399.2482862,
+   "price": 3.193e-05,
+   "mcap": 31900.0,
+   "liq": 11364.65,
+   "chg_h1": 9.15
+  },
+  {
+   "mint": "JD7ZPyfru7QbthacQF3Db3Xiw4pNbqV3duZVXXWypump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $12.0K",
+   "ts": 1795289218.427256,
+   "price": 3.307e-05,
+   "mcap": 33075.0,
+   "liq": 11573.65,
+   "chg_h1": 6.12
+  },
+  {
+   "mint": "9ncCobn6duD1NSqgpkyWmc4AJPEXQ8jdN9gfVPmbpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "warns",
+   "reason": "warns: Top 10 holders high ownership, Single holder ownership, High ownership",
+   "ts": 1795288886.163554,
+   "price": 0.0204,
+   "mcap": 20401370.0,
+   "liq": 318802.03,
+   "chg_h1": 68917.0
+  },
+  {
+   "mint": "2kj7bHHXrcMtMbdX5GJ21s74FzRuscHbvt24LgRApump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $45",
+   "ts": 1795288878.7021985,
+   "price": 1.199e-07,
+   "mcap": 193.0,
+   "liq": 40.48,
+   "chg_h1": 48.91
+  },
+  {
+   "mint": "7gqk4Ap5iYjnWHtkwygYp8bcAVFSiMo8aMJ1cGvPpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $14.0K",
+   "ts": 1795288552.1347818,
+   "price": 2.861e-05,
+   "mcap": 28575.0,
+   "liq": 10774.24,
+   "chg_h1": -2.12
+  },
+  {
+   "mint": "DoGEV7LASBkQbibMc5k5vKnTZoMg423GpJ5QtJEGfm7R",
+   "symbol": null,
+   "status": "dropped",
+   "gate": "timed out",
+   "reason": "timed out",
+   "ts": 1795288483.019197,
+   "price": null,
+   "mcap": null,
+   "liq": null,
+   "chg_h1": null
+  },
+  {
+   "mint": "EDSgcwA2zM7zqUkbCyJvtc2u5x9PnvgoX3DAMFALpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $4",
+   "ts": 1795288381.0952494,
+   "price": 1.534e-09,
+   "mcap": 3.0,
+   "liq": 4.1,
+   "chg_h1": -96.84
+  },
+  {
+   "mint": "CdVfnnCTaLgM3Ekdc3K5zkDvFYrZ1dJqCcSoKE8Vpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $11.4K",
+   "ts": 1795288312.8517036,
+   "price": 2.902e-05,
+   "mcap": 29025.0,
+   "liq": 10805.23,
+   "chg_h1": -1.2
+  },
+  {
+   "mint": "6mckp83xPFbe8R2aSJynAVxCxT6wqRZjZ6sor6cUpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $9.6K",
+   "ts": 1795288251.0107954,
+   "price": 2.442e-05,
+   "mcap": 24390.0,
+   "liq": 9824.38,
+   "chg_h1": -14.03
+  },
+  {
+   "mint": "HU5RtCesU76s12TDUsAGoefgvBCFforvJ7G2XD4Xpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $6",
+   "ts": 1795288074.5558789,
+   "price": 3.486e-09,
+   "mcap": 7.0,
+   "liq": 7.84,
+   "chg_h1": -95.92
+  },
+  {
+   "mint": "CbW2cYADNXok2KXr5ShQcy8PbEuo9ZBaw9D53zGxpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $3",
+   "ts": 1795287950.1779137,
+   "price": 1.242e-09,
+   "mcap": 2.0,
+   "liq": 3.43,
+   "chg_h1": -97.48
+  },
+  {
+   "mint": "C8ELvJqaSpfcEAUU1kExrJbD28y8PjwTVooj8gnVpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $11.0K",
+   "ts": 1795287890.8883054,
+   "price": 2.934e-05,
+   "mcap": 29348.0,
+   "liq": 10843.99,
+   "chg_h1": 0.07
+  },
+  {
+   "mint": "A52gBvRof43miaYKekg1c6M5dnRtHJkdTxoUnmXvpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $1.3K",
+   "ts": 1795287856.2427819,
+   "price": 0.0001439,
+   "mcap": 143904.0,
+   "liq": 25594.09,
+   "chg_h1": 386.0
+  },
+  {
+   "mint": "2DPkAuPQFAKn3mnb6GT8H9oK8qm6NGmf3jMt7wbxpump",
+   "symbol": null,
+   "status": "killed",
+   "gate": "liq",
+   "reason": "liq $10.2K",
+   "ts": 1795287713.7606156,
+   "price": 2.27e-05,
+   "mcap": 22663.0,
+   "liq": null,
+   "chg_h1": -23.11
+  }
+ ],
+ "room_counts": {
+  "waiting": 2,
+  "killed": 2430,
+  "dropped": 127,
+  "passed": 0
+ },
+ "rules": {
+  "min_liquidity_usd": 20000,
+  "max_h1_change_pct": 200,
+  "max_top10_pct": 25,
+  "min_pool_age_min": 10,
+  "max_wait_min": 60,
+  "stop_pct": 25,
+  "trail_pct": 40,
+  "dip_entry_pct": 15,
+  "tp_x": 2.0,
+  "min_score": 70,
+  "risk_per_trade_pct": 3,
+  "always_on": true
+ },
+ "health": {
+  "status": "ok",
+  "errors": [],
+  "sources": {
+   "dexscreener_outcomes": "ok",
+   "telegram": "on"
+  }
+ },
+ "missed_runners": [
+  {
+   "address": "B34nXKzCgsJb9ChLuSHPRpXLE3WFSWyeT8Cqkzzmpump",
+   "desk": "dip",
+   "symbol": "FIONA",
+   "url": "https://dexscreener.com/solana/djbltx1hrgzzrjgj7cwtx6sn3d7tbliytkgwombuwtvb",
+   "kill_gate": "liq",
+   "kill_reason": "liq $19.3K",
+   "kill_price": 4.906e-05,
+   "kill_mcap": 48998.0,
+   "kill_liq": 14933.21,
+   "first_kill_ts": 1795121693.3227048,
+   "last_kill_ts": 1795121762.6795762,
+   "kill_count": 1,
+   "peak_price": 0.002968,
+   "peak_mcap": 2921835.0,
+   "peak_ts": 1795168946.4907954,
+   "peak_multiple": 60.49735018344884,
+   "current_price": 0.001566,
+   "current_mcap": 1541231.0,
+   "current_liq": 122412.29,
+   "current_multiple": 31.920097839380347,
+   "min_price": 0.0005848,
+   "last_checked_ts": 1795291450.6694212,
+   "dead": 0
+  },
+  {
+   "address": "7R4MP6VX7n3RMNhL9zsk5Zu5ibZvwq8npUYnRq7epump",
+   "desk": "dip",
+   "symbol": "Singularity",
+   "url": "https://dexscreener.com/solana/58xqwpxdgp3gfu9dafxs8c1gjwtldhdqhjrofaf5ywtv",
+   "kill_gate": "liq",
+   "kill_reason": "liq $9.6K",
+   "kill_price": 2.059e-05,
+   "kill_mcap": 20563.0,
+   "kill_liq": 8785.24,
+   "first_kill_ts": 1795205301.6319509,
+   "last_kill_ts": 1795205372.1361153,
+   "kill_count": 1,
+   "peak_price": 0.0008281,
+   "peak_mcap": 787101.0,
+   "peak_ts": 1795288492.0050502,
+   "peak_multiple": 40.21855269548324,
+   "current_price": 0.0008281,
+   "current_mcap": 787101.0,
+   "current_liq": 74590.07,
+   "current_multiple": 40.21855269548324,
+   "min_price": 1.97e-05,
+   "last_checked_ts": 1795288492.0050502,
+   "dead": 0
+  },
+  {
+   "address": "Jd3NCawdFiDNWpLiTtsMqoeoBMjC1ZQMrMScRVzpump",
+   "desk": "dip",
+   "symbol": "NOHR",
+   "url": "https://dexscreener.com/solana/fbqxu5ezpbbv4vktfd83qperygcotcvqzrtabsxhqs2m",
+   "kill_gate": "liq",
+   "kill_reason": "liq $14.2K",
+   "kill_price": 0.0001279,
+   "kill_mcap": 127908.0,
+   "kill_liq": 23908.37,
+   "first_kill_ts": 1795274510.9930189,
+   "last_kill_ts": 1795274939.18966,
+   "kill_count": 1,
+   "peak_price": 0.002295,
+   "peak_mcap": 2274358.0,
+   "peak_ts": 1795288492.0050502,
+   "peak_multiple": 17.943706020328385,
+   "current_price": 0.001749,
+   "current_mcap": 1733114.0,
+   "current_liq": 95616.35,
+   "current_multiple": 13.674745895230648,
+   "min_price": 7.198e-05,
+   "last_checked_ts": 1795292908.3016865,
+   "dead": 0
+  },
+  {
+   "address": "FyCaKh6wXuot5NmqQMt5oBrSHh3wFk14w5M9dHQDpump",
+   "desk": "dip",
+   "symbol": "HNYDRIP",
+   "url": "https://dexscreener.com/solana/4pfkxaj1s1fkehhqjhxvqp5arbr195vn6d4o7wyn9nyc",
+   "kill_gate": "liq",
+   "kill_reason": "liq $11.6K",
+   "kill_price": 3.025e-05,
+   "kill_mcap": 30258.0,
+   "kill_liq": null,
+   "first_kill_ts": 1795137758.6750426,
+   "last_kill_ts": 1795137832.8014517,
+   "kill_count": 1,
+   "peak_price": 0.0005223,
+   "peak_mcap": 501152.0,
+   "peak_ts": 1795155710.0732465,
+   "peak_multiple": 17.266115702479336,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": 1.555e-06,
+   "last_checked_ts": 1795289218.430163,
+   "dead": 1
+  },
+  {
+   "address": "2TngN4B7XaoGSKsYvttq5bFAdM4Z4xCSnuyRwGiFpump",
+   "desk": "dip",
+   "symbol": "PUNANI",
+   "url": "https://dexscreener.com/solana/cnzhs2nmrnkwtpwk9okduscipbrddghpmnpnmnpd4hwa",
+   "kill_gate": "warns",
+   "kill_reason": "warns: Creator history of rugged tokens",
+   "kill_price": 0.0002042,
+   "kill_mcap": 204201.0,
+   "kill_liq": 29579.29,
+   "first_kill_ts": 1795235256.3462746,
+   "last_kill_ts": 1795235276.1569805,
+   "kill_count": 1,
+   "peak_price": 0.002962,
+   "peak_mcap": 2947744.0,
+   "peak_ts": 1795256161.1710882,
+   "peak_multiple": 14.505386875612144,
+   "current_price": 0.002712,
+   "current_mcap": 2699899.0,
+   "current_liq": 121723.58,
+   "current_multiple": 13.28109696376102,
+   "min_price": 0.0003293,
+   "last_checked_ts": 1795292175.5330417,
+   "dead": 0
+  },
+  {
+   "address": "FJKt1LxbWBpTRt9BaDEB6Wr2qL5LZzjFF5sx8rXnpump",
+   "desk": "dip",
+   "symbol": "MAYA",
+   "url": "https://dexscreener.com/solana/51edmriyson7mwtgqxaysog4z9nnvhvuupbuyy1epcbo",
+   "kill_gate": "h1 pump",
+   "kill_reason": "+241% in 1h",
+   "kill_price": 0.0002782,
+   "kill_mcap": 278169.0,
+   "kill_liq": 34972.13,
+   "first_kill_ts": 1795237736.3146405,
+   "last_kill_ts": 1795238476.127185,
+   "kill_count": 1,
+   "peak_price": 0.003829,
+   "peak_mcap": 3814948.0,
+   "peak_ts": 1795279668.6468914,
+   "peak_multiple": 13.763479511143062,
+   "current_price": 0.001901,
+   "current_mcap": 1894117.0,
+   "current_liq": 99987.79,
+   "current_multiple": 6.833213515456507,
+   "min_price": 0.0007839,
+   "last_checked_ts": 1795289218.430163,
+   "dead": 0
+  },
+  {
+   "address": "dkpuQdjegjU8zcwYrBzYrLW11wvtjwonBsQhjLApump",
+   "desk": "dip",
+   "symbol": "RIEMANN",
+   "url": "https://dexscreener.com/solana/aj5lteuxkptmc6shqg8acvddepgraipupe44s8tamws",
+   "kill_gate": "liq",
+   "kill_reason": "liq $19.7K",
+   "kill_price": 8.492e-05,
+   "kill_mcap": 84872.0,
+   "kill_liq": 18712.12,
+   "first_kill_ts": 1795233622.2706032,
+   "last_kill_ts": 1795233697.5515056,
+   "kill_count": 1,
+   "peak_price": 0.001159,
+   "peak_mcap": 1145709.0,
+   "peak_ts": 1795280441.330717,
+   "peak_multiple": 13.6481394253415,
+   "current_price": 0.0009796,
+   "current_mcap": 967930.0,
+   "current_liq": 71182.53,
+   "current_multiple": 11.535562882713142,
+   "min_price": 0.000122,
+   "last_checked_ts": 1795290720.6598666,
+   "dead": 0
+  },
+  {
+   "address": "8mnJZnxaNLqVwkaWWGH7dKmoEzyYzGJx5pHaCp7spump",
+   "desk": "dip",
+   "symbol": "PATRICK",
+   "url": "https://dexscreener.com/solana/bcgr8mwldxeg9sh9hwgzk9kmbuvn6bq3tjunugfbz6bz",
+   "kill_gate": "liq",
+   "kill_reason": "liq $11.7K",
+   "kill_price": 2.556e-05,
+   "kill_mcap": 25542.0,
+   "kill_liq": 10211.33,
+   "first_kill_ts": 1795157887.5482268,
+   "last_kill_ts": 1795157964.6347651,
+   "kill_count": 1,
+   "peak_price": 0.000277,
+   "peak_mcap": 266398.0,
+   "peak_ts": 1795206814.9479342,
+   "peak_multiple": 10.837245696400627,
+   "current_price": 8.09e-05,
+   "current_mcap": 77785.0,
+   "current_liq": 23536.84,
+   "current_multiple": 3.1651017214397497,
+   "min_price": 1.706e-05,
+   "last_checked_ts": 1795289218.430163,
+   "dead": 0
+  },
+  {
+   "address": "3JPSySKpVBG3u7zjNHd4xCBabkSVzdqHexRfsTpSpump",
+   "desk": "dip",
+   "symbol": "UODF",
+   "url": "https://dexscreener.com/solana/4kamglamekxsokiudq822mstt5m7luz6f5fprweavb6b",
+   "kill_gate": "copycat",
+   "kill_reason": "copycat of UODF",
+   "kill_price": 0.002035,
+   "kill_mcap": 2035621.0,
+   "kill_liq": 101548.62,
+   "first_kill_ts": 1795132075.601103,
+   "last_kill_ts": 1795132090.832365,
+   "kill_count": 1,
+   "peak_price": 0.02127,
+   "peak_mcap": 21259148.0,
+   "peak_ts": 1795284855.3329573,
+   "peak_multiple": 10.452088452088454,
+   "current_price": 1.464e-06,
+   "current_mcap": 1464.0,
+   "current_liq": 1496.91,
+   "current_multiple": 0.0007194103194103195,
+   "min_price": 1.464e-06,
+   "last_checked_ts": 1795289946.2964854,
+   "dead": 0
+  },
+  {
+   "address": "HF2RBPrfNBk9TxggL2cYZFEKSgirzh5HKCngLENTpump",
+   "desk": "dip",
+   "symbol": "LOOSY",
+   "url": "https://dexscreener.com/solana/bfiq9ealcmjpekcgm16gszzgdedcpcfhrafvivrp4qky",
+   "kill_gate": "holders leaving",
+   "kill_reason": "holders leaving -2% in 8m",
+   "kill_price": 0.0002802,
+   "kill_mcap": 280231.0,
+   "kill_liq": 36884.45,
+   "first_kill_ts": 1795136730.8004725,
+   "last_kill_ts": 1795138429.519273,
+   "kill_count": 1,
+   "peak_price": 0.002693,
+   "peak_mcap": 2682110.0,
+   "peak_ts": 1795185597.3378024,
+   "peak_multiple": 9.610992148465384,
+   "current_price": 1.692e-06,
+   "current_mcap": 1686.0,
+   "current_liq": 1930.48,
+   "current_multiple": 0.006038543897216275,
+   "min_price": 1.565e-06,
+   "last_checked_ts": 1795288492.0050502,
+   "dead": 0
+  },
+  {
+   "address": "HVxXzEt87QszpC95kMKAfrHdboj4K1TVxYNMzwmbpump",
+   "desk": "dip",
+   "symbol": "apocry ",
+   "url": "https://dexscreener.com/solana/dklwfze5m6tsduwcbzk3z5okwx1wb6y3ypbwzadvzjks",
+   "kill_gate": "liq",
+   "kill_reason": "liq $14.5K",
+   "kill_price": 2.181e-05,
+   "kill_mcap": 21793.0,
+   "kill_liq": 11445.47,
+   "first_kill_ts": 1795148711.947239,
+   "last_kill_ts": 1795148777.2916036,
+   "kill_count": 1,
+   "peak_price": 0.0002001,
+   "peak_mcap": 187684.0,
+   "peak_ts": 1795155710.0732465,
+   "peak_multiple": 9.174690508940854,
+   "current_price": 1.094e-05,
+   "current_mcap": 10264.0,
+   "current_liq": 8330.68,
+   "current_multiple": 0.5016047684548373,
+   "min_price": 5.968e-06,
+   "last_checked_ts": 1795292175.5330417,
+   "dead": 0
+  },
+  {
+   "address": "8SacNb6sgiAcscRe4m915B6nL9XX55dk8FS7L532pump",
+   "desk": "dip",
+   "symbol": "AI",
+   "url": "https://dexscreener.com/solana/dunrwsxga63cunxqznwqhdynzsqzgiqbaojwaxbl5wu2",
+   "kill_gate": "liq",
+   "kill_reason": "liq $11.5K",
+   "kill_price": 2.588e-05,
+   "kill_mcap": 25852.0,
+   "kill_liq": 12248.36,
+   "first_kill_ts": 1795126169.0640996,
+   "last_kill_ts": 1795126234.9124205,
+   "kill_count": 1,
+   "peak_price": 0.0002345,
+   "peak_mcap": 214353.0,
+   "peak_ts": 1795206814.9479342,
+   "peak_multiple": 9.061051004636786,
+   "current_price": 4.353e-05,
+   "current_mcap": 39790.0,
+   "current_liq": 19268.53,
+   "current_multiple": 1.6819938176197835,
+   "min_price": 4.254e-05,
+   "last_checked_ts": 1795290720.6598666,
+   "dead": 0
+  },
+  {
+   "address": "Csoj9XHJfBAxsKswqKKBENnGeoRDHtACfyYi7HmJpump",
+   "desk": "dip",
+   "symbol": "SWRDXSTFF",
+   "url": "https://dexscreener.com/solana/6lhlddfb54l1xqngc8mrqnubynsmxahjetxzwztyfwia",
+   "kill_gate": "liq",
+   "kill_reason": "liq $11.9K",
+   "kill_price": 3.062e-05,
+   "kill_mcap": 30626.0,
+   "kill_liq": 11238.17,
+   "first_kill_ts": 1795144903.1937478,
+   "last_kill_ts": 1795144972.778875,
+   "kill_count": 1,
+   "peak_price": 0.0002607,
+   "peak_mcap": 251441.0,
+   "peak_ts": 1795149843.2551389,
+   "peak_multiple": 8.514043109079033,
+   "current_price": 2.117e-06,
+   "current_mcap": 2042.0,
+   "current_liq": 2599.1,
+   "current_multiple": 0.06913781841933375,
+   "min_price": 1.975e-06,
+   "last_checked_ts": 1795292908.3016865,
+   "dead": 0
+  },
+  {
+   "address": "3umHFkiMHyphCkLxtbf8Aabie8r5hxn86QeBAovTpump",
+   "desk": "dip",
+   "symbol": "HUSS",
+   "url": "https://dexscreener.com/solana/ffnwws4z2rrf3vxcwmtbzc1ajywoutpsc7x4m68ecfcx",
+   "kill_gate": "liq",
+   "kill_reason": "liq $12.2K",
+   "kill_price": 2.904e-05,
+   "kill_mcap": 29017.0,
+   "kill_liq": null,
+   "first_kill_ts": 1795191076.5126333,
+   "last_kill_ts": 1795191142.0353956,
+   "kill_count": 1,
+   "peak_price": 0.0002385,
+   "peak_mcap": 229905.0,
+   "peak_ts": 1795273776.331491,
+   "peak_multiple": 8.212809917355372,
+   "current_price": 0.0001892,
+   "current_mcap": 182422.0,
+   "current_liq": 33328.56,
+   "current_multiple": 6.515151515151515,
+   "min_price": 2.622e-05,
+   "last_checked_ts": 1795289218.430163,
+   "dead": 0
+  },
+  {
+   "address": "gHZhqEnFnitWCJ1MA2i9BzqTReFMhsGmbdL17xypump",
+   "desk": "dip",
+   "symbol": "SWJ",
+   "url": "https://dexscreener.com/solana/488fdh1hgtfubtkwe5ycqa4ary1saebdqypbr6xnk6d5",
+   "kill_gate": "liq",
+   "kill_reason": "liq $19.9K",
+   "kill_price": 9.806e-05,
+   "kill_mcap": 98062.0,
+   "kill_liq": 21411.89,
+   "first_kill_ts": 1795100529.298298,
+   "last_kill_ts": 1795100897.6935284,
+   "kill_count": 1,
+   "peak_price": 0.0007542,
+   "peak_mcap": 744267.0,
+   "peak_ts": 1795181264.9536831,
+   "peak_multiple": 7.691209463593718,
+   "current_price": 0.0005026,
+   "current_mcap": 496044.0,
+   "current_liq": 50830.3,
+   "current_multiple": 5.125433408117479,
+   "min_price": 0.000388,
+   "last_checked_ts": 1795269967.047496,
+   "dead": 0
+  },
+  {
+   "address": "3b7WvfRxRaoMuq4j6JWJzrL5mym3Km3QzfX5dqCopump",
+   "desk": "dip",
+   "symbol": "Bigfoot",
+   "url": "https://dexscreener.com/solana/75gt1hbmhtljv4anizrjz2ojmsm6xesilok6255euxnu",
+   "kill_gate": "liq",
+   "kill_reason": "liq $11.2K",
+   "kill_price": 2.869e-05,
+   "kill_mcap": 28640.0,
+   "kill_liq": 10743.43,
+   "first_kill_ts": 1795269052.6525383,
+   "last_kill_ts": 1795269117.8393447,
+   "kill_count": 1,
+   "peak_price": 0.0002147,
+   "peak_mcap": 207511.0,
+   "peak_ts": 1795284130.7585251,
+   "peak_multiple": 7.483443708609271,
+   "current_price": 0.0001285,
+   "current_mcap": 124225.0,
+   "current_liq": 27162.24,
+   "current_multiple": 4.478912513070757,
+   "min_price": 3.848e-05,
+   "last_checked_ts": 1795292908.3016865,
+   "dead": 0
+  },
+  {
+   "address": "J7bLsZcpkfky92ir8k36Munz91nHKtcDNhDy8d3Qpump",
+   "desk": "dip",
+   "symbol": "AMC ",
+   "url": "https://dexscreener.com/solana/77bgjzs6ifrusfjvoxsyam4crjrrivcspu9cb7xfzebe",
+   "kill_gate": "liq",
+   "kill_reason": "liq $14.5K",
+   "kill_price": 4.022e-05,
+   "kill_mcap": 40227.0,
+   "kill_liq": 15799.63,
+   "first_kill_ts": 1795162915.2799976,
+   "last_kill_ts": 1795162979.9160047,
+   "kill_count": 1,
+   "peak_price": 0.0002683,
+   "peak_mcap": 253744.0,
+   "peak_ts": 1795174768.6704338,
+   "peak_multiple": 6.670810542018897,
+   "current_price": 3.67e-05,
+   "current_mcap": 34708.0,
+   "current_liq": 16242.3,
+   "current_multiple": 0.912481352560915,
+   "min_price": 2.181e-05,
+   "last_checked_ts": 1795292908.3016865,
+   "dead": 0
+  },
+  {
+   "address": "fRxGeXTCXLPQyChrq5sanfUWAe2vseLBiGdDE7k4S1M",
+   "desk": "dip",
+   "symbol": "SIM",
+   "url": "https://dexscreener.com/solana/are3c4uea7s61tdwcf9m81frzbmlmgv4rqdvez2t6ja4",
+   "kill_gate": "liq",
+   "kill_reason": "liq $13.8K",
+   "kill_price": 1.57e-05,
+   "kill_mcap": 15691.0,
+   "kill_liq": 7776.92,
+   "first_kill_ts": 1795111337.818234,
+   "last_kill_ts": 1795111417.1289392,
+   "kill_count": 1,
+   "peak_price": 0.0001037,
+   "peak_mcap": 98655.0,
+   "peak_ts": 1795202407.6249633,
+   "peak_multiple": 6.605095541401274,
+   "current_price": 8.758e-05,
+   "current_mcap": 83098.0,
+   "current_liq": 20074.77,
+   "current_multiple": 5.578343949044586,
+   "min_price": 6.916e-05,
+   "last_checked_ts": 1795282680.3634596,
+   "dead": 0
+  },
+  {
+   "address": "H3e9ixXY9eFZ5S5JrnNB163mazpL9ePT1sDMjBUKpump",
+   "desk": "dip",
+   "symbol": "DCTY",
+   "url": "https://dexscreener.com/solana/7rhr5ubszvqeknajimnhmmqr6hrfkstq2jcbcvst44m",
+   "kill_gate": "liq",
+   "kill_reason": "liq $12.4K",
+   "kill_price": 3.462e-05,
+   "kill_mcap": 34566.0,
+   "kill_liq": 11732.35,
+   "first_kill_ts": 1795261487.1746721,
+   "last_kill_ts": 1795261552.0690484,
+   "kill_count": 1,
+   "peak_price": 0.0002237,
+   "peak_mcap": 216637.0,
+   "peak_ts": 1795266330.1352007,
+   "peak_multiple": 6.4615829000577705,
+   "current_price": 1.359e-06,
+   "current_mcap": 1316.0,
+   "current_liq": 1383.25,
+   "current_multiple": 0.03925476603119585,
+   "min_price": 1.359e-06,
+   "last_checked_ts": 1795289218.430163,
+   "dead": 0
+  },
+  {
+   "address": "GT8WxWKEgxzZiKL89Uu288vb8jnescwpNSrvyHzcpump",
+   "desk": "dip",
+   "symbol": "RUGGED",
+   "url": "https://dexscreener.com/solana/dt4elfhqzwhwasv6zqqwoeztayii14a4ftjeavuprpx2",
+   "kill_gate": "liq",
+   "kill_reason": "liq $11.3K",
+   "kill_price": 2.996e-05,
+   "kill_mcap": 29922.0,
+   "kill_liq": 11174.23,
+   "first_kill_ts": 1795136670.5882068,
+   "last_kill_ts": 1795136739.5676234,
+   "kill_count": 1,
+   "peak_price": 0.0001933,
+   "peak_mcap": 187666.0,
+   "peak_ts": 1795149843.2551389,
+   "peak_multiple": 6.451935914552737,
+   "current_price": 2.155e-05,
+   "current_mcap": 20916.0,
+   "current_liq": 11579.11,
+   "current_multiple": 0.7192923898531375,
+   "min_price": 2.078e-05,
+   "last_checked_ts": 1795289218.430163,
+   "dead": 0
+  },
+  {
+   "address": "DkHsZ1kjd2Fua8sgKE6PhHhyCdXYscbDVN7mAfiGpump",
+   "desk": "dip",
+   "symbol": "JENSEN",
+   "url": "https://dexscreener.com/solana/7fy71w6jdyias1w66sqscxvuutyh2n29bkcggaln4kxt",
+   "kill_gate": "warns",
+   "kill_reason": "warns: Top 10 holders high ownership, Single holder ownership, High ownership",
+   "kill_price": 0.0003084,
+   "kill_mcap": 308443.0,
+   "kill_liq": 37602.29,
+   "first_kill_ts": 1795219367.3960688,
+   "last_kill_ts": 1795219378.0848832,
+   "kill_count": 1,
+   "peak_price": 0.001936,
+   "peak_mcap": 1929629.0,
+   "peak_ts": 1795224576.5122678,
+   "peak_multiple": 6.277561608300908,
+   "current_price": 0.0005549,
+   "current_mcap": 552997.0,
+   "current_liq": 56639.39,
+   "current_multiple": 1.7992866407263293,
+   "min_price": 0.0003084,
+   "last_checked_ts": 1795291450.6694212,
+   "dead": 0
+  },
+  {
+   "address": "CUfphqswgDK3VP3FX7CiShVCTdGQneFusYRFViABpump",
+   "desk": "dip",
+   "symbol": "BTC",
+   "url": "https://dexscreener.com/solana/5q1ezo7m3njacxmsum8bzz8iqzgt8equ9ftqtnus7aoj",
+   "kill_gate": "h1 pump",
+   "kill_reason": "+220% in 1h",
+   "kill_price": 0.0002932,
+   "kill_mcap": 293201.0,
+   "kill_liq": 36320.4,
+   "first_kill_ts": 1795207601.3991272,
+   "last_kill_ts": 1795208515.4039533,
+   "kill_count": 1,
+   "peak_price": 0.001827,
+   "peak_mcap": 1827823.0,
+   "peak_ts": 1795209008.1180673,
+   "peak_multiple": 6.231241473396999,
+   "current_price": 1.506e-06,
+   "current_mcap": 1502.0,
+   "current_liq": 1628.5,
+   "current_multiple": 0.005136425648021828,
+   "min_price": 1.503e-06,
+   "last_checked_ts": 1795291450.6694212,
+   "dead": 0
+  },
+  {
+   "address": "2GiS8L6jzveE7cQ61bjGN6wVn5MS9FcBjarSAMFppump",
+   "desk": "dip",
+   "symbol": "SI",
+   "url": "https://dexscreener.com/solana/vh9zpvmlnayosdds9wnnhn6pcm1vzdvikq4whu5mvt6",
+   "kill_gate": "liq",
+   "kill_reason": "liq $17.7K",
+   "kill_price": 8.249e-05,
+   "kill_mcap": 82490.0,
+   "kill_liq": 18482.49,
+   "first_kill_ts": 1795239126.8500931,
+   "last_kill_ts": 1795239196.4579093,
+   "kill_count": 1,
+   "peak_price": 0.0005009,
+   "peak_mcap": 493176.0,
+   "peak_ts": 1795244450.7368262,
+   "peak_multiple": 6.072251181961449,
+   "current_price": 1.38e-06,
+   "current_mcap": 1359.0,
+   "current_liq": 1457.32,
+   "current_multiple": 0.016729300521275303,
+   "min_price": 1.38e-06,
+   "last_checked_ts": 1795290720.6598666,
+   "dead": 0
+  },
+  {
+   "address": "EJeGSdnCgdQtpWyNgie5827qYi93y44RrsU5ZkhDpump",
+   "desk": "dip",
+   "symbol": "EXEN",
+   "url": "https://dexscreener.com/solana/iivcdektecbdnnl8hij4ryqabd5fxzyez2ecrbnjj1d",
+   "kill_gate": "copycat",
+   "kill_reason": "copycat of EXEN",
+   "kill_price": 0.04067,
+   "kill_mcap": 40673528.0,
+   "kill_liq": 457695.67,
+   "first_kill_ts": 1795132499.0001051,
+   "last_kill_ts": 1795132504.0252907,
+   "kill_count": 1,
+   "peak_price": 0.2446,
+   "peak_mcap": 244594206.0,
+   "peak_ts": 1795289946.2964854,
+   "peak_multiple": 6.014261126137202,
+   "current_price": 0.2446,
+   "current_mcap": 244594206.0,
+   "current_liq": 1105388.05,
+   "current_multiple": 6.014261126137202,
+   "min_price": 0.04082,
+   "last_checked_ts": 1795289946.2964854,
+   "dead": 0
+  },
+  {
+   "address": "44DZsPNJUtUyTkELAFYdwCpe82sEt12HZKrMgK1Spump",
+   "desk": "dip",
+   "symbol": "iAgent",
+   "url": "https://dexscreener.com/solana/bb8pp1b4ryr9bgm59ju1wmqpwqa42kuyno5smhljfakp",
+   "kill_gate": "warns",
+   "kill_reason": "warns: Top 10 holders high ownership, Single holder ownership, High ownership",
+   "kill_price": 0.0004249,
+   "kill_mcap": 424844.0,
+   "kill_liq": 45599.25,
+   "first_kill_ts": 1795136852.732974,
+   "last_kill_ts": 1795136872.2715313,
+   "kill_count": 1,
+   "peak_price": 0.002519,
+   "peak_mcap": 2511610.0,
+   "peak_ts": 1795155710.0732465,
+   "peak_multiple": 5.92845375382443,
+   "current_price": 1.594e-06,
+   "current_mcap": 1589.0,
+   "current_liq": 1884.37,
+   "current_multiple": 0.0037514709343374913,
+   "min_price": 1.594e-06,
+   "last_checked_ts": 1795289218.430163,
+   "dead": 0
+  },
+  {
+   "address": "7i8AXjBdKGjGpRo4Ex5aDKUaX55xed5Hrgoww1G9pump",
+   "desk": "dip",
+   "symbol": "LRS",
+   "url": "https://dexscreener.com/solana/37kvdt6rkoxvxkbfrd4wu4rbiktpsseklxhsxd8kggyr",
+   "kill_gate": "liq",
+   "kill_reason": "liq $13.7K",
+   "kill_price": 4.177e-05,
+   "kill_mcap": 41724.0,
+   "kill_liq": 13059.56,
+   "first_kill_ts": 1795216465.4163053,
+   "last_kill_ts": 1795216539.146433,
+   "kill_count": 1,
+   "peak_price": 0.000235,
+   "peak_mcap": 229565.0,
+   "peak_ts": 1795222333.2976942,
+   "peak_multiple": 5.626047402441944,
+   "current_price": 0.0002277,
+   "current_mcap": 222415.0,
+   "current_liq": 32495.63,
+   "current_multiple": 5.451280823557577,
+   "min_price": 0.000112,
+   "last_checked_ts": 1795289218.430163,
+   "dead": 0
+  },
+  {
+   "address": "9msLfYfXBrSbrApCZAPuPMCNmPqNtEL1VPKh1AEYpump",
+   "desk": "dip",
+   "symbol": "enu",
+   "url": "https://dexscreener.com/solana/f8ykd7drw4ytfnpg9l5r7xrrhwoysnxffr469u3lvjgp",
+   "kill_gate": "liq",
+   "kill_reason": "liq $13.7K",
+   "kill_price": 2.92e-05,
+   "kill_mcap": 29148.0,
+   "kill_liq": 11015.37,
+   "first_kill_ts": 1795146896.2026362,
+   "last_kill_ts": 1795146960.971844,
+   "kill_count": 1,
+   "peak_price": 0.0001572,
+   "peak_mcap": 150867.0,
+   "peak_ts": 1795210452.9298716,
+   "peak_multiple": 5.383561643835616,
+   "current_price": 0.0001113,
+   "current_mcap": 106851.0,
+   "current_liq": 23900.11,
+   "current_multiple": 3.811643835616438,
+   "min_price": 1.688e-05,
+   "last_checked_ts": 1795292908.3016865,
+   "dead": 0
+  },
+  {
+   "address": "BjnxH6a3D6HQz1LRPsGX5TZmW3GwstpexSNrK2utpump",
+   "desk": "dip",
+   "symbol": "XV",
+   "url": "https://dexscreener.com/solana/5bs5kjjztthfbmildem8sx2lt6zkntchxdcy6ccgjd9n",
+   "kill_gate": "liq",
+   "kill_reason": "liq $17.6K",
+   "kill_price": 4.034e-05,
+   "kill_mcap": 40315.0,
+   "kill_liq": 15723.42,
+   "first_kill_ts": 1795254103.6845489,
+   "last_kill_ts": 1795254168.8987763,
+   "kill_count": 1,
+   "peak_price": 0.0002086,
+   "peak_mcap": 201055.0,
+   "peak_ts": 1795259798.965795,
+   "peak_multiple": 5.17104610808131,
+   "current_price": 0.0001056,
+   "current_mcap": 101811.0,
+   "current_liq": 28861.62,
+   "current_multiple": 2.6177491323748145,
+   "min_price": 3.817e-05,
+   "last_checked_ts": 1795289946.2964854,
+   "dead": 0
+  },
+  {
+   "address": "EK2tRRD5jqNUxohdMjbjnJ5Q3t9TYGBkZVjtMceDpump",
+   "desk": "dip",
+   "symbol": "Emily",
+   "url": "https://dexscreener.com/solana/fan13yqwc3enna3rrjp1f8acwybdvmjtedk7grvlnhbx",
+   "kill_gate": "liq",
+   "kill_reason": "liq $10.9K",
+   "kill_price": 2.696e-05,
+   "kill_mcap": 26965.0,
+   "kill_liq": 10231.43,
+   "first_kill_ts": 1795263303.3640296,
+   "last_kill_ts": 1795263373.54606,
+   "kill_count": 1,
+   "peak_price": 0.0001387,
+   "peak_mcap": 133796.0,
+   "peak_ts": 1795268513.8296278,
+   "peak_multiple": 5.1446587537092,
+   "current_price": 3.79e-05,
+   "current_mcap": 36544.0,
+   "current_liq": 13891.41,
+   "current_multiple": 1.405786350148368,
+   "min_price": 2.437e-05,
+   "last_checked_ts": 1795292175.5330417,
+   "dead": 0
+  },
+  {
+   "address": "GQngHP8P6s45MxWnU7JsocfV2HjPQdJZmCEAYKpBpump",
+   "desk": "dip",
+   "symbol": "MANDY",
+   "url": "https://dexscreener.com/solana/6vhxz8nquxfgiixy7erhzlrjbamltgcsd7mzbardoujy",
+   "kill_gate": "h1 pump",
+   "kill_reason": "+204% in 1h",
+   "kill_price": 0.0003298,
+   "kill_mcap": 329825.0,
+   "kill_liq": 39995.45,
+   "first_kill_ts": 1795120908.2635639,
+   "last_kill_ts": 1795123937.2064073,
+   "kill_count": 1,
+   "peak_price": 0.001617,
+   "peak_mcap": 1611284.0,
+   "peak_ts": 1795150571.5429647,
+   "peak_multiple": 4.902971497877502,
+   "current_price": 1.283e-06,
+   "current_mcap": 1279.0,
+   "current_liq": 1357.11,
+   "current_multiple": 0.003890236506973924,
+   "min_price": 1.283e-06,
+   "last_checked_ts": 1795291450.6694212,
+   "dead": 0
+  },
+  {
+   "address": "8rjgC1GsBo4fwuXjq7Hy12SAFxgFxbtSJJSFBYkVpump",
+   "desk": "dip",
+   "symbol": "WW",
+   "url": "https://dexscreener.com/solana/pjxgzmudyerjcvi1etnfkcyhhmnnpgwutlqtf63p6oa",
+   "kill_gate": "liq",
+   "kill_reason": "liq $10.4K",
+   "kill_price": 2.682e-05,
+   "kill_mcap": 26790.0,
+   "kill_liq": 10430.98,
+   "first_kill_ts": 1795019228.3656454,
+   "last_kill_ts": 1795019233.9057205,
+   "kill_count": 1,
+   "peak_price": 0.0001308,
+   "peak_mcap": 122783.0,
+   "peak_ts": 1795184874.919546,
+   "peak_multiple": 4.876957494407159,
+   "current_price": 0.0001021,
+   "current_mcap": 95864.0,
+   "current_liq": 21525.44,
+   "current_multiple": 3.8068605518269947,
+   "min_price": 9.348e-05,
+   "last_checked_ts": 1795190662.8514585,
+   "dead": 0
+  },
+  {
+   "address": "UQLWvkwiSsnViuVBy7oArMtzb5RAZyrdJ79amQFrzoL",
+   "desk": "dip",
+   "symbol": "ZOL",
+   "url": "https://dexscreener.com/solana/58nmz19cofntjwghuemqhtq84pe5xbvdzmbfdarmxrsu",
+   "kill_gate": "liq",
+   "kill_reason": "liq $10.1K",
+   "kill_price": 2.719e-05,
+   "kill_mcap": 27142.0,
+   "kill_liq": 10554.84,
+   "first_kill_ts": 1795147440.0760946,
+   "last_kill_ts": 1795147505.8096466,
+   "kill_count": 1,
+   "peak_price": 0.0001296,
+   "peak_mcap": 124126.0,
+   "peak_ts": 1795184152.8702497,
+   "peak_multiple": 4.766458256712027,
+   "current_price": 8.297e-05,
+   "current_mcap": 79452.0,
+   "current_liq": 19771.94,
+   "current_multiple": 3.051489518205223,
+   "min_price": 2.025e-05,
+   "last_checked_ts": 1795292175.5330417,
+   "dead": 0
+  },
+  {
+   "address": "EV7J2QaPXPytSkM1LD9GPRkgAbmSEr9R3kYiXBzbpump",
+   "desk": "dip",
+   "symbol": "chud",
+   "url": "https://dexscreener.com/solana/hqbft5frsdkj1scauc62uqvxrzrm4f9fhoot9u4pcfj2",
+   "kill_gate": "liq",
+   "kill_reason": "liq $14.5K",
+   "kill_price": 7.364e-05,
+   "kill_mcap": 73644.0,
+   "kill_liq": 18042.51,
+   "first_kill_ts": 1795209420.105755,
+   "last_kill_ts": 1795209551.546291,
+   "kill_count": 1,
+   "peak_price": 0.0003507,
+   "peak_mcap": 343548.0,
+   "peak_ts": 1795292175.5330417,
+   "peak_multiple": 4.762357414448669,
+   "current_price": 0.0003507,
+   "current_mcap": 343548.0,
+   "current_liq": 42472.12,
+   "current_multiple": 4.762357414448669,
+   "min_price": 8.343e-05,
+   "last_checked_ts": 1795292175.5330417,
+   "dead": 0
+  },
+  {
+   "address": "AUuJPgFkq7BGK4NmgHZMWyScddeUw9x4NizjFDgupump",
+   "desk": "dip",
+   "symbol": "XV",
+   "url": "https://dexscreener.com/solana/7nbltgbra8tqkvpmfjbgusx5qa9uzjfmgvvj2uffwftc",
+   "kill_gate": "liq",
+   "kill_reason": "liq $11.8K",
+   "kill_price": 3.499e-05,
+   "kill_mcap": 34997.0,
+   "kill_liq": 11762.4,
+   "first_kill_ts": 1795260518.2779644,
+   "last_kill_ts": 1795260583.41898,
+   "kill_count": 1,
+   "peak_price": 0.0001483,
+   "peak_mcap": 143795.0,
+   "peak_ts": 1795266330.1352007,
+   "peak_multiple": 4.238353815375821,
+   "current_price": 1.335e-06,
+   "current_mcap": 1294.0,
+   "current_liq": 1358.12,
+   "current_multiple": 0.03815375821663332,
+   "min_price": 1.335e-06,
+   "last_checked_ts": 1795289218.430163,
+   "dead": 0
+  },
+  {
+   "address": "DUZrwdjEthcJ99ZiRXr31UuqTohoTg7VjTEyfGdBpump",
+   "desk": "dip",
+   "symbol": "jingyu",
+   "url": "https://dexscreener.com/solana/3d4szgvyhhwdo3dndzkqnppdqp1ffnvrzfvlrn94j1bp",
+   "kill_gate": "liq",
+   "kill_reason": "liq $17.6K",
+   "kill_price": 3.417e-05,
+   "kill_mcap": 34172.0,
+   "kill_liq": 12965.18,
+   "first_kill_ts": 1795075658.583156,
+   "last_kill_ts": 1795075727.9597623,
+   "kill_count": 1,
+   "peak_price": 0.0001447,
+   "peak_mcap": 140365.0,
+   "peak_ts": 1795152754.977405,
+   "peak_multiple": 4.234708808896693,
+   "current_price": 6.881e-05,
+   "current_mcap": 66716.0,
+   "current_liq": 19216.16,
+   "current_multiple": 2.0137547556335966,
+   "min_price": 6.236e-05,
+   "last_checked_ts": 1795244450.7368262,
+   "dead": 0
+  },
+  {
+   "address": "HuN5y4fJU7LNkaPjV9LhxkY7LUwpynW7yhL4qoVhpump",
+   "desk": "dip",
+   "symbol": "Singularity",
+   "url": "https://dexscreener.com/solana/6tbgppkj4jdmpzxaevrlhuseivmpcdaj4btu58fsancb",
+   "kill_gate": "liq",
+   "kill_reason": "liq $8.6K",
+   "kill_price": 2.4e-05,
+   "kill_mcap": 23955.0,
+   "kill_liq": 9518.77,
+   "first_kill_ts": 1795210568.5367289,
+   "last_kill_ts": 1795210643.0167189,
+   "kill_count": 1,
+   "peak_price": 9.997e-05,
+   "peak_mcap": 94149.0,
+   "peak_ts": 1795288492.0050502,
+   "peak_multiple": 4.165416666666667,
+   "current_price": 9.997e-05,
+   "current_mcap": 94149.0,
+   "current_liq": 21391.88,
+   "current_multiple": 4.165416666666667,
+   "min_price": 1.758e-05,
+   "last_checked_ts": 1795288492.0050502,
+   "dead": 0
+  },
+  {
+   "address": "N5mX77c3frnrCi599bkwVELYMVoQ9dYwGswb3h9pump",
+   "desk": "dip",
+   "symbol": "FUZZY",
+   "url": "https://dexscreener.com/solana/aysu2pje4tffgnpmr82d1rs7stkjaeg5ngqvvygyorum",
+   "kill_gate": "timed out",
+   "kill_reason": "timed out",
+   "kill_price": 0.004881,
+   "kill_mcap": 4880963.0,
+   "kill_liq": null,
+   "first_kill_ts": 1795197864.684556,
+   "last_kill_ts": 1795201495.3542593,
+   "kill_count": 1,
+   "peak_price": 0.01976,
+   "peak_mcap": 19758499.0,
+   "peak_ts": 1795268513.8296278,
+   "peak_multiple": 4.048350747797582,
+   "current_price": 1.293e-06,
+   "current_mcap": 1293.0,
+   "current_liq": 1325.9,
+   "current_multiple": 0.00026490473263675475,
+   "min_price": 1.274e-06,
+   "last_checked_ts": 1795289218.430163,
+   "dead": 0
+  },
+  {
+   "address": "A9jbSQDkbdQrA37fYAPf4TSK2GBCuBcGikEmZaRGpump",
+   "desk": "dip",
+   "symbol": "GTAVI",
+   "url": "https://dexscreener.com/solana/5xt7gnq8amlpcgppeqxgdmftviymhultavslghhbbxtu",
+   "kill_gate": "liq",
+   "kill_reason": "liq $11.8K",
+   "kill_price": 3.508e-05,
+   "kill_mcap": 35080.0,
+   "kill_liq": 11777.75,
+   "first_kill_ts": 1795244631.611267,
+   "last_kill_ts": 1795244696.7840688,
+   "kill_count": 1,
+   "peak_price": 0.0001391,
+   "peak_mcap": 134367.0,
+   "peak_ts": 1795250322.5795481,
+   "peak_multiple": 3.965222348916761,
+   "current_price": 1.488e-06,
+   "current_mcap": 1437.0,
+   "current_liq": 1518.44,
+   "current_multiple": 0.04241733181299886,
+   "min_price": 1.375e-06,
+   "last_checked_ts": 1795290720.6598666,
+   "dead": 0
+  },
+  {
+   "address": "9UYRPJhVFfqBLRNzRkhBPoQ4WzL9D4fEccuwrHyRpump",
+   "desk": "dip",
+   "symbol": "DCI",
+   "url": "https://dexscreener.com/solana/2gnekeva8mdzpf3jzyl4tgner42wnwslobluprujzoko",
+   "kill_gate": "liq",
+   "kill_reason": "liq $12.3K",
+   "kill_price": 3.462e-05,
+   "kill_mcap": 34621.0,
+   "kill_liq": 12028.0,
+   "first_kill_ts": 1795158674.7877772,
+   "last_kill_ts": 1795158745.5770378,
+   "kill_count": 1,
+   "peak_price": 0.0001344,
+   "peak_mcap": 129881.0,
+   "peak_ts": 1795165335.3164442,
+   "peak_multiple": 3.882149046793761,
+   "current_price": 1.319e-06,
+   "current_mcap": 1275.0,
+   "current_liq": 1348.46,
+   "current_multiple": 0.03809936452917389,
+   "min_price": 1.319e-06,
+   "last_checked_ts": 1795289946.2964854,
+   "dead": 0
+  },
+  {
+   "address": "5quizdFsXvV3DKu8LgvnSkwDLKn5r8q5QQ3Ynq3hpump",
+   "desk": "dip",
+   "symbol": "Community",
+   "url": "https://dexscreener.com/solana/dbbevcbqmc5afbw6oivffqoltri2yxmnkjf7fl8mnvxs",
+   "kill_gate": "liq",
+   "kill_reason": "liq $10.2K",
+   "kill_price": 2.458e-05,
+   "kill_mcap": 24553.0,
+   "kill_liq": 9707.4,
+   "first_kill_ts": 1795192177.4185057,
+   "last_kill_ts": 1795192241.8899345,
+   "kill_count": 1,
+   "peak_price": 8.346e-05,
+   "peak_mcap": 83362.0,
+   "peak_ts": 1795192842.2169266,
+   "peak_multiple": 3.3954434499593167,
+   "current_price": 1.435e-06,
+   "current_mcap": 1383.0,
+   "current_liq": 1506.39,
+   "current_multiple": 0.05838079739625712,
+   "min_price": 1.394e-06,
+   "last_checked_ts": 1795290720.6598666,
+   "dead": 0
+  }
+ ],
+ "dodged_rugs": [
+  {
+   "address": "CFt616G7CWyQRQgnQ5JcaLZa6AFZ2BaByKnS4Xxxpump",
+   "desk": "dip",
+   "symbol": "MUSTACHECAT",
+   "url": "https://dexscreener.com/solana/38DvFKQVPdbei7zJya8w3cSWccS9TFEMybjQZ5PJUfA6",
+   "kill_gate": "warns",
+   "kill_reason": "warns: nonTransferable, defaultAccountState, permanentDelegate, transferHook, pausableConfig",
+   "kill_price": 3.016e-05,
+   "kill_mcap": 30161.0,
+   "kill_liq": null,
+   "first_kill_ts": 1794983733.546728,
+   "last_kill_ts": 1794983738.926362,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795155710.0732465,
+   "dead": 1
+  },
+  {
+   "address": "eRCFZ3yPfcSu7VeF6es12ZcsEZj7iaAoydrgSRrpump",
+   "desk": "dip",
+   "symbol": null,
+   "url": "https://dexscreener.com/solana/2u3G2ubZaySVWANCSWo7DMpGUC2Nkqj3WJxHwaQ2w7tb",
+   "kill_gate": "h1 pump",
+   "kill_reason": "+114047% in 1h",
+   "kill_price": 0.03576,
+   "kill_mcap": 35768906.0,
+   "kill_liq": 435021.54,
+   "first_kill_ts": 1794983975.6601117,
+   "last_kill_ts": 1794983985.6077726,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795155710.0732465,
+   "dead": 1
+  },
+  {
+   "address": "AFVepWoHvbv4RB9qg76o67uGSrt6qeLJjSMLgXeKpump",
+   "desk": "dip",
+   "symbol": null,
+   "url": "https://dexscreener.com/solana/54TZYfkbjfhMH9QHSE6Bahup7nNfBE5Uje9CWpDQRpcF",
+   "kill_gate": "liq",
+   "kill_reason": "liq $12.6K",
+   "kill_price": 3.7e-05,
+   "kill_mcap": 37009.0,
+   "kill_liq": 12642.38,
+   "first_kill_ts": 1794984520.442808,
+   "last_kill_ts": 1794984525.2944741,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795155710.0732465,
+   "dead": 1
+  },
+  {
+   "address": "7M9aDrwxYCiGAxdNnVKRMnQ4VUvAEys36R52A8rgpump",
+   "desk": "dip",
+   "symbol": null,
+   "url": "https://dexscreener.com/solana/9fEFi5XTToadye5xHWEeyYjPuKoguupUPW1TfsLR94V5",
+   "kill_gate": "liq",
+   "kill_reason": "liq $11.9K",
+   "kill_price": 3.326e-05,
+   "kill_mcap": 33264.0,
+   "kill_liq": 11908.15,
+   "first_kill_ts": 1794985064.261657,
+   "last_kill_ts": 1794985069.0785074,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795155710.0732465,
+   "dead": 1
+  },
+  {
+   "address": "65dGyDFrntumXZJgrrxFPvyxbLqAGdBiMRSsypDwpump",
+   "desk": "dip",
+   "symbol": "Everdant",
+   "url": "https://dexscreener.com/solana/FJVEM75iDAJpP3G7SmPsjkEi9o76FAxi7oxQ5AkguHdZ",
+   "kill_gate": "liq",
+   "kill_reason": "liq $12.2K",
+   "kill_price": 3.436e-05,
+   "kill_mcap": 34315.0,
+   "kill_liq": 12156.81,
+   "first_kill_ts": 1794985608.2444954,
+   "last_kill_ts": 1794985612.9503245,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795155710.0732465,
+   "dead": 1
+  },
+  {
+   "address": "38gyDwMwZN7umDm25fPVH3c6GDRUWaeZFDsPESerpump",
+   "desk": "dip",
+   "symbol": null,
+   "url": "https://dexscreener.com/solana/6xu5PuupkjPq31UebjRbzYr3Xz99GWfeXze7LWSPSwYy",
+   "kill_gate": "liq",
+   "kill_reason": "liq $11.8K",
+   "kill_price": 3.275e-05,
+   "kill_mcap": 32691.0,
+   "kill_liq": 11839.07,
+   "first_kill_ts": 1794988709.772787,
+   "last_kill_ts": 1794988715.090852,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795155710.0732465,
+   "dead": 1
+  },
+  {
+   "address": "612XXqog8XwMvPeesNYmCVyQwFvj99n5SHHnNt4wpump",
+   "desk": "dip",
+   "symbol": "WIFMIHAO",
+   "url": "https://dexscreener.com/solana/2T1Q6pon8fb8MNTkBY7BSks1HfKnFsjTYyAaSrf76pmr",
+   "kill_gate": "liq",
+   "kill_reason": "liq $12.3K",
+   "kill_price": 3.499e-05,
+   "kill_mcap": 34950.0,
+   "kill_liq": 12278.88,
+   "first_kill_ts": 1794989071.9991884,
+   "last_kill_ts": 1794989077.305935,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795155710.0732465,
+   "dead": 1
+  },
+  {
+   "address": "C11eV1ag11zf7mBcqfnPX3DNkmBQDGjCGj4bpfV8pump",
+   "desk": "dip",
+   "symbol": "DCI",
+   "url": "https://dexscreener.com/solana/4afggZB7yPkwAi1zKadVqHRUDucAwzKQekaQojKtHsr8",
+   "kill_gate": "liq",
+   "kill_reason": "liq $13.0K",
+   "kill_price": 3.886e-05,
+   "kill_mcap": 38863.0,
+   "kill_liq": 12993.08,
+   "first_kill_ts": 1794992338.8422782,
+   "last_kill_ts": 1794992348.8925967,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795162371.5247235,
+   "dead": 1
+  },
+  {
+   "address": "GCQp8d9S7JrQPJUEDuhqXCYSGnq7RfcBH47KRg7Dpump",
+   "desk": "dip",
+   "symbol": null,
+   "url": "https://dexscreener.com/solana/FsGMwu88xii68VZ7xwVwi4R1bzFpi46WJbzcfsXgte8g",
+   "kill_gate": "liq",
+   "kill_reason": "liq $12.4K",
+   "kill_price": 3.557e-05,
+   "kill_mcap": 35547.0,
+   "kill_liq": 12370.62,
+   "first_kill_ts": 1794992700.9588194,
+   "last_kill_ts": 1794992705.9694388,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795162371.5247235,
+   "dead": 1
+  },
+  {
+   "address": "AscKHwzsPxd3mT4JeJY5pckonHHGTBFV12eFq3hVpump",
+   "desk": "dip",
+   "symbol": null,
+   "url": "https://dexscreener.com/solana/EpLQiS2tFq2hvCAyi12vDRK5h1Kw8FBvJNDWnjKdtodc",
+   "kill_gate": "liq",
+   "kill_reason": "liq $11.5K",
+   "kill_price": 3.108e-05,
+   "kill_mcap": 31083.0,
+   "kill_liq": 11487.68,
+   "first_kill_ts": 1794993548.1856391,
+   "last_kill_ts": 1794993553.3823216,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795162371.5247235,
+   "dead": 1
+  },
+  {
+   "address": "33HsmCws1TSyMGh7ZGeUpZxUgg2QRDun7sGJZKuNpump",
+   "desk": "dip",
+   "symbol": "DCI",
+   "url": "https://dexscreener.com/solana/3q53vh89Wma8ioBp4G6rvA6aysECc1UEiA2zg52QsDfV",
+   "kill_gate": "liq",
+   "kill_reason": "liq $11.1K",
+   "kill_price": 2.935e-05,
+   "kill_mcap": 29330.0,
+   "kill_liq": 11139.26,
+   "first_kill_ts": 1794993548.1856391,
+   "last_kill_ts": 1794993558.1975713,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795162371.5247235,
+   "dead": 1
+  },
+  {
+   "address": "2qz2XMseVxfpBfG1QS6dtVwz9T3mndoaxYfXYEm1pump",
+   "desk": "dip",
+   "symbol": "SHARK",
+   "url": "https://dexscreener.com/solana/3e3RXbvfTyvdrPbiKAQLtta1XwFm6jU3vM4y3Aqqdi1n",
+   "kill_gate": "liq",
+   "kill_reason": "liq $9.7K",
+   "kill_price": 2.303e-05,
+   "kill_mcap": 23035.0,
+   "kill_liq": 9726.85,
+   "first_kill_ts": 1794994336.4303575,
+   "last_kill_ts": 1794994341.4601,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795162371.5247235,
+   "dead": 1
+  },
+  {
+   "address": "9gd5VnmF3qBgx4sjjS3FqXNsWkR66ykSBkuV7Zeapump",
+   "desk": "dip",
+   "symbol": "SHARK",
+   "url": "https://dexscreener.com/solana/G9mswVFo15XTrMEbERbmX8v6cPiRMT2zNzJomvUiAYzD",
+   "kill_gate": "liq",
+   "kill_reason": "liq $9.9K",
+   "kill_price": 2.356e-05,
+   "kill_mcap": 23551.0,
+   "kill_liq": 9873.2,
+   "first_kill_ts": 1794994819.2609656,
+   "last_kill_ts": 1794994824.3409212,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795162371.5247235,
+   "dead": 1
+  },
+  {
+   "address": "Geee1viZh4HpVJFaHB8ev5BZNdtUR4Dy2PDS5iBB7cLz",
+   "desk": "dip",
+   "symbol": null,
+   "url": "https://dexscreener.com/solana/DNZQr3yecXTGvhHh6SjBJCA52jtcTwizFkSaqwaBieMM",
+   "kill_gate": "liq",
+   "kill_reason": "liq $16.2K",
+   "kill_price": 4.207e-05,
+   "kill_mcap": 42073.0,
+   "kill_liq": 16171.94,
+   "first_kill_ts": 1794995180.744791,
+   "last_kill_ts": 1794995185.7628646,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795161642.5476067,
+   "dead": 1
+  },
+  {
+   "address": "BqjWJEnY85bb7jHzXXzDcoCiLag25WwdBz5BbXQopump",
+   "desk": "dip",
+   "symbol": "SHARK",
+   "url": "https://dexscreener.com/solana/5zozpvU9Co64pejCPS5nYcC6ZkAZYfYFiGkbRQvdeYcE",
+   "kill_gate": "liq",
+   "kill_reason": "liq $10.0K",
+   "kill_price": 2.425e-05,
+   "kill_mcap": 24233.0,
+   "kill_liq": 10022.25,
+   "first_kill_ts": 1794995241.581171,
+   "last_kill_ts": 1794995246.9621136,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795161642.5476067,
+   "dead": 1
+  },
+  {
+   "address": "82EdE9ChoGXPLd4zFuNf7ijtKBHRGHJ82o3v9PEDpump",
+   "desk": "dip",
+   "symbol": null,
+   "url": "https://dexscreener.com/solana/BHaA3ttvRLjz7h9P237VNLXTJMNEbaCaZGVchZqeMSMs",
+   "kill_gate": "liq",
+   "kill_reason": "liq $11.9K",
+   "kill_price": 3.288e-05,
+   "kill_mcap": 32887.0,
+   "kill_liq": 11867.8,
+   "first_kill_ts": 1794996388.903344,
+   "last_kill_ts": 1794996396.2351742,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795168224.8583784,
+   "dead": 1
+  },
+  {
+   "address": "9n3xpPiiTYSsU5WGFkq5hyoPnhtvM5nfb5XqBQVwpump",
+   "desk": "dip",
+   "symbol": "GTA6",
+   "url": "https://dexscreener.com/solana/HN8GFzGnm4y7iLRAzKZD84A4229nPdLxXfj3VKutwJZ9",
+   "kill_gate": "liq",
+   "kill_reason": "liq $10.8K",
+   "kill_price": 2.783e-05,
+   "kill_mcap": 27833.0,
+   "kill_liq": 10834.86,
+   "first_kill_ts": 1794996993.7225547,
+   "last_kill_ts": 1794996998.720925,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795168224.8583784,
+   "dead": 1
+  },
+  {
+   "address": "9T3fM5msARk5CY2yPpnPtSmNjHGpBuB4iKuVesotpump",
+   "desk": "dip",
+   "symbol": null,
+   "url": "https://dexscreener.com/solana/6UMKDqq8mp8mu1maurJ4k84QJ8Rbygx5DAoZrLcNkuY9",
+   "kill_gate": "liq",
+   "kill_reason": "liq $11.8K",
+   "kill_price": 3.256e-05,
+   "kill_mcap": 32533.0,
+   "kill_liq": 11766.34,
+   "first_kill_ts": 1794999654.3834968,
+   "last_kill_ts": 1794999659.2862995,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795168224.8583784,
+   "dead": 1
+  },
+  {
+   "address": "AviSZfmvxy6mi2YbPQDknjn4SLdnFg9Nu5FkPKvFpump",
+   "desk": "dip",
+   "symbol": null,
+   "url": "https://dexscreener.com/solana/FVPeKS3rfrpF7ZzfXvo3PRGQ6XKpXc47ocyLhPpmN5vz",
+   "kill_gate": "liq",
+   "kill_reason": "liq $12.2K",
+   "kill_price": 3.449e-05,
+   "kill_mcap": 34495.0,
+   "kill_liq": 12153.67,
+   "first_kill_ts": 1794999714.7258956,
+   "last_kill_ts": 1794999728.9480674,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795168224.8583784,
+   "dead": 1
+  },
+  {
+   "address": "9emcU6aEriBiCz8wXYmX274S4YetfEhJCDvs3fypump",
+   "desk": "dip",
+   "symbol": null,
+   "url": "https://dexscreener.com/solana/Ffd7B5RCjkUFczPcK7PfvhqtHYPvpTv7JnkmEMvnZGUW",
+   "kill_gate": "h1 pump",
+   "kill_reason": "+114308% in 1h",
+   "kill_price": 0.03571,
+   "kill_mcap": 35711491.0,
+   "kill_liq": 433828.46,
+   "first_kill_ts": 1795000017.2860265,
+   "last_kill_ts": 1795000026.260274,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795168224.8583784,
+   "dead": 1
+  },
+  {
+   "address": "7VoDyiV5LKcquhEpd2dXGeFTY7AXQo4ff3Hq4TPWpump",
+   "desk": "dip",
+   "symbol": null,
+   "url": "https://dexscreener.com/solana/FTbf69zyucto92eeVJ9ywVKUKXFqKntBLSmEynrA2ovf",
+   "kill_gate": "liq",
+   "kill_reason": "liq $11.9K",
+   "kill_price": 3.339e-05,
+   "kill_mcap": 33395.0,
+   "kill_liq": 11916.78,
+   "first_kill_ts": 1795000259.0928552,
+   "last_kill_ts": 1795000265.519924,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795168224.8583784,
+   "dead": 1
+  },
+  {
+   "address": "3NFv5aHmRH6nrpVbcZVL7uQWHgPqgjsxL6J4Tv7Qpump",
+   "desk": "dip",
+   "symbol": "DACT",
+   "url": "https://dexscreener.com/solana/2jCKMuH8EF9jVP8SsuuE83o6rmwpWdWUvyBHJi7YWno7",
+   "kill_gate": "liq",
+   "kill_reason": "liq $13.2K",
+   "kill_price": 3.989e-05,
+   "kill_mcap": 39896.0,
+   "kill_liq": 13209.87,
+   "first_kill_ts": 1795000803.1483543,
+   "last_kill_ts": 1795000808.3147058,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795168224.8583784,
+   "dead": 1
+  },
+  {
+   "address": "J9iAgmoNwZK51M1CLgGcGerAKQyftDubqQeoLeQFpump",
+   "desk": "dip",
+   "symbol": "PINGHALF",
+   "url": "https://dexscreener.com/solana/HyWdqApj8beddZLRajpvVxTXY8DeKG9qvL3UwoVJZsXs",
+   "kill_gate": "liq",
+   "kill_reason": "liq $11.0K",
+   "kill_price": 2.872e-05,
+   "kill_mcap": 28724.0,
+   "kill_liq": 10965.08,
+   "first_kill_ts": 1795001468.9503174,
+   "last_kill_ts": 1795001474.052448,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795174046.4298918,
+   "dead": 1
+  },
+  {
+   "address": "6rdQXFpELVn3nWTWmP9zoPDQTaj2qGqR3Vy4XfXmpump",
+   "desk": "dip",
+   "symbol": "AFTER",
+   "url": "https://dexscreener.com/solana/dgi2wgpa2bzmtavpdq27jx9dh8kcss8pee6hdy7azkkw",
+   "kill_gate": "copycat",
+   "kill_reason": "copycat of GTAVI",
+   "kill_price": 3.815e-05,
+   "kill_mcap": 38153.0,
+   "kill_liq": null,
+   "first_kill_ts": 1795003706.0193021,
+   "last_kill_ts": 1795003712.6300085,
+   "kill_count": 1,
+   "peak_price": 3.815e-05,
+   "peak_mcap": 38153.0,
+   "peak_ts": 1795003706.0193021,
+   "peak_multiple": 1.0,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": 2.431e-06,
+   "last_checked_ts": 1795174046.4298918,
+   "dead": 1
+  },
+  {
+   "address": "5vbzq7NwZ5fEHANiCQ2hFY79KsQT5GEjqJL1VKWFpump",
+   "desk": "dip",
+   "symbol": "GrandPump",
+   "url": "https://dexscreener.com/solana/3ashjshyufgqeswoh5dy2g21uvnuqjdnptmezwq9ospt",
+   "kill_gate": "liq",
+   "kill_reason": "liq $13.6K",
+   "kill_price": 4.203e-05,
+   "kill_mcap": 41998.0,
+   "kill_liq": 13630.02,
+   "first_kill_ts": 1795004733.2182858,
+   "last_kill_ts": 1795004738.2649477,
+   "kill_count": 1,
+   "peak_price": 4.203e-05,
+   "peak_mcap": 41998.0,
+   "peak_ts": 1795004733.2182858,
+   "peak_multiple": 1.0,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": 1.489e-06,
+   "last_checked_ts": 1795174046.4298918,
+   "dead": 1
+  },
+  {
+   "address": "GcubAT4H358royJdpgpaBRB5BvCw5pZGzuUQg96opump",
+   "desk": "dip",
+   "symbol": "BUCKZ",
+   "url": "https://dexscreener.com/solana/HKG3oVT1vT3kZ6Rx9NKVoAVeiTJJUXbFfAjSucGMfdqG",
+   "kill_gate": "liq",
+   "kill_reason": "liq $14.1K",
+   "kill_price": 4.344e-05,
+   "kill_mcap": 43449.0,
+   "kill_liq": 14065.92,
+   "first_kill_ts": 1795004733.2182858,
+   "last_kill_ts": 1795004743.1057956,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795174046.4298918,
+   "dead": 1
+  },
+  {
+   "address": "9FkBDqYNfCHQgmbMvwGr2tWgFDCSrCqRueYLAAtApump",
+   "desk": "dip",
+   "symbol": null,
+   "url": "https://dexscreener.com/solana/HP57v3fbPsNfABoJcBCMWZysWKdRzCiHBhdH4XvrHtsD",
+   "kill_gate": "liq",
+   "kill_reason": "liq $11.0K",
+   "kill_price": 2.908e-05,
+   "kill_mcap": 29048.0,
+   "kill_liq": 11037.2,
+   "first_kill_ts": 1795005519.5547633,
+   "last_kill_ts": 1795005539.5454392,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795174046.4298918,
+   "dead": 1
+  },
+  {
+   "address": "4EDmr9KPqUfFBgoC7WVYgGet1QJ5f85T4Whr3aJfpump",
+   "desk": "dip",
+   "symbol": "BUCKZ",
+   "url": "https://dexscreener.com/solana/3ZX3qJLCChkfVP4Mzfu6cgP82YBF1zFELsb7EyD2ETmZ",
+   "kill_gate": "liq",
+   "kill_reason": "liq $13.7K",
+   "kill_price": 4.335e-05,
+   "kill_mcap": 43318.0,
+   "kill_liq": 13747.61,
+   "first_kill_ts": 1795005821.4805806,
+   "last_kill_ts": 1795005830.4700122,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795174046.4298918,
+   "dead": 1
+  },
+  {
+   "address": "GSqPGvZeNVNHGNePwNY37hh3MNw8AUk6kX1p6NyUpump",
+   "desk": "dip",
+   "symbol": null,
+   "url": "https://dexscreener.com/solana/G3NtbwjRPagfNzAacW1taDKXnM4QJb8eH1BeSTQTddj5",
+   "kill_gate": "liq",
+   "kill_reason": "liq $12.8K",
+   "kill_price": 3.723e-05,
+   "kill_mcap": 37171.0,
+   "kill_liq": 12755.27,
+   "first_kill_ts": 1795005821.4805806,
+   "last_kill_ts": 1795005837.3279848,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795174046.4298918,
+   "dead": 1
+  },
+  {
+   "address": "GRh3qyx1JXWRgSZMJ6MUt2S1U3QhWrTet19n3yTNpump",
+   "desk": "dip",
+   "symbol": "Boobie",
+   "url": "https://dexscreener.com/solana/b4jtnjsxcaijrtfgud6cevfmgjgljlzniye4nr4xez28",
+   "kill_gate": "liq",
+   "kill_reason": "liq $12.1K",
+   "kill_price": 3.348e-05,
+   "kill_mcap": 33425.0,
+   "kill_liq": 12066.25,
+   "first_kill_ts": 1795007067.014968,
+   "last_kill_ts": 1795007077.3930721,
+   "kill_count": 1,
+   "peak_price": 3.348e-05,
+   "peak_mcap": 33425.0,
+   "peak_ts": 1795007067.014968,
+   "peak_multiple": 1.0,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": 2.363e-06,
+   "last_checked_ts": 1795179821.3142133,
+   "dead": 1
+  },
+  {
+   "address": "8gU6Vxx1u6gwzCqfpL8fUbnPQQokuKAC6j32kRpMpump",
+   "desk": "dip",
+   "symbol": "GT",
+   "url": "https://dexscreener.com/solana/a47sb42dkckyqsqsc1hfypdeaqgkjdgx3jptyb4pciwm",
+   "kill_gate": "liq",
+   "kill_reason": "liq $12.3K",
+   "kill_price": 3.533e-05,
+   "kill_mcap": 35269.0,
+   "kill_liq": 12303.58,
+   "first_kill_ts": 1795007248.5242717,
+   "last_kill_ts": 1795007254.5350225,
+   "kill_count": 1,
+   "peak_price": 3.533e-05,
+   "peak_mcap": 35269.0,
+   "peak_ts": 1795007248.5242717,
+   "peak_multiple": 1.0,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": 1.496e-06,
+   "last_checked_ts": 1795179821.3142133,
+   "dead": 1
+  },
+  {
+   "address": "8MZL5wPGFmFJUYksagQFhYqRk4n1H2QqPLjM2Tc6pump",
+   "desk": "dip",
+   "symbol": "Mandy",
+   "url": "https://dexscreener.com/solana/ASof9LJgx6w1bc8L5MwZzwhTgRcpjKQgh3Pmw7FZcbef",
+   "kill_gate": "liq",
+   "kill_reason": "liq $10.8K",
+   "kill_price": 2.807e-05,
+   "kill_mcap": 28053.0,
+   "kill_liq": 10843.69,
+   "first_kill_ts": 1795009365.684235,
+   "last_kill_ts": 1795009371.012528,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795179821.3142133,
+   "dead": 1
+  },
+  {
+   "address": "ASqoHn7amwMjHTkzSkBEdrdUFJDTuH5KY2x3PGPApump",
+   "desk": "dip",
+   "symbol": null,
+   "url": "https://dexscreener.com/solana/FTKsfj7TTQ4aUJSiQBiHLapQBgGARKUZ4ycCBFH7nRaP",
+   "kill_gate": "liq",
+   "kill_reason": "liq $11.7K",
+   "kill_price": 3.218e-05,
+   "kill_mcap": 32189.0,
+   "kill_liq": 11682.19,
+   "first_kill_ts": 1795009608.7308874,
+   "last_kill_ts": 1795009613.8227549,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795179821.3142133,
+   "dead": 1
+  },
+  {
+   "address": "AcspyeCHt5ZAfPQ8EwCdwjLRMst9oP7PPdAiWMjpump",
+   "desk": "dip",
+   "symbol": null,
+   "url": "https://dexscreener.com/solana/2T33UyveTYvEADSr71J4o6cRXyx52Xg7kKXetGdhwnLX",
+   "kill_gate": "h1 pump",
+   "kill_reason": "+922284% in 1h",
+   "kill_price": 0.2871,
+   "kill_mcap": 287143150.0,
+   "kill_liq": 1231057.85,
+   "first_kill_ts": 1795009728.9823885,
+   "last_kill_ts": 1795009739.3367848,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795179821.3142133,
+   "dead": 1
+  },
+  {
+   "address": "C9eSdQjR6JQ62kzKk39MWeVW3wmJUCawP6aQCpAKpump",
+   "desk": "dip",
+   "symbol": "RUBLE",
+   "url": "https://dexscreener.com/solana/dbwebla7wnofuyxzhpg6vnd6hvfyw8yulhvzgxdhg4x3",
+   "kill_gate": "warns",
+   "kill_reason": "warns: nonTransferable, defaultAccountState, permanentDelegate, transferHook, pausableConfig",
+   "kill_price": 3.236e-05,
+   "kill_mcap": 32326.0,
+   "kill_liq": null,
+   "first_kill_ts": 1795010273.167159,
+   "last_kill_ts": 1795010279.1812103,
+   "kill_count": 1,
+   "peak_price": 3.236e-05,
+   "peak_mcap": 32326.0,
+   "peak_ts": 1795010273.167159,
+   "peak_multiple": 1.0,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": 1.424e-06,
+   "last_checked_ts": 1795179821.3142133,
+   "dead": 1
+  },
+  {
+   "address": "8AazSsYvkKEmhVYLgcs9JEwLswfhmP9FeHHXAcydpump",
+   "desk": "dip",
+   "symbol": "GTAVI",
+   "url": "https://dexscreener.com/solana/3uydaavprb6naye9opqqnepbskgzeaiq6rvlwqgjchpf",
+   "kill_gate": "liq",
+   "kill_reason": "liq $12.4K",
+   "kill_price": 3.565e-05,
+   "kill_mcap": 35598.0,
+   "kill_liq": 12350.13,
+   "first_kill_ts": 1795012088.5869648,
+   "last_kill_ts": 1795012099.665344,
+   "kill_count": 1,
+   "peak_price": 3.565e-05,
+   "peak_mcap": 35598.0,
+   "peak_ts": 1795012088.5869648,
+   "peak_multiple": 1.0,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": 1.47e-06,
+   "last_checked_ts": 1795179821.3142133,
+   "dead": 1
+  },
+  {
+   "address": "DeywEtVkXJFv9g9MjVoUVfw11LwcsmzB4kC5GocBpump",
+   "desk": "dip",
+   "symbol": null,
+   "url": "https://dexscreener.com/solana/8FStA1QB2girYDStjRnMrprDwZRvx9tZqxQGfmA3fmHk",
+   "kill_gate": "h1 pump",
+   "kill_reason": "+3051602% in 1h",
+   "kill_price": 0.9457,
+   "kill_mcap": 945718349.0,
+   "kill_liq": 2227950.37,
+   "first_kill_ts": 1795012633.4177659,
+   "last_kill_ts": 1795012638.6654074,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795184874.919546,
+   "dead": 1
+  },
+  {
+   "address": "51TL7cAXaPcR5FyyPu4KMooLzfcMZAQFqkii1RCfpump",
+   "desk": "dip",
+   "symbol": "gta",
+   "url": "https://dexscreener.com/solana/btuyd5ckmksh2b6sx8za8fli6vpancktwdrmegdbkzm",
+   "kill_gate": "liq",
+   "kill_reason": "liq $13.0K",
+   "kill_price": 3.733e-05,
+   "kill_mcap": 37278.0,
+   "kill_liq": 12971.87,
+   "first_kill_ts": 1795013358.4998465,
+   "last_kill_ts": 1795013363.793513,
+   "kill_count": 1,
+   "peak_price": 3.733e-05,
+   "peak_mcap": 37278.0,
+   "peak_ts": 1795013358.4998465,
+   "peak_multiple": 1.0,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": 1.583e-06,
+   "last_checked_ts": 1795184874.919546,
+   "dead": 1
+  },
+  {
+   "address": "cY4bFXhBPwp4EY2AKJn5kTMgRA1YEyEPyhmHRYSpump",
+   "desk": "dip",
+   "symbol": "CC",
+   "url": "https://dexscreener.com/solana/BRxTYqoSH7GLb7ZZnYcjFNLyn2XD53jd8ZkACosM9irv",
+   "kill_gate": "liq",
+   "kill_reason": "liq $14.2K",
+   "kill_price": 4.568e-05,
+   "kill_mcap": 45633.0,
+   "kill_liq": 14239.24,
+   "first_kill_ts": 1795013419.2821221,
+   "last_kill_ts": 1795013429.7631252,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795184874.919546,
+   "dead": 1
+  },
+  {
+   "address": "3q6oyri5LVmMfzKLk5nqhuGokvAvijQmy8mDeuSmpump",
+   "desk": "dip",
+   "symbol": null,
+   "url": "https://dexscreener.com/solana/FEJy7SEWk4mKjmbuAFFyYcPCfd6bV1KKwAGjt67zSDEd",
+   "kill_gate": "liq",
+   "kill_reason": "liq $10.1K",
+   "kill_price": 2.484e-05,
+   "kill_mcap": 24844.0,
+   "kill_liq": 10086.55,
+   "first_kill_ts": 1795015172.6613476,
+   "last_kill_ts": 1795015178.3022113,
+   "kill_count": 1,
+   "peak_price": null,
+   "peak_mcap": null,
+   "peak_ts": null,
+   "peak_multiple": null,
+   "current_price": 0.0,
+   "current_mcap": null,
+   "current_liq": null,
+   "current_multiple": 0.0,
+   "min_price": null,
+   "last_checked_ts": 1795184874.919546,
+   "dead": 1
+  }
+ ],
+ "gate_scorecard": [
+  {
+   "gate": "liq",
+   "desk": "dip",
+   "unique_coins_killed": 2068,
+   "tracked_coins": 919,
+   "runners_2x": 61,
+   "runners_5x": 21,
+   "crashed_50pct": 848,
+   "median_peak_x": 1.0,
+   "median_current_x": 0.04498722860791826,
+   "best_runner": {
+    "symbol": "FIONA",
+    "peak_x": 60.49735018344884,
+    "kill_mcap": 48998.0,
+    "peak_mcap": 2921835.0,
+    "url": "https://dexscreener.com/solana/djbltx1hrgzzrjgj7cwtx6sn3d7tbliytkgwombuwtvb",
+    "address": "B34nXKzCgsJb9ChLuSHPRpXLE3WFSWyeT8Cqkzzmpump"
+   }
+  },
+  {
+   "gate": "warns",
+   "desk": "dip",
+   "unique_coins_killed": 131,
+   "tracked_coins": 84,
+   "runners_2x": 6,
+   "runners_5x": 3,
+   "crashed_50pct": 58,
+   "median_peak_x": 1.0,
+   "median_current_x": 0.0314553418064951,
+   "best_runner": {
+    "symbol": "PUNANI",
+    "peak_x": 14.505386875612144,
+    "kill_mcap": 204201.0,
+    "peak_mcap": 2947744.0,
+    "url": "https://dexscreener.com/solana/cnzhs2nmrnkwtpwk9okduscipbrddghpmnpnmnpd4hwa",
+    "address": "2TngN4B7XaoGSKsYvttq5bFAdM4Z4xCSnuyRwGiFpump"
+   }
+  },
+  {
+   "gate": "copycat",
+   "desk": "dip",
+   "unique_coins_killed": 89,
+   "tracked_coins": 68,
+   "runners_2x": 5,
+   "runners_5x": 2,
+   "crashed_50pct": 47,
+   "median_peak_x": 1.01336091474389,
+   "median_current_x": 0.007799893783766203,
+   "best_runner": {
+    "symbol": "UODF",
+    "peak_x": 10.452088452088454,
+    "kill_mcap": 2035621.0,
+    "peak_mcap": 21259148.0,
+    "url": "https://dexscreener.com/solana/4kamglamekxsokiudq822mstt5m7luz6f5fprweavb6b",
+    "address": "3JPSySKpVBG3u7zjNHd4xCBabkSVzdqHexRfsTpSpump"
+   }
+  },
+  {
+   "gate": "h1 pump",
+   "desk": "dip",
+   "unique_coins_killed": 129,
+   "tracked_coins": 107,
+   "runners_2x": 4,
+   "runners_5x": 2,
+   "crashed_50pct": 93,
+   "median_peak_x": 1.0,
+   "median_current_x": 1.2329020332717191e-05,
+   "best_runner": {
+    "symbol": "MAYA",
+    "peak_x": 13.763479511143062,
+    "kill_mcap": 278169.0,
+    "peak_mcap": 3814948.0,
+    "url": "https://dexscreener.com/solana/51edmriyson7mwtgqxaysog4z9nnvhvuupbuyy1epcbo",
+    "address": "FJKt1LxbWBpTRt9BaDEB6Wr2qL5LZzjFF5sx8rXnpump"
+   }
+  },
+  {
+   "gate": "holders leaving",
+   "desk": "dip",
+   "unique_coins_killed": 13,
+   "tracked_coins": 13,
+   "runners_2x": 2,
+   "runners_5x": 1,
+   "crashed_50pct": 8,
+   "median_peak_x": 1.0107142857142855,
+   "median_current_x": 0.008586052463211771,
+   "best_runner": {
+    "symbol": "LOOSY",
+    "peak_x": 9.610992148465384,
+    "kill_mcap": 280231.0,
+    "peak_mcap": 2682110.0,
+    "url": "https://dexscreener.com/solana/bfiq9ealcmjpekcgm16gszzgdedcpcfhrafvivrp4qky",
+    "address": "HF2RBPrfNBk9TxggL2cYZFEKSgirzh5HKCngLENTpump"
+   }
+  },
+  {
+   "gate": "timed out",
+   "desk": "dip",
+   "unique_coins_killed": 127,
+   "tracked_coins": 5,
+   "runners_2x": 2,
+   "runners_5x": 0,
+   "crashed_50pct": 4,
+   "median_peak_x": 1.893436838390967,
+   "median_current_x": 0.01068454481298518,
+   "best_runner": {
+    "symbol": "FUZZY",
+    "peak_x": 4.048350747797582,
+    "kill_mcap": 4880963.0,
+    "peak_mcap": 19758499.0,
+    "url": "https://dexscreener.com/solana/aysu2pje4tffgnpmr82d1rs7stkjaeg5ngqvvygyorum",
+    "address": "N5mX77c3frnrCi599bkwVELYMVoQ9dYwGswb3h9pump"
+   }
+  }
+ ],
+ "outcome_index": {
+  "G2m7PA1WUNZMH9Jx5JKwuU7ofHu5poxwYksEttz4pump": {
+   "p": 1.0,
+   "c": 0.17
+  },
+  "GM8DK56XEFdsbHZ5tEndMf9ypfVbUVfothW7RPsupump": {
+   "p": 2.227,
+   "c": 2.227
+  },
+  "7ZvVvfLrjdCpCrPLhmSk3VMFB3hGgHoWNtzPtS14pump": {
+   "p": 1.0,
+   "c": 0.013
+  },
+  "7C2Xv1G9HeB2KQfzw24iJ8oR1soHGpL6a2gzgDVnpump": {
+   "p": 1.0,
+   "c": 0.315
+  },
+  "pumptGRwCjbBVT9dskwqNDpYGLwS3VuDNiD6uiRssEm": {
+   "p": 1.0,
+   "c": 0.089
+  },
+  "7yMnhNL1ogfn3f1gjE6igi25Qj42WWdEybaKEZJkpump": {
+   "p": 1.601,
+   "c": 1.601
+  },
+  "E7nFMcFDT8PhX8VQYifr9zLtaXe318MUkkyYRwhcpump": {
+   "p": 1.0,
+   "c": 0.694
+  },
+  "5vh1khFqXp2BdboRv7ycBknTeMEG9rT8kKqBk3BKpump": {
+   "p": 1.201,
+   "c": 1.201
+  },
+  "CUxcbWRhChNNscAsTLXgp7fHH2AeT7zBgNwvhcdTpump": {
+   "p": 1.0,
+   "c": 0.195
+  },
+  "Dtx414D8jurspmB1jqJWsYU66pemoXRjQeXx7TC1pump": {
+   "p": 1.154,
+   "c": 1.154
+  },
+  "7SjpHoT4mJrqCdS8F1sN3EaNNm7Zv4ijCwgXeYr7xVkr": {
+   "p": 1.0,
+   "c": 0.525
+  },
+  "BganZwsMszyogAEDsncgHgjt12qXjKD1NV9iZzvVpump": {
+   "p": 2.162,
+   "c": 2.162
+  },
+  "DRPPEw6J7rrsBEwP59SSjtKxmVB32v7sd7eheccapump": {
+   "p": 1.118,
+   "c": 1.118
+  },
+  "Fq21HdJsqHhUS5qvGf9xAXB8f8UreGuSUzZvTiz4pump": {
+   "p": 1.0,
+   "c": 0.314
+  },
+  "DKUM8qywmi8X9RYK2wUgnTw8QKjh1nYDThZR1GXPpump": {
+   "p": 1.268,
+   "c": 1.268
+  },
+  "EhYZ1zUAYNX9cWDRPxUPCExQAjged26Mb7Kvywu5pump": {
+   "p": 1.925,
+   "c": 1.925
+  },
+  "JD7ZPyfru7QbthacQF3Db3Xiw4pNbqV3duZVXXWypump": {
+   "p": 1.068,
+   "c": 1.068
+  },
+  "9ncCobn6duD1NSqgpkyWmc4AJPEXQ8jdN9gfVPmbpump": {
+   "p": 1.008,
+   "c": 1.008
+  },
+  "7gqk4Ap5iYjnWHtkwygYp8bcAVFSiMo8aMJ1cGvPpump": {
+   "p": 1.0,
+   "c": 0.259
+  },
+  "CdVfnnCTaLgM3Ekdc3K5zkDvFYrZ1dJqCcSoKE8Vpump": {
+   "p": 1.962,
+   "c": 0.049
+  },
+  "6mckp83xPFbe8R2aSJynAVxCxT6wqRZjZ6sor6cUpump": {
+   "p": 1.0,
+   "c": 0.075
+  },
+  "C8ELvJqaSpfcEAUU1kExrJbD28y8PjwTVooj8gnVpump": {
+   "p": 2.107,
+   "c": 0.048
+  },
+  "A52gBvRof43miaYKekg1c6M5dnRtHJkdTxoUnmXvpump": {
+   "p": 1.0,
+   "c": 0.009
+  },
+  "2DPkAuPQFAKn3mnb6GT8H9oK8qm6NGmf3jMt7wbxpump": {
+   "p": 1.453,
+   "c": 0.294
+  },
+  "5CvjVmu78ikjKA4oST7ucsurLcCeU174YRBdqSippump": {
+   "p": 1.0,
+   "c": 0.993
+  },
+  "2gwC192EkEkYN366ND3AvzFFYwe3jV4qZZizoxSnpump": {
+   "p": 1.0,
+   "c": 0.178
+  },
+  "51TUkCJcBPi5fj9gZgjnXh6Ny5RSiEbrxUBoikDLpump": {
+   "p": 1.253,
+   "c": 1.253
+  },
+  "39Tih7echsqCoJg3aMTQWvGT6xDdcV5LdTmQh86apump": {
+   "p": 1.0,
+   "c": 0.044
+  },
+  "GMt6XY1xjLoKv6chXUpoJ9FndLVixByeQw4skJ61pump": {
+   "p": 1.0,
+   "c": 0.01
+  },
+  "Gz5pvBjkBnBh6bG9nfvKkxLeFhU6NLhBd5mRx5cKpump": {
+   "p": 1.0,
+   "c": 0.529
+  },
+  "qvZgdGfEVEseJxbe5e72KHDjETwW2Luc6PoStbApump": {
+   "p": 1.463,
+   "c": 1.463
+  },
+  "6p2KJhVQ5fuMccnwECxWtdTyS7MkqTGBNvv2fKkBpump": {
+   "p": 1.358,
+   "c": 1.017
+  },
+  "8umh4Tj9tnhATSEinuiigxXzpBUCwr1T4tBod6gwpump": {
+   "p": 1.0,
+   "c": 0.06
+  },
+  "AinbHumkGCvwxCmnWZVdrYTxwa8U8fG8yQtgzffhpump": {
+   "p": 1.506,
+   "c": 0.047
+  },
+  "DM3H3YLTDih3eehrZD6dsy49xWe4eCTDkvgZhnvKpump": {
+   "p": 1.418,
+   "c": 0.044
+  },
+  "D86intTvas35dBPKDRr1SZRjtrfwSSSARQNvsUGTpump": {
+   "p": 1.0,
+   "c": 0.997
+  },
+  "Hbp6gqGFfwCcfHK644XCTAhY2hkiBuMX267TJP4cpump": {
+   "p": 1.086,
+   "c": 0.041
+  },
+  "De6A7BZNQnamHeJFzNs4T47cfon21KULR1MLbbmdpump": {
+   "p": 1.0,
+   "c": 0.076
+  },
+  "nnx9LhDCSsCh39egrrBE4s5tjQnfD2G7o3Jz6Prpump": {
+   "p": 1.0,
+   "c": 0.054
+  },
+  "7rGmC4qH99shHrxgXgQbkM38zhefd8eBqrRusUKgpump": {
+   "p": 1.0,
+   "c": 0.095
+  },
+  "285kL5qHfJKysshMcShV8eU78rPkF9LApajMV1aJpump": {
+   "p": 1.0,
+   "c": 0.051
+  },
+  "3AbaemPLizhuDmpEnJ1tLFB5sGQ6kBYUpnYc4X8Rpump": {
+   "p": 1.0,
+   "c": 0.048
+  },
+  "5jYoYYfcsKsoPmonPFiwMK1en1suh2bqfV8WvCiDpump": {
+   "p": 1.024,
+   "c": 1.024
+  },
+  "8yx3P9ToHTRRL1iN6MWrxsosZ7WSMhdZszdpVPMSpump": {
+   "p": 1.0,
+   "c": 0.05
+  },
+  "37EKZi7FCyZbPmQSaqK3gxQBou8mjzPikgBTtVPrpump": {
+   "p": 1.0,
+   "c": 0.05
+  },
+  "5DXhycfJ9bdnx2sxbPoGZk9L3wZnjGdMJVMJSQY5pump": {
+   "p": 1.0,
+   "c": 0.019
+  },
+  "GuRGWjKLsM6E67owv1HiTvdmYu4XmatPiaHezJk6pump": {
+   "p": 1.0,
+   "c": 0.315
+  },
+  "DiQpNLJgvYumRMRstiZUnJkxZQTwafRWfSfDYSYWpump": {
+   "p": 1.0,
+   "c": 0.062
+  },
+  "6JMfd33i5a5w818kPLsjVRUPWRa2Rnec9venrVCHpump": {
+   "p": 1.123,
+   "c": 0.152
+  },
+  "DywBpdhcTnrSf5WfzhxcFAkGTCN6LCDV1B61dZ3wpump": {
+   "p": 1.0,
+   "c": 0.037
+  },
+  "GUmEktSovDB9y1gHxzQFnSjAHZfe8f8Q4KcLfvtBpump": {
+   "p": 1.126,
+   "c": 0.047
+  },
+  "GNGN1gc1bocBGRgR8gooeZCJjQokMXYDBPjup2QYpump": {
+   "p": 1.0,
+   "c": 0.048
+  },
+  "BBRYfBbTAwbwQptJBP7Tb6gDBUA5CGFzqFFFGkFySyDz": {
+   "p": 1.207,
+   "c": 0.1
+  },
+  "5MzYUa4z7ZtJEWAyj6pcCmhky8NVS1PLa9NFGEQcpump": {
+   "p": 1.0,
+   "c": 0.124
+  },
+  "A9aNGLJHLsfREaLLgyNaibePBRYYD1PfjGvDvbGVpump": {
+   "p": 1.082,
+   "c": 0.041
+  },
+  "7gMV5YmMpbhThjZ35NucRyRMnveFNwxdcngiaAjMpump": {
+   "p": 1.0,
+   "c": 0.05
+  },
+  "ApRusYyBmcX5Nrk4UAdxSLfAhSMkV2xS6Erohsaapump": {
+   "p": 1.0,
+   "c": 0.077
+  },
+  "EzyLWHHn1eELgm38GUnoGkTZwtgzC1bLKZV1CDGwpump": {
+   "p": 1.627,
+   "c": 0.037
+  },
+  "DWCjhpzehnR8RYFQy2e3u7sWL9F7UdcFNmR7UpUpump": {
+   "p": 1.0,
+   "c": 0.8
+  },
+  "782n9KG7gnKXzvMGmVZmNHrEArGCFtBveGJrN6D5pump": {
+   "p": 2.443,
+   "c": 0.042
+  },
+  "FRgvRd6qoNhBxeHtAKrw4oHNjpFciYwL1Gmo8CC2pump": {
+   "p": 2.23,
+   "c": 0.032
+  },
+  "2Fm3qAJQ4s9Hcem4rLUsrfscFBYuMzpmmPbJiSADpump": {
+   "p": 1.03,
+   "c": 0.431
+  },
+  "D7Yr73o4rg6NMUKd8Hca5i52ysqFyFEEUziX6B1ypump": {
+   "p": 1.274,
+   "c": 0.041
+  },
+  "WXGFhNM7bNwKkVZJgmLB1pqm4G96wY4TiqwiJn5pump": {
+   "p": 1.225,
+   "c": 0.094
+  },
+  "4ZgkpHfEnPGeA2UwgMahstsYBHMdvipdYB75Zeyfpump": {
+   "p": 1.0,
+   "c": 0.053
+  },
+  "9WPAsRfQYYLPvUmCysPSA8Fd324TQpu3B1hCiS9Upump": {
+   "p": 1.454,
+   "c": 0.049
+  },
+  "BFzEwy2Y8m5f8yhfeC62fBsnCgX9dU4qKbWMAkEGpump": {
+   "p": 1.0,
+   "c": 0.028
+  },
+  "2sa5buf3chqMbKUtZGx9GdYLiax9asPHBAsaUZ4vpump": {
+   "p": 1.795,
+   "c": 0.05
+  },
+  "DfRRzS9bh1acd6M8hvFp2aZ7q3vzYsXiTvGsd9xUpump": {
+   "p": 1.125,
+   "c": 0.032
+  },
+  "FrKnDznuhPtNQGTAtQXi6iMcPQcHoxZUYTzrHr5Bpump": {
+   "p": 1.0,
+   "c": 0.05
+  },
+  "GhjBM6WhME2QLERYrDh1Mfb59vXVVb3oEyXyTBtgG1Uo": {
+   "p": 2.466,
+   "c": 0.118
+  },
+  "BDbyTFicW4spEEpoVZHxzwGkqdK6vg6L68FnRiWfpump": {
+   "p": 1.0,
+   "c": 0.057
+  },
+  "b2NnoZcbnFYfTSVrDuxKjZipeYM9VAv2m41xTxtpump": {
+   "p": 1.321,
+   "c": 0.026
+  },
+  "QSMebKR3JLa2MPkYKeJ6SgtUA1sYKszv581D3cYpump": {
+   "p": 1.301,
+   "c": 0.032
+  },
+  "De9JHwfE4yrKkxj6BUVCiZyDHcpVHSgq8TwymWj7pump": {
+   "p": 1.015,
+   "c": 0.747
+  },
+  "27Ei5H46yrLtSyGiCc2AYkrPetr9AsDAN9kLFmPkoksr": {
+   "p": 1.0,
+   "c": 0.058
+  },
+  "bN146h4sWFMk3Uq17eu7CzmkG5APcSQQRP9KuqFpump": {
+   "p": 1.0,
+   "c": 0.724
+  },
+  "2y8pf2tZkfMMyRfEZStopHVukXDNoVf9wMjnNaZBpump": {
+   "p": 1.58,
+   "c": 0.102
+  },
+  "Aap1i3qjM8uyAYNCwhQN8KJ8h8pQLxVbpKwGurQEpump": {
+   "p": 1.0,
+   "c": 0.048
+  },
+  "Cvb1vV5yp6Z3cZCXXHeCWkhimQEAaBWgaFgR47EMpump": {
+   "p": 1.601,
+   "c": 0.041
+  },
+  "HkgTnHww6NPhEmkhd9m561xbwakdX36cTFeepWhdpump": {
+   "p": 1.281,
+   "c": 0.044
+  },
+  "3vnopepmrB8S3ENkv6wcuCJqgb7FQH98c49HyBWnpump": {
+   "p": 1.0,
+   "c": 0.056
+  },
+  "HzZXx1QZEygQZQUh1td4v2SXt1hTC6dUXunXfwVNpump": {
+   "p": 1.022,
+   "c": 0.005
+  },
+  "8AiATNTPBoApZu4y5QqVzMJK6CmtoMLEEbGBZAaqpump": {
+   "p": 1.31,
+   "c": 0.051
+  },
+  "EbsnhguvJGXRb1kYvYKF6CKhiNmpUvP37bezf6xfpump": {
+   "p": 1.178,
+   "c": 0.162
+  },
+  "8xegBRcvNUMYTtxno5DnPLMMHRXQg9RrUVnQwEVppump": {
+   "p": 1.166,
+   "c": 0.539
+  },
+  "Jd3NCawdFiDNWpLiTtsMqoeoBMjC1ZQMrMScRVzpump": {
+   "p": 17.944,
+   "c": 13.675
+  },
+  "EU9RwR3SHT9tvszyzWPPpxFcgDMgULvz5S8NEz6Mpump": {
+   "p": 1.423,
+   "c": 0.167
+  },
+  "DFKwjUFbbS3RZ3zFxoHkMgZVeLnrQLttgxhwbkdsidFD": {
+   "p": 1.256,
+   "c": 1.256
+  },
+  "ARJn4PbmgExTpJcyH3ZQoHU4J6z8K6RFHJBgjpd7pump": {
+   "p": 1.0,
+   "c": 0.038
+  },
+  "G8Jzr8vorvDFqhCxK5J3JZeM5YUjSFhvkSz6z25gpump": {
+   "p": 1.216,
+   "c": 0.045
+  },
+  "JaB8P85aP2sJd5prcmrqHqQXAUS8mp4JSfbM9Yhpump": {
+   "p": 1.294,
+   "c": 0.379
+  },
+  "AZBexhUGS7MNcxcXyjMHuZ6xgqdKQ1rqPvbFf67epump": {
+   "p": 1.0,
+   "c": 0.047
+  },
+  "Ep4Br7d6sDtwT8pVf1dRQ6mRqoVuWcXQhhfXFLA2pump": {
+   "p": 1.389,
+   "c": 0.137
+  },
+  "HU2YPsKVqGWR8W3TA4BkEuqaHfPsvfECkXmUyHAupump": {
+   "p": 1.004,
+   "c": 0.045
+  },
+  "co4VfoYEvprrwcKw1qiu4W246drJdjjju57Y831pump": {
+   "p": 1.011,
+   "c": 1.003
+  },
+  "VnkziA1x7psDBKNbRFfGJS3a2EEZqxZQ9YTtgxepump": {
+   "p": 1.0,
+   "c": 0.012
+  },
+  "HLaoQpp3AmrdPpDMh4fB25KVej5aE6ZyNX3ueE5jpump": {
+   "p": 1.0,
+   "c": 0.044
+  },
+  "3S856mBeC7tEULvNjHnyL2rWbC3wQmC3MvM2HFi3pump": {
+   "p": 2.069,
+   "c": 0.052
+  },
+  "QNosYEiEDf7gJggo3UjfqqonvJxmBc9dTEqcHmTpump": {
+   "p": 1.043,
+   "c": 0.258
+  },
+  "3xV8wTxRo2BX2oRj1d2nV2jn1T96LFGHXenpmmoZpump": {
+   "p": 1.0,
+   "c": 0.038
+  },
+  "BUT4YZEesNZzGLZdLtvqSJWR7E9qXGYy7cFPAfz6pump": {
+   "p": 1.0,
+   "c": 0.226
+  },
+  "EUXjmY9aSBbvut9oGi5Go4Qz1DrZDWoMRQaSMgF7pump": {
+   "p": 1.0,
+   "c": 0.044
+  },
+  "9o4782Dsf4tsCTU5FT4qcXjpnr3ZYRCkB7Tces84pump": {
+   "p": 1.0,
+   "c": 0.435
+  },
+  "ANvdcNHyYp8fDUuk3BK28VhQ2YgNAypAUW6KgzWPpump": {
+   "p": 1.0,
+   "c": 0.047
+  },
+  "DrkpdAyf6i16LxZ83etYxFoW9w5mpVYgojk2tLefpump": {
+   "p": 1.509,
+   "c": 0.036
+  },
+  "6XDT2hV46r6ur26BB5FReZV2pt7KYxhU2xeineGHpump": {
+   "p": 1.0,
+   "c": 0.038
+  },
+  "4wGw4ZvA7pGksDT5SpMKm4wua9UA9S6y3RiRAg4Qpump": {
+   "p": 1.0,
+   "c": 0.148
+  },
+  "NGK4MVhgG1Vtpri7vCoregDMd1xotEJMhsWRfg7pump": {
+   "p": 1.0,
+   "c": 0.073
+  },
+  "8Wj18dstju6wghWDEsRdRzRmPTz8fD5Z5QwyfHjzpump": {
+   "p": 2.256,
+   "c": 0.064
+  },
+  "DmrUPQKm5ifGaneG1bTkUD9sjSF2Th7qiwV7GwUYpump": {
+   "p": 1.0,
+   "c": 0.03
+  },
+  "DdUDPF6Ddime7VMKvvSkyMkYjTZntQtRKio9UCf1pump": {
+   "p": 1.0,
+   "c": 0.088
+  },
+  "6qmVTdMG9CtogD7AJx3UJhnoCVEjNCf5aRsEGi6mpump": {
+   "p": 1.663,
+   "c": 0.043
+  },
+  "FUd2jMbBFxA1HCF96Yr7rMFvByjkTNxDu1bG9iw3pump": {
+   "p": 1.0,
+   "c": 0.044
+  },
+  "4zn72PK3SXqH7Jw7XHVA18379b46gA8FdnApMQHpump": {
+   "p": 1.032,
+   "c": 1.032
+  },
+  "3b7WvfRxRaoMuq4j6JWJzrL5mym3Km3QzfX5dqCopump": {
+   "p": 7.483,
+   "c": 4.479
+  },
+  "93j86ui7BpdhqUeiSSZRbtfaH9zM2yAedRZDEjZ4pump": {
+   "p": 1.0,
+   "c": 0.05
+  },
+  "3sK3zMeAu7EPxaU2H4x6fcof6Ckmtn2wNEGKjPrwpump": {
+   "p": 1.157,
+   "c": 0.041
+  },
+  "3akirsQnDij9R6h4fZFxdxrYUjQy32JNWBv4FCNBpump": {
+   "p": 1.436,
+   "c": 0.394
+  },
+  "2Axvd4o5wdEB2oSGDhzZiCVZb4v26c9rEpsP8UMWpump": {
+   "p": 1.045,
+   "c": 0.035
+  },
+  "HQgpp7XJUFvfKDK5UYg25Wc8vDCH4JVafxSeVaZMpump": {
+   "p": 1.0,
+   "c": 0.056
+  },
+  "AniTsLxVLrBxVrFubVDbMb1g657m6g57hBG18819pump": {
+   "p": 1.0,
+   "c": 0.065
+  },
+  "8uMusuxzM8zefxWDMa4SrbXgCVp3HK4CN7HwUFuFpump": {
+   "p": 1.0,
+   "c": 0.049
+  },
+  "GsKXTWqJvZtUekcNGTQoWGPSU2fgsdrCNDBoeV9Npump": {
+   "p": 1.0,
+   "c": 0.026
+  },
+  "EALjJGCnm5JUFW8LNFdgsn4L5YCkzxYkFYioV2zPpump": {
+   "p": 1.46,
+   "c": 0.024
+  },
+  "6nU7MJcdaoS461fJbHeSHGxnzvAw5Tt9DGx9Tdrypump": {
+   "p": 1.0,
+   "c": 0.053
+  },
+  "HqUn8GhyLrvK4P2nLFRMbPLZhyMUJ2NUsaBe8siZpump": {
+   "p": 1.0,
+   "c": 0.046
+  },
+  "3iVoBmmj454jL3WE5KrxcoAP8Du8RaKoC6XncG3apump": {
+   "p": 1.149,
+   "c": 0.043
+  },
+  "ygeujef3E9i4N13Ub5LFXXZ3RGrc45NiV3V2B6upump": {
+   "p": 1.022,
+   "c": 1.017
+  },
+  "8LiYzFsD2WySHR26ZAZdZkYZHgEvjdE9SrSfchhwpump": {
+   "p": 1.393,
+   "c": 0.057
+  },
+  "9YvnLQNmp2asrkDSdDjtPGheMBz4GuPnqwPxgEk7pump": {
+   "p": 1.027,
+   "c": 0.179
+  },
+  "9AkGqjChJXFArMn2sPq8yp6Cg5oLCAA1LTPp263Fpump": {
+   "p": 1.0,
+   "c": 0.06
+  },
+  "D5JYaow3EqtqZXYmnaRRvezp9DKzD93wvkayvP5qpump": {
+   "p": 1.0,
+   "c": 0.037
+  },
+  "23SaCrvoAZeUd9gPikpqEbdnP6XsSxnczJrDwFPrUgat": {
+   "p": 1.0,
+   "c": 0.158
+  },
+  "7VtNjQu7GGPX5A1CowMxJjfFsPkZsuJ3AoSQdzHTpump": {
+   "p": 1.261,
+   "c": 0.067
+  },
+  "EK2tRRD5jqNUxohdMjbjnJ5Q3t9TYGBkZVjtMceDpump": {
+   "p": 5.145,
+   "c": 1.406
+  },
+  "AmGfxYgTpavfxkdJKFSwG67R8RQ1PZzFbj1qrbrVpump": {
+   "p": 1.046,
+   "c": 0.035
+  },
+  "4RYJYwtK1ZMsZ4iBQ9qLHCB4rQqd6Rwjy33FWG5upump": {
+   "p": 1.144,
+   "c": 0.041
+  },
+  "C77wTNSwkorDNDhQTujY39xJJNzG3q78MMRx4EDzpump": {
+   "p": 1.68,
+   "c": 0.107
+  },
+  "H3e9ixXY9eFZ5S5JrnNB163mazpL9ePT1sDMjBUKpump": {
+   "p": 6.462,
+   "c": 0.039
+  },
+  "AUuJPgFkq7BGK4NmgHZMWyScddeUw9x4NizjFDgupump": {
+   "p": 4.238,
+   "c": 0.038
+  },
+  "UjJJWVidb24XTz9NgJZnY8gqSe2xFw89qAEfHktpump": {
+   "p": 1.029,
+   "c": 0.0
+  },
+  "D5D2ieKCyhBToJjKJWWM3HeakiH8DPAVoCYkfd38pump": {
+   "p": 1.555,
+   "c": 0.115
+  },
+  "YUJaNkMKnFwCM1WFQf4d1YGFpSkQDwQ3PDYWMnDpump": {
+   "p": 1.0,
+   "c": 0.15
+  },
+  "AJnaFi9YKgNWzi3aEqJXVbH6puHdNi4FuTr6to7Tpump": {
+   "p": 1.0,
+   "c": 0.057
+  },
+  "9hCmXvhoJv3RKfWtampFKn4RZrnAN4mx8qThhZGZpump": {
+   "p": 1.069,
+   "c": 0.044
+  },
+  "71m6i7HRdHvPPEWJAUHbUL542sCKdfk32m2VcxAopump": {
+   "p": 1.05,
+   "c": 1.05
+  },
+  "E4XUKh5vPSvkV6MyWYkjXqgzan5xj9CtprMwEEBhpump": {
+   "p": 1.0,
+   "c": 0.611
+  },
+  "TSPMowYjNS39wpLgS2T3ZF3TP2mnCkusdCDZ28apump": {
+   "p": 1.055,
+   "c": 1.055
+  },
+  "B6q85g1RwhUHzGzaq2WKwjUpuZ9FfszmziJANGpKpump": {
+   "p": 1.407,
+   "c": 0.057
+  },
+  "2YwUPZeZDB7WyDpPzQgYudkyTQcjcnaDjy8USJhFpump": {
+   "p": 1.099,
+   "c": 0.039
+  },
+  "BjnxH6a3D6HQz1LRPsGX5TZmW3GwstpexSNrK2utpump": {
+   "p": 5.171,
+   "c": 2.618
+  },
+  "1o5cZEe8UZwxjSu43Min8kMGoRWi7c7V6Q8vW1Epump": {
+   "p": 1.005,
+   "c": 0.0
+  },
+  "8qpRy1wxdx6dXJCUkCrenSf8zaX9QKmnp7f3CsBfpump": {
+   "p": 1.019,
+   "c": 0.1
+  },
+  "eeRBCh5un9dD4nuPe645ib29KKvYi7DQuJB92jNpump": {
+   "p": 1.372,
+   "c": 0.04
+  },
+  "cbE47tiuDKC2U35UbAhjf7moDxEJAYFkCybrnzfpump": {
+   "p": 1.0,
+   "c": 0.313
+  },
+  "HqfF6w59HLspNEnqw4BBt6VzwCCbURtWhi4Vbtwrpump": {
+   "p": 1.304,
+   "c": 0.043
+  },
+  "8bGA7uQRGURruJLacPopiTSJtzS49VvLL7C5yDBpump": {
+   "p": 1.0,
+   "c": 0.012
+  },
+  "Car88oYN7W5Saf8bsiNw6og5QgCDtzXWec3NvNugpump": {
+   "p": 1.0,
+   "c": 0.102
+  },
+  "78g2qqHVJCAhEpPCUoaoHmYVakzXevd5ELJt1bi5Gov2": {
+   "p": 1.0,
+   "c": 0.082
+  },
+  "53DzwArXGL4wAqxCraDEUZSN9AgnuWwxKSmtFeu6pump": {
+   "p": 1.0,
+   "c": 0.101
+  },
+  "DKA4FnRka6zPzvwUJCbnchGfjnT4x4WkfoKCFSawpump": {
+   "p": 1.179,
+   "c": 0.042
+  },
+  "3TQ2LZpbtM9dxXgJWqAQcyRTKFTWwTVMo495wnMbpump": {
+   "p": 1.242,
+   "c": 0.046
+  },
+  "Gqz7b4NvCm7co4gmSd1H2VgVzTGYBvGyTFU7z4ddpump": {
+   "p": 1.406,
+   "c": 0.496
+  },
+  "H7tfwRhsBzRMG5WgCdZp9kdGnrchb2sYajc1SgAcpump": {
+   "p": 1.335,
+   "c": 0.043
+  },
+  "FbuiGnS7jFu2WqQjiFrjkW32oYCHQZ6Ygvr4Y6s6pump": {
+   "p": 1.205,
+   "c": 0.049
+  },
+  "CxMVhgQoDvYPhePwa9wfGRSJpSaWfJZcxhDJ4Zy6pump": {
+   "p": 1.0,
+   "c": 0.039
+  },
+  "DRRgyTnGDGf4Dvu9C4WYrJ1T7dMkrAZRzHE5KoHzpump": {
+   "p": 1.181,
+   "c": 0.043
+  },
+  "EZih8uh6nRK6PqBVQEVZkkJLsz6wU9G4W1BcrxWLpump": {
+   "p": 1.0,
+   "c": 0.054
+  },
+  "EJaKBgujwjYTqEiaTZyoSsXcGcEY2rPqqXSRnmYipump": {
+   "p": 1.124,
+   "c": 0.005
+  },
+  "91GG7PWsUTmXwHcDtkoaEm77v1xc6NyQWoETFjrDpump": {
+   "p": 1.239,
+   "c": 1.239
+  },
+  "C9sdZ4U5J4Rz7R8d67zsTx9cZfUALsmSxArN9esfpump": {
+   "p": 1.38,
+   "c": 0.039
+  },
+  "72ghv9CEhahxx2eZU2wQnquQPJETquSiEG6S4fwZpump": {
+   "p": 1.075,
+   "c": 0.926
+  },
+  "A9jbSQDkbdQrA37fYAPf4TSK2GBCuBcGikEmZaRGpump": {
+   "p": 3.965,
+   "c": 0.042
+  },
+  "AaPvtDo61uDD6DA7WLRSb22SnjfwGjcpSPro8Gm4pump": {
+   "p": 1.077,
+   "c": 0.044
+  },
+  "GSQSvrTbghgJ11Ng7RNaNLiHuumMfxYmReVfQCiupump": {
+   "p": 1.0,
+   "c": 0.08
+  },
+  "48GgJr8uYHtCeQfJs92maEXVgdo8cGGG6JWB6FCSpump": {
+   "p": 1.204,
+   "c": 0.046
+  },
+  "GumhxFxfbF4uzcKdXuPAtpULM4BDPCLE1aWpwqc1pump": {
+   "p": 1.0,
+   "c": 0.036
+  },
+  "xt9JrEvcqu7FoKyoJLS8arMa69g4k3HoB9Dh5PQpump": {
+   "p": 1.061,
+   "c": 0.041
+  },
+  "ARQwiXap6xe55NHbCQu8EcaF2i1qmgoL95ydjPoLpump": {
+   "p": 1.136,
+   "c": 0.845
+  },
+  "B3y5kmGACtQG2aD6ApgQVaP2hJhDz9K1t3WUiX1Hpump": {
+   "p": 1.0,
+   "c": 0.247
+  },
+  "MyVNKoBgRTDLRFkdHJ4Fw9UJsqHHPodt9hXQKWxpump": {
+   "p": 1.026,
+   "c": 0.0
+  },
+  "4bhXU61MpisPAGHjL6cfqYpMhdDGtgnnTf2M3j8Npump": {
+   "p": 1.0,
+   "c": 0.007
+  },
+  "4pzi3TsM4FYJNRK733TJpE3HUDMrs6fWQZX9GyXvpump": {
+   "p": 1.122,
+   "c": 0.025
+  },
+  "6DkJawEZE7m1tnXi7WqdhoKrANfuMRPQwirXLyGKpump": {
+   "p": 1.431,
+   "c": 0.076
+  },
+  "AW7se4JobWd9jCTF9KyxWM1RbEkVYvwFHmQfaQzopump": {
+   "p": 1.0,
+   "c": 0.045
+  },
+  "7M7yAQmtvo9jJ6TgrMPEj5eXbxFiJCJjqWfQyMQrpump": {
+   "p": 1.562,
+   "c": 0.01
+  },
+  "2GiS8L6jzveE7cQ61bjGN6wVn5MS9FcBjarSAMFppump": {
+   "p": 6.072,
+   "c": 0.017
+  },
+  "Aq19t4Yor4X4G5Cm3hSSmQnfXzvKHB9i8aSVA6jHpump": {
+   "p": 1.0,
+   "c": 0.043
+  },
+  "FJKt1LxbWBpTRt9BaDEB6Wr2qL5LZzjFF5sx8rXnpump": {
+   "p": 13.763,
+   "c": 6.833
+  },
+  "H6AoDjpzE8pj7KdsqRKbtWsJk7jYAVEcrTWGLVQTpump": {
+   "p": 1.0,
+   "c": 0.053
+  },
+  "3CSs7oM6iuDQb6obp81qpc3mUbVDewJep3hyBp69pump": {
+   "p": 1.151,
+   "c": 0.046
+  },
+  "F1FLgpASNqs9DDgiQAYrGSmb3LUSoyUEaAMzsz68pump": {
+   "p": 1.0,
+   "c": 0.04
+  },
+  "DLzz7Ydou6eLLnsQVCjaJ8Gng5j3MpnRuBxjDmQipump": {
+   "p": 1.207,
+   "c": 0.045
+  },
+  "DbMPw1vSRtE93EK5Sqw23xHuDtkD569RpqANLvdqpump": {
+   "p": 2.467,
+   "c": 0.455
+  },
+  "wCGGuRLCmbFjmQJFFBYbAzuySbfQyTpvmjE8RNZpump": {
+   "p": 1.0,
+   "c": 0.988
+  },
+  "9cfCUuAMqvWk9eDwTuJtFyqzJ6FK5tjFcVHkkvJQcoKU": {
+   "p": 1.0,
+   "c": 0.074
+  },
+  "HahgMPjJaNgZvLsYAXRcEeUyAUoMJoBPnujECTSpump": {
+   "p": 1.005,
+   "c": 0.0
+  },
+  "2S4e8Lv5kMqzXumeWrXMMwANUVtFLazeezUorfG9pump": {
+   "p": 1.0,
+   "c": 0.005
+  },
+  "8fWsV1u1SYcN358tSA6dyTjfpmaQTziftcHwKBFSpump": {
+   "p": 2.169,
+   "c": 0.107
+  },
+  "439nprrEUAawb4nmfnB8Y9AhpEKdRr5MpEfLse7R6HkJ": {
+   "p": 1.0,
+   "c": 0.083
+  },
+  "9cmXfuC26anZtH9AUWVzpUxU1UJ7PPogYxftYTepump": {
+   "p": 1.08,
+   "c": 1.018
+  },
+  "2TngN4B7XaoGSKsYvttq5bFAdM4Z4xCSnuyRwGiFpump": {
+   "p": 14.505,
+   "c": 13.281
+  },
+  "YgRwqHEGxY2mCrgD9y8WHwT3A7uUXftbU2Xod9Ppump": {
+   "p": 1.0,
+   "c": 0.0
+  },
+  "FQNz7BKQejsQR3aFyCY746Km2smesUS9DWYsU9nopump": {
+   "p": 2.445,
+   "c": 0.063
+  },
+  "AVywdS79k8M4GjMeqbYqBuHj367kJrqmwh2QhtMxpump": {
+   "p": 1.0,
+   "c": 0.055
+  },
+  "Gf7N95ddTeNbNXHmZBucqF5BXp5MwTh6oHacFGHUpump": {
+   "p": 1.162,
+   "c": 0.034
+  },
+  "AiLUihrfFHpdNKVqJH8AVQ6NLVYbnsvXP1pyvRZJpump": {
+   "p": 1.0,
+   "c": 0.078
+  },
+  "C2nrwWDQ72yjtLiCCpJDBpzv1Se5eniAVqadTvAdpump": {
+   "p": 1.042,
+   "c": 0.026
+  },
+  "8Vf84Hy21ZDU2t8S89JQVni5QaBXf21xEnv5yizXpump": {
+   "p": 1.047,
+   "c": 0.021
+  },
+  "dkpuQdjegjU8zcwYrBzYrLW11wvtjwonBsQhjLApump": {
+   "p": 13.648,
+   "c": 11.536
+  },
+  "14hfjVTAPr5JCP8Dv4uYJWnzBhME2LrRfJwxYxSJpump": {
+   "p": 1.136,
+   "c": 0.046
+  },
+  "97GqfiSRQy21ex8mCpjU7t6LKAnxr5LYb8YMUyCpump": {
+   "p": 1.0,
+   "c": 0.016
+  },
+  "23ChKzi4LbpS5F7eyftoKSnXZvRmFxQcM3K9M96hpump": {
+   "p": 1.0,
+   "c": 0.266
+  },
+  "BrtTvKvji38mNSnaR1BmTRp4y6FxSoztvcYjbmmGpump": {
+   "p": 1.0,
+   "c": 0.018
+  },
+  "wM5REumscZ1Q8TzjLPygs7qFrFPKJYjdLdcc9Q5pump": {
+   "p": 1.0,
+   "c": 0.0
+  },
+  "3phSmhJdHAnmQ5XEzMrhwyUSWBhHab5HEYpWhGqspump": {
+   "p": 1.0,
+   "c": 0.017
+  },
+  "C8S48SdQPgTrxh7Ghf67mfb74y8msUjTtotpTT4Mpump": {
+   "p": 1.0,
+   "c": 0.004
+  },
+  "Sq9VvbKjb3Kw6chdF8o4AAdwZBEk3eK6PqAn14Ppump": {
+   "p": 1.128,
+   "c": 1.128
+  },
+  "CjUYtohUCUBJDAzbUSGWHGMkqyHcBqtbALDtceh7pump": {
+   "p": 1.122,
+   "c": 0.051
+  },
+  "8GeQhuSciH7dKRK8ztzSeVyzujmLffouYc52JuCrpump": {
+   "p": 1.0,
+   "c": 0.036
+  },
+  "8GAcZ9EPayc6BQFdM9ftuhprVL9xBp4BvtwMSB8Dpump": {
+   "p": 1.0,
+   "c": 0.053
+  },
+  "2W2ZnH5pg5yPuCTw5MyQ6L4kRU1geogXGNA9qtXXpump": {
+   "p": 1.854,
+   "c": 0.04
+  },
+  "BNGYWzaF5anMyqKmBRfbRSjWeD5otnmQWqQsxjpjpump": {
+   "p": 1.0,
+   "c": 0.073
+  },
+  "HK64kGr5Pqonta3rijg2hxHCGfNfbPSF2wcY47WVpump": {
+   "p": 1.365,
+   "c": 0.021
+  },
+  "Ad3yfRjzGMgw2hKSo9cNbzHcqRrRV68JJoqVBeC8pump": {
+   "p": 1.0,
+   "c": 0.099
+  },
+  "F7KHs31oDJJYmmGjLcmFkeTwoTds4J3FkKPV64Lepump": {
+   "p": 1.337,
+   "c": 0.042
+  },
+  "7WCR1tjR5XHYn5xX7d6rXPh1B8RrBkLnJnPwN7bxpump": {
+   "p": 1.0,
+   "c": 0.004
+  },
+  "5QcxzQiUUDSj1mhjFd7YatSSJDeeTc7gMxm4EyBQpump": {
+   "p": 1.678,
+   "c": 0.049
+  },
+  "CktHFigNyDjkk1GesqUXkLM9zm5gXaYJAY8UEbhqpump": {
+   "p": 1.086,
+   "c": 0.162
+  },
+  "GwRU4wwh6A9njT2QPDHtmxBrQnkVogBBLdU7eAXqpump": {
+   "p": 1.0,
+   "c": 0.048
+  },
+  "7pq9QyFN1cPmC2Sdr3v4CxMcPM9vfNrbKMhxtpXNpump": {
+   "p": 1.153,
+   "c": 0.702
+  },
+  "zYJFpS5R5SYyZkmgYMk3MmMpyCELnSSyDUV6md4pump": {
+   "p": 1.064,
+   "c": 0.038
+  },
+  "5qXuUk2BVCzzUCr9AM2YVqjs7vhmgKUB3nQMoJF8pump": {
+   "p": 1.0,
+   "c": 0.09
+  },
+  "GBwbNdK5pVKkWPkyiL676ceyGbBu4RT9kSi9V8jnpump": {
+   "p": 1.381,
+   "c": 0.041
+  },
+  "DdwecY5BnnWTwhayALJ7N7magvTVw1aFXWFg7thJpump": {
+   "p": 1.0,
+   "c": 0.018
+  },
+  "5nmffpV9dMux1B1AeuZsi77CtgvD4SbeYWaMNShspump": {
+   "p": 1.213,
+   "c": 0.038
+  },
+  "8p86GHyesWbZgaR1N1ZimgS5uFXbmv6cZ76cQmESpump": {
+   "p": 1.0,
+   "c": 0.004
+  },
+  "22EQG83ZbQJFgk3YYbYCfkHfdcMgZecJbowwRaQ4pump": {
+   "p": 1.486,
+   "c": 0.048
+  },
+  "9yxz4fpcAr5ZufxJZrERivC5Pr7yzERB1Wm6eRzbpump": {
+   "p": 2.09,
+   "c": 0.04
+  },
+  "9ifLN1orU5ww6y7HvYytuGq7MhyPxDkDHZkMtr8wpump": {
+   "p": 1.0,
+   "c": 0.023
+  },
+  "p44sDiebm5RDPYgufghjcV5n6MpgvNgS2tg1mdXpump": {
+   "p": 1.073,
+   "c": 1.073
+  },
+  "CsKK9d5wtc9ykh6ZL6ERSRRjRnSZU5QTjVosEo2xpump": {
+   "p": 1.075,
+   "c": 0.176
+  },
+  "7DAPW4DxKDP3zmjKc4tJJmQRq7cdiLt2C4tZzQFTpump": {
+   "p": 1.0,
+   "c": 0.11
+  },
+  "6mAxeFTTa8WMQuGZCS12HiZDNVzmLjyJ61qaxZe6pump": {
+   "p": 1.0,
+   "c": 0.051
+  },
+  "FCSdJTj7afdLNjBNS38c3yyiqWqBuvtfJerPTd9xpump": {
+   "p": 1.085,
+   "c": 0.034
+  },
+  "9HKCuE3xpMeSUCDRy1b9RQwqyJWVJGFshe6WdUm9pump": {
+   "p": 1.352,
+   "c": 0.053
+  },
+  "2D627z6oyDiiGRcpmfqfWhfHnQg6QmpRj8XZnCyCpump": {
+   "p": 1.0,
+   "c": 0.004
+  },
+  "2wh7dPQV4w1tgVQzYzJB683fqxcTkU4A8WeaoNZJpump": {
+   "p": 1.577,
+   "c": 1.577
+  },
+  "8WTVMHHhXxSXt97cXJGrYPLSRe2Q3yyT8tmNjuURpump": {
+   "p": 1.046,
+   "c": 0.045
+  },
+  "ACVkPjBRHWMZEKExATPQaw6PwMZ7ED4wobxomeWGpump": {
+   "p": 1.621,
+   "c": 0.052
+  },
+  "4mSMHb6jcsFrMDAkbRGABBiKMGVVKdbvPeU7aS9Qpump": {
+   "p": 1.0,
+   "c": 0.004
+  },
+  "G8yh46v9zFfrW43iB8DZ9pZUdtW9vWkNxrJy2gzppump": {
+   "p": 1.56,
+   "c": 0.049
+  },
+  "62GAnQT4ZmpkRRuv5pALY1GtD2wo6KQiDKrB8CLYpump": {
+   "p": 1.246,
+   "c": 0.039
+  },
+  "ChNFpNTKpQEtn7tg5igBCcqRTKo52zCvNCVpzKQ5pump": {
+   "p": 1.0,
+   "c": 0.004
+  },
+  "EJn9bZuhEqhqiTh289yYbpCaDXn8gKinuqJqg2YCpump": {
+   "p": 1.087,
+   "c": 0.044
+  },
+  "HmJRWZ8tFfuCY9A4MrSftnrvEFCApw1hyqHtb9Rzpump": {
+   "p": 1.56,
+   "c": 0.066
+  },
+  "Hv4ZF1XAdezZBs75nhG8pNjCdXPJzZ8ATnhaGjGGpump": {
+   "p": 2.471,
+   "c": 1.559
+  },
+  "2g3NFpebwCV6Abz7AhmVC4xmsaczQXbqxHV4Khy4pump": {
+   "p": 1.752,
+   "c": 1.752
+  },
+  "CxGYpWoTun4J3xD4cNwXFRn2W3RzJozTxyU9nbJ4pump": {
+   "p": 1.0,
+   "c": 0.06
+  },
+  "DkHsZ1kjd2Fua8sgKE6PhHhyCdXYscbDVN7mAfiGpump": {
+   "p": 6.278,
+   "c": 1.799
+  },
+  "6Ys82v4P9wA7FWj2kQgdWE1rdwBiEJoeyRqeJ8nWpump": {
+   "p": 1.578,
+   "c": 0.04
+  },
+  "DdGq3CkX7BR67sAK3uMNCrToZBHSiUj94GgrGtpFpump": {
+   "p": 1.0,
+   "c": 0.037
+  },
+  "7m7CncqD9pKGVkBeoTcaWd1gA9q6jkiXwLLWTNKupump": {
+   "p": 1.139,
+   "c": 0.468
+  },
+  "4dXAFK3eL6MSmNtxoSni1u9493bJ9wweJDqSRkijpump": {
+   "p": 1.0,
+   "c": 0.009
+  },
+  "EUerLXMvnNyMp4A7EhueM5DuJkdRzkiHpAjnD6DXpump": {
+   "p": 1.374,
+   "c": 0.035
+  },
+  "HSMDvZe5NiGXDPHh74Rjvcc1R8YSBbk8eRBd9Hkbpump": {
+   "p": 2.385,
+   "c": 0.042
+  },
+  "7i8AXjBdKGjGpRo4Ex5aDKUaX55xed5Hrgoww1G9pump": {
+   "p": 5.626,
+   "c": 5.451
+  },
+  "EHhpwU1Xu2yMegS9g8NkCCLfXKNXSMFiWs3APvZepump": {
+   "p": 1.658,
+   "c": 0.054
+  },
+  "GJQmJ1kEMi8Q1GyZiif6qXaYqBdpaafvFVsFyYoCpump": {
+   "p": 1.523,
+   "c": 0.08
+  },
+  "6WcBvG5MaLSmk6BzDEZzEXc1JFrSopcmUdgfo2R4pump": {
+   "p": 2.506,
+   "c": 0.051
+  },
+  "HMs3u6rx8DSruPMhXL7N2N5hciXTXa49e9LCoj1Apump": {
+   "p": 2.848,
+   "c": 0.005
+  },
+  "9X8YzoGEa5i1iw8MBrfZ4tLrnwjGzk6mNzu5ufBbpump": {
+   "p": 1.0,
+   "c": 0.038
+  },
+  "CTerwsBK7QFQBJWgTTSKV9LUYYJhRUouHPd8ijKXpump": {
+   "p": 1.178,
+   "c": 0.024
+  },
+  "FADa7zQhdunoEBaZWywFtEytNXkLyaog8KSZeScdpump": {
+   "p": 1.235,
+   "c": 0.041
+  },
+  "7AfpieqMnoUJ6toDQX8HK1SHcW6C5zUMZCDZ9Lspump": {
+   "p": 1.0,
+   "c": 0.072
+  },
+  "DHgE4is2ywsvP5pQbawT5jvKoJyazPpzS1gJ6cEUWz9F": {
+   "p": 1.0,
+   "c": 0.081
+  },
+  "BRUntPiitVAZYLJ9ggibwzxMn5VSHB3gjGH3FerZpump": {
+   "p": 2.464,
+   "c": 0.045
+  },
+  "4uZrSJYFnNDUYM4zpPLwf3q6rNLAiAtPCVptmcWGpump": {
+   "p": 1.005,
+   "c": 0.0
+  },
+  "7f9q2si98aToHBCebeEu8EP6gSEC7apjvhgTbqK1pump": {
+   "p": 1.0,
+   "c": 0.057
+  },
+  "58nduYYmSUTAZToz3VCZxEDC5jpd3jTHuSGUQMtUpump": {
+   "p": 1.235,
+   "c": 0.049
+  },
+  "5kLah7PHaD6A4RmU2tdF7Tv3zXHGrkvxgfFtKUfApump": {
+   "p": 1.31,
+   "c": 0.025
+  },
+  "H8eM37zPUkmv3pQSUfg2pn65E7ZZ6KSdGADNWaiXpump": {
+   "p": 1.0,
+   "c": 0.147
+  },
+  "Fuxc3UNkjwBArgd4ZRRmeL7rapuUTzYuMVBhjPYvpump": {
+   "p": 1.559,
+   "c": 0.066
+  },
+  "9tpGLFqcxt4bxbrEVyyTcYH8FiBk1kFUxteJ2iitpump": {
+   "p": 1.145,
+   "c": 0.036
+  },
+  "F3sjyc7zZ9m6J5p6jDjYNyQTHavXo4We6qjGBgxdXXJy": {
+   "p": 1.0,
+   "c": 0.052
+  },
+  "83RX6mMHyYepRdJu2yPK4h4p18yftKpFdkCgMZVMpump": {
+   "p": 1.0,
+   "c": 0.062
+  },
+  "GpiQNUa9Sf77Jbn5giTiUmcm6L1XirqBGkr92TPLpump": {
+   "p": 1.036,
+   "c": 0.161
+  },
+  "GFdEV3eyWRiBx8km1FZT7z6FyoRfGdru7uQE5CbzQLdy": {
+   "p": 1.591,
+   "c": 0.284
+  },
+  "2KgUUCka6gr1TPDvDNQvubM6VmK7ywwmS2PMt198pump": {
+   "p": 1.0,
+   "c": 0.17
+  },
+  "6NcdukgrJwHs3925EFaxCWA8T9tMNT9iXa4Xt6oUe6dK": {
+   "p": 1.823,
+   "c": 0.028
+  },
+  "JBWmerM6nxqSuLwBVwE46yj4NxjMBppGVEbHoG2Spump": {
+   "p": 1.0,
+   "c": 0.068
+  },
+  "SPHFHU7sz2EZQYqyxMrZjgFdiYSCXJxRBE4giAjpump": {
+   "p": 2.043,
+   "c": 1.087
+  },
+  "FtSfZmvCyAxmgAExEYK8Ssq2ioKz9MaiHtr9G7NGpump": {
+   "p": 1.0,
+   "c": 0.045
+  },
+  "9nu4yZwbrYd7K89qfFgJBu1LbGV6K6jety7hH3RUpump": {
+   "p": 1.0,
+   "c": 0.037
+  },
+  "29P6EsshgU6kpmuyPpNaRdFWfJhPWtGe9ncEecoGpump": {
+   "p": 1.0,
+   "c": 0.067
+  },
+  "DxAnu12yrrj3ug3XerazVK1DM8yTPHtcChNkD5Fpump": {
+   "p": 1.0,
+   "c": 0.066
+  },
+  "FqjSkUk7eZF6ord8Tk8wkUMcv5qmztn3hbYfhQsxpump": {
+   "p": 1.237,
+   "c": 0.047
+  },
+  "N35x77dF7AWE9YKEvVbUUxaQFTjYkDtPM27tPGXpump": {
+   "p": 1.0,
+   "c": 0.172
+  },
+  "BT6P7kbNK9sVWp7UseyhWd4bRmMtMhD3idDHykiPRmvX": {
+   "p": 1.0,
+   "c": 0.087
+  }
+ },
+ "outcomes_meta": {
+  "tracked": 1196,
+  "seeded": 2557,
+  "last_refresh_ts": 1795292908.3016865,
+  "window_hours": 48,
+  "error": null
+ },
+ "cash": 100.0,
+ "reserved": 0.0,
+ "equity": 100.0,
+ "start_cash": 100.0,
+ "pnl_usd": 0.0,
+ "pnl_pct": 0.0,
+ "open_positions": [],
+ "waiting_orders": [],
+ "recent_events": [
+  {
+   "ts": 1795293458.4048643,
+   "kind": "scanner_kill",
+   "mint": "29LxBq5GiDJtgW9HLmgYzBKKGj4Ue1jH9wDzFWkTpump",
+   "note": "liq $2"
+  },
+  {
+   "ts": 1795293454.1106374,
+   "kind": "scanner_kill",
+   "mint": "DnJK43qFfwdaUBTZdcSqdQK7vBNPCfC1ZVBmL7CXpump",
+   "note": "liq $6"
+  },
+  {
+   "ts": 1795293215.3666852,
+   "kind": "scanner_kill",
+   "mint": "4RtmiCdvKszPoW5oNyjXC5uK8kfM6HjE4Gt2g7sNpump",
+   "note": "liq $9.6K"
+  },
+  {
+   "ts": 1795293211.0194314,
+   "kind": "scanner_kill",
+   "mint": "e5SH8rr8ypL3KsXbxWUPvurj1Yq9akm8pzVoLshpump",
+   "note": "liq $1"
+  },
+  {
+   "ts": 1795292725.1902204,
+   "kind": "scanner_kill",
+   "mint": "G2m7PA1WUNZMH9Jx5JKwuU7ofHu5poxwYksEttz4pump",
+   "note": "liq $5.3K"
+  },
+  {
+   "ts": 1795292660.2092984,
+   "kind": "scanner_kill",
+   "mint": "3E9DZfZagjeXsfpaVzyetu1cZbKBTXmW2cRiz2HVUTDv",
+   "note": "liq $1"
+  },
+  {
+   "ts": 1795292539.5252848,
+   "kind": "scanner_kill",
+   "mint": "GM8DK56XEFdsbHZ5tEndMf9ypfVbUVfothW7RPsupump",
+   "note": "liq $14.0K"
+  },
+  {
+   "ts": 1795292424.2453856,
+   "kind": "scanner_kill",
+   "mint": "7ZvVvfLrjdCpCrPLhmSk3VMFB3hGgHoWNtzPtS14pump",
+   "note": "copycat of VTC"
+  },
+  {
+   "ts": 1795292357.6263118,
+   "kind": "scanner_kill",
+   "mint": "4tSyA4g1odGi629vqnEmxWdSqzmYmzSbo5zbMiuVpump",
+   "note": "liq $0"
+  },
+  {
+   "ts": 1795292175.5320804,
+   "kind": "scanner_kill",
+   "mint": "7C2Xv1G9HeB2KQfzw24iJ8oR1soHGpL6a2gzgDVnpump",
+   "note": "liq $6.3K"
+  },
+  {
+   "ts": 1795291812.7863004,
+   "kind": "scanner_kill",
+   "mint": "hMXHcSc79hpYJpX6S8WV7ASbwNp7F9sNne3giaEpump",
+   "note": "liq $1"
+  },
+  {
+   "ts": 1795291752.4552925,
+   "kind": "scanner_kill",
+   "mint": "dE2iMhRL19Nw35yjGm6H78yD9YTGN8dNTkjc3sqpump",
+   "note": "liq $3"
+  },
+  {
+   "ts": 1795291631.394773,
+   "kind": "scanner_kill",
+   "mint": "friqAKh5S9e8HYNuZtXSe5kVumGKPGT7sD7aGSCpump",
+   "note": "liq $400"
+  },
+  {
+   "ts": 1795291575.7512062,
+   "kind": "scanner_kill",
+   "mint": "EgS3Df2c26PY6CF2XxHS64XPgeiv98uzuiodJT6S16X",
+   "note": "liq $5"
+  },
+  {
+   "ts": 1795291571.529612,
+   "kind": "scanner_kill",
+   "mint": "pumptGRwCjbBVT9dskwqNDpYGLwS3VuDNiD6uiRssEm",
+   "note": "liq $11.0K"
+  },
+  {
+   "ts": 1795291511.2291954,
+   "kind": "scanner_kill",
+   "mint": "A7P2kLjmVyB3jAteyUqzh31UX4fmqWp5x9xzDuJ7pump",
+   "note": "liq $40"
+  },
+  {
+   "ts": 1795291338.2039623,
+   "kind": "scanner_kill",
+   "mint": "7abgv392gsP25DZ8Q5YGYAVtykVfNvvzWLZQeX6apump",
+   "note": "liq $7"
+  },
+  {
+   "ts": 1795291333.8232052,
+   "kind": "scanner_kill",
+   "mint": "7yMnhNL1ogfn3f1gjE6igi25Qj42WWdEybaKEZJkpump",
+   "note": "liq $13.3K"
+  },
+  {
+   "ts": 1795291329.6268568,
+   "kind": "scanner_kill",
+   "mint": "E7nFMcFDT8PhX8VQYifr9zLtaXe318MUkkyYRwhcpump",
+   "note": "liq $18.2K"
+  },
+  {
+   "ts": 1795291269.7302427,
+   "kind": "scanner_kill",
+   "mint": "Dz9LRiD9JZhJ2NFzUd7YKnUHqgsqSWPqzqwLUnw3pump",
+   "note": "liq $11"
+  },
+  {
+   "ts": 1795290967.5951087,
+   "kind": "scanner_kill",
+   "mint": "5vh1khFqXp2BdboRv7ycBknTeMEG9rT8kKqBk3BKpump",
+   "note": "liq $11.5K"
+  },
+  {
+   "ts": 1795290664.5722218,
+   "kind": "scanner_kill",
+   "mint": "DcXt3VREW9kJvN2wAyRpYDacg12W7Dzy3RjEMxQDpump",
+   "note": "liq $5"
+  },
+  {
+   "ts": 1795290604.4983623,
+   "kind": "scanner_kill",
+   "mint": "G16MVSAVMUc43oTugpP7mTwBwb4F5efky723Ghnspump",
+   "note": "liq $1"
+  },
+  {
+   "ts": 1795290483.3433473,
+   "kind": "scanner_kill",
+   "mint": "C8KYaCpPKpsP1bhnDwtVKMHHA8jVi4pc6oNASF5dpump",
+   "note": "liq $6"
+  },
+  {
+   "ts": 1795290422.8689764,
+   "kind": "scanner_kill",
+   "mint": "CUxcbWRhChNNscAsTLXgp7fHH2AeT7zBgNwvhcdTpump",
+   "note": "liq $5.6K"
+  },
+  {
+   "ts": 1795290247.9572222,
+   "kind": "scanner_kill",
+   "mint": "39RViwf3G3Sh9qSq8tnnnrGfqCV5TSXkEJFpk1CGpump",
+   "note": "liq $3"
+  },
+  {
+   "ts": 1795290200.3342206,
+   "kind": "scanner_kill",
+   "mint": "4nij2GasfEfyZStUA8BsaGsdzYvxS5UstnVKZDNmpump",
+   "note": "liq $43"
+  },
+  {
+   "ts": 1795290004.581656,
+   "kind": "scanner_kill",
+   "mint": "3uHnnphofgbJbuxEmqFRjmj6m8G7s585zAyxCWFspump",
+   "note": "liq $17"
+  },
+  {
+   "ts": 1795290000.367085,
+   "kind": "scanner_drop",
+   "mint": "72mQThogLxX1hGCrQAhf4ckxt6YeHFA7E9Kcitrpump",
+   "note": "timed out"
+  },
+  {
+   "ts": 1795289885.4738379,
+   "kind": "scanner_kill",
+   "mint": "Dtx414D8jurspmB1jqJWsYU66pemoXRjQeXx7TC1pump",
+   "note": "liq $11.3K"
+  }
+ ],
+ "audits": [],
+ "scanner_kills": {
+  "warns": 131,
+  "h1 pump": 129,
+  "liq": 2068,
+  "copycat": 89,
+  "timed out": 127,
+  "holders leaving": 13
+ },
+ "skip_reasons": {},
+ "night": {
+  "id": "2026-11-20",
+  "trades": 0,
+  "start_equity": 100.0,
+  "realized": 0.0,
+  "locked": false,
+  "pnl_usd": 0.0,
+  "loss_stop_pct": 30,
+  "max_trades": 30
+ },
+ "session": {
+  "tz": "America/Edmonton",
+  "night_start": "22:00",
+  "lock_time": "06:30",
+  "report_time": "08:00",
+  "always_on": true,
+  "in_window": true
+ },
+ "telegram": "on",
+ "social": "off"
+}

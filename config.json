@@ -1,0 +1,90 @@
+{
+  "_comment": "PAPER-ONLY 6-stage desk: Scout > Filter (binary gates, fail-closed) > Analyst (0-100, 70+) > Executor > Risk > Logger. No wallet, no signing, no live orders, and no live-trading switch exists in this code.",
+  "bankroll": {
+    "starting_balance_usd": 100.0,
+    "max_trade_pct_of_equity": 8.0,
+    "max_trade_pct_of_pool_liquidity": 2.0,
+    "no_creator_history_size_multiplier": 0.5,
+    "min_trade_usd": 1.0,
+    "one_entry_per_coin_ever": true
+  },
+  "costs": {
+    "swap_fee_pct": 0.25,
+    "extra_adverse_slippage_pct": 0.5,
+    "model_price_impact_multiplier": 2.0,
+    "network_fee_usd_per_tx": 0.02,
+    "jupiter_slippage_bps": 300
+  },
+  "scout": {
+    "min_pair_age_minutes": 10,
+    "max_pair_age_minutes": 10080,
+    "min_mcap_usd": 100000,
+    "max_mcap_usd": 50000000,
+    "allowed_dex_ids": [
+      "pumpswap",
+      "pumpfun",
+      "raydium",
+      "raydium-clmm",
+      "raydium-cpmm",
+      "launchlab"
+    ],
+    "dexscreener_search_terms": [
+      "pumpswap",
+      "raydium",
+      "pump",
+      "launchlab",
+      "solana meme"
+    ],
+    "geckoterminal_address_discovery": true
+  },
+  "gates": {
+    "min_liquidity_usd": 25000,
+    "min_volume_h1_usd": 25000,
+    "max_price_change_h1_pct": 80,
+    "min_lp_locked_or_burned_pct": 90,
+    "min_lock_days": 30,
+    "max_top10_real_pct": 30,
+    "max_dev_hold_pct": 3,
+    "max_bundled_pct": 10,
+    "creator_lookback_launches": 10,
+    "creator_rugs_to_kill": 2,
+    "rug_def_min_ath_mcap_usd": 30000,
+    "rug_def_drawdown_pct": 90,
+    "max_round_trip_loss_pct": 10,
+    "max_chase_above_signal_pct": 15,
+    "max_price_impact_pct": 3,
+    "max_data_age_seconds_at_fill": 10,
+    "rugcheck_cache_seconds": 600
+  },
+  "analyst": {
+    "min_score": 65,
+    "min_weight_coverage_pct": 60,
+    "weights": {
+      "momentum": 20,
+      "unique_buyers": 15,
+      "buy_sell_ratio": 15,
+      "holder_growth": 15,
+      "liq_mcap": 15,
+      "smart_wallets": 20
+    }
+  },
+  "risk": {
+    "hard_stop_net_pct": -8.0,
+    "trail_activate_net_pct": 12.0,
+    "trail_distance_from_peak_pct": 8.0,
+    "_exits": "ONLY the stop or the trailing stop exits a position. The stop is never moved lower."
+  },
+  "sources": {
+    "gmgn_enabled": true,
+    "gmgn_allow_public_demo_key": false,
+    "use_free_sources_when_no_gmgn": true,
+    "free_source_cache_seconds": 1800,
+    "_comment": "gmgn_enabled: use GMGN when a personal key is in ~/.config/gmgn/.env (or secrets/gmgn.env). use_free_sources_when_no_gmgn: if no key (or a GMGN call fails), bundle = RugCheck insider/cluster share (>10% kill), creator history = pump.fun created-coins when reachable, else RugCheck creatorTokens + cached reports (2+ rugs in last 10 = kill, no history = half size). Smart-wallet factor is GMGN-only; without a key it is dropped and its 20-point weight is redistributed over the other five Analyst factors. Pump.fun's frontend API is often Cloudflare-blocked from this host; that is treated as unavailable, not a fail-closed kill."
+  },
+  "audit": {
+    "ran_threshold_pct": 50,
+    "rug_drawdown_pct": 80,
+    "rug_liquidity_fraction": 0.2,
+    "lookback_days": 7
+  }
+}

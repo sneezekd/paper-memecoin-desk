@@ -1,0 +1,36 @@
+# Offline checks, the temp-database end-to-end mock, and one real paper tick.
+# The tick uses the seed database in the runner only. It does not push state.
+name: Test
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: paper desk tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fast-path and free-source tests
+        run: |
+          python3 tests/test_manage_fastpath.py
+          python3 tests/test_free_sources.py
+
+      - name: End-to-end mock (temp database)
+        run: python3 tests/e2e_mock.py
+
+      - name: One paper tick (not pushed)
+        run: python3 run.py tick
